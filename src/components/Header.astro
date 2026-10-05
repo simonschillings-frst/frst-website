@@ -1,0 +1,48 @@
+---
+import Logo from './Logo.astro';
+import { navItems } from '../data/navigation';
+
+interface Props {
+  /** Transparent über einem Hero-Bild statt dunkler Leiste */
+  overlay?: boolean;
+}
+const { overlay = false } = Astro.props;
+
+---
+
+<header
+  class:list={[
+    'z-50 w-full text-cream',
+    overlay ? 'absolute inset-x-0 top-0' : 'bg-night',
+  ]}
+>
+  <div class="container-frst flex h-[58px] items-center justify-between gap-6">
+    <a href="/" class="shrink-0" aria-label="frst Startseite">
+      <Logo class="h-6 w-auto" />
+    </a>
+
+    <nav class="hidden lg:block" aria-label="Hauptnavigation">
+      <ul class="flex items-center gap-7 text-[13px]">
+        {navItems.map((item) => (
+          <li><a href={item.href} class="opacity-90 transition-opacity hover:opacity-100">{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <a href="/#contact" class="btn-outline hidden border-cream/80 hover:bg-cream hover:text-night lg:inline-flex">
+      Let’s Talk
+    </a>
+
+    <details class="group relative lg:hidden">
+      <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center" aria-label="Menü öffnen">
+        <span class="block h-px w-6 bg-current shadow-[0_6px_0_currentColor,0_-6px_0_currentColor] group-open:shadow-none"></span>
+      </summary>
+      <nav class="fixed inset-x-0 top-[58px] bottom-0 bg-night px-5 py-8" aria-label="Mobile Navigation">
+        <ul class="flex flex-col gap-5 text-2xl">
+          {navItems.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+          <li class="pt-4"><a href="/#contact" class="btn-outline border-cream/80">Let’s Talk</a></li>
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>

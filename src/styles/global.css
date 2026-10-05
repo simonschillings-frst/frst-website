@@ -1,0 +1,32 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/albert-sans';
+
+/* Farben und Schrift aus den XD-Dokument-Assets */
+@theme {
+  --color-violet: #6026fe;
+  --color-lilac: #f1d4fc;
+  --color-night: #0d0626;
+  --color-cream: #fff9ed;
+  --color-stone: #707070;
+
+  --font-sans: 'Albert Sans Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    @apply bg-cream text-night antialiased;
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .container-frst {
+    @apply mx-auto w-full max-w-[1440px] px-5 md:px-10;
+  }
+  .eyebrow {
+    @apply text-[11px] tracking-[0.08em] uppercase;
+  }
+  .btn-outline {
+    @apply inline-flex items-center rounded-full border px-5 py-2 text-sm transition-colors;
+  }
+}

@@ -1,0 +1,34 @@
+---
+/**
+ * Bildfläche. Ohne `src` wird ein Platzhalter mit Verlauf gezeigt,
+ * bis die Originalbilder aus XD da sind.
+ */
+interface Props {
+  src?: string;
+  alt?: string;
+  label?: string;
+  tone?: 'night' | 'desert' | 'mist' | 'sky' | 'dusk';
+  class?: string;
+}
+const { src, alt = '', label, tone = 'night', class: className } = Astro.props;
+
+const tones = {
+  night: 'from-[#05030f] via-[#1c1640] to-[#6b7a8f]',
+  desert: 'from-[#e8a07e] via-[#c96f4a] to-[#6e3a26]',
+  mist: 'from-[#8d8f88] via-[#6f6e66] to-[#3e3b34]',
+  sky: 'from-[#bcd8ef] via-[#7fb0d8] to-[#e9eef2]',
+  dusk: 'from-[#4b4a6b] via-[#c78a7a] to-[#1a1a2a]',
+};
+---
+
+{src ? (
+  <img src={src} alt={alt} class:list={['object-cover', className]} loading="lazy" />
+) : (
+  <div
+    role="img"
+    aria-label={alt || label || 'Bildplatzhalter'}
+    class:list={['relative overflow-hidden bg-gradient-to-br', tones[tone], className]}
+  >
+    {label && <span class="absolute bottom-2 left-2 text-[10px] tracking-wide text-white/60 uppercase">{label}</span>}
+  </div>
+)}
