@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Arrow from '../components/Arrow.astro';
+
+const intro =
+  'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.';
+const longText = `${intro} We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.`;
+const stepText = 'From Strategy to creative, brand, campaigns and AI- one connected partner.';
+
+const services = [
+  { no: '01', title: 'Strategy', text: longText },
+  { no: '02', title: 'Creative', text: longText },
+  { no: '03', title: 'Brand', text: longText },
+  { no: '04', title: 'Campaigns', text: longText, tags: 'Creative Concepts · Art Direction · Social Content · Design' },
+  { no: '05', title: 'AI', text: intro, tags: 'AI Strategy · Creative AI · AI powered production · AI Experiences' },
+];
+
+const steps = ['Understand', 'Define', 'Create', 'Connect', 'Make'];
+---
+
+<Base title="What We Do – frst" headerOverlay>
+  <!-- Hero -->
+  <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-[640px]">
+    <div
+      class="pointer-events-none absolute top-1/2 left-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-[55%] rounded-full bg-[radial-gradient(circle,#93c0f5_0%,#4d6fd0_25%,#1f1d6b_50%,transparent_70%)]"
+    ></div>
+    <div class="container-frst relative grid gap-10 pt-40 pb-6 md:grid-cols-2">
+      <div>
+        <p class="eyebrow">What we do</p>
+        <h1 class="mt-6 text-5xl leading-[1.05] font-light md:text-6xl">End to end<br />for your brand.</h1>
+        <p class="mt-10 max-w-md text-sm leading-relaxed opacity-90">{intro}</p>
+        <a href="#services" class="mt-16 inline-flex h-7 w-7 items-center justify-center rounded-full border border-cream/80" aria-label="Weiter scrollen">
+          <Arrow class="rotate-90" />
+        </a>
+      </div>
+      <p class="max-w-xs self-center text-sm leading-relaxed opacity-90 md:justify-self-end md:pt-24">{intro}</p>
+    </div>
+  </section>
+
+  <!-- Our services -->
+  <section id="services" class="container-frst py-20 md:py-24">
+    <p class="eyebrow">Our services</p>
+    <div class="mt-10 grid gap-x-16 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+      {services.map((s) => (
+        <article>
+          <p class="text-sm">{s.no}</p>
+          <h2 class="mt-5 text-2xl">{s.title}</h2>
+          <p class="mt-6 max-w-[34ch] text-xs leading-relaxed">{s.text}</p>
+          {s.tags && <p class="mt-6 text-[10px]">{s.tags}</p>}
+        </article>
+      ))}
+      <Media tone="night" label="Services" class="aspect-[2/1] w-full self-start lg:mt-[-1.25rem]" />
+    </div>
+  </section>
+
+  <!-- Our approaches -->
+  <section class="container-frst py-20 md:py-24">
+    <div class="grid gap-12 md:grid-cols-[2fr_1fr]">
+      <div>
+        <p class="eyebrow">Our approaches</p>
+        <h2 class="mt-8 text-5xl leading-[1.05] font-light md:text-6xl">One idea.<br />Many disciplines.</h2>
+        <p class="mt-10 max-w-md text-xs leading-relaxed">{intro}</p>
+      </div>
+      <div class="text-xs leading-relaxed">
+        <p>The interesting things happen between the disciplines.</p>
+        <p class="mt-4">
+          A strategy can become a campaign.<br />
+          A campaign can become a brand world.<br />
+          A brand can become an experience.<br />
+          AI can change all of it.
+        </p>
+      </div>
+    </div>
+
+    <ol class="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
+      {steps.map((step, i) => (
+        <li class="relative pr-6">
+          <p class="text-sm">{String(i + 1).padStart(2, '0')}</p>
+          <h3 class="mt-4 text-sm uppercase">{step}</h3>
+          <p class="mt-5 text-xs leading-relaxed">{stepText}</p>
+          {i < steps.length - 1 && <Arrow class="absolute top-[4.6rem] right-0 hidden lg:block" />}
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- Selected work -->
+  <section class="grid md:grid-cols-[1.35fr_1fr]">
+    <Media tone="night" label="Selected Work" class="min-h-[320px] w-full md:min-h-[440px]" />
+    <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-24">
+      <p class="eyebrow">Selected work</p>
+      <h2 class="mt-6 text-2xl">Ideas in action.</h2>
+      <p class="mt-6 max-w-xs text-xs leading-relaxed opacity-90">{intro}</p>
+    </div>
+  </section>
+</Base>

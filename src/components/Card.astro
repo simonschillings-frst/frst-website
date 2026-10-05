@@ -1,0 +1,31 @@
+---
+import Arrow from './Arrow.astro';
+
+interface Props {
+  title: string;
+  text: string;
+  href?: string;
+  variant?: 'cream' | 'night' | 'lilac';
+}
+const { title, text, href = '#', variant = 'cream' } = Astro.props;
+
+const variants = {
+  cream: 'bg-cream text-night border-night/20',
+  night: 'bg-night text-cream border-night',
+  lilac: 'bg-lilac text-night border-night/20',
+};
+---
+
+<a
+  href={href}
+  class:list={[
+    'flex min-h-[260px] flex-col justify-between rounded-2xl border p-5 transition-transform hover:-translate-y-1',
+    variants[variant],
+  ]}
+>
+  <div>
+    <h3 class="mt-12 text-lg">{title}</h3>
+    <p class="mt-3 max-w-[22ch] text-xs leading-relaxed opacity-80">{text}</p>
+  </div>
+  <Arrow />
+</a>
