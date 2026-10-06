@@ -1,0 +1,264 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Arrow from '../components/Arrow.astro';
+
+const intro =
+  'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.';
+
+// Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
+const cases = [
+  { eyebrow: 'The Next Chapter', title: 'A Clearer Tomorrow', tags: 'Strategy · Campaign · Content · Digital', tone: 'dusk', frame: 'aspect-[16/10]', col: 'md:col-span-7' },
+  { eyebrow: 'Brand World', title: 'Northern Light', tags: 'Brand · Creative · Design', tone: 'sky', frame: 'aspect-[4/5]', col: 'md:col-span-5 md:mt-24' },
+  { eyebrow: 'Campaign', title: 'Common Ground', tags: 'Campaign · Social · Film', tone: 'desert', frame: 'aspect-square', col: 'md:col-span-4' },
+  { eyebrow: 'AI Experience', title: 'Second Opinion', tags: 'AI · Strategy · Digital', tone: 'night', frame: 'aspect-[16/9]', col: 'md:col-span-8 md:mt-12' },
+] as const;
+
+const strip = [
+  { title: 'Open Doors', tags: 'Brand · Content', tone: 'mist', frame: 'aspect-[3/4]' },
+  { title: 'Fast Forward', tags: 'Campaign · AI', tone: 'desert', frame: 'aspect-square' },
+  { title: 'Quiet Power', tags: 'Strategy · Film', tone: 'night', frame: 'aspect-[4/5]' },
+  { title: 'Blue Hour', tags: 'Creative · Design', tone: 'sky', frame: 'aspect-[3/2]' },
+  { title: 'Real Talk', tags: 'Content · Social', tone: 'dusk', frame: 'aspect-[3/4]' },
+] as const;
+
+const disciplines = [
+  { no: '01', title: 'Strategy', count: '12 Cases' },
+  { no: '02', title: 'Creative', count: '18 Cases' },
+  { no: '03', title: 'Brand', count: '9 Cases' },
+  { no: '04', title: 'Campaigns', count: '14 Cases' },
+  { no: '05', title: 'AI', count: '6 Cases' },
+];
+
+const results = [
+  { value: '120+', text: 'Lorem Ipsum dolor sit amet Ectur centran et amos.' },
+  { value: '35%', text: 'Lorem Ipsum dolor sit amet Ectur centran et amos.' },
+  { value: '12', text: 'Lorem Ipsum dolor sit amet Ectur centran et amos.' },
+];
+
+const words = ['Strategy', 'Creative', 'Brand', 'Campaigns', 'AI'];
+---
+
+<Base title="Work – frst" headerOverlay>
+  <!-- 1. Hero: große Typo auf dunklem Grund mit Glow und Laufband am unteren Rand -->
+  <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-[700px]">
+    <div
+      class="pointer-events-none absolute top-1/2 left-[70%] h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#ffd9a0_0%,#f59a3c_28%,#6026fe55_55%,transparent_72%)] opacity-80"
+    ></div>
+    <div class="container-frst relative grid gap-10 pt-40 pb-32 md:grid-cols-[2fr_1fr] md:items-end">
+      <div>
+        <p class="eyebrow">Selected work</p>
+        <h1 class="mt-14 text-5xl leading-[1.05] font-light md:text-6xl">One idea.<br />Many shapes.</h1>
+      </div>
+      <p class="max-w-xs text-sm leading-relaxed opacity-90 md:justify-self-end md:pb-6">{intro}</p>
+    </div>
+    <!-- Laufband: transparent am unteren Rand des Heros, Text in Cream -->
+    <div class="absolute inset-x-0 bottom-0 overflow-hidden py-4 text-cream" aria-hidden="true">
+      <div class="marquee-track flex w-max gap-12 text-2xl font-light whitespace-nowrap md:text-4xl">
+        {[0, 1, 2, 3].map(() => (
+          <div class="flex gap-12">
+            {words.map((word) => (
+              <span class="flex items-center gap-12">{word}<span class="text-[0.55em] text-cream">✦</span></span>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Versetztes Raster mit unterschiedlichen Bildformaten -->
+  <section id="cases" class="container-frst scroll-mt-20 py-20 md:py-28">
+    <div class="flex items-end justify-between gap-8">
+      <div>
+        <p class="eyebrow">Cases</p>
+        <h2 class="mt-8 text-2xl leading-snug font-light md:text-3xl">Selected<br />cases.</h2>
+      </div>
+      <p class="hidden max-w-[30ch] text-xs leading-relaxed md:block">{intro}</p>
+    </div>
+    <ul class="mt-14 grid gap-x-6 gap-y-14 md:grid-cols-12">
+      {cases.map((item) => (
+        <li class={item.col}>
+          <a href="#" class="group block">
+            <div class="overflow-hidden">
+              <Media
+                tone={item.tone}
+                label={item.eyebrow}
+                class={`${item.frame} w-full transition-transform duration-700 ease-out group-hover:scale-105`}
+              />
+            </div>
+            <div class="mt-6 flex items-start justify-between gap-6">
+              <div>
+                <p class="eyebrow">{item.eyebrow}</p>
+                <h3 class="mt-3 text-xl uppercase">{item.title}</h3>
+                <p class="mt-2 text-[10px] opacity-70">{item.tags}</p>
+              </div>
+              <span class="mt-1 inline-block transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- 5. Horizontaler Streifen zum Wischen -->
+  <section class="overflow-hidden bg-lilac py-16 md:py-24">
+    <div class="container-frst flex items-end justify-between">
+      <div>
+        <p class="eyebrow">More work</p>
+        <h2 class="mt-8 text-2xl leading-snug font-light md:text-3xl">Keep exploring.</h2>
+      </div>
+      <p class="text-[10px] opacity-70">Scroll →</p>
+    </div>
+    <ul class="strip mt-12 flex snap-x snap-mandatory items-end gap-5 overflow-x-auto px-5 pb-4 md:px-10">
+      {strip.map((item) => (
+        <li class="w-[70vw] shrink-0 snap-start sm:w-[44vw] md:w-[26rem]">
+          <a href="#" class="group block">
+            <div class="overflow-hidden">
+              <Media tone={item.tone} class={`${item.frame} w-full transition-transform duration-700 ease-out group-hover:scale-105`} />
+            </div>
+            <h3 class="mt-5 text-lg uppercase">{item.title}</h3>
+            <p class="mt-1 text-[10px] opacity-70">{item.tags}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- 6. Disziplinen als ruhige Liste -->
+  <section class="container-frst py-16 md:py-20">
+    <div class="grid gap-10 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
+      <div>
+        <p class="eyebrow">By discipline</p>
+        <h2 class="mt-8 text-2xl leading-snug font-light md:text-3xl">Five disciplines.<br />One partner.</h2>
+      </div>
+      <ul class="border-t border-night/20">
+        {disciplines.map((item) => (
+          <li class="border-b border-night/20">
+            <a
+              href="#cases"
+              class="group grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 py-4 transition-[padding,color] duration-300 hover:pl-3 hover:text-violet md:grid-cols-[3rem_1fr_auto_2rem] md:py-5"
+            >
+              <span class="text-xs">{item.no}</span>
+              <span class="text-xl leading-none font-light md:text-2xl">{item.title}</span>
+              <span class="hidden text-[11px] opacity-70 md:inline">{item.count}</span>
+              <span class="justify-self-end transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7. Ergebnisse mit hochzählenden Zahlen -->
+  <section id="results" class="scroll-mt-20 bg-night text-cream" data-facts>
+    <div class="container-frst py-16 md:py-24">
+      <p class="eyebrow">Results</p>
+      <h2 class="mt-8 text-2xl leading-snug font-light md:text-3xl">Work that moves<br />the needle.</h2>
+      <ul class="mt-16 grid gap-12 md:grid-cols-3 md:gap-8">
+        {results.map((item, i) => (
+          <li class={i === 1 ? 'md:mt-16' : i === 2 ? 'md:mt-32' : ''}>
+            <p class="text-7xl leading-none font-light tabular-nums md:text-[8rem]" data-count>{item.value}</p>
+            <p class="mt-6 max-w-[22ch] text-[11px] leading-snug">{item.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 8. Ein großes Zitat -->
+  <section class="bg-cream">
+    <div class="container-frst py-20 md:py-32">
+      <svg viewBox="0 0 16 12" class="h-6 w-8 text-night" fill="currentColor" aria-hidden="true">
+        <path d="M0 12V7.2C0 3.2 2.2.6 6 0l.6 1.6C4.4 2.4 3.4 3.8 3.4 5.4H6V12H0Zm9.4 0V7.2C9.4 3.2 11.6.6 15.4 0L16 1.6c-2.2.8-3.2 2.2-3.2 3.8h2.6V12H9.4Z" />
+      </svg>
+      <blockquote class="mt-8 max-w-4xl text-3xl leading-tight font-light md:text-5xl">
+        „Sie haben nicht nur eine Kampagne gebaut, sondern uns eine Haltung gegeben.“
+      </blockquote>
+      <p class="mt-8 text-[10px] leading-tight">Kundenstimme · Marketing Director</p>
+    </div>
+  </section>
+
+  <!-- 9. Newsletter (wie auf der Startseite) -->
+  <section class="bg-lilac">
+    <div class="container-frst grid gap-10 py-16 md:grid-cols-[1fr_3fr]">
+      <div>
+        <p class="eyebrow">Let’s talk</p>
+        <h2 class="mt-4 text-4xl leading-none font-light">Stay<br />Connected</h2>
+      </div>
+      <form class="grid gap-8 md:grid-cols-3 md:pt-6" action="#" method="post">
+        {[
+          { name: 'firstName', label: 'First Name', type: 'text' },
+          { name: 'lastName', label: 'Last Name', type: 'text' },
+          { name: 'email', label: 'E-Mail', type: 'email' },
+        ].map((f) => (
+          <label class="flex flex-col gap-6 text-xs">
+            {f.label}
+            <input name={f.name} type={f.type} class="border-b border-night/30 bg-transparent pb-2 outline-none focus:border-night" />
+          </label>
+        ))}
+        <div>
+          <button type="submit" class="btn-outline border-night px-4 py-1 text-[10px] hover:bg-night hover:text-cream">Subscribe</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <style>
+    .marquee-track {
+      animation: work-marquee 40s linear infinite;
+    }
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+    @keyframes work-marquee {
+      to {
+        transform: translateX(-25%);
+      }
+    }
+    .strip {
+      scrollbar-width: none;
+    }
+    .strip::-webkit-scrollbar {
+      display: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track {
+        animation: none;
+      }
+    }
+  </style>
+
+  <script>
+    // Zahlen im Results-Modul zählen gleichzeitig hoch, sobald die Maus die dunkle Fläche berührt
+    const facts = document.querySelector<HTMLElement>('[data-facts]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (facts && !reduceMotion) {
+      const counters = Array.from(facts.querySelectorAll<HTMLElement>('[data-count]'))
+        .map((el) => {
+          const finalText = el.textContent ?? '';
+          return { el, finalText, target: parseInt(finalText, 10), suffix: finalText.replace(/^\d+/, '') };
+        })
+        .filter((counter) => !Number.isNaN(counter.target));
+
+      let frame = 0;
+      const run = () => {
+        cancelAnimationFrame(frame);
+        const start = performance.now();
+        const duration = 1100;
+        const tick = (now: number) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          counters.forEach((counter) => {
+            counter.el.textContent = progress < 1 ? Math.round(counter.target * eased) + counter.suffix : counter.finalText;
+          });
+          if (progress < 1) frame = requestAnimationFrame(tick);
+        };
+        frame = requestAnimationFrame(tick);
+      };
+
+      facts.addEventListener('mouseenter', run);
+      facts.addEventListener('touchstart', run, { passive: true });
+    }
+  </script>
+</Base>

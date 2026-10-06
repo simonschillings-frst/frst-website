@@ -82,11 +82,11 @@ export const navItems: NavItem[] = [
   {
     key: 'work',
     label: 'Work',
-    href: '/#work',
+    href: '/work',
     layout: 'cards',
     children: [
-      { title: 'Cases', subtitle: 'Work', href: '/#work' },
-      { title: 'Results', subtitle: 'Work', href: '/#work' },
+      { title: 'Cases', subtitle: 'Work', href: '/work#cases' },
+      { title: 'Results', subtitle: 'Work', href: '/work#results' },
     ],
   },
   {
