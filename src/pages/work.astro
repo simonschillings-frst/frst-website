@@ -100,28 +100,31 @@ const words = ['Strategy', 'Creative', 'Brand', 'Campaigns', 'AI'];
     </ul>
   </section>
 
-  <!-- 5. Horizontaler Streifen zum Wischen -->
-  <section class="overflow-hidden bg-lilac py-16 md:py-24">
-    <div class="container-frst flex items-end justify-between">
-      <div>
-        <p class="eyebrow">More work</p>
-        <h2 class="mt-8 text-2xl leading-snug font-light md:text-3xl">Keep exploring.</h2>
+  <!-- 5. Horizontaler Streifen: Die Seite bleibt hier stehen, bis der Streifen durchgescrollt ist -->
+  <section class="relative bg-lilac" data-hscroll>
+    <div class="sticky top-0 flex h-svh flex-col justify-center overflow-hidden pt-20 pb-10" data-hscroll-sticky>
+      <div class="container-frst flex items-end justify-between">
+        <div>
+          <p class="eyebrow">More work</p>
+          <h2 class="mt-8 text-2xl leading-snug font-light md:text-3xl">Keep exploring.</h2>
+        </div>
+        <p class="text-[10px] opacity-70">Scroll ↓</p>
       </div>
-      <p class="text-[10px] opacity-70">Scroll →</p>
+      <ul class="mt-10 flex items-end gap-5 px-5 will-change-transform md:px-10" data-hscroll-track>
+        {strip.map((item) => (
+          <li class="w-[70vw] shrink-0 sm:w-[44vw] md:w-[26rem]">
+            <a href="#" class="group block">
+              <div class="overflow-hidden">
+                <Media tone={item.tone} class={`${item.frame} w-full transition-transform duration-700 ease-out group-hover:scale-105`} />
+              </div>
+              <h3 class="mt-5 text-lg uppercase">{item.title}</h3>
+              <p class="mt-1 text-[10px] opacity-70">{item.tags}</p>
+            </a>
+          </li>
+        ))}
+        <li class="w-px shrink-0 md:w-5" aria-hidden="true"></li>
+      </ul>
     </div>
-    <ul class="strip mt-12 flex snap-x snap-mandatory items-end gap-5 overflow-x-auto px-5 pb-4 md:px-10">
-      {strip.map((item) => (
-        <li class="w-[70vw] shrink-0 snap-start sm:w-[44vw] md:w-[26rem]">
-          <a href="#" class="group block">
-            <div class="overflow-hidden">
-              <Media tone={item.tone} class={`${item.frame} w-full transition-transform duration-700 ease-out group-hover:scale-105`} />
-            </div>
-            <h3 class="mt-5 text-lg uppercase">{item.title}</h3>
-            <p class="mt-1 text-[10px] opacity-70">{item.tags}</p>
-          </a>
-        </li>
-      ))}
-    </ul>
   </section>
 
   <!-- 6. Disziplinen als ruhige Liste -->
@@ -215,12 +218,6 @@ const words = ['Strategy', 'Creative', 'Brand', 'Campaigns', 'AI'];
         transform: translateX(-25%);
       }
     }
-    .strip {
-      scrollbar-width: none;
-    }
-    .strip::-webkit-scrollbar {
-      display: none;
-    }
     @media (prefers-reduced-motion: reduce) {
       .marquee-track {
         animation: none;
@@ -259,6 +256,53 @@ const words = ['Strategy', 'Creative', 'Brand', 'Campaigns', 'AI'];
 
       facts.addEventListener('mouseenter', run);
       facts.addEventListener('touchstart', run, { passive: true });
+    }
+  </script>
+  <script>
+    // Der Streifen "More work" bleibt beim Scrollen stehen und läuft seitlich durch.
+    // Erst danach scrollt die Seite normal weiter.
+    const wrap = document.querySelector<HTMLElement>('[data-hscroll]');
+    const sticky = document.querySelector<HTMLElement>('[data-hscroll-sticky]');
+    const track = document.querySelector<HTMLElement>('[data-hscroll-track]');
+
+    if (wrap && sticky && track) {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        // Ohne Bewegung: normaler seitlicher Streifen zum Wischen
+        sticky.style.position = 'static';
+        sticky.style.height = 'auto';
+        track.style.overflowX = 'auto';
+      } else {
+        let maxShift = 0;
+        let ticking = false;
+
+        const update = () => {
+          ticking = false;
+          const distance = wrap.offsetHeight - sticky.offsetHeight;
+          const progress = distance > 0 ? Math.min(1, Math.max(0, -wrap.getBoundingClientRect().top / distance)) : 0;
+          track.style.transform = `translate3d(${-maxShift * progress}px, 0, 0)`;
+        };
+
+        const measure = () => {
+          track.style.transform = 'translate3d(0, 0, 0)';
+          maxShift = Math.max(0, track.scrollWidth - window.innerWidth);
+          wrap.style.height = `${sticky.offsetHeight + maxShift}px`;
+          update();
+        };
+
+        window.addEventListener(
+          'scroll',
+          () => {
+            if (!ticking) {
+              ticking = true;
+              requestAnimationFrame(update);
+            }
+          },
+          { passive: true },
+        );
+        window.addEventListener('resize', measure);
+        window.addEventListener('load', measure);
+        measure();
+      }
     }
   </script>
 </Base>
