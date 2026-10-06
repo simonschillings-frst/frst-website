@@ -68,15 +68,15 @@ export const navItems: NavItem[] = [
   {
     key: 'research',
     label: 'Research',
-    href: '/#research',
+    href: '/research',
     layout: 'feature',
     feature: { label: 'Our Approaches', title: ['The', 'Future', 'of the Agency'] },
     children: [
-      { title: 'Relationships', subtitle: 'Lorem ipsum', href: '/#research' },
-      { title: 'Reports', subtitle: 'Lorem ipsum', href: '/#research' },
-      { title: 'Insights', subtitle: 'Lorem ipsum', href: '/#research' },
-      { title: 'Benchmark', subtitle: 'Lorem ipsum', href: '/#research' },
-      { title: 'Participate', subtitle: 'Lorem ipsum', href: '/#research' },
+      { title: 'Relationships', subtitle: 'Lorem ipsum', href: '/research' },
+      { title: 'Reports', subtitle: 'Lorem ipsum', href: '/research#reports' },
+      { title: 'Insights', subtitle: 'Lorem ipsum', href: '/research#insights' },
+      { title: 'Benchmark', subtitle: 'Lorem ipsum', href: '/research#benchmark' },
+      { title: 'Participate', subtitle: 'Lorem ipsum', href: '/research' },
     ],
   },
   {

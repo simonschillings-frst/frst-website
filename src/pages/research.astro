@@ -1,0 +1,176 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+
+const intro =
+  'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.';
+const cardText = 'From Strategy to creative, brand, campaigns and AI- one connected partner.';
+
+// Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
+const topics = [
+  { id: 'reports', label: 'Reports', tone: 'sky' },
+  { id: 'insights', label: 'Insights', tone: 'night' },
+  { id: 'benchmark', label: 'Benchmark', tone: 'sky' },
+  { id: 'people-behind', label: 'People Behind', tone: 'night' },
+] as const;
+
+const facts = [
+  { value: '120+', text: 'Lorem Ipsum dolor sit amet Ectur centran et amos.' },
+  { value: '50+', text: 'Lorem Ipsum dolor sit amet Ectur centran et amos.' },
+  { value: '10+', text: 'Lorem Ipsum dolor sit amet Ectur centran et amos.' },
+  { value: '100%', text: 'Lorem Ipsum dolor sit amet Ectur centran et amos.' },
+];
+
+const quotes = [
+  { text: 'Ich glaube, diese eine Agentur für alles gibt es nicht mehr.', source: 'IP 2 · Fachexpertise', role: 'Unternehmenskommunikation' },
+  {
+    text: 'Ich glaube, wir werden viele, viele kleine spezialisierte Agenturen sehen und halt große, große Netzwerke, die vieles abbilden können.',
+    source: 'IP 2 · Fachexpertise',
+    role: 'Unternehmenskommunikation',
+  },
+  {
+    text: 'Ich will auch keine Agentur haben, die alles anbietet. Ich bestelle auch nicht bei einem Italiener, der nebenher noch Indisch kocht.',
+    source: 'IP 2 · Fachexpertise',
+    role: 'Unternehmenskommunikation',
+  },
+  {
+    text: 'Dienstleister weisen abseits ihrer originären Kernkompetenzen oftmals Schwächen in der Ausführung auf.',
+    source: 'IP 2 · Fachexpertise',
+    role: 'Unternehmenskommunikation',
+  },
+];
+---
+
+<Base title="Research – frst" headerOverlay>
+  <!-- Hero -->
+  <section class="relative flex min-h-[640px] items-end overflow-hidden bg-[linear-gradient(155deg,#2a2c5e_0%,#41457a_50%,#b0808c_100%)] text-cream md:h-[640px]">
+    <div class="container-frst relative grid gap-10 pt-40 pb-10 md:grid-cols-2 md:items-end">
+      <div class="md:self-center">
+        <p class="eyebrow">Research</p>
+        <h1 class="mt-14 text-5xl leading-[1.05] font-light md:text-6xl">Better questions.<br />Deeper Insights.</h1>
+        <p class="mt-10 max-w-md text-sm leading-relaxed opacity-90">{intro}</p>
+      </div>
+      <p class="max-w-xs text-sm leading-relaxed opacity-90 md:justify-self-end md:pb-16">{intro}</p>
+    </div>
+  </section>
+
+  <!-- Why frst: Themen -->
+  <section class="container-frst py-20 md:py-24">
+    <div class="grid gap-12 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
+      <div>
+        <p class="eyebrow">Why frst</p>
+        <h2 class="mt-8 text-2xl leading-snug font-light md:text-3xl">We dig deeper.<br />So you can go further.</h2>
+        <p class="mt-10 max-w-[30ch] text-xs leading-relaxed">{intro}</p>
+        <p class="mt-5 max-w-[30ch] text-xs leading-relaxed">{intro}</p>
+      </div>
+      <ul class="grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        {topics.map((topic) => (
+          <li id={topic.id} class="scroll-mt-20">
+            <a href="#" class="group block">
+              <div class="aspect-square overflow-hidden border border-night/20">
+                <Media tone={topic.tone} label={topic.label} class="h-full w-full transition-transform duration-500 group-hover:scale-105" />
+              </div>
+              <p class="eyebrow mt-6">{topic.label}</p>
+              <h3 class="mt-3 text-sm">From Data To Direction.</h3>
+              <p class="mt-5 max-w-[26ch] text-xs leading-relaxed">{cardText}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Facts -->
+  <section class="bg-night text-cream" data-facts>
+    <div class="container-frst grid gap-12 py-16 md:py-20 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
+      <div>
+        <p class="eyebrow">Why frst</p>
+        <h2 class="mt-8 text-2xl leading-snug font-light md:text-3xl">Facts that<br />make a difference.</h2>
+        <p class="mt-10 max-w-[30ch] text-xs leading-relaxed">{intro}</p>
+      </div>
+      <ul class="grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        {facts.map((fact) => (
+          <li class="lg:pt-4">
+            <p class="text-6xl leading-none font-light tabular-nums md:text-7xl" data-count>{fact.value}</p>
+            <p class="mt-6 max-w-[22ch] text-[11px] leading-snug">{fact.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Stimmen -->
+  <section class="container-frst py-20 md:py-24">
+    <div class="grid gap-12 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
+      <div>
+        <p class="eyebrow">Why frst</p>
+        <h2 class="mt-8 text-2xl leading-snug font-light md:text-3xl">Difference perspectives.<br />Same direction.</h2>
+        <p class="mt-10 max-w-[30ch] text-xs leading-relaxed">{intro}</p>
+      </div>
+      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {quotes.map((quote) => (
+          <li class="group">
+            <figure class="flex h-full min-h-[260px] cursor-default flex-col justify-between rounded-2xl border border-night/20 bg-cream p-4 [transition:transform_300ms_cubic-bezier(0.34,1.56,0.64,1),border-color_300ms_ease-out,background-color_300ms_ease-out] group-hover:-translate-y-1.5 group-hover:scale-[1.03] group-hover:border-night/50 group-hover:bg-[#f9eaf3] motion-reduce:transition-none">
+              <div>
+                <svg viewBox="0 0 16 12" class="h-3 w-4 origin-left [transition:transform_300ms_cubic-bezier(0.34,1.56,0.64,1),color_300ms_ease-out] group-hover:scale-125 group-hover:text-night" fill="currentColor" aria-hidden="true">
+                  <path d="M0 12V7.2C0 3.2 2.2.6 6 0l.6 1.6C4.4 2.4 3.4 3.8 3.4 5.4H6V12H0Zm9.4 0V7.2C9.4 3.2 11.6.6 15.4 0L16 1.6c-2.2.8-3.2 2.2-3.2 3.8h2.6V12H9.4Z" />
+                </svg>
+                <blockquote class="mt-4 text-sm leading-snug">„{quote.text}“</blockquote>
+              </div>
+              <figcaption class="mt-8 text-[10px] leading-tight">
+                {quote.source}<br />{quote.role}
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Abschlussbild -->
+  <section class="relative flex min-h-[260px] items-center overflow-hidden text-cream md:min-h-[320px]">
+    <div class="absolute inset-0"><Media tone="mist" label="Foto" class="h-full w-full" /></div>
+    <div class="absolute inset-0 bg-night/20"></div>
+    <div class="container-frst relative grid gap-8 py-12 md:grid-cols-2 md:items-center">
+      <div>
+        <p class="eyebrow">Why frst</p>
+        <h2 class="mt-5 text-2xl leading-snug font-light md:text-3xl">Facts that<br />make a difference.</h2>
+      </div>
+      <p class="max-w-xs text-xs leading-relaxed md:justify-self-end">{intro}</p>
+    </div>
+  </section>
+
+  <script>
+    // Alle Zahlen im Fakten-Modul zählen gleichzeitig hoch, sobald die Maus die dunkle Fläche berührt
+    const facts = document.querySelector<HTMLElement>('[data-facts]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (facts && !reduceMotion) {
+      const counters = Array.from(facts.querySelectorAll<HTMLElement>('[data-count]'))
+        .map((el) => {
+          const finalText = el.textContent ?? '';
+          return { el, finalText, target: parseInt(finalText, 10), suffix: finalText.replace(/^\d+/, '') };
+        })
+        .filter((counter) => !Number.isNaN(counter.target));
+
+      let frame = 0;
+      const run = () => {
+        cancelAnimationFrame(frame);
+        const start = performance.now();
+        const duration = 1100;
+        const tick = (now: number) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          counters.forEach((counter) => {
+            counter.el.textContent = progress < 1 ? Math.round(counter.target * eased) + counter.suffix : counter.finalText;
+          });
+          if (progress < 1) frame = requestAnimationFrame(tick);
+        };
+        frame = requestAnimationFrame(tick);
+      };
+
+      facts.addEventListener('mouseenter', run);
+      facts.addEventListener('touchstart', run, { passive: true });
+    }
+  </script>
+</Base>
