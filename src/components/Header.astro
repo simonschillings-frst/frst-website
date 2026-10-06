@@ -1,6 +1,6 @@
 ---
 import Logo from './Logo.astro';
-import Arrow from './Arrow.astro';
+import Media from './Media.astro';
 import { navItems } from '../data/navigation';
 
 interface Props {
@@ -8,66 +8,132 @@ interface Props {
   overlay?: boolean;
 }
 const { overlay = false } = Astro.props;
+
+// Platzhalterbilder der Karten, wenn kein eigener Ton gesetzt ist
+const tones = ['night', 'desert', 'mist'] as const;
 ---
 
 <header
   data-site-header
   class:list={[
-    'z-50 w-full text-cream transition-colors',
-    // Leiste wird dunkel, sobald ein Mega-Menü offen ist (auch über dem Hero-Bild)
-    'has-[[data-dropdown]:hover]:bg-night has-[[data-dropdown]:focus-within]:bg-night',
+    'group/header z-50 w-full text-cream transition-colors duration-300 data-[open]:bg-night',
     overlay ? 'absolute inset-x-0 top-0' : 'relative bg-night',
   ]}
 >
   <div class="container-frst flex h-[58px] items-center justify-between gap-6">
-    <a href="/" class="shrink-0" aria-label="frst Startseite">
+    <a href="/" class="shrink-0" aria-label="frst Startseite" data-hide-menu>
       <Logo class="h-6 w-auto" />
     </a>
 
     <!-- Desktop: Mega-Menü öffnet bei Hover und Tastaturfokus -->
     <nav class="hidden h-full lg:block" aria-label="Hauptnavigation">
-      <ul class="flex h-full items-center gap-7 text-[13px]">
-        {navItems.map((item) =>
-          item.children ? (
-            <li class="group/item flex h-full items-center" data-dropdown>
-              <a href={item.href} class="opacity-90 transition-opacity hover:opacity-100" aria-haspopup="true">
-                {item.label}
-              </a>
-              <div class="invisible absolute inset-x-0 top-full border-t border-night/10 bg-cream text-night opacity-0 shadow-sm transition-opacity duration-150 group-focus-within/item:visible group-focus-within/item:opacity-100 group-hover/item:visible group-hover/item:opacity-100">
-                <div class="container-frst grid grid-cols-12 gap-10 py-12">
-                  <div class="col-span-4">
-                    <p class="eyebrow opacity-60">{item.label}</p>
-                    {item.description && (
-                      <p class="mt-4 max-w-[22ch] text-[28px] leading-[1.15] font-light">{item.description}</p>
-                    )}
-                    <a href={item.href} class="mt-8 inline-flex items-center gap-3 text-[13px] underline-offset-4 hover:underline">
-                      Overview <Arrow />
-                    </a>
-                  </div>
-                  <ul class="col-span-8 grid grid-cols-2 content-start gap-x-10">
-                    {item.children.map((child) => (
+      <ul class="flex h-full items-center gap-0.5 text-[13px]">
+        {navItems.map((item) => (
+          <li class="flex h-full items-center" data-menu>
+            <a
+              href={item.href}
+              data-trigger
+              class="block rounded-full px-3.5 py-1.5 opacity-60 transition-[opacity,background-color] duration-200 hover:bg-cream/20 hover:opacity-100 focus-visible:bg-cream/20 focus-visible:opacity-100 aria-expanded:bg-cream/20 aria-expanded:opacity-100"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              {item.label}
+            </a>
+
+            <div data-panel class="mega absolute inset-x-0 top-full bg-cream text-night shadow-[0_30px_60px_rgba(13,8,48,0.14)]">
+              {item.layout === 'cards' && (
+                <div class="container-frst pt-14 pb-[70px]">
+                  <ul class="grid gap-9" style={`grid-template-columns: repeat(${item.children.length}, minmax(0, 1fr))`}>
+                    {item.children.map((child, i) => (
                       <li>
-                        <a href={child.href} class="group/link flex items-start justify-between gap-4 border-t border-night/15 py-5">
-                          <span>
-                            <span class="block text-[15px]">{child.title}</span>
-                            <span class="mt-1 block text-[12px] opacity-70">{child.description}</span>
-                          </span>
-                          <Arrow class="mt-1.5 shrink-0 -translate-x-1 opacity-0 transition group-hover/link:translate-x-0 group-hover/link:opacity-100 group-focus-visible/link:translate-x-0 group-focus-visible/link:opacity-100" />
+                        <a href={child.href} class="group/card block">
+                          <div class="aspect-[2.13/1] origin-center bg-night transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover/card:-translate-y-1 group-hover/card:scale-[1.07] group-hover/card:shadow-[0_18px_40px_rgba(13,6,38,0.28)] group-focus-visible/card:-translate-y-1 group-focus-visible/card:scale-[1.07] group-focus-visible/card:shadow-[0_18px_40px_rgba(13,6,38,0.28)] motion-reduce:transition-none">
+                            <Media
+                              tone={child.tone ?? tones[i % tones.length]}
+                              class="h-full w-full"
+                            />
+                          </div>
+                          <p class="mt-[clamp(24px,3.6vw,52px)] mb-2.5 text-[clamp(18px,1.9vw,27px)] leading-[1.2] font-light">{child.title}</p>
+                          {child.subtitle && <p class="text-sm">{child.subtitle}</p>}
                         </a>
                       </li>
                     ))}
                   </ul>
                 </div>
-              </div>
-            </li>
-          ) : (
-            <li><a href={item.href} class="opacity-90 transition-opacity hover:opacity-100">{item.label}</a></li>
-          )
-        )}
+              )}
+
+              {item.layout === 'list-media' && (
+                <div class="container-frst pt-[30px] pb-11">
+                  <div class="grid grid-cols-[31%_minmax(0,1fr)]">
+                    <ul class="border-r border-night/20">
+                      {item.children.map((child) => (
+                        <li class="border-b border-night/20 last:border-b-0">
+                          <a href={child.href} class="block py-5 pr-[30px] pl-1 transition-[padding] duration-200 hover:pl-4">
+                            <p class="mb-2.5 text-[clamp(18px,1.6vw,23px)] leading-[1.2] font-light">{child.title}</p>
+                            {child.subtitle && <p class="text-sm">{child.subtitle}</p>}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                    {item.media && (
+                      <div class="pt-1.5 pl-12">
+                        <p class="mb-[30px] pl-0.5 text-sm uppercase">{item.media.label}</p>
+                        <ul class="grid grid-cols-2 gap-9">
+                          {item.media.items.map((card, i) => (
+                            <li>
+                              <a href={card.href} class="group/card block">
+                                <div class="aspect-[2.13/1] origin-center bg-night transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover/card:-translate-y-1 group-hover/card:scale-[1.07] group-hover/card:shadow-[0_18px_40px_rgba(13,6,38,0.28)] group-focus-visible/card:-translate-y-1 group-focus-visible/card:scale-[1.07] group-focus-visible/card:shadow-[0_18px_40px_rgba(13,6,38,0.28)] motion-reduce:transition-none">
+                                  <Media
+                                    tone={card.tone ?? tones[i % tones.length]}
+                                    class="h-full w-full"
+                                  />
+                                </div>
+                                <p class="mt-[34px] mb-2.5 text-[clamp(18px,1.9vw,27px)] leading-[1.2] font-light">{card.title}</p>
+                                {card.subtitle && <p class="text-sm">{card.subtitle}</p>}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {item.layout === 'feature' && item.feature && (
+                <div class="container-frst pt-[30px] pb-11">
+                  <div class="grid grid-cols-[32%_minmax(0,1fr)]">
+                    <div class="border-r border-night/20 pt-1.5 pr-6">
+                      <p class="mb-14 text-sm uppercase">{item.feature.label}</p>
+                      <p class="text-[clamp(30px,3.8vw,58px)] leading-none font-light tracking-[-0.01em] whitespace-nowrap">
+                        {item.feature.title.map((line, i) => (
+                          <>
+                            {i > 0 && <br />}
+                            {line}
+                          </>
+                        ))}
+                      </p>
+                    </div>
+                    <ul class="pl-8">
+                      {item.children.map((child) => (
+                        <li class="border-b border-night/20 last:border-b-0">
+                          <a href={child.href} class="block py-5 pl-[50px] transition-[padding] duration-200 hover:pl-[62px]">
+                            <p class="mb-2.5 text-[clamp(18px,1.6vw,23px)] leading-[1.2] font-light">{child.title}</p>
+                            {child.subtitle && <p class="text-sm">{child.subtitle}</p>}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </div>
+          </li>
+        ))}
       </ul>
     </nav>
 
-    <a href="/#contact" class="btn-outline hidden border-cream/80 hover:bg-cream hover:text-night lg:inline-flex">
+    <a href="/#contact" data-hide-menu class="btn-outline hidden border-cream/80 hover:bg-cream hover:text-night lg:inline-flex">
       Let’s Talk
     </a>
 
@@ -80,25 +146,21 @@ const { overlay = false } = Astro.props;
         <ul class="flex flex-col text-2xl">
           {navItems.map((item) => (
             <li class="border-b border-cream/15">
-              {item.children ? (
-                <details class="group/section">
-                  <summary class="flex cursor-pointer list-none items-center justify-between py-4">
-                    {item.label}
-                    <span class="relative block h-3 w-3" aria-hidden="true">
-                      <span class="absolute inset-x-0 top-1/2 h-px bg-current"></span>
-                      <span class="absolute inset-y-0 left-1/2 w-px bg-current transition-opacity group-open/section:opacity-0"></span>
-                    </span>
-                  </summary>
-                  <ul class="flex flex-col gap-3 pb-5 pl-1 text-base">
-                    <li><a href={item.href} class="opacity-60">Overview</a></li>
-                    {item.children.map((child) => (
-                      <li><a href={child.href}>{child.title}</a></li>
-                    ))}
-                  </ul>
-                </details>
-              ) : (
-                <a href={item.href} class="block py-4">{item.label}</a>
-              )}
+              <details class="group/section">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4">
+                  {item.label}
+                  <span class="relative block h-3 w-3" aria-hidden="true">
+                    <span class="absolute inset-x-0 top-1/2 h-px bg-current"></span>
+                    <span class="absolute inset-y-0 left-1/2 w-px bg-current transition-opacity group-open/section:opacity-0"></span>
+                  </span>
+                </summary>
+                <ul class="flex flex-col gap-3 pb-5 pl-1 text-base">
+                  <li><a href={item.href} class="opacity-60">Overview</a></li>
+                  {item.children.map((child) => (
+                    <li><a href={child.href}>{child.title}</a></li>
+                  ))}
+                </ul>
+              </details>
             </li>
           ))}
           <li class="pt-8"><a href="/#contact" class="btn-outline border-cream/80">Let’s Talk</a></li>
@@ -106,28 +168,129 @@ const { overlay = false } = Astro.props;
       </nav>
     </details>
   </div>
+
+  <!-- Blaue Linie unter der Leiste, solange ein Mega-Menü offen ist -->
+  <span
+    class="pointer-events-none absolute inset-x-0 bottom-0 hidden h-px bg-[#3d6bd1] opacity-0 transition-opacity duration-300 group-data-[open]/header:opacity-100 lg:block"
+    aria-hidden="true"
+  ></span>
 </header>
+
+<style>
+  /* Panel-Zustände: Beim Wechsel zwischen zwei Menüs wird ohne Animation getauscht (siehe Skript) */
+  .mega {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.3s,
+      transform 0.3s,
+      visibility 0s 0.3s;
+  }
+  .mega[data-active] {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.3s,
+      transform 0.3s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mega,
+    .mega[data-active] {
+      transition: none;
+    }
+  }
+</style>
 
 <script>
   const header = document.querySelector<HTMLElement>('[data-site-header]');
-  const mobileMenu = header?.querySelector<HTMLDetailsElement>('[data-mobile-menu]');
 
-  // Escape schließt das Desktop-Mega-Menü (Fokus verlassen) und das Mobile-Menü
-  document.addEventListener('keydown', (event) => {
-    if (event.key !== 'Escape') return;
-    const active = document.activeElement;
-    if (active instanceof HTMLElement && header?.contains(active)) active.blur();
-    if (mobileMenu) mobileMenu.open = false;
-  });
+  if (header) {
+    const items = Array.from(header.querySelectorAll<HTMLElement>('[data-menu]'));
+    const mobileMenu = header.querySelector<HTMLDetailsElement>('[data-mobile-menu]');
+    let timer: number | undefined;
 
-  // Mobile: Menü schließen, wenn ein Link auf derselben Seite angetippt wird
-  mobileMenu?.addEventListener('click', (event) => {
-    if ((event.target as HTMLElement).closest('a')) mobileMenu.open = false;
-  });
+    const panelOf = (item: HTMLElement) => item.querySelector<HTMLElement>('[data-panel]');
 
-  // Nach Klick auf einen Link im Mega-Menü soll es nicht offen bleiben (Fokus bleibt sonst im Link)
-  header?.addEventListener('click', (event) => {
-    const link = (event.target as HTMLElement).closest('[data-dropdown] a');
-    if (link instanceof HTMLElement) link.blur();
-  });
+    function syncAria() {
+      items.forEach((item) => {
+        const open = panelOf(item)?.hasAttribute('data-active') ?? false;
+        item.querySelector('[data-trigger]')?.setAttribute('aria-expanded', String(open));
+      });
+    }
+
+    function show(item: HTMLElement) {
+      window.clearTimeout(timer);
+      const next = panelOf(item);
+      if (!next) return;
+      if (!next.hasAttribute('data-active')) {
+        const current = header!.querySelector<HTMLElement>('[data-panel][data-active]');
+        if (current) {
+          // Direkter Wechsel zwischen zwei Menüs: ohne Ein- und Ausblenden tauschen
+          current.style.transition = 'none';
+          next.style.transition = 'none';
+          current.removeAttribute('data-active');
+          next.setAttribute('data-active', '');
+          void next.offsetWidth;
+          current.style.transition = '';
+          next.style.transition = '';
+        } else {
+          next.setAttribute('data-active', '');
+        }
+      }
+      header!.setAttribute('data-open', '');
+      syncAria();
+    }
+
+    function hide() {
+      window.clearTimeout(timer);
+      header!.querySelectorAll('[data-panel][data-active]').forEach((panel) => panel.removeAttribute('data-active'));
+      header!.removeAttribute('data-open');
+      syncAria();
+    }
+
+    function hideLater() {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(hide, 140);
+    }
+
+    items.forEach((item) => {
+      item.addEventListener('mouseenter', () => show(item));
+      item.addEventListener('focusin', () => show(item));
+    });
+
+    header.addEventListener('mouseenter', () => window.clearTimeout(timer));
+    header.addEventListener('mouseleave', hideLater);
+    header.addEventListener('focusout', (event) => {
+      const next = event.relatedTarget as Node | null;
+      if (!next || !header.contains(next)) hide();
+    });
+
+    // Logo und Button schließen das Menü
+    header.querySelectorAll<HTMLElement>('[data-hide-menu]').forEach((el) => {
+      el.addEventListener('mouseenter', hideLater);
+      el.addEventListener('focus', hide);
+    });
+
+    // Klick auf einen Link im Menü: Menü schließen (wichtig bei Links auf dieselbe Seite)
+    header.addEventListener('click', (event) => {
+      const link = (event.target as HTMLElement).closest('[data-panel] a');
+      if (link instanceof HTMLElement) {
+        hide();
+        link.blur();
+      }
+      if (mobileMenu && (event.target as HTMLElement).closest('[data-mobile-menu] nav a')) {
+        mobileMenu.open = false;
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      hide();
+      const active = document.activeElement;
+      if (active instanceof HTMLElement && header.contains(active)) active.blur();
+      if (mobileMenu) mobileMenu.open = false;
+    });
+  }
 </script>
