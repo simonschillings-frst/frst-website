@@ -1,0 +1,93 @@
+---
+import Base from '../../layouts/Base.astro';
+import Media from '../../components/Media.astro';
+
+const lead = 'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.';
+const lead2 =
+  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos?';
+const paragraph =
+  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+const quote = '„Ich bin nur deshalb weiser als dieser Mensch, weil ich, was ich nicht weiß, auch nicht zu wissen glaube.“';
+---
+
+<Base title="The middle is disappearing – frst" headerOverlay>
+  <!-- Hero mit Bild -->
+  <section class="relative flex min-h-[640px] items-end overflow-hidden text-cream md:h-screen md:max-h-[900px]">
+    <div class="absolute inset-0"><Media tone="mist" label="Artikelbild" class="h-full w-full" /></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-night/40 via-transparent to-night/20"></div>
+    <div class="container-frst relative pt-40 pb-12">
+      <div class="md:ml-[9%]">
+        <p class="eyebrow">Article · 6 min read</p>
+        <h1 class="mt-8 text-5xl leading-[1.05] font-light md:text-6xl">The middle is disappearing.</h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Artikel: erster Teil -->
+  <section class="px-5 py-16 md:px-10 md:py-24">
+    <div class="mx-auto max-w-[1110px]">
+      <p class="max-w-[48ch] text-sm leading-relaxed">{lead}</p>
+
+      <div class="mt-12 md:ml-[20%]">
+        <p class="max-w-[78ch] text-xs leading-relaxed">{paragraph}</p>
+        <p class="mt-8 max-w-[78ch] text-xs leading-relaxed">{paragraph}</p>
+
+        <blockquote class="mx-auto mt-20 max-w-[34ch] text-center text-xl leading-snug font-light md:text-2xl">{quote}</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bildband über die ganze Breite -->
+  <section aria-hidden="true">
+    <Media tone="night" label="Artikelbild" class="h-[260px] w-full md:h-[420px]" />
+  </section>
+
+  <!-- Artikel: zweiter Teil -->
+  <section class="px-5 py-16 md:px-10 md:py-24">
+    <div class="mx-auto max-w-[1110px]">
+      <p class="max-w-[52ch] text-sm leading-relaxed">{lead2}</p>
+
+      <div class="mt-12 md:ml-[20%]">
+        <p class="max-w-[78ch] text-xs leading-relaxed">{paragraph}</p>
+        <p class="mt-8 max-w-[78ch] text-xs leading-relaxed">{paragraph}</p>
+
+        <p class="mt-10 text-[9px] tracking-wide uppercase">Article name · Date</p>
+        <a href="/perspectives" class="btn-outline mt-6 border-night px-4 py-1 text-[10px] hover:bg-night hover:text-cream">Back to Perspectives</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zusammenfassung mit Bild -->
+  <section class="grid md:grid-cols-[1fr_2fr]">
+    <Media tone="dusk" label="Artikelbild" class="min-h-[320px] w-full md:min-h-[560px]" />
+    <div class="flex flex-col items-center justify-center bg-night px-5 py-20 text-center text-cream md:px-16">
+      <p class="max-w-[28ch] text-xl leading-snug font-light md:text-2xl">Lorem Ipsum dolor sit amet hier ist ein dreizeiliges Zitat, das den Artikel zusammenfasst.</p>
+      <a href="#" class="btn-outline mt-10 border-cream/80 px-4 py-1 text-[10px] hover:bg-cream hover:text-night">Download article</a>
+    </div>
+  </section>
+
+  <!-- Newsletter (wie auf der Startseite) -->
+  <section class="bg-lilac">
+    <div class="container-frst grid gap-10 py-16 md:grid-cols-[1fr_3fr]">
+      <div>
+        <p class="eyebrow">Let’s talk</p>
+        <h2 class="mt-4 text-4xl leading-none font-light">Stay<br />Connected</h2>
+      </div>
+      <form class="grid gap-8 md:grid-cols-3 md:pt-6" action="#" method="post">
+        {[
+          { name: 'firstName', label: 'First Name', type: 'text' },
+          { name: 'lastName', label: 'Last Name', type: 'text' },
+          { name: 'email', label: 'E-Mail', type: 'email' },
+        ].map((f) => (
+          <label class="flex flex-col gap-6 text-xs">
+            {f.label}
+            <input name={f.name} type={f.type} class="border-b border-night/30 bg-transparent pb-2 outline-none focus:border-night" />
+          </label>
+        ))}
+        <div>
+          <button type="submit" class="btn-outline border-night px-4 py-1 text-[10px] hover:bg-night hover:text-cream">Subscribe</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</Base>
