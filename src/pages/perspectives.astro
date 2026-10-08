@@ -1,0 +1,185 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Arrow from '../components/Arrow.astro';
+
+const intro =
+  'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.';
+const longText = `${intro} ${intro} ${intro}`;
+const articleText = 'What AI means for the agency model – and what comes next.';
+
+// Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
+const articles = [
+  { no: '01', title: 'The middle is disappearing' },
+  { no: '02', title: 'Time is not the product' },
+  { no: '03', title: 'Second Brand Strategy' },
+];
+
+const videos = [
+  { title: 'Talk mit Dr. Ilke Heller', tags: 'Design Thinking', tone: 'night' },
+  { title: 'Talk mit Constantin Schiller', tags: 'Social Media · Content · Digital', tone: 'dusk' },
+  { title: 'Talk mit Sebastian Corbé', tags: 'Strategy · Content · Archetypes', tone: 'mist' },
+  { title: 'Talk mit Vorname Nachname', tags: 'Brand · Creative', tone: 'sky' },
+  { title: 'Talk mit Vorname Nachname', tags: 'AI · Strategy', tone: 'desert' },
+] as const;
+---
+
+<Base title="Perspectives – frst" headerOverlay>
+  <!-- Hero -->
+  <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-[680px]">
+    <div
+      class="pointer-events-none absolute top-1/2 left-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-[55%] rounded-full bg-[radial-gradient(circle,#93c0f5_0%,#4d6fd0_25%,#1f1d6b_50%,transparent_70%)]"
+    ></div>
+    <div class="container-frst relative grid gap-10 pt-40 pb-10 md:grid-cols-2 md:items-end">
+      <div class="md:self-center">
+        <p class="eyebrow">Perspectives</p>
+        <h1 class="mt-14 text-5xl leading-[1.05] font-light md:text-6xl">Ideas worth<br />thinking about.</h1>
+        <p class="mt-10 max-w-md text-sm leading-relaxed opacity-90">{intro}</p>
+      </div>
+      <p class="max-w-xs text-sm leading-relaxed opacity-90 md:justify-self-end md:pb-16">{intro}</p>
+    </div>
+  </section>
+
+  <!-- Neuester Artikel -->
+  <section id="newest" class="container-frst scroll-mt-20 py-16 md:py-24">
+    <div class="grid items-center gap-10 md:grid-cols-[1.4fr_1fr] md:gap-16">
+      <a href="#" class="group block overflow-hidden" aria-label="What happens when creativity meets AI?">
+        <Media tone="night" label="Newest article" class="aspect-[16/9] w-full transition-transform duration-700 ease-out group-hover:scale-105" />
+      </a>
+      <div>
+        <p class="eyebrow">Newest article</p>
+        <h2 class="mt-6 max-w-[20ch] text-xl leading-snug font-light md:text-2xl">What happens when creativity meets AI?</h2>
+        <p class="mt-6 max-w-[48ch] text-[11px] leading-relaxed">{longText}</p>
+        <a href="#" class="mt-6 inline-block" aria-label="Artikel lesen"><Arrow /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Artikel -->
+  <section id="articles" class="container-frst scroll-mt-20 py-16 md:py-24">
+    <p class="eyebrow">Articles</p>
+    <div class="mt-10 grid items-start gap-10 md:grid-cols-[1.4fr_1fr] md:gap-16">
+      <ul>
+        {articles.map((article) => (
+          <li>
+            <a
+              href="#"
+              class="group grid grid-cols-[3rem_1fr_auto] items-start gap-4 py-6 transition-[padding] duration-300 hover:pl-3 md:grid-cols-[4.5rem_1fr_auto]"
+            >
+              <span class="text-2xl leading-none font-light">{article.no}</span>
+              <div>
+                <h3 class="text-xl leading-snug font-light md:text-2xl">{article.title}</h3>
+                <p class="mt-5 max-w-[30ch] text-xs leading-relaxed">{articleText}</p>
+                <p class="mt-4 text-[9px] tracking-wide uppercase opacity-60">Article · 6 min read</p>
+              </div>
+              <span class="mt-2 transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a href="#" class="group block overflow-hidden" aria-label="Artikel ansehen">
+        <Media tone="night" label="Articles" class="aspect-[11/10] w-full transition-transform duration-700 ease-out group-hover:scale-105" />
+      </a>
+    </div>
+  </section>
+
+  <!-- Podcast -->
+  <section id="podcast" class="grid scroll-mt-20 md:grid-cols-[1fr_1.3fr]">
+    <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-10">
+      <p class="eyebrow">Podcast</p>
+      <h2 class="mt-8 max-w-[16ch] text-2xl leading-snug font-light md:text-3xl">You think about it, we talk about it.</h2>
+      <p class="mt-8 max-w-xs text-xs leading-relaxed opacity-90">{intro}</p>
+    </div>
+    <a href="#" class="group block overflow-hidden" aria-label="Podcast anhören">
+      <Media tone="dusk" label="Podcast" class="min-h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:h-full md:min-h-[420px]" />
+    </a>
+  </section>
+
+  <!-- Videos als Slider -->
+  <section id="videos" class="container-frst scroll-mt-20 py-16 md:py-24" data-slider>
+    <div class="flex items-center justify-between">
+      <p class="eyebrow">Latest videos</p>
+      <div class="flex gap-2">
+        <button
+          type="button"
+          data-slider-prev
+          class="flex h-9 w-9 items-center justify-center rounded-full border border-night/40 transition-colors duration-200 hover:bg-night hover:text-cream disabled:pointer-events-none disabled:opacity-30"
+          aria-label="Vorherige Videos"
+        >
+          <Arrow class="rotate-180" />
+        </button>
+        <button
+          type="button"
+          data-slider-next
+          class="flex h-9 w-9 items-center justify-center rounded-full border border-night/40 transition-colors duration-200 hover:bg-night hover:text-cream disabled:pointer-events-none disabled:opacity-30"
+          aria-label="Nächste Videos"
+        >
+          <Arrow />
+        </button>
+      </div>
+    </div>
+    <ul class="slider mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth" data-slider-track>
+      {videos.map((video) => (
+        <li class="w-[82%] shrink-0 snap-start sm:w-[calc((100%-1rem)/2)] md:w-[calc((100%-2rem)/3)]">
+          <a href="#" class="group block">
+            <div class="overflow-hidden">
+              <Media tone={video.tone} label="frst talk" class="aspect-video w-full transition-transform duration-700 ease-out group-hover:scale-105" />
+            </div>
+            <p class="mt-8 text-[11px]">Frst Talk</p>
+            <h3 class="mt-3 text-lg font-light">{video.title}</h3>
+            <p class="mt-5 text-[10px] opacity-70">{video.tags}</p>
+            <span class="mt-5 inline-block transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Abschlussbild -->
+  <section class="relative mt-10 flex min-h-[260px] items-center overflow-hidden text-cream md:mt-20 md:min-h-[320px]">
+    <div class="absolute inset-0"><Media tone="mist" label="Foto" class="h-full w-full" /></div>
+    <div class="absolute inset-0 bg-night/20"></div>
+    <div class="container-frst relative grid gap-8 py-12 md:grid-cols-2 md:items-center">
+      <div>
+        <p class="eyebrow">Why frst</p>
+        <h2 class="mt-5 text-2xl leading-snug font-light md:text-3xl">Facts that<br />make a difference.</h2>
+      </div>
+      <p class="max-w-xs text-xs leading-relaxed md:justify-self-end">{intro}</p>
+    </div>
+  </section>
+  <style>
+    .slider {
+      scrollbar-width: none;
+    }
+    .slider::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+
+  <script>
+    // Video-Slider: Pfeile blättern um eine Karte weiter, Wischen und Trackpad funktionieren ebenfalls
+    document.querySelectorAll<HTMLElement>('[data-slider]').forEach((slider) => {
+      const track = slider.querySelector<HTMLElement>('[data-slider-track]');
+      const prev = slider.querySelector<HTMLButtonElement>('[data-slider-prev]');
+      const next = slider.querySelector<HTMLButtonElement>('[data-slider-next]');
+      if (!track || !prev || !next) return;
+
+      const step = () => {
+        const first = track.querySelector<HTMLElement>('li');
+        const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+        return first ? first.offsetWidth + gap : track.clientWidth;
+      };
+
+      const update = () => {
+        prev.disabled = track.scrollLeft <= 4;
+        next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+      };
+
+      prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+      next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+      track.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    });
+  </script>
+</Base>
