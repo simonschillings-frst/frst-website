@@ -10,9 +10,9 @@ const articleText = 'What AI means for the agency model – and what comes next.
 
 // Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
 const articles = [
-  { no: '01', title: 'The middle is disappearing' },
-  { no: '02', title: 'Time is not the product' },
-  { no: '03', title: 'Second Brand Strategy' },
+  { no: '01', title: 'The middle is disappearing', href: '/perspectives/the-middle-is-disappearing' },
+  { no: '02', title: 'Time is not the product', href: '#' },
+  { no: '03', title: 'Second Brand Strategy', href: '#' },
 ];
 
 const videos = [
@@ -63,7 +63,7 @@ const videos = [
         {articles.map((article) => (
           <li>
             <a
-              href="#"
+              href={article.href}
               class="group grid grid-cols-[3rem_1fr_auto] items-start gap-4 py-6 transition-[padding] duration-300 hover:pl-3 md:grid-cols-[4.5rem_1fr_auto]"
             >
               <span class="text-2xl leading-none font-light">{article.no}</span>
