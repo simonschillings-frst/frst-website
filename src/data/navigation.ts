@@ -82,22 +82,22 @@ export const navItems: NavItem[] = [
   {
     key: 'work',
     label: 'Work',
-    href: '/#work',
+    href: '/work',
     layout: 'cards',
     children: [
-      { title: 'Cases', subtitle: 'Work', href: '/#work' },
-      { title: 'Results', subtitle: 'Work', href: '/#work' },
+      { title: 'Cases', subtitle: 'Work', href: '/work#cases' },
+      { title: 'Results', subtitle: 'Work', href: '/work#results' },
     ],
   },
   {
     key: 'perspectives',
     label: 'Perspectives',
-    href: '/#perspectives',
+    href: '/perspectives',
     layout: 'cards',
     children: [
-      { title: 'Articles', subtitle: 'Perspectives', href: '/#perspectives' },
-      { title: 'Videos', subtitle: 'Perspectives', href: '/#perspectives' },
-      { title: 'Podcast', subtitle: 'Perspectives', href: '/#perspectives' },
+      { title: 'Articles', subtitle: 'Perspectives', href: '/perspectives#articles' },
+      { title: 'Videos', subtitle: 'Perspectives', href: '/perspectives#videos' },
+      { title: 'Podcast', subtitle: 'Perspectives', href: '/perspectives#podcast' },
     ],
   },
   {
