@@ -1,0 +1,48 @@
+# Baut die Website bei jedem Push auf main und lädt sie per FTPS auf den
+# All-Inkl-Webspace. Die Zugangsdaten liegen als Repository-Secrets:
+#   FTP_SERVER    z. B. w0123456.kasserver.com
+#   FTP_USERNAME  FTP-Benutzer aus dem All-Inkl-KAS
+#   FTP_PASSWORD  Passwort dieses FTP-Benutzers
+# Optional als Repository-Variable:
+#   FTP_SERVER_DIR  Zielordner auf dem Server, Standard ./ (Startordner des FTP-Benutzers)
+name: Deploy to All-Inkl
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-allinkl
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      HAS_FTP_SECRETS: ${{ secrets.FTP_SERVER != '' && secrets.FTP_USERNAME != '' && secrets.FTP_PASSWORD != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Skip upload without FTP secrets
+        if: env.HAS_FTP_SECRETS != 'true'
+        run: echo "::notice::FTP-Secrets fehlen noch, deshalb wurde nur gebaut und nichts hochgeladen."
+
+      - name: Upload to All-Inkl
+        if: env.HAS_FTP_SECRETS == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./dist/
+          server-dir: ${{ vars.FTP_SERVER_DIR || './' }}
