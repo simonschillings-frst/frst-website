@@ -40,23 +40,37 @@ const disciplines = [
 
 <Base headerOverlay>
   <!-- Hero -->
-  <section class="relative flex min-h-[640px] items-end overflow-hidden text-cream md:h-screen md:max-h-[900px]">
+  <section class="relative flex min-h-[640px] items-center overflow-hidden text-cream md:h-screen md:max-h-[900px]">
     <div class="absolute inset-0"><Media tone="dusk" class="h-full w-full" /></div>
+    <!-- Hintergrundvideo: Datei unter public/videos/hero.mp4 ablegen. Ohne Datei bleibt der Verlauf sichtbar. -->
+    <video
+      class="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      aria-hidden="true"
+    >
+      <source src="/videos/hero.mp4" type="video/mp4" />
+    </video>
     <div class="absolute inset-0 bg-gradient-to-t from-night/60 via-transparent to-night/30"></div>
-    <div class="container-frst relative grid gap-10 pb-10 md:grid-cols-2 md:items-end">
+    <div class="container-frst relative py-24">
       <div>
         <p class="eyebrow">A space for what’s next.</p>
-        <h1 class="mt-4 text-5xl leading-[1.05] font-light md:text-7xl">frst<br />see beyond belonging*</h1>
+        <h1 class="mt-4 text-[8vw] leading-[1.05] font-light whitespace-nowrap md:text-5xl lg:text-7xl">see beyond belonging*</h1>
         <p class="mt-8 max-w-xl text-sm leading-relaxed opacity-90">*Belonging is the comfort of the familiar: We help brands see beyond it.</p>
-        <a href="/about-us" class="mt-10 inline-flex h-7 w-7 items-center justify-center rounded-full border border-cream/80" aria-label="Zur About-us-Seite">
-          <Arrow class="rotate-90" />
-        </a>
       </div>
+    </div>
+    <div class="container-frst absolute inset-x-0 bottom-10">
+      <a href="/about-us" class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-cream/80" aria-label="Zur About-us-Seite">
+        <Arrow class="rotate-90" />
+      </a>
     </div>
   </section>
 
   <!-- Work -->
-  <section id="work" class="container-frst py-20 md:py-28">
+  <section id="work" class="container-frst pt-20 pb-14 md:pt-28 md:pb-20">
     <p class="eyebrow">Work</p>
     <div class="mt-8 grid gap-12 md:grid-cols-12 md:gap-8">
       <a href="/work/naeher-am-leben" class="group grid gap-6 md:col-span-8 md:grid-cols-[3fr_2fr] md:items-center">
@@ -79,10 +93,9 @@ const disciplines = [
   </section>
 
   <!-- Why frst -->
-  <section id="why-frst" class="container-frst py-20 md:py-28">
+  <section id="why-frst" class="container-frst pt-14 pb-20 md:pt-20 md:pb-28">
     <p class="eyebrow">Why frst</p>
-    <h2 class="mt-8 text-2xl leading-snug md:text-4xl">frst - seeing beyond belonging</h2>
-    <div class="mt-10 max-w-6xl space-y-8 text-2xl leading-snug md:text-4xl">
+    <div class="mt-10 text-2xl leading-snug md:columns-2 md:gap-16 [&>p]:mb-8 [&>p]:break-inside-avoid">
       <p>
         We were never interested in doing things just because they’ve always been done that way. We believe the most interesting things happen when different minds meet, familiar ideas are challenged and there’s room for something unexpected.
       </p>
@@ -98,10 +111,10 @@ const disciplines = [
       <p>
         Together, we explore new ways to build brands, create culture and move things forward. Not by producing more of what already exists, but by making room for what doesn’t.
       </p>
-      <p class="pt-4">
+      <p>
         We don’t believe the future belongs to those with all the answers. It belongs to those willing to ask better questions, see things differently and create together.
       </p>
-      <p class="pt-4">We are frst. A space for what’s next.</p>
+      <p>We are frst. A space for what’s next.</p>
     </div>
   </section>
 
@@ -126,6 +139,7 @@ const disciplines = [
         <p class="mt-6 max-w-sm text-xs leading-relaxed">
           frst is a creative hub. We bring together the right insights, artists and technology for everything your brand needs next. Four disciplines give it shape. One open process keeps you inside the work, from day one.
         </p>
+        <a href="/what-we-do" class="mt-8 inline-block" aria-label="Zur What-we-do-Seite"><Arrow /></a>
       </div>
       <div class="relative grid grid-cols-6 gap-4 lg:pt-12">
         <Media tone="desert" class="col-span-4 col-start-2 aspect-[3/4]" />
@@ -145,7 +159,6 @@ const disciplines = [
             </div>
           </li>
         ))}
-        <li class="pl-12"><a href="/what-we-do" aria-label="Alle Leistungen"><Arrow /></a></li>
       </ol>
     </div>
   </section>
@@ -207,10 +220,10 @@ const disciplines = [
 
   <!-- Research -->
   <section id="research" class="grid md:grid-cols-2">
-    <div class="container-frst flex flex-col justify-center py-20 md:px-10">
+    <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-10">
       <p class="eyebrow">Research</p>
       <h2 class="mt-8 text-2xl leading-snug">We asked the people who know.</h2>
-      <p class="mt-6 max-w-sm text-[14px] leading-relaxed">
+      <p class="mt-6 max-w-sm text-[14px] leading-relaxed opacity-90">
         Together with TH Köln, we asked a representative group of clients what they really expect from agencies. It had not been done before. The answers are not always comfortable. They are very useful. We share what we found, so the whole industry can move forward.
       </p>
       <a href="/research" class="mt-8" aria-label="Zur Research-Seite"><Arrow /></a>
@@ -269,17 +282,17 @@ const disciplines = [
   </section>
 
   <!-- About us Teaser -->
-  <section id="about" class="grid md:grid-cols-[1.6fr_1fr]">
-    <div class="px-5 py-20 md:min-h-[720px] md:px-[6%] md:pt-28 md:pb-20">
+  <section id="about" class="grid md:grid-cols-2">
+    <div class="flex flex-col justify-center bg-black px-5 py-20 text-cream md:px-10">
       <p class="eyebrow">About us</p>
-      <h2 class="mt-12 max-w-lg text-4xl leading-tight md:mt-16 md:text-5xl">Made for the unguarded moment.</h2>
-      <p class="mt-16 max-w-[36rem] text-[14px] leading-relaxed md:mt-20">
+      <h2 class="mt-8 text-2xl leading-snug">Made for the unguarded moment.</h2>
+      <p class="mt-6 max-w-sm text-[14px] leading-relaxed opacity-90">
         frst is a family-owned company, led by brothers, with an eye for people. We see our work as an interaction between humans. In every conversation we look for the moment the mask drops and something real is said. That is where the best ideas begin.
       </p>
-      <a href="/about-us" class="mt-8 inline-block" aria-label="Mehr über uns"><Arrow /></a>
+      <a href="/about-us" class="mt-8" aria-label="Zur About-us-Seite"><Arrow /></a>
     </div>
     <a href="/about-us" class="group block overflow-hidden" aria-label="Zur About-us-Seite">
-      <Media tone="mist" label="About us" class="min-h-[420px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:h-full" />
+      <Media tone="mist" label="About us" class="min-h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:h-full md:min-h-[480px]" />
     </a>
   </section>
 
