@@ -1,0 +1,115 @@
+---
+import Base from '../../layouts/Base.astro';
+import Media from '../../components/Media.astro';
+
+// Texte und Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
+const facts = [
+  { label: 'Project', value: 'Campagne' },
+  { label: 'Client', value: 'Volksbank Göppingen' },
+  { label: 'Location', value: 'Göppingen' },
+  { label: 'Year', value: '2025' },
+];
+
+const paragraph =
+  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+---
+
+<Base title="Näher am Leben – Volksbank Göppingen – frst" headerLight>
+  <!-- Titel -->
+  <section class="container-frst flex min-h-[70vh] items-center py-20 md:h-[80vh] md:py-0">
+    <div class="md:ml-[16%]" data-align-nav>
+      <h1 class="text-5xl leading-[1.05] font-light md:text-7xl">Näher am Leben.</h1>
+      <p class="mt-8 text-lg font-light md:text-2xl">Volksbank Göppingen</p>
+    </div>
+  </section>
+
+  <!-- Hauptmotiv über die ganze Breite -->
+  <section>
+    <Media tone="dusk" label="Kampagnenmotiv" class="aspect-[16/10] w-full md:aspect-[12/5]" />
+  </section>
+
+  <!-- Projektdaten und Text -->
+  <section class="container-frst py-14 md:py-20">
+    <div class="grid gap-10 md:grid-cols-[1fr_1.35fr] md:gap-0">
+      <dl class="grid h-fit grid-cols-[5.5rem_1fr] gap-x-4 gap-y-2 text-[10px]">
+        {facts.map((fact) => (
+          <>
+            <dt class="uppercase">{fact.label}:</dt>
+            <dd>{fact.value}</dd>
+          </>
+        ))}
+      </dl>
+      <div class="space-y-5 text-xs leading-relaxed">
+        <p>{paragraph}</p>
+        <p>{paragraph}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bildergalerie -->
+  <section class="container-frst pb-16 md:pb-24">
+    <div class="grid gap-8 md:grid-cols-12 md:gap-x-6 md:gap-y-12">
+      <div class="overflow-hidden md:col-span-4">
+        <Media tone="night" label="Out of home" class="aspect-[3/4] w-full" />
+      </div>
+      <div class="overflow-hidden md:col-span-7 md:col-start-6 md:mt-24">
+        <Media tone="desert" label="Print" class="aspect-[5/4] w-full" />
+      </div>
+      <div class="overflow-hidden md:col-span-7 md:col-start-2 md:mt-6">
+        <Media tone="mist" label="Social" class="aspect-[5/4] w-full" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Teilen -->
+  <section class="container-frst pb-20 md:pb-28">
+    <p class="flex flex-wrap items-center gap-x-10 gap-y-3 text-xs">
+      <span>Share on</span>
+      <a href="#" class="hover:underline">Instagram</a>
+      <a href="#" class="hover:underline">LinkedIn</a>
+    </p>
+  </section>
+
+  <!-- Newsletter (dunkle Variante) -->
+  <section class="bg-night text-cream">
+    <div class="container-frst grid gap-10 py-16 md:grid-cols-[1fr_3fr]">
+      <div>
+        <p class="eyebrow">Let’s talk</p>
+        <h2 class="mt-4 text-4xl leading-none font-light">Stay<br />Connected</h2>
+      </div>
+      <form class="grid gap-8 md:grid-cols-3 md:pt-6" action="#" method="post">
+        {[
+          { name: 'firstName', label: 'First Name', type: 'text' },
+          { name: 'lastName', label: 'Last Name', type: 'text' },
+          { name: 'email', label: 'E-Mail', type: 'email' },
+        ].map((f) => (
+          <label class="flex flex-col gap-6 text-xs">
+            {f.label}
+            <input name={f.name} type={f.type} class="border-b border-cream/30 bg-transparent pb-2 outline-none focus:border-cream" />
+          </label>
+        ))}
+        <div>
+          <button type="submit" class="btn-outline border-cream/80 px-4 py-1 text-[10px] hover:bg-cream hover:text-night">Subscribe</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    // Titel linksbündig mit dem ersten Navigationspunkt („Why frst“) ausrichten
+    const block = document.querySelector<HTMLElement>('[data-align-nav]');
+    const align = () => {
+      const link = document.querySelector<HTMLElement>('header nav[aria-label="Hauptnavigation"] a, header nav[aria-label="Hauptnavigation"] summary, header nav[aria-label="Hauptnavigation"] button');
+      if (!block || !block.parentElement) return;
+      if (!link || link.offsetParent === null || window.innerWidth < 768) {
+        block.style.marginLeft = '';
+        return;
+      }
+      const offset = link.getBoundingClientRect().left + parseFloat(getComputedStyle(link).paddingLeft) - block.parentElement.getBoundingClientRect().left - parseFloat(getComputedStyle(block.parentElement).paddingLeft);
+      block.style.marginLeft = `${Math.max(0, offset)}px`;
+    };
+    align();
+    window.addEventListener('resize', align);
+    window.addEventListener('load', align);
+  </script>
+</Base>

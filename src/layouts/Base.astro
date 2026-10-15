@@ -7,11 +7,13 @@ interface Props {
   title?: string;
   description?: string;
   headerOverlay?: boolean;
+  headerLight?: boolean;
 }
 const {
   title = 'frst – The agency for tomorrow',
   description = 'We build memorable brands that spark excitement and ignite engagement.',
   headerOverlay = false,
+  headerLight = false,
 } = Astro.props;
 ---
 
@@ -25,7 +27,7 @@ const {
     <meta name="description" content={description} />
   </head>
   <body class="min-h-screen">
-    <Header overlay={headerOverlay} />
+    <Header overlay={headerOverlay} light={headerLight} />
     <main>
       <slot />
     </main>
