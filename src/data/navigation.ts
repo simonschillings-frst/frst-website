@@ -113,13 +113,13 @@ export const navItems: NavItem[] = [
   },
   {
     key: 'about',
-    label: 'About',
-    href: '/#about',
+    label: 'About us',
+    href: '/about-us',
     layout: 'cards',
     children: [
-      { title: 'Team', subtitle: 'About', href: '/#about' },
-      { title: 'Philosophy', subtitle: 'About', href: '/#about' },
-      { title: 'Careers', subtitle: 'About', href: '/#about' },
+      { title: 'Team', subtitle: 'About us', href: '/#about' },
+      { title: 'Philosophy', subtitle: 'About us', href: '/#about' },
+      { title: 'Careers', subtitle: 'About us', href: '/#about' },
     ],
   },
 ];
