@@ -7,13 +7,12 @@ import Arrow from '../components/Arrow.astro';
 const intro =
   'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.';
 const cardText = 'We turn complexity into clarity and ideas into impact.';
-const disciplineText = 'From Strategy to creative, brand, campaigns and AI- one connected partner.';
 
 const disciplines = [
-  { no: '01', title: 'Strategy' },
-  { no: '02', title: 'Creative' },
-  { no: '03', title: 'Brand' },
-  { no: '04', title: 'Campaigns' },
+  { no: '01', title: 'Brand Strategy', text: 'A position built on evidence, so your brand knows where it stands and where it is going.' },
+  { no: '02', title: 'Creative Concept', text: 'Original ideas from the right people, chosen for your project and shaped with you.' },
+  { no: '03', title: 'Campaign & Craft', text: 'Campaigns, content and film, from first concept to launch. Crafted with care, built to move people.' },
+  { no: '04', title: 'AI driven Technology', text: 'Dare to changes outcomes: sharper insights, faster briefings, teams matched with precision.' },
 ];
 ---
 
@@ -24,14 +23,13 @@ const disciplines = [
     <div class="absolute inset-0 bg-gradient-to-t from-night/60 via-transparent to-night/30"></div>
     <div class="container-frst relative grid gap-10 pb-10 md:grid-cols-2 md:items-end">
       <div>
-        <p class="eyebrow">The agency for tomorrow</p>
-        <h1 class="mt-4 text-5xl leading-[1.05] font-light md:text-7xl">Ideas for what’s next.</h1>
-        <p class="mt-8 max-w-md text-sm leading-relaxed opacity-90">{intro}</p>
+        <p class="eyebrow">A space for what’s next.</p>
+        <h1 class="mt-4 text-5xl leading-[1.05] font-light md:text-7xl">frst<br />see beyond belonging*</h1>
+        <p class="mt-8 max-w-xl text-sm leading-relaxed opacity-90">*Belonging is the comfort of the familiar: We help brands see beyond it.</p>
         <a href="#work" class="mt-10 inline-flex h-7 w-7 items-center justify-center rounded-full border border-cream/80" aria-label="Weiter scrollen">
           <Arrow class="rotate-90" />
         </a>
       </div>
-      <p class="max-w-xs text-sm leading-relaxed opacity-90 md:justify-self-end">{intro}</p>
     </div>
   </section>
 
@@ -39,20 +37,20 @@ const disciplines = [
   <section id="work" class="container-frst py-20 md:py-28">
     <p class="eyebrow">Work</p>
     <div class="mt-8 grid gap-12 md:grid-cols-12 md:gap-8">
-      <a href="#" class="group grid gap-6 md:col-span-8 md:grid-cols-[3fr_2fr] md:items-center">
-        <Media tone="night" label="The Mirror" class="aspect-[4/3] w-full" />
+      <a href="/work/naeher-am-leben" class="group grid gap-6 md:col-span-8 md:grid-cols-[3fr_2fr] md:items-center">
+        <Media tone="night" label="Näher am Leben" class="aspect-[4/3] w-full" />
         <div>
-          <p class="eyebrow">The Mirror</p>
-          <h3 class="mt-3 text-xl uppercase">Schott/ESO</h3>
-          <p class="mt-2 text-[10px] opacity-70">Strategy · Film · Science · Storytelling</p>
+          <p class="eyebrow">Volksbank Göppingen</p>
+          <h3 class="mt-3 text-xl uppercase">Näher am Leben</h3>
+          <p class="mt-2 text-[10px] opacity-70">Strategy · Campaign · Content · Digital</p>
           <Arrow class="mt-6" />
         </div>
       </a>
-      <a href="#" class="group md:col-span-3 md:col-start-10">
-        <Media tone="night" label="A Clearer Tomorrow" class="aspect-[4/3] w-full" />
-        <p class="eyebrow mt-6">The Next Chapter</p>
-        <h3 class="mt-3 text-xl uppercase">A Clearer Tomorrow</h3>
-        <p class="mt-2 text-[10px] opacity-70">Strategy · Campaign · Content · Digital</p>
+      <a href="/perspectives/the-middle-is-disappearing" class="group md:col-span-3 md:col-start-10">
+        <Media tone="night" label="The middle is disappearing" class="aspect-[4/3] w-full" />
+        <p class="eyebrow mt-6">Perspectives</p>
+        <h3 class="mt-3 text-xl uppercase">The middle is disappearing</h3>
+        <p class="mt-2 text-[10px] opacity-70">Article · 6 min read</p>
         <Arrow class="mt-6" />
       </a>
     </div>
@@ -60,20 +58,28 @@ const disciplines = [
 
   <!-- Why frst -->
   <section id="why-frst" class="container-frst py-20 md:py-28">
-    <div class="grid gap-12 lg:grid-cols-[1fr_2.2fr] lg:gap-16">
-      <div>
-        <p class="eyebrow">Why frst</p>
-        <h2 class="mt-8 text-2xl leading-snug md:text-3xl">
-          We stand for excellence in strategy, campaigns, and content powered by future-forward technology.
-        </h2>
-        <p class="mt-6 max-w-sm text-xs leading-relaxed">{intro}</p>
-      </div>
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Card title="Strategy" text={cardText} />
-        <Card title="Creative" text={cardText} />
-        <Card title="Content" text={cardText} />
-        <Card title="Technology" text={cardText} variant="night" />
-      </div>
+    <p class="eyebrow">Why frst</p>
+    <h2 class="mt-8 text-2xl leading-snug md:text-4xl">frst - seeing beyond belonging</h2>
+    <div class="mt-10 max-w-6xl space-y-8 text-2xl leading-snug md:text-4xl">
+      <p>
+        We were never interested in doing things just because they’ve always been done that way. We believe the most interesting things happen when different minds meet, familiar ideas are challenged and there’s room for something unexpected.
+      </p>
+      <p>
+        That’s why frst is more than an agency. It’s a space for curious minds, challenging conversations and the kind of collaboration that makes new things possible.
+      </p>
+      <p>
+        We bring together people from brands, creativity, technology and academia. People who question the obvious, share what they know and are open to what they don’t.
+      </p>
+      <p>
+        We use technology to expand what’s possible. But we believe it takes human intuition, imagination and judgment to make something matter.
+      </p>
+      <p>
+        Together, we explore new ways to build brands, create culture and move things forward. Not by producing more of what already exists, but by making room for what doesn’t.
+      </p>
+      <p class="pt-4">
+        We don’t believe the future belongs to those with all the answers. It belongs to those willing to ask better questions, see things differently and create together.
+      </p>
+      <p class="pt-4">We are frst. A space for what’s next.</p>
     </div>
   </section>
 
@@ -82,9 +88,11 @@ const disciplines = [
     <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-10">
       <h2 class="text-2xl">The Future of the Agency</h2>
       <p class="mt-6 max-w-sm text-xs leading-relaxed opacity-90">{intro}</p>
-      <a href="#" class="mt-8" aria-label="Mehr erfahren"><Arrow /></a>
+      <a href="/research" class="mt-8" aria-label="Zur Research-Seite"><Arrow /></a>
     </div>
-    <Media tone="mist" label="Future of the Agency" class="min-h-[320px] w-full md:min-h-[480px]" />
+    <a href="/research" class="group block overflow-hidden" aria-label="Zur Research-Seite">
+      <Media tone="mist" label="Future of the Agency" class="min-h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:h-full md:min-h-[480px]" />
+    </a>
   </section>
 
   <!-- What we do -->
@@ -93,12 +101,14 @@ const disciplines = [
     <div class="mt-8 grid gap-12 lg:grid-cols-[1fr_1.4fr_1fr]">
       <div>
         <h2 class="text-2xl leading-snug md:text-3xl">End-to-end for your brand.</h2>
-        <p class="mt-6 max-w-xs text-xs leading-relaxed">{disciplineText}</p>
+        <p class="mt-6 max-w-sm text-xs leading-relaxed">
+          frst is a creative hub. We bring together the right insights, artists and technology for everything your brand needs next. Four disciplines give it shape. One open process keeps you inside the work, from day one.
+        </p>
       </div>
       <div class="relative grid grid-cols-6 gap-4 lg:pt-12">
         <Media tone="desert" class="col-span-4 col-start-2 aspect-[3/4]" />
         <div class="absolute top-1/3 left-0 hidden h-36 w-36 items-center justify-center rounded-full border border-night/60 text-center text-[9px] tracking-wide uppercase lg:flex">
-          Five disciplines<br />one partner
+          Four disciplines<br />one partner
         </div>
         <Media tone="mist" class="col-span-4 aspect-[4/3]" />
         <Media tone="sky" class="col-span-2 mt-8 aspect-[2/3]" />
@@ -109,7 +119,7 @@ const disciplines = [
             <span>{d.no}</span>
             <div>
               <h3 class="uppercase">{d.title}</h3>
-              <p class="mt-2 max-w-[24ch] text-xs leading-relaxed">{disciplineText}</p>
+              <p class="mt-2 max-w-[34ch] text-xs leading-relaxed">{d.text}</p>
             </div>
           </li>
         ))}
@@ -122,22 +132,28 @@ const disciplines = [
   <section id="perspectives" class="container-frst py-20 md:py-28">
     <div class="grid gap-12 md:grid-cols-[1fr_1.3fr]">
       <div>
-        <p class="eyebrow normal-case">Perspectives</p>
-        <h2 class="mt-8 max-w-sm text-2xl leading-snug md:text-3xl">
-          Thoughts, questions, ideas – and what we’re watching, reading and thinking about.
-        </h2>
+        <p class="eyebrow">Perspectives</p>
+        <h2 class="mt-8 max-w-sm text-2xl leading-snug md:text-3xl">Outside views, on purpose.</h2>
+        <p class="mt-6 max-w-sm text-xs leading-relaxed">
+          Most agencies talk about themselves. We would rather listen. In our talks, we meet people from outside our world and learn how they see things. What we learn becomes films, podcasts, articles and whitepapers, including the findings of our research.
+        </p>
         <a href="#" class="mt-8 inline-block" aria-label="Alle Perspectives"><Arrow /></a>
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
-        {[1, 2].map(() => (
-          <a href="#">
-            <Media tone="night" class="aspect-[4/3] w-full" />
-            <p class="eyebrow mt-6">The Next Chapter</p>
-            <h3 class="mt-3 text-lg uppercase">A Clearer Tomorrow</h3>
-            <p class="mt-2 text-[10px] opacity-70">Strategy · Campaign · Content · Digital</p>
-            <Arrow class="mt-6" />
-          </a>
-        ))}
+        <a href="/perspectives/the-middle-is-disappearing">
+          <Media tone="night" label="The middle is disappearing" class="aspect-[4/3] w-full" />
+          <p class="eyebrow mt-6">Perspectives</p>
+          <h3 class="mt-3 text-lg uppercase">The middle is disappearing</h3>
+          <p class="mt-2 text-[10px] opacity-70">Article · 6 min read</p>
+          <Arrow class="mt-6" />
+        </a>
+        <a href="#">
+          <Media tone="night" class="aspect-[4/3] w-full" />
+          <p class="eyebrow mt-6">The Next Chapter</p>
+          <h3 class="mt-3 text-lg uppercase">A Clearer Tomorrow</h3>
+          <p class="mt-2 text-[10px] opacity-70">Strategy · Campaign · Content · Digital</p>
+          <Arrow class="mt-6" />
+        </a>
       </div>
     </div>
   </section>
@@ -171,11 +187,15 @@ const disciplines = [
   <section id="research" class="grid md:grid-cols-2">
     <div class="container-frst flex flex-col justify-center py-20 md:px-10">
       <p class="eyebrow">Research</p>
-      <h2 class="mt-8 text-2xl leading-snug">Insights for a changing industry.</h2>
-      <p class="mt-6 max-w-sm text-xs leading-relaxed">{intro}</p>
-      <a href="#" class="mt-8" aria-label="Zur Research"><Arrow /></a>
+      <h2 class="mt-8 text-2xl leading-snug">We asked the people who know.</h2>
+      <p class="mt-6 max-w-sm text-xs leading-relaxed">
+        Together with TH Köln, we asked a representative group of clients what they really expect from agencies. It had not been done before. The answers are not always comfortable. They are very useful. We share what we found, so the whole industry can move forward.
+      </p>
+      <a href="/research" class="mt-8" aria-label="Zur Research-Seite"><Arrow /></a>
     </div>
-    <Media tone="mist" label="Research" class="min-h-[320px] w-full md:min-h-[480px]" />
+    <a href="/research" class="group block overflow-hidden" aria-label="Zur Research-Seite">
+      <Media tone="mist" label="Research" class="min-h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:h-full md:min-h-[480px]" />
+    </a>
   </section>
 
   <!-- CMO Community -->
@@ -183,8 +203,12 @@ const disciplines = [
     <div class="grid gap-12 lg:grid-cols-[1fr_1.6fr]">
       <div>
         <p class="eyebrow">CMO Community</p>
-        <h2 class="mt-8 text-2xl leading-snug">A network for what’s next.</h2>
-        <p class="mt-6 max-w-sm text-xs leading-relaxed">{intro}</p>
+        <h2 class="mt-8 max-w-md text-2xl leading-snug">The Future of Agency Relationships</h2>
+        <p class="mt-6 max-w-md text-xs leading-relaxed">
+          The agency-client relationship is under pressure. AI. More transparency. New expectations. But the pressure isn’t on agencies themselves—it’s on the model companies and agencies use to work together. frst is exploring what needs to change.
+        </p>
+        <p class="mt-4 max-w-md text-xs leading-relaxed">Evidence-led. Built with you.</p>
+        <a href="/cmo-community" class="mt-8 inline-block" aria-label="Zur CMO Community"><Arrow /></a>
       </div>
       <div class="grid gap-4 sm:grid-cols-3">
         <Card title="Events" text={cardText} />
