@@ -1,12 +1,34 @@
 ---
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
-import Card from '../components/Card.astro';
 import Arrow from '../components/Arrow.astro';
 
 const intro =
   'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.';
-const cardText = 'We turn complexity into clarity and ideas into impact.';
+
+const pillars = [
+  {
+    no: 'Pillar 1',
+    title: 'Research Drops',
+    subtitle: 'Evidence every six weeks',
+    text: 'Every six weeks, we test one thesis with data, interviews, and surveys. Eight editions a year. No guesswork. No long reports. Just clear, reliable insights. At the end of the year, one major report brings everything together and validates the findings.',
+    why: 'You get evidence, not opinion—clear, concise, and on a regular schedule.',
+  },
+  {
+    no: 'Pillar 2',
+    title: 'CMO Roundtables',
+    subtitle: 'Peer conversations, backed by research',
+    text: 'Three times a year, 10–15 marketing and C-suite leaders come together. No panels. No pitches. Three themes: trust, creativity, and the future of agencies. What’s shared in the room stays in the room. The insights feed into the next study.',
+    why: 'Bring your questions to the table. Explore them with the right people—and help turn the answers into research.',
+  },
+  {
+    no: 'Pillar 3',
+    title: 'Perspectives',
+    subtitle: 'Fresh thinking between Research Drops',
+    text: 'Every Friday, we share a point of view, a research insight, or an interview clip. A way into the conversation without waiting six weeks for the next drop. Ideas that help you move forward.',
+    why: 'Stay close to the conversation, week after week. A steady stream of insight—never too much, never too little.',
+  },
+];
 
 const disciplines = [
   { no: '01', title: 'Brand Strategy', text: 'A position built on evidence, so your brand knows where it stands and where it is going.' },
@@ -200,7 +222,7 @@ const disciplines = [
 
   <!-- CMO Community -->
   <section id="cmo-community" class="container-frst py-20 md:py-28">
-    <div class="grid gap-12 lg:grid-cols-[1fr_1.6fr]">
+    <div class="grid gap-12 lg:grid-cols-[1fr_2.4fr]">
       <div>
         <p class="eyebrow">CMO Community</p>
         <h2 class="mt-8 max-w-md text-2xl leading-snug">The Future of Agency Relationships</h2>
@@ -210,10 +232,38 @@ const disciplines = [
         <p class="mt-4 max-w-md text-xs leading-relaxed">Evidence-led. Built with you.</p>
         <a href="/cmo-community" class="mt-8 inline-block" aria-label="Zur CMO Community"><Arrow /></a>
       </div>
-      <div class="grid gap-4 sm:grid-cols-3">
-        <Card title="Events" text={cardText} />
-        <Card title="CMO Network" text={cardText} />
-        <Card title="Roundtables" text={cardText} variant="lilac" />
+      <div class="grid items-start gap-4 md:grid-cols-3">
+        {pillars.map((pillar) => (
+          <div class="flex flex-col rounded-2xl border border-night/20 bg-cream p-5 text-night transition-colors duration-300 hover:bg-lilac" data-pillar>
+            <p class="eyebrow opacity-70">{pillar.no}</p>
+            <h3 class="mt-8 text-lg">{pillar.title}</h3>
+            <p class="mt-1 text-xs opacity-80">{pillar.subtitle}</p>
+            <div
+              id={`pillar-${pillar.no.replace(/\D/g, '')}`}
+              class="mt-6 max-h-[4.25rem] overflow-hidden transition-[max-height] duration-500 ease-out data-[collapsed]:[mask-image:linear-gradient(to_bottom,black_45%,transparent)] motion-reduce:transition-none"
+              data-pillar-content
+              data-collapsed
+            >
+              <p class="text-xs leading-relaxed">{pillar.text}</p>
+              <p class="mt-6 text-[10px] tracking-wide uppercase opacity-70">Why it matters</p>
+              <p class="mt-2 text-xs leading-relaxed">{pillar.why}</p>
+            </div>
+            <div class="mt-8">
+              <button
+                type="button"
+                class="group -m-2 p-2 transition-opacity hover:opacity-60"
+                aria-expanded="false"
+                aria-controls={`pillar-${pillar.no.replace(/\D/g, '')}`}
+                aria-label="Mehr lesen"
+                data-pillar-toggle
+              >
+                <svg class="h-3 w-4 transition-transform duration-300 group-aria-expanded:rotate-45 motion-reduce:transition-none" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+                  <path d="M2 6h12M8 0v12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -229,4 +279,35 @@ const disciplines = [
       <a href="#" class="btn-outline mt-10 border-cream/80 px-4 py-1 text-[10px] hover:bg-cream hover:text-night">Let’s Talk</a>
     </div>
   </section>
+
+  <script>
+    // Pillar-Kacheln: zeigen zunächst nur einen Teil des Textes, „Mehr lesen“ klappt die Kachel auf
+    document.querySelectorAll<HTMLElement>('[data-pillar]').forEach((tile) => {
+      const content = tile.querySelector<HTMLElement>('[data-pillar-content]');
+      const toggle = tile.querySelector<HTMLButtonElement>('[data-pillar-toggle]');
+      if (!content || !toggle) return;
+
+      const open = () => {
+        content.style.maxHeight = `${content.scrollHeight}px`;
+        content.removeAttribute('data-collapsed');
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', 'Weniger lesen');
+      };
+      const close = () => {
+        // Von der aktuellen Höhe aus zuklappen, damit die Animation sauber läuft
+        content.style.maxHeight = `${content.scrollHeight}px`;
+        void content.offsetHeight;
+        content.style.maxHeight = '';
+        content.setAttribute('data-collapsed', '');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Mehr lesen');
+      };
+
+      toggle.addEventListener('click', () => (toggle.getAttribute('aria-expanded') === 'true' ? close() : open()));
+      // Bei Größenänderung der Seite die aufgeklappte Höhe nachziehen
+      window.addEventListener('resize', () => {
+        if (toggle.getAttribute('aria-expanded') === 'true') content.style.maxHeight = `${content.scrollHeight}px`;
+      });
+    });
+  </script>
 </Base>
