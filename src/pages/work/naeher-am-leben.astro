@@ -16,7 +16,7 @@ const paragraph =
 
 <Base title="Näher am Leben – Volksbank Göppingen – frst" headerLight>
   <!-- Titel -->
-  <section class="container-frst flex min-h-[70vh] items-center py-20 md:h-[80vh] md:py-0">
+  <section class="container-frst pt-24 pb-14 md:pt-36 md:pb-16">
     <div class="md:ml-[16%]" data-align-nav>
       <h1 class="text-5xl leading-[1.05] font-light md:text-7xl">Näher am Leben.</h1>
       <p class="mt-8 text-lg font-light md:text-2xl">Volksbank Göppingen</p>
@@ -31,7 +31,7 @@ const paragraph =
   <!-- Projektdaten und Text -->
   <section class="container-frst py-14 md:py-20">
     <div class="grid gap-10 md:grid-cols-[1fr_1.35fr] md:gap-0">
-      <dl class="grid h-fit grid-cols-[5.5rem_1fr] gap-x-4 gap-y-2 text-[10px]">
+      <dl class="grid h-fit grid-cols-[7rem_1fr] gap-x-4 gap-y-2 text-[14px]">
         {facts.map((fact) => (
           <>
             <dt class="uppercase">{fact.label}:</dt>
@@ -39,7 +39,7 @@ const paragraph =
           </>
         ))}
       </dl>
-      <div class="space-y-5 text-xs leading-relaxed">
+      <div class="space-y-6 text-[20px] leading-relaxed">
         <p>{paragraph}</p>
         <p>{paragraph}</p>
       </div>
@@ -63,10 +63,10 @@ const paragraph =
 
   <!-- Teilen -->
   <section class="container-frst pb-20 md:pb-28">
-    <p class="flex flex-wrap items-center gap-x-10 gap-y-3 text-xs">
+    <p class="flex flex-wrap items-center gap-x-10 gap-y-3 text-[14px]">
       <span>Share on</span>
-      <a href="#" class="hover:underline">Instagram</a>
-      <a href="#" class="hover:underline">LinkedIn</a>
+      <a href="#" class="transition-colors duration-200 hover:text-violet focus-visible:text-violet">Instagram</a>
+      <a href="#" class="transition-colors duration-200 hover:text-violet focus-visible:text-violet">LinkedIn</a>
     </p>
   </section>
 
