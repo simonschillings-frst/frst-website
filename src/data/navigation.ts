@@ -95,7 +95,7 @@ export const navItems: NavItem[] = [
     href: '/perspectives',
     layout: 'cards',
     children: [
-      { title: 'Articles', subtitle: 'Perspectives', href: '/perspectives#articles' },
+      { title: 'Articles', subtitle: 'Perspectives', href: '/research#articles' },
       { title: 'Videos', subtitle: 'Perspectives', href: '/perspectives#videos' },
       { title: 'Podcast', subtitle: 'Perspectives', href: '/perspectives#podcast' },
     ],
@@ -103,7 +103,7 @@ export const navItems: NavItem[] = [
   {
     key: 'cmo',
     label: 'CMO Community',
-    href: '/#cmo-community',
+    href: '/cmo-community',
     layout: 'cards',
     children: [
       { title: 'Events', subtitle: 'CMO Community', href: '/#cmo-community' },
