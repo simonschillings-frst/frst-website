@@ -95,7 +95,7 @@ export const navItems: NavItem[] = [
     href: '/perspectives',
     layout: 'cards',
     children: [
-      { title: 'Articles', subtitle: 'Perspectives', href: '/perspectives#articles' },
+      { title: 'Articles', subtitle: 'Perspectives', href: '/research#articles' },
       { title: 'Videos', subtitle: 'Perspectives', href: '/perspectives#videos' },
       { title: 'Podcast', subtitle: 'Perspectives', href: '/perspectives#podcast' },
     ],
@@ -103,7 +103,7 @@ export const navItems: NavItem[] = [
   {
     key: 'cmo',
     label: 'CMO Community',
-    href: '/#cmo-community',
+    href: '/cmo-community',
     layout: 'cards',
     children: [
       { title: 'Events', subtitle: 'CMO Community', href: '/#cmo-community' },
@@ -113,13 +113,13 @@ export const navItems: NavItem[] = [
   },
   {
     key: 'about',
-    label: 'About',
-    href: '/#about',
+    label: 'About us',
+    href: '/about-us',
     layout: 'cards',
     children: [
-      { title: 'Team', subtitle: 'About', href: '/#about' },
-      { title: 'Philosophy', subtitle: 'About', href: '/#about' },
-      { title: 'Careers', subtitle: 'About', href: '/#about' },
+      { title: 'Team', subtitle: 'About us', href: '/#about' },
+      { title: 'Philosophy', subtitle: 'About us', href: '/#about' },
+      { title: 'Careers', subtitle: 'About us', href: '/#about' },
     ],
   },
 ];
