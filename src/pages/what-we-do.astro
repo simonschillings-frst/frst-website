@@ -93,9 +93,9 @@ const steps = [
       </div>
     </div>
 
-    <ol class="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
+    <ol class="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-x-16">
       {steps.map((step, i) => (
-        <li class="relative pr-6">
+        <li class="relative pr-6 lg:pr-0">
           <p class="text-[24px] leading-snug">{String(i + 1).padStart(2, '0')}{step.phase && <span class="block">{step.phase}</span>}</p>
           <h3 class:list={[step.phase ? 'eyebrow mt-4 text-[14px]' : 'mt-[0.6rem] text-[24px] leading-snug']}>{step.title}</h3>
           <p id={`step-text-${i + 1}`} class="mt-5 line-clamp-4 text-[16px] leading-relaxed" data-step-text>{step.text}</p>
@@ -109,7 +109,7 @@ const steps = [
           >
             Read more
           </button>
-          {i < steps.length - 1 && <Arrow class="absolute top-[3.3rem] right-0 hidden lg:block" />}
+          {i < steps.length - 1 && <Arrow class="absolute top-[2.75rem] -right-10 hidden lg:block" />}
         </li>
       ))}
     </ol>
