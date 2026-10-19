@@ -8,10 +8,10 @@ const intro =
 
 // Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
 const cases = [
-  { eyebrow: 'The Next Chapter', title: 'A Clearer Tomorrow', tags: 'Strategy · Campaign · Content · Digital', tone: 'dusk', frame: 'aspect-[16/10]', col: 'md:col-span-7' },
-  { eyebrow: 'Brand World', title: 'Northern Light', tags: 'Brand · Creative · Design', tone: 'sky', frame: 'aspect-[4/5]', col: 'md:col-span-5 md:mt-24' },
-  { eyebrow: 'Campaign', title: 'Common Ground', tags: 'Campaign · Social · Film', tone: 'desert', frame: 'aspect-square', col: 'md:col-span-4' },
-  { eyebrow: 'AI Experience', title: 'Second Opinion', tags: 'AI · Strategy · Digital', tone: 'night', frame: 'aspect-[16/9]', col: 'md:col-span-8 md:mt-12' },
+  { eyebrow: 'Volksbank Göppingen', title: 'Näher am Leben', href: '/work/naeher-am-leben', tags: 'Strategy · Campaign · Content · Digital', tone: 'dusk', frame: 'aspect-[16/10]', col: 'md:col-span-7' },
+  { eyebrow: 'Brand World', title: 'Northern Light', href: '#', tags: 'Brand · Creative · Design', tone: 'sky', frame: 'aspect-[4/5]', col: 'md:col-span-5 md:mt-24' },
+  { eyebrow: 'Campaign', title: 'Common Ground', href: '#', tags: 'Campaign · Social · Film', tone: 'desert', frame: 'aspect-square', col: 'md:col-span-4' },
+  { eyebrow: 'AI Experience', title: 'Second Opinion', href: '#', tags: 'AI · Strategy · Digital', tone: 'night', frame: 'aspect-[16/9]', col: 'md:col-span-8 md:mt-12' },
 ] as const;
 
 const strip = [
@@ -78,7 +78,7 @@ const words = ['Strategy', 'Creative', 'Brand', 'Campaigns', 'AI'];
     <ul class="mt-14 grid gap-x-6 gap-y-14 md:grid-cols-12">
       {cases.map((item) => (
         <li class={item.col}>
-          <a href="#" class="group block">
+          <a href={item.href} class="group block">
             <div class="overflow-hidden">
               <Media
                 tone={item.tone}
