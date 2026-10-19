@@ -5,22 +5,40 @@ import Arrow from '../components/Arrow.astro';
 
 const intro =
   'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.';
-const cardText = 'From Strategy to creative, brand, campaigns and AI- one connected partner.';
 
 // Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
 const articleText = 'What AI means for the agency model – and what comes next.';
-const articles = [
-  { no: '01', title: 'The middle is disappearing', href: '/perspectives/the-middle-is-disappearing', text: 'KI zerstört nicht die Agentur. Sie zerstört das Mittelfeld.', lang: 'de' },
-  { no: '02', title: 'Time is not the product', href: '#', text: articleText },
-  { no: '03', title: 'Second Brand Strategy', href: '#', text: articleText },
+const baseArticles = [
+  { no: '01', title: 'Time was the real value.', href: '#', text: articleText, tone: 'night' },
+  { no: '02', title: 'The middle is disappearing', href: '/perspectives/the-middle-is-disappearing', text: 'KI zerstört nicht die Agentur. Sie zerstört das Mittelfeld.', lang: 'de', tone: 'dusk' },
+  { no: '03', title: 'Trust goes the model stays.', href: '#', text: articleText, tone: 'sky' },
+  { no: '04', title: 'AI nods You believe', href: '#', text: articleText, tone: 'desert' },
 ];
 
-const topics = [
-  { id: 'reports', label: 'Reports', tone: 'sky' },
-  { id: 'insights', label: 'Insights', tone: 'night' },
-  { id: 'benchmark', label: 'Benchmark', tone: 'sky' },
-  { id: 'people-behind', label: 'People Behind', tone: 'night' },
-] as const;
+// Platzhalter 05–12, damit die Seitenaufteilung (4 Artikel pro Seite, bis zu 12 Artikel) sichtbar ist.
+// Beim Anlegen echter Artikel einfach hier ersetzen oder ergänzen.
+const placeholderTones = ['night', 'dusk', 'sky', 'desert'] as const;
+const articles = [
+  ...baseArticles,
+  ...Array.from({ length: 8 }, (_, k) => ({
+    no: String(k + 5).padStart(2, '0'),
+    title: 'Lorem Ipsum',
+    href: '#',
+    text: articleText,
+    tone: placeholderTones[k % placeholderTones.length],
+  })),
+];
+const pageSize = 4;
+
+// Felder der Studien-Anmeldung (nur die nötigsten Angaben, siehe Datenminimierung)
+const studyFields = [
+  { name: 'firstName', label: 'First name', type: 'text', autocomplete: 'given-name' },
+  { name: 'lastName', label: 'Last name', type: 'text', autocomplete: 'family-name' },
+  { name: 'email', label: 'E-mail address', type: 'email', autocomplete: 'email' },
+  { name: 'company', label: 'Company', type: 'text', autocomplete: 'organization' },
+  { name: 'function', label: 'Function', type: 'text', autocomplete: 'off' },
+  { name: 'jobTitle', label: 'Job title', type: 'text', autocomplete: 'organization-title' },
+];
 
 const facts = [
   { value: '120+', text: 'Lorem Ipsum dolor sit amet Ectur centran et amos.' },
@@ -55,7 +73,7 @@ const quotes = [
     <div class="container-frst relative grid gap-10 pt-40 pb-10 md:grid-cols-2 md:items-end">
       <div class="md:self-center">
         <p class="eyebrow text-[14px]">Research</p>
-        <h1 class="mt-14 text-[8vw] leading-[1.05] font-normal md:text-5xl lg:text-7xl">Better questions.<br />Deeper Insights.</h1>
+        <h1 class="mt-14 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">Better questions.<br />Deeper Insights.</h1>
         <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{intro}</p>
       </div>
       <p class="max-w-sm text-[16px] leading-relaxed opacity-90 md:justify-self-end md:pb-16">{intro}</p>
@@ -66,9 +84,9 @@ const quotes = [
   <section id="articles" class="container-frst scroll-mt-20 py-16 md:py-24">
     <p class="eyebrow text-[14px]">Articles</p>
     <div class="mt-10 grid items-start gap-10 md:grid-cols-[1.4fr_1fr] md:gap-16">
-      <ul>
-        {articles.map((article) => (
-          <li>
+      <ul data-article-list>
+        {articles.map((article, i) => (
+          <li data-article-item={i}>
             <a
               href={article.href}
               class="group grid grid-cols-[3rem_1fr_auto] items-start gap-4 py-6 transition-[padding] duration-300 hover:pl-3 md:grid-cols-[4.5rem_1fr_auto]"
@@ -84,54 +102,78 @@ const quotes = [
           </li>
         ))}
       </ul>
-      <a href="#" class="group block overflow-hidden" aria-label="Artikel ansehen">
-        <Media tone="night" label="Articles" class="aspect-[11/10] w-full transition-transform duration-700 ease-out group-hover:scale-105" />
+      <!-- Bild wechselt mit dem Artikel, über dem die Maus steht; Ausgangslage ist Artikel 01 -->
+      <a href={articles[0].href} class="relative block aspect-[11/10] w-full overflow-hidden" tabindex="-1" aria-hidden="true" data-article-image-link>
+        {articles.map((article, i) => (
+          <div
+            class="absolute inset-0 opacity-0 transition-opacity duration-500 data-[active]:opacity-100 motion-reduce:transition-none"
+            data-article-image={i}
+            data-active={i === 0 ? '' : undefined}
+          >
+            <Media tone={article.tone as 'night' | 'dusk' | 'sky' | 'desert'} label="Articles" class="h-full w-full" />
+          </div>
+        ))}
       </a>
     </div>
+    <!-- Seitenzahlen: werden per Skript eingeblendet, wenn es mehr als eine Seite gibt -->
+    <nav class="mt-14 hidden items-center justify-center gap-2" aria-label="Artikel-Seiten" data-pager>
+      <button
+        type="button"
+        class="flex h-9 w-9 items-center justify-center rounded-full border border-night/40 transition-colors duration-200 hover:bg-night hover:text-cream disabled:pointer-events-none disabled:opacity-30"
+        aria-label="Vorherige Seite"
+        data-pager-prev
+      >
+        <Arrow class="rotate-180" />
+      </button>
+      <ol class="flex items-center gap-1 text-[16px]" data-pager-pages></ol>
+      <button
+        type="button"
+        class="flex h-9 w-9 items-center justify-center rounded-full border border-night/40 transition-colors duration-200 hover:bg-night hover:text-cream disabled:pointer-events-none disabled:opacity-30"
+        aria-label="Nächste Seite"
+        data-pager-next
+      >
+        <Arrow />
+      </button>
+    </nav>
   </section>
 
-  <!-- Why frst: Themen -->
-  <section class="container-frst py-20 md:py-24">
-    <div class="grid gap-12 lg:grid-cols-[1fr_2.6fr] lg:gap-24">
+  <!-- Get the Study: Anfrage der Studie (Aufbau wie Stay Connected, Bild als Hintergrund) -->
+  <section id="get-the-study" class="relative scroll-mt-20 overflow-hidden text-cream">
+    <div class="absolute inset-0" aria-hidden="true"><Media tone="dusk" class="h-full w-full" /></div>
+    <div class="absolute inset-0 bg-night/50" aria-hidden="true"></div>
+    <div class="container-frst relative grid gap-10 py-16 md:grid-cols-[1fr_3fr]">
       <div>
-        <p class="eyebrow text-[14px]">Why frst</p>
-        <h2 class="mt-8 text-[30px] leading-snug">We dig deeper.<br />So you can go further.</h2>
-        <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{intro}</p>
-        <p class="mt-6 max-w-sm text-[16px] leading-relaxed">{intro}</p>
+        <p class="eyebrow text-[14px]">Study</p>
+        <h2 class="mt-4 text-[30px] leading-snug">Get the Study</h2>
       </div>
-      <ul class="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
-        {topics.map((topic) => (
-          <li id={topic.id} class="scroll-mt-20">
-            <a href="#" class="group block">
-              <div class="aspect-square overflow-hidden border border-night/20">
-                <Media tone={topic.tone} label={topic.label} class="h-full w-full transition-transform duration-500 group-hover:scale-105" />
-              </div>
-              <p class="eyebrow mt-8 text-[14px]">{topic.label}</p>
-              <h3 class="mt-4 text-[24px] leading-snug">From Data To Direction.</h3>
-              <p class="mt-6 max-w-[30ch] text-[16px] leading-relaxed">{cardText}</p>
-            </a>
-          </li>
+      <form class="grid gap-x-8 gap-y-8 md:grid-cols-3 md:pt-6" action="#" method="post">
+        {[
+          { name: 'studyFirstName', label: 'First Name', type: 'text', autocomplete: 'given-name' },
+          { name: 'studyLastName', label: 'Last Name', type: 'text', autocomplete: 'family-name' },
+          { name: 'studyEmail', label: 'E-Mail', type: 'email', autocomplete: 'email' },
+        ].map((f) => (
+          <label class="flex flex-col gap-6 text-[16px]">
+            <span>{f.label} <span aria-hidden="true">*</span></span>
+            <input name={f.name} type={f.type} autocomplete={f.autocomplete} required class="border-b border-cream/60 bg-transparent pb-2 text-[16px] outline-none focus:border-cream focus-visible:border-cream" />
+          </label>
         ))}
-      </ul>
-    </div>
-  </section>
 
-  <!-- Facts -->
-  <section class="bg-night text-cream" data-facts>
-    <div class="container-frst grid gap-12 py-16 md:py-20 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
-      <div>
-        <p class="eyebrow text-[14px]">Why frst</p>
-        <h2 class="mt-8 text-[30px] leading-snug">Facts that<br />make a difference.</h2>
-        <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{intro}</p>
-      </div>
-      <ul class="grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-        {facts.map((fact) => (
-          <li class="lg:pt-4">
-            <p class="text-6xl leading-none font-normal tabular-nums md:text-7xl" data-count>{fact.value}</p>
-            <p class="mt-6 max-w-[26ch] text-[16px] leading-relaxed">{fact.text}</p>
-          </li>
-        ))}
-      </ul>
+        <!-- Einwilligung (DSGVO): nicht vorausgewählt, freiwillig, Widerruf jederzeit möglich -->
+        <div class="md:col-span-3">
+          <label class="flex items-start gap-3 text-[14px] leading-relaxed">
+            <input type="checkbox" name="studyConsent" required class="mt-1 h-4 w-4 shrink-0 accent-violet focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream" />
+            <span>
+              I agree that frst uses my name and e-mail address to send me the study. I can withdraw my consent at any time with effect for the future. Further information can be found in the
+              <a href="/datenschutz" class="underline underline-offset-4 hover:opacity-80 focus-visible:opacity-80">privacy policy</a>. *
+            </span>
+          </label>
+          <p class="mt-4 text-[14px] leading-relaxed">* Required fields.</p>
+        </div>
+
+        <div class="md:col-span-3">
+          <button type="submit" class="btn-outline border-cream/80 px-4 py-1 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">Get the Study</button>
+        </div>
+      </form>
     </div>
   </section>
 
@@ -163,19 +205,142 @@ const quotes = [
     </div>
   </section>
 
-  <!-- Abschlussbild -->
-  <section class="relative flex min-h-[260px] items-center overflow-hidden text-cream md:min-h-[320px]">
-    <div class="absolute inset-0"><Media tone="mist" label="Foto" class="h-full w-full" /></div>
-    <div class="absolute inset-0 bg-night/20"></div>
-    <div class="container-frst relative grid gap-8 py-12 md:grid-cols-2 md:items-center">
+  <!-- Facts -->
+  <section class="bg-night text-cream" data-facts>
+    <div class="container-frst grid gap-12 py-16 md:py-20 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
       <div>
         <p class="eyebrow text-[14px]">Why frst</p>
-        <h2 class="mt-5 text-[30px] leading-snug">Facts that<br />make a difference.</h2>
+        <h2 class="mt-8 text-[30px] leading-snug">Facts that<br />make a difference.</h2>
+        <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{intro}</p>
       </div>
-      <p class="max-w-sm text-[16px] leading-relaxed md:justify-self-end">{intro}</p>
+      <ul class="grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        {facts.map((fact) => (
+          <li class="lg:pt-4">
+            <p class="text-6xl leading-none font-normal tabular-nums md:text-7xl" data-count>{fact.value}</p>
+            <p class="mt-6 max-w-[26ch] text-[16px] leading-relaxed">{fact.text}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
+  <!-- Studienteilnahme: Anmeldeformular -->
+  <section id="study" class="scroll-mt-20 bg-lilac">
+    <div class="container-frst grid gap-12 py-16 md:py-24 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
+      <div>
+        <p class="eyebrow text-[14px]">Research study</p>
+        <h2 class="mt-8 text-[30px] leading-snug">Take part<br />in our study.</h2>
+        <p class="mt-10 max-w-sm text-[16px] leading-relaxed">Share a few details and we will get in touch with the next steps. Your data is used only for organising the study.</p>
+      </div>
+
+      <form class="grid gap-x-8 gap-y-8 sm:grid-cols-2" action="#" method="post" data-study-form>
+        {studyFields.map((field) => (
+          <label class="flex flex-col gap-3 text-[16px]">
+            <span>{field.label} <span aria-hidden="true">*</span></span>
+            <input
+              name={field.name}
+              type={field.type}
+              autocomplete={field.autocomplete}
+              required
+              class="border-b border-night/40 bg-transparent pb-2 text-[16px] outline-none focus:border-violet focus-visible:border-violet"
+            />
+          </label>
+        ))}
+
+        <!-- Einwilligung (DSGVO): nicht vorausgewählt, ausdrücklich und freiwillig, Widerruf jederzeit möglich -->
+        <div class="sm:col-span-2">
+          <label class="flex items-start gap-3 text-[14px] leading-relaxed">
+            <input type="checkbox" name="consent" required class="mt-1 h-4 w-4 shrink-0 accent-violet focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet" />
+            <span>
+              I agree that frst processes my details (name, e-mail address, company, function, job title) to organise my participation in the study and to contact me about it. I can withdraw my consent at any time with effect for the future, for example by e-mail. Further information can be found in the
+              <a href="/datenschutz" class="underline underline-offset-4 hover:text-violet focus-visible:text-violet">privacy policy</a>. *
+            </span>
+          </label>
+          <p class="mt-4 text-[14px] leading-relaxed opacity-80">* Required fields. Participation is voluntary. Your details are deleted once the study has ended, unless you agree to further contact.</p>
+        </div>
+
+        <div class="sm:col-span-2">
+          <button type="submit" class="btn-outline border-night px-5 py-2 text-[16px] hover:bg-night hover:text-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet">Take part</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script define:vars={{ pageSize }}>
+    // Artikelliste: vier Artikel pro Seite mit Seitenzahlen. Das Bild rechts folgt der Maus
+    // (bzw. dem Tastaturfokus) und springt danach auf den ersten Artikel der Seite zurück.
+    const list = document.querySelector('[data-article-list]');
+    const imageLink = document.querySelector('[data-article-image-link]');
+    const pager = document.querySelector('[data-pager]');
+    if (list && imageLink) {
+      const items = Array.from(list.querySelectorAll('[data-article-item]'));
+      const images = Array.from(imageLink.querySelectorAll('[data-article-image]'));
+      const pageCount = Math.ceil(items.length / pageSize);
+      let page = 0;
+
+      const show = (index) => {
+        images.forEach((img, i) => img.toggleAttribute('data-active', i === index));
+        const link = items[index]?.querySelector('a');
+        if (link) imageLink.href = link.href;
+      };
+
+      items.forEach((item, index) => {
+        item.addEventListener('mouseenter', () => show(index));
+        item.addEventListener('focusin', () => show(index));
+      });
+      list.addEventListener('mouseleave', () => show(page * pageSize));
+      list.addEventListener('focusout', (event) => {
+        if (!list.contains(event.relatedTarget)) show(page * pageSize);
+      });
+
+      if (pager && pageCount > 1) {
+        const prev = pager.querySelector('[data-pager-prev]');
+        const next = pager.querySelector('[data-pager-next]');
+        const pages = pager.querySelector('[data-pager-pages]');
+        const buttons = [];
+
+        for (let p = 0; p < pageCount; p++) {
+          const li = document.createElement('li');
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.textContent = String(p + 1);
+          button.setAttribute('aria-label', 'Seite ' + (p + 1));
+          button.className = 'flex h-9 w-9 items-center justify-center rounded-full border border-transparent transition-colors duration-200 hover:border-night/40';
+          button.addEventListener('click', () => go(p));
+          li.appendChild(button);
+          pages.appendChild(li);
+          buttons.push(button);
+        }
+
+        const go = (target) => {
+          page = Math.min(Math.max(target, 0), pageCount - 1);
+          items.forEach((item, i) => {
+            item.hidden = Math.floor(i / pageSize) !== page;
+          });
+          buttons.forEach((button, p) => {
+            if (p === page) {
+              button.setAttribute('aria-current', 'page');
+              button.classList.add('border-night');
+              button.classList.remove('border-transparent');
+            } else {
+              button.removeAttribute('aria-current');
+              button.classList.remove('border-night');
+              button.classList.add('border-transparent');
+            }
+          });
+          prev.disabled = page === 0;
+          next.disabled = page === pageCount - 1;
+          show(page * pageSize);
+        };
+
+        prev.addEventListener('click', () => go(page - 1));
+        next.addEventListener('click', () => go(page + 1));
+        pager.classList.remove('hidden');
+        pager.classList.add('flex');
+        go(0);
+      }
+    }
+  </script>
   <script>
     // Alle Zahlen im Fakten-Modul zählen gleichzeitig hoch, sobald die Maus die dunkle Fläche berührt
     const facts = document.querySelector<HTMLElement>('[data-facts]');

@@ -37,13 +37,9 @@ export const navItems: NavItem[] = [
   {
     key: 'why',
     label: 'Why frst',
-    href: '/#why-frst',
+    href: '/',
     layout: 'cards',
-    children: [
-      { title: 'Agency & Transformation', subtitle: 'Agency Transformation', href: '/#why-frst' },
-      { title: 'Creative Growth', subtitle: 'Agency Transformation', href: '/#why-frst' },
-      { title: 'AI & Agency', subtitle: 'Agency Transformation', href: '/#why-frst' },
-    ],
+    children: [],
   },
   {
     key: 'what',
@@ -72,11 +68,11 @@ export const navItems: NavItem[] = [
     layout: 'feature',
     feature: { label: 'Our Approaches', title: ['The', 'Future', 'of the Agency'] },
     children: [
-      { title: 'Relationships', subtitle: 'Lorem ipsum', href: '/research' },
-      { title: 'Reports', subtitle: 'Lorem ipsum', href: '/research#reports' },
-      { title: 'Insights', subtitle: 'Lorem ipsum', href: '/research#insights' },
-      { title: 'Benchmark', subtitle: 'Lorem ipsum', href: '/research#benchmark' },
-      { title: 'Participate', subtitle: 'Lorem ipsum', href: '/research' },
+      { title: 'Better questions. Deeper Insights.', subtitle: 'Lorem ipsum', href: '/research' },
+      { title: 'Time was the real value.', subtitle: 'Lorem ipsum', href: '/research' },
+      { title: 'The middle is disappearing', subtitle: 'Lorem ipsum', href: '/perspectives/the-middle-is-disappearing' },
+      { title: 'Trust goes the model stays.', subtitle: 'Lorem ipsum', href: '/research' },
+      { title: 'AI nods You believe', subtitle: 'Lorem ipsum', href: '/research' },
     ],
   },
   {

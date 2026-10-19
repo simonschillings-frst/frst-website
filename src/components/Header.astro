@@ -13,6 +13,14 @@ const { overlay = false, light = false } = Astro.props;
 
 // Platzhalterbilder der Karten, wenn kein eigener Ton gesetzt ist
 const tones = ['night', 'desert', 'mist'] as const;
+
+// Aktuelle Seite (inkl. Unterseiten) für den Punkt in der Navigation
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => {
+  const base = href.split('#')[0].replace(/\/$/, '');
+  if (base === '') return href === '/' && path === '/';
+  return path === base || path.startsWith(base + '/');
+};
 ---
 
 <header
@@ -33,23 +41,35 @@ const tones = ['night', 'desert', 'mist'] as const;
     <nav class="hidden h-full lg:block" aria-label="Hauptnavigation">
       <ul class="flex h-full items-center gap-0.5 text-[16px]">
         {navItems.map((item) => (
-          <li class="flex h-full items-center" data-menu>
+          <li class="flex h-full items-center" data-menu={item.children.length > 0 ? '' : undefined}>
             <a
               href={item.href}
-              data-trigger
+              data-trigger={item.children.length > 0 ? '' : undefined}
+              data-hide-menu={item.children.length === 0 ? '' : undefined}
               class:list={[
-                'block rounded-full px-3.5 py-1.5 opacity-60 transition-[opacity,background-color] duration-200 hover:opacity-100 focus-visible:opacity-100 aria-expanded:opacity-100',
-                light
-                  ? 'hover:bg-night/10 focus-visible:bg-night/10 aria-expanded:bg-night/10'
-                  : 'hover:bg-cream/20 focus-visible:bg-cream/20 aria-expanded:bg-cream/20',
+                'group/link relative flex items-center gap-1.5 rounded-full py-1.5 pr-3 pl-5 transition-opacity duration-200 hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current aria-expanded:opacity-100',
+                isCurrent(item.href) ? 'opacity-100' : 'opacity-60',
               ]}
-              aria-haspopup="true"
-              aria-expanded="false"
+              aria-haspopup={item.children.length > 0 ? 'true' : undefined}
+              aria-expanded={item.children.length > 0 ? 'false' : undefined}
+              aria-current={isCurrent(item.href) ? 'page' : undefined}
             >
+              <!-- Punkt: markiert die aktuelle Seite, erscheint auch beim Hover und bei offenem Menü -->
+              <span
+                class:list={[
+                  'absolute top-1/2 left-2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-current transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover/link:scale-100 group-hover/link:opacity-100 group-focus-visible/link:scale-100 group-focus-visible/link:opacity-100 group-aria-expanded/link:scale-100 group-aria-expanded/link:opacity-100 motion-reduce:transition-none',
+                  isCurrent(item.href) ? 'scale-100 opacity-100' : 'scale-0 opacity-0',
+                ]}
+                aria-hidden="true"
+              ></span>
               {item.label}
+              <!-- Pfeil: zeigt Unterseiten an und klappt beim Öffnen des Menüs um -->
+              {item.children.length > 0 && <svg viewBox="0 0 10 6" class="h-1.5 w-2.5 transition-transform duration-300 group-aria-expanded/link:rotate-180 motion-reduce:transition-none" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M1 1l4 4 4-4" />
+              </svg>}
             </a>
 
-            <div data-panel class="mega absolute inset-x-0 top-full bg-cream text-night shadow-[0_30px_60px_rgba(13,8,48,0.14)]">
+            {item.children.length > 0 && <div data-panel class="mega absolute inset-x-0 top-full bg-cream text-night shadow-[0_30px_60px_rgba(13,8,48,0.14)]">
               {item.layout === 'cards' && (
                 <div class="container-frst pt-14 pb-[70px]">
                   <ul class="grid gap-9" style={`grid-template-columns: repeat(${item.children.length}, minmax(0, 1fr))`}>
@@ -62,7 +82,7 @@ const tones = ['night', 'desert', 'mist'] as const;
                               class="h-full w-full"
                             />
                           </div>
-                          <p class="mt-[clamp(24px,3.6vw,52px)] mb-2.5 text-[clamp(18px,1.9vw,27px)] leading-[1.2] font-normal">{child.title}</p>
+                          <p class="mt-[clamp(24px,3.6vw,52px)] mb-2.5 text-[clamp(18px,1.9vw,27px)] leading-[1.2] font-light">{child.title}</p>
                           {child.subtitle && <p class="text-[16px]">{child.subtitle}</p>}
                         </a>
                       </li>
@@ -78,7 +98,7 @@ const tones = ['night', 'desert', 'mist'] as const;
                       {item.children.map((child) => (
                         <li class="border-b border-night/20 last:border-b-0">
                           <a href={child.href} class="block py-5 pr-[30px] pl-1 transition-[padding] duration-200 hover:pl-4">
-                            <p class="mb-2.5 text-[clamp(18px,1.6vw,23px)] leading-[1.2] font-normal">{child.title}</p>
+                            <p class="mb-2.5 text-[clamp(18px,1.6vw,23px)] leading-[1.2] font-light">{child.title}</p>
                             {child.subtitle && <p class="text-[16px]">{child.subtitle}</p>}
                           </a>
                         </li>
@@ -97,7 +117,7 @@ const tones = ['night', 'desert', 'mist'] as const;
                                     class="h-full w-full"
                                   />
                                 </div>
-                                <p class="mt-[34px] mb-2.5 text-[clamp(18px,1.9vw,27px)] leading-[1.2] font-normal">{card.title}</p>
+                                <p class="mt-[34px] mb-2.5 text-[clamp(18px,1.9vw,27px)] leading-[1.2] font-light">{card.title}</p>
                                 {card.subtitle && <p class="text-[16px]">{card.subtitle}</p>}
                               </a>
                             </li>
@@ -114,7 +134,7 @@ const tones = ['night', 'desert', 'mist'] as const;
                   <div class="grid grid-cols-[32%_minmax(0,1fr)]">
                     <div class="border-r border-night/20 pt-1.5 pr-6">
                       <p class="mb-14 text-sm uppercase">{item.feature.label}</p>
-                      <p class="text-[clamp(30px,3.8vw,58px)] leading-none font-normal tracking-[-0.01em] whitespace-nowrap">
+                      <p class="text-[clamp(30px,3.8vw,58px)] leading-none font-light tracking-[-0.01em] whitespace-nowrap">
                         {item.feature.title.map((line, i) => (
                           <>
                             {i > 0 && <br />}
@@ -127,7 +147,7 @@ const tones = ['night', 'desert', 'mist'] as const;
                       {item.children.map((child) => (
                         <li class="border-b border-night/20 last:border-b-0">
                           <a href={child.href} class="block py-5 pl-[50px] transition-[padding] duration-200 hover:pl-[62px]">
-                            <p class="mb-2.5 text-[clamp(18px,1.6vw,23px)] leading-[1.2] font-normal">{child.title}</p>
+                            <p class="mb-2.5 text-[clamp(18px,1.6vw,23px)] leading-[1.2] font-light">{child.title}</p>
                             {child.subtitle && <p class="text-[16px]">{child.subtitle}</p>}
                           </a>
                         </li>
@@ -136,7 +156,7 @@ const tones = ['night', 'desert', 'mist'] as const;
                   </div>
                 </div>
               )}
-            </div>
+            </div>}
           </li>
         ))}
       </ul>
@@ -162,6 +182,9 @@ const tones = ['night', 'desert', 'mist'] as const;
         <ul class="flex flex-col text-2xl">
           {navItems.map((item) => (
             <li class:list={['border-b', light ? 'border-night/15' : 'border-cream/15']}>
+              {item.children.length === 0 ? (
+                <a href={item.href} class="block py-4">{item.label}</a>
+              ) : (
               <details class="group/section">
                 <summary class="flex cursor-pointer list-none items-center justify-between py-4">
                   {item.label}
@@ -177,6 +200,7 @@ const tones = ['night', 'desert', 'mist'] as const;
                   ))}
                 </ul>
               </details>
+              )}
             </li>
           ))}
           <li class="pt-8"><a href="/#contact" class:list={['btn-outline', 'text-[16px]', light ? 'border-night' : 'border-cream/80']}>Let’s Talk</a></li>

@@ -18,7 +18,7 @@ const paragraph =
   <!-- Titel -->
   <section class="container-frst pt-24 pb-14 md:pt-36 md:pb-16">
     <div class="md:ml-[16%]" data-align-nav>
-      <h1 class="text-5xl leading-[1.05] font-normal md:text-7xl">Näher am Leben.</h1>
+      <h1 class="text-5xl leading-[1.05] font-light md:text-7xl">Näher am Leben.</h1>
       <p class="mt-8 text-lg font-light md:text-2xl">Volksbank Göppingen</p>
     </div>
   </section>
@@ -84,10 +84,21 @@ const paragraph =
           { name: 'email', label: 'E-Mail', type: 'email' },
         ].map((f) => (
           <label class="flex flex-col gap-6 text-xs">
-            {f.label}
-            <input name={f.name} type={f.type} class="border-b border-cream/30 bg-transparent pb-2 outline-none focus:border-cream" />
+            <span>{f.label} <span aria-hidden="true">*</span></span>
+            <input name={f.name} type={f.type} required autocomplete={f.name === 'firstName' ? 'given-name' : f.name === 'lastName' ? 'family-name' : 'email'} class="border-b border-cream/30 bg-transparent pb-2 outline-none focus:border-cream" />
           </label>
         ))}
+        <!-- Einwilligung (DSGVO): nicht vorausgewählt, freiwillig, Widerruf jederzeit möglich -->
+        <div class="md:col-span-3">
+          <label class="flex items-start gap-3 text-[14px] leading-relaxed">
+            <input type="checkbox" name="newsletterConsent" required class="mt-1 h-4 w-4 shrink-0 accent-violet focus-visible:outline-cream focus-visible:outline-2 focus-visible:outline-offset-2" />
+            <span>
+              I agree that frst uses my name and e-mail address to send me the newsletter. I can withdraw my consent at any time with effect for the future, for example via the unsubscribe link in every newsletter. Further information can be found in the
+              <a href="/datenschutz" class="underline underline-offset-4 hover:opacity-80 focus-visible:opacity-80">privacy policy</a>. *
+            </span>
+          </label>
+          <p class="mt-4 text-[14px] leading-relaxed">* Required fields.</p>
+        </div>
         <div>
           <button type="submit" class="btn-outline border-cream/80 px-4 py-1 text-[10px] hover:bg-cream hover:text-night">Subscribe</button>
         </div>
