@@ -10,9 +10,9 @@ const cardText = 'From Strategy to creative, brand, campaigns and AI- one connec
 // Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
 const articleText = 'What AI means for the agency model – and what comes next.';
 const articles = [
-  { no: '01', title: 'The middle is disappearing', href: '/perspectives/the-middle-is-disappearing' },
-  { no: '02', title: 'Time is not the product', href: '#' },
-  { no: '03', title: 'Second Brand Strategy', href: '#' },
+  { no: '01', title: 'The middle is disappearing', href: '/perspectives/the-middle-is-disappearing', text: 'KI zerstört nicht die Agentur. Sie zerstört das Mittelfeld.', lang: 'de' },
+  { no: '02', title: 'Time is not the product', href: '#', text: articleText },
+  { no: '03', title: 'Second Brand Strategy', href: '#', text: articleText },
 ];
 
 const topics = [
@@ -76,8 +76,8 @@ const quotes = [
               <span class="text-[24px] leading-snug">{article.no}</span>
               <div>
                 <h3 class="text-[24px] leading-snug">{article.title}</h3>
-                <p class="mt-5 max-w-[40ch] text-[16px] leading-relaxed">{articleText}</p>
-                <p class="mt-4 text-[14px]">Article · 6 min read</p>
+                <p class="mt-5 max-w-[40ch] text-[16px] leading-relaxed" lang={article.lang}>{article.text}</p>
+                <p class="mt-4 text-[14px]">Article · 5 min read</p>
               </div>
               <span class="mt-2 transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
             </a>
