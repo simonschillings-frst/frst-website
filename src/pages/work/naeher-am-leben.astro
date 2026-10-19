@@ -46,17 +46,37 @@ const paragraph =
     </div>
   </section>
 
-  <!-- Bildergalerie -->
-  <section class="container-frst pb-16 md:pb-24">
-    <div class="grid gap-8 md:grid-cols-12 md:gap-x-6 md:gap-y-12">
-      <div class="overflow-hidden md:col-span-4">
-        <Media tone="night" label="Out of home" class="aspect-[3/4] w-full" />
-      </div>
-      <div class="overflow-hidden md:col-span-7 md:col-start-6 md:mt-24">
-        <Media tone="desert" label="Print" class="aspect-[5/4] w-full" />
-      </div>
-      <div class="overflow-hidden md:col-span-7 md:col-start-2 md:mt-6">
-        <Media tone="mist" label="Social" class="aspect-[5/4] w-full" />
+  <!-- Bildergalerie (Anordnung wie bei Wieden+Kennedy: Film, Doppelbild, Dreierreihe, durchlaufender Bilderstreifen) -->
+  <!-- Film / großes Bewegtbild über die ganze Breite (wie das Hauptmotiv oben) -->
+  <section>
+    <Media tone="night" label="Film" class="aspect-video w-full" />
+  </section>
+
+  <section class="container-frst mt-2 pb-2">
+    <!-- Zwei Bilder nebeneinander -->
+    <div class="grid gap-2 md:grid-cols-2">
+      <Media tone="desert" label="Out of home" class="aspect-[4/5] w-full" />
+      <Media tone="mist" label="Print" class="aspect-[4/5] w-full" />
+    </div>
+
+    <!-- Drei Bilder nebeneinander -->
+    <div class="mt-2 grid gap-2 md:grid-cols-3">
+      <Media tone="sky" label="Social" class="aspect-[3/4] w-full" />
+      <Media tone="dusk" label="Social" class="aspect-[3/4] w-full" />
+      <Media tone="night" label="Social" class="aspect-[3/4] w-full" />
+    </div>
+  </section>
+
+  <!-- Durchlaufender Bilderstreifen über die ganze Breite (seitlich scrollbar, auch per Tastatur) -->
+  <section class="pb-16 md:pb-24" aria-label="Weitere Motive">
+    <div class="mt-2 h-[50vh] overflow-x-auto xl:h-screen" tabindex="0" role="region" aria-label="Bildergalerie, seitlich scrollbar">
+      <div class="flex h-full min-w-max gap-2">
+        <Media tone="desert" label="Motiv 1" class="h-full aspect-[4/5] shrink-0" />
+        <Media tone="night" label="Motiv 2" class="h-full aspect-[3/4] shrink-0" />
+        <Media tone="mist" label="Motiv 3" class="h-full aspect-[5/4] shrink-0" />
+        <Media tone="dusk" label="Motiv 4" class="h-full aspect-[4/5] shrink-0" />
+        <Media tone="sky" label="Motiv 5" class="h-full aspect-[3/4] shrink-0" />
+        <Media tone="desert" label="Motiv 6" class="h-full aspect-[5/4] shrink-0" />
       </div>
     </div>
   </section>
