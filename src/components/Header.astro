@@ -31,7 +31,7 @@ const tones = ['night', 'desert', 'mist'] as const;
 
     <!-- Desktop: Mega-Menü öffnet bei Hover und Tastaturfokus -->
     <nav class="hidden h-full lg:block" aria-label="Hauptnavigation">
-      <ul class="flex h-full items-center gap-0.5 text-[13px]">
+      <ul class="flex h-full items-center gap-0.5 text-[16px]">
         {navItems.map((item) => (
           <li class="flex h-full items-center" data-menu>
             <a
@@ -62,8 +62,8 @@ const tones = ['night', 'desert', 'mist'] as const;
                               class="h-full w-full"
                             />
                           </div>
-                          <p class="mt-[clamp(24px,3.6vw,52px)] mb-2.5 text-[clamp(18px,1.9vw,27px)] leading-[1.2] font-light">{child.title}</p>
-                          {child.subtitle && <p class="text-sm">{child.subtitle}</p>}
+                          <p class="mt-[clamp(24px,3.6vw,52px)] mb-2.5 text-[clamp(18px,1.9vw,27px)] leading-[1.2] font-normal">{child.title}</p>
+                          {child.subtitle && <p class="text-[16px]">{child.subtitle}</p>}
                         </a>
                       </li>
                     ))}
@@ -78,8 +78,8 @@ const tones = ['night', 'desert', 'mist'] as const;
                       {item.children.map((child) => (
                         <li class="border-b border-night/20 last:border-b-0">
                           <a href={child.href} class="block py-5 pr-[30px] pl-1 transition-[padding] duration-200 hover:pl-4">
-                            <p class="mb-2.5 text-[clamp(18px,1.6vw,23px)] leading-[1.2] font-light">{child.title}</p>
-                            {child.subtitle && <p class="text-sm">{child.subtitle}</p>}
+                            <p class="mb-2.5 text-[clamp(18px,1.6vw,23px)] leading-[1.2] font-normal">{child.title}</p>
+                            {child.subtitle && <p class="text-[16px]">{child.subtitle}</p>}
                           </a>
                         </li>
                       ))}
@@ -97,8 +97,8 @@ const tones = ['night', 'desert', 'mist'] as const;
                                     class="h-full w-full"
                                   />
                                 </div>
-                                <p class="mt-[34px] mb-2.5 text-[clamp(18px,1.9vw,27px)] leading-[1.2] font-light">{card.title}</p>
-                                {card.subtitle && <p class="text-sm">{card.subtitle}</p>}
+                                <p class="mt-[34px] mb-2.5 text-[clamp(18px,1.9vw,27px)] leading-[1.2] font-normal">{card.title}</p>
+                                {card.subtitle && <p class="text-[16px]">{card.subtitle}</p>}
                               </a>
                             </li>
                           ))}
@@ -114,7 +114,7 @@ const tones = ['night', 'desert', 'mist'] as const;
                   <div class="grid grid-cols-[32%_minmax(0,1fr)]">
                     <div class="border-r border-night/20 pt-1.5 pr-6">
                       <p class="mb-14 text-sm uppercase">{item.feature.label}</p>
-                      <p class="text-[clamp(30px,3.8vw,58px)] leading-none font-light tracking-[-0.01em] whitespace-nowrap">
+                      <p class="text-[clamp(30px,3.8vw,58px)] leading-none font-normal tracking-[-0.01em] whitespace-nowrap">
                         {item.feature.title.map((line, i) => (
                           <>
                             {i > 0 && <br />}
@@ -127,8 +127,8 @@ const tones = ['night', 'desert', 'mist'] as const;
                       {item.children.map((child) => (
                         <li class="border-b border-night/20 last:border-b-0">
                           <a href={child.href} class="block py-5 pl-[50px] transition-[padding] duration-200 hover:pl-[62px]">
-                            <p class="mb-2.5 text-[clamp(18px,1.6vw,23px)] leading-[1.2] font-light">{child.title}</p>
-                            {child.subtitle && <p class="text-sm">{child.subtitle}</p>}
+                            <p class="mb-2.5 text-[clamp(18px,1.6vw,23px)] leading-[1.2] font-normal">{child.title}</p>
+                            {child.subtitle && <p class="text-[16px]">{child.subtitle}</p>}
                           </a>
                         </li>
                       ))}
@@ -146,7 +146,7 @@ const tones = ['night', 'desert', 'mist'] as const;
       href="/#contact"
       data-hide-menu
       class:list={[
-        'btn-outline hidden lg:inline-flex',
+        'btn-outline hidden text-[16px] lg:inline-flex',
         light ? 'border-night hover:bg-night hover:text-cream' : 'border-cream/80 hover:bg-cream hover:text-night',
       ]}
     >
@@ -179,7 +179,7 @@ const tones = ['night', 'desert', 'mist'] as const;
               </details>
             </li>
           ))}
-          <li class="pt-8"><a href="/#contact" class:list={['btn-outline', light ? 'border-night' : 'border-cream/80']}>Let’s Talk</a></li>
+          <li class="pt-8"><a href="/#contact" class:list={['btn-outline', 'text-[16px]', light ? 'border-night' : 'border-cream/80']}>Let’s Talk</a></li>
         </ul>
       </nav>
     </details>

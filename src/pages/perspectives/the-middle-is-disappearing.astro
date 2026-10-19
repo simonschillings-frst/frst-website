@@ -2,12 +2,59 @@
 import Base from '../../layouts/Base.astro';
 import Media from '../../components/Media.astro';
 
-const lead = 'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.';
-const lead2 =
-  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos?';
-const paragraph =
-  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
-const quote = '„Ich bin nur deshalb weiser als dieser Mensch, weil ich, was ich nicht weiß, auch nicht zu wissen glaube.“';
+// Artikeltext: KI zerstört nicht die Agentur. Sie zerstört das Mittelfeld.
+const lead = `KI zerstört nicht die Agentur. Sie zerstört das Mittelfeld.`;
+const intro = [
+  `Es gibt eine bequeme Geschichte, die die Branche sich gerade erzählt: KI ist ein Werkzeug. Wir nutzen es. Wir werden effizienter. Und am Ende sind wir stärker als zuvor. Die Geschichte ist nicht falsch. Aber sie ist unvollständig.`,
+  `Denn KI verändert nicht nur, wie Agenturen arbeiten. Sie verändert, welche Agenturen überhaupt noch gebraucht werden. Was repetitiv ist, verschwindet. Was keine klare Kompetenz hat, verliert seine Daseinsberechtigung. Was bleibt, sind die Enden des Spektrums — die Spezialisten und die Netzwerke. Das Mittelfeld dazwischen schrumpft. Nicht dramatisch. Nicht über Nacht. Aber strukturell und unaufhaltsam. Was folgt, sind keine Analysen. Es sind Befunde. Pointiert, weil die Lage es verlangt. Zugespitzt, weil das Mittelfeld keinen Raum mehr lässt für Unentschlossenheit. Ein Ratgeber in sechs Zitat-Kacheln.`,
+];
+const pullQuote = `Das Mittelfeld dazwischen schrumpft. Nicht dramatisch. Nicht über Nacht. Aber strukturell und unaufhaltsam.`;
+
+const statements = [
+  {
+    title: `Wer für alle da ist, ist für niemanden unverzichtbar.`,
+    text: `Die Agenturlandschaft hat sich jahrzehntelang in der Mitte eingerichtet. Full Service war kein Versprechen – es war eine Vermeidungsstrategie. Wer alles anbietet, muss sich nie entscheiden. Wer sich nie entscheidet, muss sich nie erklären. Das funktionierte, solange Kunden bereit waren, für Bequemlichkeit zu zahlen. Diese Zeit ist vorbei. Der GWA-Frühjahrsmonitor 2026 dokumentiert eine wachsende Spaltung zwischen Agenturen, die den Wandel produktiv wenden, und solchen, denen das nicht gelingt.`,
+  },
+  {
+    title: `Effizienz ist kein Differenzierungsmerkmal, sondern die Eintrittskarte.`,
+    text: `Generative KI hat die Produktionskosten für Standardleistungen auf ein Niveau gesenkt, das noch vor fünf Jahren undenkbar gewesen wäre. Textvarianten, Formatadaptionen, einfache Bildwelten, all das erledigen Tools schneller und günstiger als jedes Team. Die Transaktionskostentheorie nach Williamson beschreibt diesen Mechanismus präzise: Sinken die Kosten interner Koordination durch Technologisierung, verschiebt sich die Make-or-Buy-Grenze zuungunsten der externen Agentur. Was repetitiv und standardisierbar ist, wandert zurück in die Hierarchie. Oder fällt an Plattformen. Agenturen, die ihren Wert über diese Leistungen definiert haben, verlieren ihre Preisgrundlage. Nicht weil sie schlechter geworden wären. Sondern weil der Marktpreis für das, was sie tun, gegen null tendiert.`,
+  },
+  {
+    title: `Spezialisierung ist keine Einschränkung. Sie ist der einzige Schutz.`,
+    text: `Was nicht standardisierbar ist, kann nicht automatisiert werden. Tiefes Branchenwissen, das über Jahre aufgebaut wurde. Eine Handschrift, die unverwechselbar ist. Die Fähigkeit, in einem bestimmten Kontext Dinge zu sehen, die andere übersehen. Der ressourcenbasierte Ansatz nach Barney (1991) beschreibt genau diese Qualitäten als nachhaltige Wettbewerbsvorteile: wertvoll, selten, schwer imitierbar, nicht substituierbar. Die Boutique, die besser ist als alle anderen in genau einer Sache. Und schläft ruhiger als die Agentur, die gut ist in vielen Dingen.`,
+  },
+  {
+    title: `Größe schützt nur die, die wirklich groß sind.`,
+    text: `Auf der anderen Seite des Spektrums stehen die Netzwerke. Globale Koordination, internationale Kampagnen, proprietäre Technologien. Das sind Leistungen, die kleine Agenturen strukturell nicht erbringen können. Laut World Federation of Advertisers verfügen inzwischen zwei Drittel der multinationalen Unternehmen über eigene interne Agentureinheiten. Ein Anstieg von 16 Prozentpunkten seit 2020. Diese Entwicklung trifft das Mittelfeld härter als die Extreme: Wer weder die Skalierbarkeit eines Netzwerks hat noch die Tiefe einer Spezialagentur, verliert auf beiden Seiten gleichzeitig.`,
+  },
+  {
+    title: `Das Mittelfeld ist kein Geschäftsmodell. Es ist ein Aufschub.`,
+    text: `Was gerade passiert, ist keine Krise. Es ist eine Korrektur. Der Markt sortiert sich entlang einer Logik, die schon immer stimmte, aber lange durch Wachstum und Bequemlichkeit überdeckt wurde. Die empirischen Befunde der Masterthesis bestätigen diesen Befund aus Kundenperspektive: Kein einziger der befragten Entscheider glaubt noch an die Agentur für alles. Wer seinen Wert nicht klar benennen kann, verliert ihn. Nicht an die KI. Nicht an den Wettbewerb. Sondern an die eigene Unentschlossenheit.`,
+  },
+  {
+    title: `Die Frage ist nicht, ob du dich positionierst. Die Frage ist, ob du es rechtzeitig tust.`,
+    text: `Es gibt Agenturen, die diese Entscheidung bereits getroffen haben. Die wissen, was sie können, was sie nicht können und was sie nie versuchen werden. Sie haben aufgehört, jeden Pitch mitzumachen, und angefangen, die richtigen abzulehnen. Diese Agenturen wachsen. Nicht weil der Markt einfacher geworden ist, sondern weil Klarheit im Moment der Verwirrung der stärkste Wettbewerbsvorteil ist, den man haben kann.`,
+  },
+];
+
+const research = `Die Transaktionskostentheorie nach Coase (1937) und Williamson (1985) liefert die ökonomische Erklärung für die laufende Marktbereinigung: Unternehmen lagern Leistungen aus, wenn externe Koordinationskosten niedriger sind als interne. Sinken diese Kosten durch Digitalisierung und KI-gestützte Automatisierung, verschiebt sich die Make-or-Buy-Grenze — zuungunsten der externen Agentur. Dieser Mechanismus erklärt strukturell, warum In-Housing operativer Standardleistungen kein vorübergehender Trend ist, sondern eine ökonomische Konsequenz. Der ressourcenbasierte Ansatz nach Barney (1991) beschreibt, welche Agenturen dennoch überleben: jene, die Ressourcen bieten, die intern nicht replizierbar sind — wertvoll, selten, schwer imitierbar und nicht substituierbar. Das trifft auf hochspezialisierte Boutiquen und auf integrierte Netzwerke zu, nicht jedoch auf das Mittelfeld ohne klares Alleinstellungsmerkmal. Die empirischen Befunde der Masterarbeit (Walter, 2026) bestätigen diese Polarisierung aus Kundenperspektive: Kein einziger der elf befragten Entscheider glaubt noch an die Universalagentur. Die WFA & Observatory International (2023) dokumentieren, dass zwei Drittel der multinationalen Unternehmen bereits eigene interne Agentureinheiten betreiben — ein Anstieg von 16 Prozentpunkten seit 2020.`;
+
+const facts = [
+  { value: '66 %', text: 'der multinationalen Unternehmen haben bereits eigene interne Agentureinheiten (WFA & Observatory International, 2023)' },
+  { value: '21 %', text: 'erwägen zusätzlich den Aufbau einer eigenen Einheit (WFA, 2023)' },
+  { value: '49 %', text: 'der Agenturen sehen KI-Substitution als Wachstumshemmnis (GWA Frühjahrsmonitor, 2026)' },
+  { value: '11 %', text: 'der Unternehmen halten ihr bestehendes Agenturmodell für zukunftsfähig (WFA)' },
+  { value: '43,7 %', text: 'der Agenturen melden Umsatzplus — aber 50,7 % melden Rückgänge: Der Markt spaltet sich (GWA, 2026)' },
+];
+
+const quotes = [
+  { text: 'Ich glaube, diese eine Agentur für alles gibt es nicht mehr.', source: 'IP 8 · Top-Management Markenstrategie' },
+  { text: 'Ich glaube, wir werden viele, viele kleine spezialisierte Agenturen sehen und halt große, große Netzwerke, die vieles abbilden können.', source: 'IP 2 · Fachexpertise Unternehmenskommunikation' },
+  { text: 'Ich will auch keine Agentur haben, die alles anbietet. Ich bestelle auch nicht bei einem Italiener, der nebenher noch Indisch kocht.', source: 'IP 11 · Fachkoordination Kommunikation' },
+  { text: 'Dienstleister weisen abseits ihrer originären Kernkompetenzen oftmals Schwächen in der Ausführung auf.', source: 'IP 1 · Führungsebene Marketing & Kommunikation' },
+];
+
+const practice = `Die wichtigste strategische Entscheidung, die Agenturen jetzt treffen müssen, ist keine Technologieentscheidung. Es ist eine Positionierungsentscheidung: Boutique oder Netzwerk? Spezialist oder Integrator? Wer sich nicht entscheidet, entscheidet sich für das Mittelfeld — und das Mittelfeld schrumpft. Konkret bedeutet das: Kernkompetenz radikal benennen und konsequent kommunizieren. Leistungen außerhalb dieser Kompetenz transparent an spezialisierte Partner abgeben. Und In-Housing nicht als Bedrohung lesen, sondern als Chance, den eigenen Wertbeitrag auf das zu konzentrieren, was kein internes Team je replizieren kann.`;
 ---
 
 <Base title="The middle is disappearing – frst" headerOverlay>
@@ -21,22 +68,23 @@ const quote = '„Ich bin nur deshalb weiser als dieser Mensch, weil ich, was ic
     ></div>
     <div class="container-frst relative pt-40 pb-12">
       <div class="md:ml-[9%]">
-        <p class="eyebrow">Article · 6 min read</p>
-        <h1 class="mt-8 text-5xl leading-[1.05] font-light md:text-6xl">The middle is disappearing.</h1>
+        <p class="eyebrow text-[14px]">Article · 5 min read</p>
+        <h1 class="mt-8 text-[8vw] leading-[1.05] font-normal md:text-5xl lg:text-7xl">The middle is disappearing.</h1>
       </div>
     </div>
   </section>
 
-  <!-- Artikel: erster Teil -->
-  <section class="px-5 py-16 md:px-10 md:py-24">
+  <!-- Einleitung -->
+  <section class="px-5 py-16 md:px-10 md:py-24" lang="de">
     <div class="mx-auto max-w-[1110px]">
-      <p class="max-w-[48ch] text-sm leading-relaxed">{lead}</p>
+      <p class="max-w-[48ch] text-[20px] leading-relaxed">{lead}</p>
 
       <div class="mt-12 md:ml-[20%]">
-        <p class="max-w-[78ch] text-xs leading-relaxed">{paragraph}</p>
-        <p class="mt-8 max-w-[78ch] text-xs leading-relaxed">{paragraph}</p>
+        {intro.map((paragraph, i) => (
+          <p class:list={['max-w-[78ch] text-[16px] leading-relaxed', i > 0 && 'mt-8']}>{paragraph}</p>
+        ))}
 
-        <blockquote class="mx-auto mt-20 max-w-[34ch] text-center text-xl leading-snug font-light md:text-2xl">{quote}</blockquote>
+        <blockquote class="mx-auto mt-20 max-w-[34ch] text-center text-[30px] leading-snug">{pullQuote}</blockquote>
       </div>
     </div>
   </section>
@@ -46,17 +94,74 @@ const quote = '„Ich bin nur deshalb weiser als dieser Mensch, weil ich, was ic
     <Media tone="night" label="Artikelbild" class="h-[260px] w-full md:h-[420px]" />
   </section>
 
-  <!-- Artikel: zweiter Teil -->
-  <section class="px-5 py-16 md:px-10 md:py-24">
+  <!-- Die sechs Befunde -->
+  <section class="px-5 py-16 md:px-10 md:py-24" lang="de">
     <div class="mx-auto max-w-[1110px]">
-      <p class="max-w-[52ch] text-sm leading-relaxed">{lead2}</p>
+      <div class="md:ml-[20%]">
+        {statements.map((statement, i) => (
+          <div class:list={[i > 0 && 'mt-16']}>
+            <h2 class="max-w-[34ch] text-[24px] leading-snug">{statement.title}</h2>
+            <p class="mt-4 max-w-[78ch] text-[16px] leading-relaxed">{statement.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-      <div class="mt-12 md:ml-[20%]">
-        <p class="max-w-[78ch] text-xs leading-relaxed">{paragraph}</p>
-        <p class="mt-8 max-w-[78ch] text-xs leading-relaxed">{paragraph}</p>
+  <!-- Forschungslage -->
+  <section class="px-5 pb-16 md:px-10 md:pb-24" lang="de">
+    <div class="mx-auto max-w-[1110px]">
+      <div class="md:ml-[20%]">
+        <h2 class="text-[30px] leading-snug">Forschungslage</h2>
+        <p class="mt-6 max-w-[78ch] text-[16px] leading-relaxed">{research}</p>
+      </div>
+    </div>
+  </section>
 
-        <p class="mt-10 text-[9px] tracking-wide uppercase">Article name · Date</p>
-        <a href="/perspectives" class="btn-outline mt-6 border-night px-4 py-1 text-[10px] hover:bg-night hover:text-cream">Back to Perspectives</a>
+  <!-- Zahlen -->
+  <section class="bg-night text-cream" lang="de">
+    <div class="container-frst py-16 md:py-20">
+      <h2 class="text-[30px] leading-snug">Zahlen</h2>
+      <ul class="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-5">
+        {facts.map((fact) => (
+          <li>
+            <p class="text-[30px] leading-none">{fact.value}</p>
+            <p class="mt-4 text-[16px] leading-relaxed">{fact.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Direkte Zitate -->
+  <section class="container-frst py-16 md:py-24" lang="de">
+    <h2 class="text-[30px] leading-snug">Direkte Zitate</h2>
+    <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {quotes.map((quote) => (
+        <li>
+          <figure class="flex h-full min-h-[260px] cursor-default flex-col justify-between rounded-2xl border border-night/20 bg-cream p-5 text-night transition-[transform,background-color,border-color,color] duration-300 ease-out hover:-translate-y-1 hover:border-night hover:bg-night hover:text-cream motion-reduce:transition-none">
+            <div>
+              <svg viewBox="0 0 16 12" class="h-3 w-4" fill="currentColor" aria-hidden="true">
+                <path d="M0 12V7.2C0 3.2 2.2.6 6 0l.6 1.6C4.4 2.4 3.4 3.8 3.4 5.4H6V12H0Zm9.4 0V7.2C9.4 3.2 11.6.6 15.4 0L16 1.6c-2.2.8-3.2 2.2-3.2 3.8h2.6V12H9.4Z" />
+              </svg>
+              <blockquote class="mt-4 text-[16px] leading-snug">„{quote.text}“</blockquote>
+            </div>
+            <figcaption class="mt-8 text-[14px] leading-tight">{quote.source}</figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Ableitung in die Praxis -->
+  <section class="px-5 pb-16 md:px-10 md:pb-24" lang="de">
+    <div class="mx-auto max-w-[1110px]">
+      <div class="md:ml-[20%]">
+        <h2 class="text-[30px] leading-snug">Ableitung in die Praxis</h2>
+        <p class="mt-6 max-w-[78ch] text-[16px] leading-relaxed">{practice}</p>
+
+        <p class="eyebrow mt-10 text-[14px]" lang="en">The middle is disappearing</p>
+        <a href="/perspectives" class="btn-outline mt-6 border-night text-[16px] hover:bg-night hover:text-cream" lang="en">Back to Perspectives</a>
       </div>
     </div>
   </section>
@@ -65,8 +170,8 @@ const quote = '„Ich bin nur deshalb weiser als dieser Mensch, weil ich, was ic
   <section class="grid md:grid-cols-[1fr_2fr]">
     <Media tone="dusk" label="Artikelbild" class="min-h-[320px] w-full md:min-h-[560px]" />
     <div class="flex flex-col items-center justify-center bg-night px-5 py-20 text-center text-cream md:px-16">
-      <p class="max-w-[28ch] text-xl leading-snug font-light md:text-2xl">Lorem Ipsum dolor sit amet hier ist ein dreizeiliges Zitat, das den Artikel zusammenfasst.</p>
-      <a href="#" class="btn-outline mt-10 border-cream/80 px-4 py-1 text-[10px] hover:bg-cream hover:text-night">Download article</a>
+      <p class="max-w-[28ch] text-[30px] leading-snug" lang="de">Das Mittelfeld ist kein Geschäftsmodell. Es ist ein Aufschub.</p>
+      <a href="#" class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">Download article</a>
     </div>
   </section>
 
@@ -74,8 +179,8 @@ const quote = '„Ich bin nur deshalb weiser als dieser Mensch, weil ich, was ic
   <section class="bg-lilac">
     <div class="container-frst grid gap-10 py-16 md:grid-cols-[1fr_3fr]">
       <div>
-        <p class="eyebrow">Let’s talk</p>
-        <h2 class="mt-4 text-4xl leading-none font-light">Stay<br />Connected</h2>
+        <p class="eyebrow text-[14px]">Let’s talk</p>
+        <h2 class="mt-4 text-[30px] leading-tight font-normal">Stay<br />Connected</h2>
       </div>
       <form class="grid gap-8 md:grid-cols-3 md:pt-6" action="#" method="post">
         {[
@@ -83,13 +188,13 @@ const quote = '„Ich bin nur deshalb weiser als dieser Mensch, weil ich, was ic
           { name: 'lastName', label: 'Last Name', type: 'text' },
           { name: 'email', label: 'E-Mail', type: 'email' },
         ].map((f) => (
-          <label class="flex flex-col gap-6 text-xs">
+          <label class="flex flex-col gap-6 text-[16px]">
             {f.label}
-            <input name={f.name} type={f.type} class="border-b border-night/30 bg-transparent pb-2 outline-none focus:border-night" />
+            <input name={f.name} type={f.type} class="text-[16px] border-b border-night/30 bg-transparent pb-2 outline-none focus:border-violet focus:shadow-[0_1px_0_0_var(--color-violet)]" />
           </label>
         ))}
         <div>
-          <button type="submit" class="btn-outline border-night px-4 py-1 text-[10px] hover:bg-night hover:text-cream">Subscribe</button>
+          <button type="submit" class="btn-outline border-night text-[16px] hover:bg-night hover:text-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet">Subscribe</button>
         </div>
       </form>
     </div>
