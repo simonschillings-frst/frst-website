@@ -31,7 +31,7 @@ const tones = ['night', 'desert', 'mist'] as const;
 
     <!-- Desktop: Mega-Menü öffnet bei Hover und Tastaturfokus -->
     <nav class="hidden h-full lg:block" aria-label="Hauptnavigation">
-      <ul class="flex h-full items-center gap-0.5 text-[13px]">
+      <ul class="flex h-full items-center gap-0.5 text-[16px]">
         {navItems.map((item) => (
           <li class="flex h-full items-center" data-menu>
             <a
@@ -146,7 +146,7 @@ const tones = ['night', 'desert', 'mist'] as const;
       href="/#contact"
       data-hide-menu
       class:list={[
-        'btn-outline hidden lg:inline-flex',
+        'btn-outline hidden text-[16px] lg:inline-flex',
         light ? 'border-night hover:bg-night hover:text-cream' : 'border-cream/80 hover:bg-cream hover:text-night',
       ]}
     >
@@ -179,7 +179,7 @@ const tones = ['night', 'desert', 'mist'] as const;
               </details>
             </li>
           ))}
-          <li class="pt-8"><a href="/#contact" class:list={['btn-outline', light ? 'border-night' : 'border-cream/80']}>Let’s Talk</a></li>
+          <li class="pt-8"><a href="/#contact" class:list={['btn-outline', 'text-[16px]', light ? 'border-night' : 'border-cream/80']}>Let’s Talk</a></li>
         </ul>
       </nav>
     </details>

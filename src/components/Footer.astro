@@ -7,7 +7,7 @@ import { navItems } from '../data/navigation';
   <div class="container-frst flex flex-col gap-8 py-12 md:flex-row md:items-center md:justify-between">
     <a href="/" aria-label="frst Startseite"><Logo class="h-7 w-auto" /></a>
     <nav aria-label="Footer-Navigation">
-      <ul class="flex flex-wrap gap-x-7 gap-y-3 text-[13px]">
+      <ul class="flex flex-wrap gap-x-7 gap-y-3 text-[16px]">
         {navItems.filter((i) => i.label !== 'About us').map((item) => (
           <li><a href={item.href} class="hover:underline">{item.label}</a></li>
         ))}
