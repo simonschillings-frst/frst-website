@@ -40,11 +40,10 @@ export const navItems: NavItem[] = [
     href: '/what-we-do',
     layout: 'list-media',
     children: [
-      { title: 'Strategy', subtitle: 'Agency Transformation', href: '/what-we-do' },
-      { title: 'Creative', subtitle: 'Agency Transformation', href: '/what-we-do' },
-      { title: 'Brand', subtitle: 'Agency Transformation', href: '/what-we-do' },
-      { title: 'Campaigns', subtitle: 'Agency Transformation', href: '/what-we-do' },
-      { title: 'AI', subtitle: 'Agency Transformation', href: '/what-we-do' },
+      { title: 'Brand Strategy', subtitle: 'Services', href: '/what-we-do#brand-strategy' },
+      { title: 'Creative Concept', subtitle: 'Services', href: '/what-we-do#creative-concept' },
+      { title: 'Campaign and Craft', subtitle: 'Services', href: '/what-we-do#campaign-and-craft' },
+      { title: 'AI driven Technology', subtitle: 'Services', href: '/what-we-do#ai-driven-technology' },
     ],
     media: {
       label: 'Latest Media',

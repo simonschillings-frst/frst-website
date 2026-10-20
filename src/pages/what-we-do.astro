@@ -19,23 +19,23 @@ const services = [
 const steps = [
   {
     title: 'Research',
-    text: 'Every project starts with research, not assumptions. We study your business, your audiences and your market, with the same principle behind our study with TH Köln: ask the people who know. You join the conversations from day one.',
+    text: 'Look beyond: Research, not guesses. We ask those who know. You join from day one.',
   },
   {
     title: 'Briefing',
-    text: 'Together we turn what we learned into a sharp brief. Superpod’s AI-supported briefing generator structures it, sharpens the wording and makes it ready to work on. You review it, comment on it and approve it before anything is made.',
+    text: 'Frame the task: Superpod AI sharpens the brief. You review and approve. Then we start.',
   },
   {
     title: 'Talent matching',
-    text: 'Superpod matches your task with the artists and experts it needs. From a large network of independent talent, we choose the people who fit this project, not whoever happens to be available. You know who is on your team, and why.',
+    text: 'Assemble the team: Superpod matches the right artists, not whoever is free.',
   },
   {
     title: 'Co-creation',
-    text: 'The work happens in the open. The process is generated from the briefing and runs inside Superpod, with clear responsibilities and direct feedback. You see ideas while they are still ideas and shape them with us. Nothing is presented that you have not been part of.',
+    text: 'Work happens in the open: You shape ideas early with us. No surprises.',
   },
   {
-    title: 'Launch and learning',
-    text: 'We launch together, measure what matters and learn from the results. What we learn feeds the next step: a new campaign, a refined brand or a custom system you run yourself. The work keeps moving after launch.',
+    title: 'Launch and learn',
+    text: 'Move forward: Launch together, measure what matters. Results shape what’s next.',
   },
 ];
 ---
@@ -63,7 +63,7 @@ const steps = [
     <p class="eyebrow text-[14px]">Our services</p>
     <div class="mt-10 grid gap-x-16 gap-y-14 md:gap-y-24 md:grid-cols-2 lg:grid-cols-3">
       {services.map((s) => (
-        <article>
+        <article id={s.title ? s.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : undefined} class="scroll-mt-24">
           {s.no ? <p class="text-[16px] leading-snug">{s.no}</p> : <p class="invisible text-[16px] leading-snug" aria-hidden="true">&nbsp;</p>}
           {s.title ? <h2 class="mt-[0.6rem] text-[24px] leading-snug font-light">{s.title}</h2> : <p class="invisible mt-[0.6rem] text-[24px] leading-snug" aria-hidden="true">&nbsp;</p>}
           <p class="mt-6 max-w-[34ch] text-[16px] leading-relaxed">{s.text}</p>
@@ -94,19 +94,9 @@ const steps = [
           <p class="text-[16px] leading-snug">{String(i + 1).padStart(2, '0')}</p>
           <h3 class="eyebrow mt-4 text-[14px]">{step.title}</h3>
           <div class="relative mt-5">
-            <p id={`step-text-${i + 1}`} class="line-clamp-4 text-[16px] leading-relaxed" data-step-text>{step.text}</p>
+            <p class="text-[16px] leading-relaxed">{step.text}</p>
             {i < steps.length - 1 && <Arrow class="absolute top-[52px] -right-10 hidden -translate-y-1/2 lg:block" />}
           </div>
-          <button
-            type="button"
-            class="mt-4 text-[14px] underline underline-offset-4 transition-colors duration-200 hover:text-violet focus-visible:text-violet"
-            aria-expanded="false"
-            aria-controls={`step-text-${i + 1}`}
-            data-step-toggle
-            hidden
-          >
-            Read more
-          </button>
         </li>
       ))}
     </ol>
@@ -123,30 +113,4 @@ const steps = [
       <p class="mt-6 max-w-md text-[16px] leading-relaxed opacity-90">{intro}</p>
     </div>
   </section>
-  <script>
-    // Schritt-Texte: zeigen zunächst nur vier Zeilen, „Read more“ klappt den ganzen Text auf
-    const steps = document.querySelectorAll<HTMLElement>('[data-step-text]');
-    const update = () => {
-      steps.forEach((text) => {
-        const toggle = text.closest('li')?.querySelector<HTMLButtonElement>('[data-step-toggle]');
-        if (!toggle) return;
-        const expanded = toggle.getAttribute('aria-expanded') === 'true';
-        // Button nur zeigen, wenn der Text wirklich gekürzt ist (oder bereits aufgeklappt)
-        toggle.hidden = !expanded && text.scrollHeight <= text.clientHeight + 1;
-      });
-    };
-    steps.forEach((text) => {
-      const toggle = text.closest('li')?.querySelector<HTMLButtonElement>('[data-step-toggle]');
-      toggle?.addEventListener('click', () => {
-        const expanded = toggle.getAttribute('aria-expanded') === 'true';
-        toggle.setAttribute('aria-expanded', String(!expanded));
-        toggle.textContent = expanded ? 'Read more' : 'Read less';
-        text.classList.toggle('line-clamp-4', expanded);
-        update();
-      });
-    });
-    update();
-    window.addEventListener('resize', update);
-    window.addEventListener('load', update);
-  </script>
 </Base>
