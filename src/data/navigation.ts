@@ -44,10 +44,9 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       href: l('/what-we-do'),
       layout: 'list-media',
       children: [
-        { title: t('Brand Strategy', 'Markenstrategie'), subtitle: t('Services', 'Leistungen'), href: l('/what-we-do#brand-strategy') },
-        { title: t('Creative Concept', 'Kreativkonzept'), subtitle: t('Services', 'Leistungen'), href: l('/what-we-do#creative-concept') },
-        { title: t('Campaign and Craft', 'Kampagne und Handwerk'), subtitle: t('Services', 'Leistungen'), href: l('/what-we-do#campaign-and-craft') },
-        { title: t('AI driven Technology', 'KI-gestützte Technologie'), subtitle: t('Services', 'Leistungen'), href: l('/what-we-do#ai-driven-technology') },
+        { title: t('Our services', 'Unsere Leistungen'), subtitle: t('Four disciplines. One team, built around your project.', 'Vier Disziplinen. Ein Team, zusammengestellt für dein Projekt.'), href: l('/what-we-do#services') },
+        { title: t('Our approaches', 'Unsere Ansätze'), subtitle: t('The Process built around your Ambition.', 'Der Prozess, gebaut um deinen Anspruch.'), href: l('/what-we-do#process') },
+        { title: t('Selected work', 'Ausgewählte Projekte'), subtitle: 'Näher am Leben', href: l('/what-we-do#selected-work') },
       ],
       media: {
         label: t('Latest Media', 'Neueste Medien'),
@@ -64,11 +63,11 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       layout: 'feature',
       feature: { label: t('Our Approaches', 'Unsere Ansätze'), title: lang === 'de' ? ['Die', 'Zukunft', 'der Agentur'] : ['The', 'Future', 'of the Agency'] },
       children: [
-        { title: t('Better questions. Deeper Insights.', 'Bessere Fragen. Tiefere Einsichten.'), subtitle: 'Lorem ipsum', href: l('/research') },
-        { title: t('Time was the real value.', 'Zeit war der eigentliche Wert.'), subtitle: 'Lorem ipsum', href: l('/research') },
-        { title: t('The middle is disappearing', 'Die Mitte verschwindet'), subtitle: 'Lorem ipsum', href: '/de/perspectives/the-middle-is-disappearing' },
-        { title: t('Trust goes the model stays.', 'Vertrauen geht, das Modell bleibt.'), subtitle: 'Lorem ipsum', href: l('/research') },
-        { title: t('AI nods You believe', 'KI nickt. Du glaubst.'), subtitle: 'Lorem ipsum', href: l('/research') },
+        { title: t('Articles', 'Artikel'), subtitle: t('Thoughts on the future of the agency', 'Gedanken zur Zukunft der Agentur'), href: l('/research#articles') },
+        { title: t('Study', 'Studie'), subtitle: t('Get the study', 'Studie anfordern'), href: l('/research#get-the-study') },
+        { title: 'Insights', subtitle: t('Different perspectives. Same direction.', 'Verschiedene Perspektiven. Gleiche Richtung.'), href: l('/research#insights') },
+        { title: 'Benchmark', subtitle: t('Facts that make a difference.', 'Fakten, die den Unterschied machen.'), href: l('/research#benchmark') },
+        { title: t('Research study', 'Research-Studie'), subtitle: t('Take part in our study.', 'Nimm teil an unserer Studie.'), href: l('/research#study') },
       ],
     },
     {

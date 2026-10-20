@@ -52,7 +52,7 @@ const steps = [
   </section>
 
   <!-- Our services -->
-  <section id="services" class="container-frst py-20 md:py-24">
+  <section id="services" class="container-frst scroll-mt-20 py-20 md:py-24">
     <p class="eyebrow text-[14px]">{t('Our services', 'Unsere Leistungen')}</p>
     <div class="mt-10 grid gap-x-16 gap-y-14 md:gap-y-24 md:grid-cols-2 lg:grid-cols-3">
       {services.map((s) => (
@@ -68,7 +68,7 @@ const steps = [
   </section>
 
   <!-- Our approaches -->
-  <section class="container-frst py-20 md:py-24">
+  <section id="process" class="container-frst scroll-mt-20 py-20 md:py-24">
     <div>
       <p class="eyebrow text-[14px]">{t('Our approaches', 'Unsere Ansätze')}</p>
       <div class="mt-8 lg:grid lg:grid-cols-5 lg:gap-x-16">
@@ -97,7 +97,7 @@ const steps = [
   </section>
 
   <!-- Selected work -->
-  <section class="grid md:grid-cols-[1.35fr_1fr]">
+  <section id="selected-work" class="grid scroll-mt-20 md:grid-cols-[1.35fr_1fr]">
     <a href={localePath(lang, '/work/naeher-am-leben')} class="group block overflow-hidden" aria-label={t('Go to the case study Näher am Leben', 'Zur Case-Seite Näher am Leben')}>
       <Media tone="night" label="Selected Work" class="min-h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 md:h-full md:min-h-[440px]" />
     </a>
