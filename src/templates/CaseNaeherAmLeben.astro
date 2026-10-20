@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
+import Video from '../components/Video.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { useLang, type Lang } from '../i18n';
 
@@ -33,7 +34,8 @@ const paragraph =
 
   <!-- Hauptmotiv über die ganze Breite -->
   <section>
-    <Media tone="dusk" label={t('Campaign visual', 'Kampagnenmotiv')} class="aspect-[16/10] w-full md:aspect-[12/5]" />
+    <!-- Bewegtbild: Datei unter public/videos/naeher-am-leben.mp4 ablegen (stumm, Loop). Ohne Datei bleibt der Verlauf sichtbar. -->
+    <Video src="/videos/naeher-am-leben.mp4" loop tone="dusk" class="aspect-[16/10] w-full md:aspect-[12/5]" lang={lang} />
   </section>
 
   <!-- Projektdaten und Text -->

@@ -61,7 +61,7 @@ const tones = {
 ---
 
 {src && loop && (
-  <div class:list={['relative overflow-hidden', className]} data-video-loop>
+  <div class:list={['relative overflow-hidden bg-gradient-to-br', tones[tone], className]} data-video-loop>
     <video src={src} poster={poster} autoplay muted loop playsinline preload="metadata" aria-hidden="true" class="h-full w-full object-cover"></video>
     <button
       type="button"
@@ -122,6 +122,10 @@ const tones = {
       video.removeAttribute('autoplay');
       video.pause();
     }
+    // Datei fehlt oder lädt nicht: Pause-Knopf ausblenden, Verlauf bleibt sichtbar
+    const hideButton = () => button.classList.add('hidden');
+    if (video.error) hideButton();
+    video.addEventListener('error', hideButton);
     video.addEventListener('play', update);
     video.addEventListener('pause', update);
     button.addEventListener('click', () => (video.paused ? video.play() : video.pause()));
