@@ -1,3 +1,5 @@
+import { localePath, useLang, type Lang } from '../i18n';
+
 /** Bildtöne der Platzhalter (siehe Media.astro). Mit `src` später durch echte Bilder ersetzen. */
 export type Tone = 'night' | 'desert' | 'mist' | 'sky' | 'dusk';
 
@@ -28,85 +30,88 @@ export interface NavItem {
 }
 
 /*
- * Hauptnavigation mit Mega-Menü (Stand des Entwurfs aus dem Claude-Artifact).
- * Die Unterpunkte verlinken vorerst auf Abschnitte der Startseite bzw. /what-we-do.
- * Sobald es eigene Seiten gibt, nur die href-Werte ersetzen.
+ * Hauptnavigation mit Mega-Menü, sprachabhängig (en/de).
+ * Jeder Text steht als Paar t('English', 'Deutsch'); Adressen werden mit l() automatisch mit /de versehen.
  * Texte wie "Lorem ipsum" und "Latest Media" sind Platzhalter aus dem Entwurf.
  */
-export const navItems: NavItem[] = [
-  {
-    key: 'what',
-    label: 'Services',
-    href: '/what-we-do',
-    layout: 'list-media',
-    children: [
-      { title: 'Brand Strategy', subtitle: 'Services', href: '/what-we-do#brand-strategy' },
-      { title: 'Creative Concept', subtitle: 'Services', href: '/what-we-do#creative-concept' },
-      { title: 'Campaign and Craft', subtitle: 'Services', href: '/what-we-do#campaign-and-craft' },
-      { title: 'AI driven Technology', subtitle: 'Services', href: '/what-we-do#ai-driven-technology' },
-    ],
-    media: {
-      label: 'Latest Media',
-      items: [
-        { title: 'Latest Media: Lorem Ipsum', subtitle: 'Agency Transformation', href: '#', tone: 'dusk' },
-        { title: 'Latest Media: Lorem Ipsum', subtitle: 'Agency Transformation', href: '#', tone: 'desert' },
+export const getNavItems = (lang: Lang): NavItem[] => {
+  const t = useLang(lang);
+  const l = (href: string) => localePath(lang, href);
+  return [
+    {
+      key: 'what',
+      label: t('Services', 'Leistungen'),
+      href: l('/what-we-do'),
+      layout: 'list-media',
+      children: [
+        { title: t('Brand Strategy', 'Markenstrategie'), subtitle: t('Services', 'Leistungen'), href: l('/what-we-do#brand-strategy') },
+        { title: t('Creative Concept', 'Kreativkonzept'), subtitle: t('Services', 'Leistungen'), href: l('/what-we-do#creative-concept') },
+        { title: t('Campaign and Craft', 'Kampagne und Handwerk'), subtitle: t('Services', 'Leistungen'), href: l('/what-we-do#campaign-and-craft') },
+        { title: t('AI driven Technology', 'KI-gestützte Technologie'), subtitle: t('Services', 'Leistungen'), href: l('/what-we-do#ai-driven-technology') },
+      ],
+      media: {
+        label: t('Latest Media', 'Neueste Medien'),
+        items: [
+          { title: t('Latest Media: Lorem Ipsum', 'Neueste Medien: Lorem Ipsum'), subtitle: t('Agency Transformation', 'Agentur-Transformation'), href: '#', tone: 'dusk' },
+          { title: t('Latest Media: Lorem Ipsum', 'Neueste Medien: Lorem Ipsum'), subtitle: t('Agency Transformation', 'Agentur-Transformation'), href: '#', tone: 'desert' },
+        ],
+      },
+    },
+    {
+      key: 'research',
+      label: t('Research', 'Research'),
+      href: l('/research'),
+      layout: 'feature',
+      feature: { label: t('Our Approaches', 'Unsere Ansätze'), title: lang === 'de' ? ['Die', 'Zukunft', 'der Agentur'] : ['The', 'Future', 'of the Agency'] },
+      children: [
+        { title: t('Better questions. Deeper Insights.', 'Bessere Fragen. Tiefere Einsichten.'), subtitle: 'Lorem ipsum', href: l('/research') },
+        { title: t('Time was the real value.', 'Zeit war der eigentliche Wert.'), subtitle: 'Lorem ipsum', href: l('/research') },
+        { title: t('The middle is disappearing', 'Die Mitte verschwindet'), subtitle: 'Lorem ipsum', href: '/de/perspectives/the-middle-is-disappearing' },
+        { title: t('Trust goes the model stays.', 'Vertrauen geht, das Modell bleibt.'), subtitle: 'Lorem ipsum', href: l('/research') },
+        { title: t('AI nods You believe', 'KI nickt. Du glaubst.'), subtitle: 'Lorem ipsum', href: l('/research') },
       ],
     },
-  },
-  {
-    key: 'research',
-    label: 'Research',
-    href: '/research',
-    layout: 'feature',
-    feature: { label: 'Our Approaches', title: ['The', 'Future', 'of the Agency'] },
-    children: [
-      { title: 'Better questions. Deeper Insights.', subtitle: 'Lorem ipsum', href: '/research' },
-      { title: 'Time was the real value.', subtitle: 'Lorem ipsum', href: '/research' },
-      { title: 'The middle is disappearing', subtitle: 'Lorem ipsum', href: '/perspectives/the-middle-is-disappearing' },
-      { title: 'Trust goes the model stays.', subtitle: 'Lorem ipsum', href: '/research' },
-      { title: 'AI nods You believe', subtitle: 'Lorem ipsum', href: '/research' },
-    ],
-  },
-  {
-    key: 'work',
-    label: 'Work',
-    href: '/work',
-    layout: 'cards',
-    children: [
-      { title: 'Cases', subtitle: 'Work', href: '/work#cases' },
-      { title: 'Results', subtitle: 'Work', href: '/work#results' },
-    ],
-  },
-  {
-    key: 'perspectives',
-    label: 'Perspectives',
-    href: '/perspectives',
-    layout: 'cards',
-    children: [
-      { title: 'Articles', subtitle: 'Perspectives', href: '/research#articles' },
-      { title: 'Videos', subtitle: 'Perspectives', href: '/perspectives#videos' },
-      { title: 'Podcast', subtitle: 'Perspectives', href: '/perspectives#podcast' },
-    ],
-  },
-  {
-    key: 'cmo',
-    label: 'CMO Community',
-    href: '/cmo-community',
-    layout: 'cards',
-    children: [
-      { title: 'Events', subtitle: 'CMO Community', href: '/cmo-community#events' },
-      { title: 'Roundtables', subtitle: 'CMO Community', href: '/cmo-community#roundtables' },
-      { title: 'CMO Network', subtitle: 'CMO Community', href: '/cmo-community#network' },
-    ],
-  },
-  {
-    key: 'about',
-    label: 'About us',
-    href: '/about-us',
-    layout: 'cards',
-    children: [
-      { title: 'Superpod', subtitle: 'About us', href: '/about-us#superpod' },
-      { title: 'Careers', subtitle: 'About us', href: '/about-us#careers' },
-    ],
-  },
-];
+    {
+      key: 'work',
+      label: t('Work', 'Projekte'),
+      href: l('/work'),
+      layout: 'cards',
+      children: [
+        { title: t('Cases', 'Cases'), subtitle: t('Work', 'Projekte'), href: l('/work#cases') },
+        { title: t('Results', 'Ergebnisse'), subtitle: t('Work', 'Projekte'), href: l('/work#results') },
+      ],
+    },
+    {
+      key: 'perspectives',
+      label: t('Perspectives', 'Perspektiven'),
+      href: l('/perspectives'),
+      layout: 'cards',
+      children: [
+        { title: t('Articles', 'Artikel'), subtitle: t('Perspectives', 'Perspektiven'), href: l('/research#articles') },
+        { title: t('Videos', 'Videos'), subtitle: t('Perspectives', 'Perspektiven'), href: l('/perspectives#videos') },
+        { title: t('Podcast', 'Podcast'), subtitle: t('Perspectives', 'Perspektiven'), href: l('/perspectives#podcast') },
+      ],
+    },
+    {
+      key: 'cmo',
+      label: 'CMO Community',
+      href: l('/cmo-community'),
+      layout: 'cards',
+      children: [
+        { title: t('Events', 'Events'), subtitle: 'CMO Community', href: l('/cmo-community#events') },
+        { title: t('Roundtables', 'Roundtables'), subtitle: 'CMO Community', href: l('/cmo-community#roundtables') },
+        { title: t('CMO Network', 'CMO-Netzwerk'), subtitle: 'CMO Community', href: l('/cmo-community#network') },
+      ],
+    },
+    {
+      key: 'about',
+      label: t('About us', 'Über uns'),
+      href: l('/about-us'),
+      layout: 'cards',
+      children: [
+        { title: 'Superpod', subtitle: t('About us', 'Über uns'), href: l('/about-us#superpod') },
+        { title: t('Careers', 'Karriere'), subtitle: t('About us', 'Über uns'), href: l('/about-us#careers') },
+      ],
+    },
+  ];
+};

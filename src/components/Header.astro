@@ -1,23 +1,32 @@
 ---
 import Logo from './Logo.astro';
 import Media from './Media.astro';
-import { navItems } from '../data/navigation';
+import { getNavItems } from '../data/navigation';
+import { defaultLang, localePath, stripLang, useLang, type Lang } from '../i18n';
 
 interface Props {
   /** Transparent über einem Hero-Bild statt dunkler Leiste */
   overlay?: boolean;
   /** Helle Variante: cremefarbene Leiste mit dunkler Schrift */
   light?: boolean;
+  /** Sprache der Seite */
+  lang?: Lang;
+  /** Adresse dieser Seite in der anderen Sprache (für den Sprachumschalter) */
+  switchHref?: string;
 }
-const { overlay = false, light = false } = Astro.props;
+const { overlay = false, light = false, lang = defaultLang, switchHref = '/' } = Astro.props;
+const t = useLang(lang);
+const l = (href: string) => localePath(lang, href);
+const navItems = getNavItems(lang);
+const otherLang: Lang = lang === 'de' ? 'en' : 'de';
 
 // Platzhalterbilder der Karten, wenn kein eigener Ton gesetzt ist
 const tones = ['night', 'desert', 'mist'] as const;
 
 // Aktuelle Seite (inkl. Unterseiten) für den Punkt in der Navigation
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const path = stripLang(Astro.url.pathname).replace(/\/$/, '') || '/';
 const isCurrent = (href: string) => {
-  const base = href.split('#')[0].replace(/\/$/, '');
+  const base = stripLang(href.split('#')[0]).replace(/\/$/, '');
   if (base === '') return href === '/' && path === '/';
   return path === base || path.startsWith(base + '/');
 };
@@ -33,12 +42,12 @@ const isCurrent = (href: string) => {
   ]}
 >
   <div class="container-frst flex h-[58px] items-center justify-between gap-6">
-    <a href="/" class="shrink-0" aria-label="frst Startseite" data-hide-menu>
+    <a href={l('/')} class="shrink-0" aria-label={t('frst home', 'frst Startseite')} data-hide-menu>
       <Logo class="h-6 w-auto" />
     </a>
 
     <!-- Desktop: Mega-Menü öffnet bei Hover und Tastaturfokus -->
-    <nav class="hidden h-full lg:block" aria-label="Hauptnavigation">
+    <nav data-main-nav class="hidden h-full lg:block" aria-label={t('Main navigation', 'Hauptnavigation')}>
       <ul class="flex h-full items-center gap-0.5 text-[16px]">
         {navItems.map((item) => (
           <li class="flex h-full items-center" data-menu={item.children.length > 0 ? '' : undefined}>
@@ -163,8 +172,22 @@ const isCurrent = (href: string) => {
     </nav>
 
     <div class="hidden items-center gap-[15px] lg:flex">
+      <!-- Sprachumschalter: echte Links, damit jede Sprache eine eigene Adresse hat (gut für SEO) -->
+      <nav class="flex items-center gap-2 pr-2 text-[16px]" aria-label={t('Language', 'Sprache')}>
+        <span aria-current="true" lang={lang} class="opacity-100">{lang.toUpperCase()}</span>
+        <span aria-hidden="true" class="opacity-40">/</span>
+        <a
+          href={switchHref}
+          hreflang={otherLang}
+          lang={otherLang}
+          data-hide-menu
+          aria-label={otherLang === 'de' ? 'Deutsch' : 'English'}
+          class="opacity-60 transition-opacity duration-200 hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+        >{otherLang.toUpperCase()}</a>
+      </nav>
+
       <a
-        href="/#contact"
+        href={l('/#contact')}
         data-book-demo
         data-hide-menu
         class:list={[
@@ -172,7 +195,7 @@ const isCurrent = (href: string) => {
           light ? 'border-night hover:bg-night hover:text-cream' : 'border-cream/80 hover:bg-cream hover:text-night',
         ]}
       >
-        Book a demo
+        {t('Book a demo', 'Demo buchen')}
       </a>
 
       <a
@@ -182,16 +205,16 @@ const isCurrent = (href: string) => {
         data-hide-menu
         class:list={['btn-outline bg-white text-[16px] text-night hover:bg-cream', light ? 'border-night/30' : 'border-white']}
       >
-        Sign in
+        {t('Sign in', 'Anmelden')}
       </a>
     </div>
 
     <!-- Mobil: Fullscreen-Menü mit aufklappbaren Bereichen -->
     <details class="group relative lg:hidden" data-mobile-menu>
-      <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center" aria-label="Menü öffnen">
+      <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center" aria-label={t('Open menu', 'Menü öffnen')}>
         <span class="block h-px w-6 bg-current shadow-[0_6px_0_currentColor,0_-6px_0_currentColor] group-open:shadow-none"></span>
       </summary>
-      <nav class:list={['fixed inset-x-0 top-[58px] bottom-0 overflow-y-auto px-5 py-6', light ? 'bg-cream text-night' : 'bg-night']} aria-label="Mobile Navigation">
+      <nav class:list={['fixed inset-x-0 top-[58px] bottom-0 overflow-y-auto px-5 py-6', light ? 'bg-cream text-night' : 'bg-night']} aria-label={t('Mobile navigation', 'Mobile Navigation')}>
         <ul class="flex flex-col text-2xl">
           {navItems.map((item) => (
             <li class:list={['border-b', light ? 'border-night/15' : 'border-cream/15']}>
@@ -207,7 +230,7 @@ const isCurrent = (href: string) => {
                   </span>
                 </summary>
                 <ul class="flex flex-col gap-3 pb-5 pl-1 text-base">
-                  <li><a href={item.href} class="opacity-60">Overview</a></li>
+                  <li><a href={item.href} class="opacity-60">{t('Overview', 'Übersicht')}</a></li>
                   {item.children.map((child) => (
                     <li><a href={child.href}>{child.title}</a></li>
                   ))}
@@ -217,8 +240,13 @@ const isCurrent = (href: string) => {
             </li>
           ))}
           <li class="flex flex-wrap gap-[15px] pt-8">
-            <a href="/#contact" data-book-demo class:list={['btn-outline', 'text-[16px]', light ? 'border-night' : 'border-cream/80']}>Book a demo</a>
-            <a href="https://superpod.frst.agency" target="_blank" rel="noopener noreferrer" class:list={['btn-outline bg-white text-[16px] text-night', light ? 'border-night/30' : 'border-white']}>Sign in</a>
+            <a href={l('/#contact')} data-book-demo class:list={['btn-outline', 'text-[16px]', light ? 'border-night' : 'border-cream/80']}>{t('Book a demo', 'Demo buchen')}</a>
+            <a href="https://superpod.frst.agency" target="_blank" rel="noopener noreferrer" class:list={['btn-outline bg-white text-[16px] text-night', light ? 'border-night/30' : 'border-white']}>{t('Sign in', 'Anmelden')}</a>
+          </li>
+          <li class="pt-6 text-base">
+            <span aria-current="true" lang={lang}>{lang.toUpperCase()}</span>
+            <span aria-hidden="true" class="mx-2 opacity-40">/</span>
+            <a href={switchHref} hreflang={otherLang} lang={otherLang} aria-label={otherLang === 'de' ? 'Deutsch' : 'English'} class="opacity-60">{otherLang.toUpperCase()}</a>
           </li>
         </ul>
       </nav>

@@ -1,0 +1,79 @@
+---
+import { defaultLang, localePath, useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+  /** Dunkle Variante (dunkelblauer Hintergrund) statt lila */
+  dark?: boolean;
+}
+const { lang = defaultLang, dark = false } = Astro.props;
+const t = useLang(lang);
+const fields = [
+  { name: 'firstName', label: t('First Name', 'Vorname'), type: 'text', autocomplete: 'given-name' },
+  { name: 'lastName', label: t('Last Name', 'Nachname'), type: 'text', autocomplete: 'family-name' },
+  { name: 'email', label: t('E-Mail', 'E-Mail'), type: 'email', autocomplete: 'email' },
+];
+---
+
+<section class={dark ? 'bg-night text-cream' : 'bg-lilac'}>
+  <div class="container-frst grid gap-10 py-16 md:grid-cols-[1fr_3fr]">
+    <div>
+      <p class="eyebrow text-[14px]">{t('Keep in touch', 'In Kontakt bleiben')}</p>
+      <h2 class="mt-4 text-[30px] leading-snug font-light">
+        {lang === 'de' ? <>Immer<br />informiert</> : <>Stay<br />Connected</>}
+      </h2>
+    </div>
+    <form class="grid gap-8 md:grid-cols-3 md:pt-6" action="#" method="post">
+      {fields.map((f) => (
+        <label class="flex flex-col gap-6 text-[16px]">
+          <span>{f.label} <span aria-hidden="true">*</span></span>
+          <input
+            name={f.name}
+            type={f.type}
+            required
+            autocomplete={f.autocomplete}
+            class:list={[
+              'border-b bg-transparent pb-2 text-[16px] outline-none',
+              dark ? 'border-cream/30 focus:border-cream' : 'border-night/30 focus:border-violet focus:shadow-[0_1px_0_0_var(--color-violet)]',
+            ]}
+          />
+        </label>
+      ))}
+      <!-- Einwilligung (DSGVO): nicht vorausgewählt, freiwillig, Widerruf jederzeit möglich -->
+      <div class="md:col-span-3">
+        <label class="flex items-start gap-3 text-[14px] leading-relaxed">
+          <input
+            type="checkbox"
+            name="newsletterConsent"
+            required
+            class:list={[
+              'mt-1 h-4 w-4 shrink-0 accent-violet focus-visible:outline-2 focus-visible:outline-offset-2',
+              dark ? 'focus-visible:outline-cream' : 'focus-visible:outline-violet',
+            ]}
+          />
+          <span>
+            {t(
+              'I agree that frst uses my name and e-mail address to send me the newsletter. I can withdraw my consent at any time with effect for the future, for example via the unsubscribe link in every newsletter. Further information can be found in the',
+              'Ich willige ein, dass frst meinen Namen und meine E-Mail-Adresse verwendet, um mir den Newsletter zu senden. Ich kann meine Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, zum Beispiel über den Abmeldelink in jedem Newsletter. Weitere Informationen finden sich in der',
+            )}{' '}
+            <a
+              href="/de/datenschutz"
+              hreflang="de"
+              class:list={['underline underline-offset-4', dark ? 'hover:opacity-80 focus-visible:opacity-80' : 'hover:text-violet focus-visible:text-violet']}
+            >{t('privacy policy (in German)', 'Datenschutzerklärung')}</a>. *
+          </span>
+        </label>
+        <p class="mt-4 text-[14px] leading-relaxed">{t('* Required fields.', '* Pflichtfelder.')}</p>
+      </div>
+      <div>
+        <button
+          type="submit"
+          class:list={[
+            'btn-outline text-[16px] focus-visible:outline-2 focus-visible:outline-offset-2',
+            dark ? 'border-cream/80 hover:bg-cream hover:text-night focus-visible:outline-cream' : 'border-night hover:bg-night hover:text-cream focus-visible:outline-violet',
+          ]}
+        >{t('Subscribe', 'Abonnieren')}</button>
+      </div>
+    </form>
+  </div>
+</section>
