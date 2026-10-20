@@ -1,0 +1,143 @@
+---
+import { defaultLang, useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = defaultLang } = Astro.props;
+const t = useLang(lang);
+
+// Pop-up „Book a demo“. Öffnet sich über jedes Element mit `data-book-demo`.
+// Formular hat noch kein Backend (action="#"); Texte der Einwilligung sind Platzhalter und rechtlich zu prüfen.
+const fields = [
+  { name: 'email', label: t('Business email', 'Geschäftliche E-Mail-Adresse'), type: 'email', autocomplete: 'email', placeholder: t('Enter your business email', 'Geschäftliche E-Mail-Adresse eingeben') },
+  { name: 'fullName', label: t('Full name', 'Vollständiger Name'), type: 'text', autocomplete: 'name', placeholder: t('Enter your full name', 'Vollständigen Namen eingeben') },
+  { name: 'company', label: t('Company name', 'Unternehmen'), type: 'text', autocomplete: 'organization', placeholder: t('Enter your company name', 'Unternehmen eingeben') },
+];
+const sizes = ['1–10', '11–50', '51–200', '201–1,000', '1,000+'];
+---
+
+<dialog
+  id="book-demo"
+  aria-labelledby="book-demo-title"
+  class="m-auto w-[calc(100%-2rem)] max-w-3xl rounded-3xl bg-cream p-0 text-night backdrop:bg-night/70 backdrop:backdrop-blur-sm"
+>
+  <div class="relative px-6 py-12 md:px-12 md:py-14">
+    <button
+      type="button"
+      data-book-demo-close
+      class="absolute top-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-night/40 text-[16px] hover:border-violet hover:text-violet focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet"
+      aria-label={t('Close', 'Schließen')}
+    >
+      <svg viewBox="0 0 12 12" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11" /></svg>
+    </button>
+
+    <h2 id="book-demo-title" class="text-center text-[30px] leading-snug">{t('Book a demo with our experts', 'Demo mit unseren Expertinnen und Experten buchen')}</h2>
+
+    <form class="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2" action="/api/book-demo" method="post" data-book-demo-form
+      data-msg-sending={t('Sending …', 'Wird gesendet …')}
+      data-msg-success={t('Thank you! We have received your request and will get back to you shortly.', 'Vielen Dank! Wir haben deine Anfrage erhalten und melden uns in Kürze.')}
+      data-msg-error={t('Sorry, something went wrong. Please try again or write to demo@frst.agency.', 'Leider ist etwas schiefgelaufen. Bitte versuche es erneut oder schreibe an demo@frst.agency.')}
+    >
+      <!-- Honeypot gegen Spam: für Menschen unsichtbar, nicht ausfüllen -->
+      <div class="sr-only" aria-hidden="true">
+        <label>{t('Website', 'Webseite')} <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+      </div>
+      {fields.map((field) => (
+        <label class="flex flex-col gap-3 text-[16px]">
+          <span>{field.label} <span aria-hidden="true">*</span></span>
+          <input
+            name={field.name}
+            type={field.type}
+            autocomplete={field.autocomplete}
+            placeholder={field.placeholder}
+            required
+            class="border-b border-night/40 bg-transparent pb-2 text-[16px] outline-none placeholder:text-night/50 focus:border-violet focus-visible:border-violet"
+          />
+        </label>
+      ))}
+      <label class="flex flex-col gap-3 text-[16px]">
+        <span>{t('Company size', 'Unternehmensgröße')} <span aria-hidden="true">*</span></span>
+        <select name="companySize" required class="border-b border-night/40 bg-transparent pb-2 text-[16px] outline-none focus:border-violet focus-visible:border-violet">
+          <option value="" disabled selected>{t('Select the size of your company', 'Unternehmensgröße auswählen')}</option>
+          {sizes.map((size) => <option value={size}>{t(size, size.replaceAll(',', '.'))}</option>)}
+        </select>
+      </label>
+
+      <!-- Einwilligung (DSGVO): nicht vorausgewählt, ausdrücklich und freiwillig, Widerruf jederzeit möglich -->
+      <div class="sm:col-span-2">
+        <label class="flex items-start gap-3 text-[14px] leading-relaxed">
+          <input type="checkbox" name="consent" required class="mt-1 h-4 w-4 shrink-0 accent-violet focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet" />
+          <span>
+            {t(
+              'I agree that frst processes my details (business email, name, company, company size) to contact me about a demo and to arrange an appointment. I can withdraw my consent at any time with effect for the future, for example by e-mail. Further information can be found in the',
+              'Ich willige ein, dass frst meine Angaben (geschäftliche E-Mail-Adresse, Name, Unternehmen, Unternehmensgröße) verarbeitet, um mich zu einer Demo zu kontaktieren und einen Termin abzustimmen. Ich kann meine Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, zum Beispiel per E-Mail. Weitere Informationen finden sich in der',
+            )}{' '}
+            <a href="/de/datenschutz" hreflang="de" class="underline underline-offset-4 hover:text-violet focus-visible:text-violet">{t('privacy policy (in German)', 'Datenschutzerklärung')}</a>. *
+          </span>
+        </label>
+        <p class="mt-4 text-[14px] leading-relaxed opacity-80">{t('* Required fields. Your details are used only to arrange the demo.', '* Pflichtfelder. Deine Angaben werden nur verwendet, um die Demo zu vereinbaren.')}</p>
+      </div>
+
+      <p class="text-[16px] leading-relaxed sm:col-span-2" role="status" aria-live="polite" data-book-demo-status hidden></p>
+
+      <div class="flex sm:col-span-2 sm:justify-end">
+        <button type="submit" class="btn-outline border-night px-5 py-2 text-[16px] hover:bg-night hover:text-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet">{t('Book a demo', 'Demo buchen')}</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('book-demo') as HTMLDialogElement | null;
+  if (dialog) {
+    let opener: HTMLElement | null = null;
+    document.querySelectorAll<HTMLElement>('[data-book-demo]').forEach((trigger) => {
+      trigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        opener = trigger;
+        if (!dialog.open) dialog.showModal();
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    const close = () => dialog.close();
+    dialog.querySelector('[data-book-demo-close]')?.addEventListener('click', close);
+    // Klick auf den abgedunkelten Hintergrund schließt das Pop-up
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) close();
+    });
+    // Formular absenden: Anfrage geht an /api/book-demo und von dort per E-Mail an demo@frst.agency
+    const form = dialog.querySelector<HTMLFormElement>('[data-book-demo-form]');
+    const status = dialog.querySelector<HTMLElement>('[data-book-demo-status]');
+    const submit = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form || !status || !submit) return;
+      const values = Object.fromEntries(new FormData(form).entries());
+      const payload = { ...values, consent: form.querySelector<HTMLInputElement>('[name="consent"]')?.checked === true };
+      submit.disabled = true;
+      status.hidden = false;
+      status.textContent = form.dataset.msgSending ?? '';
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!response.ok) throw new Error('failed');
+        form.reset();
+        status.textContent = form.dataset.msgSuccess ?? '';
+      } catch {
+        status.textContent = form.dataset.msgError ?? '';
+        submit.disabled = false;
+      }
+    });
+
+    dialog.addEventListener('close', () => {
+      if (status) { status.hidden = true; status.textContent = ''; }
+      if (submit) submit.disabled = false;
+      document.body.style.overflow = '';
+      opener?.focus();
+    });
+  }
+</script>

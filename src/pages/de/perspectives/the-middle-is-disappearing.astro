@@ -1,6 +1,7 @@
 ---
-import Base from '../../layouts/Base.astro';
-import Media from '../../components/Media.astro';
+import Base from '../../../layouts/Base.astro';
+import Media from '../../../components/Media.astro';
+import Newsletter from '../../../components/Newsletter.astro';
 
 // Artikeltext: KI zerstört nicht die Agentur. Sie zerstört das Mittelfeld.
 const lead = `KI zerstört nicht die Agentur. Sie zerstört das Mittelfeld.`;
@@ -57,7 +58,7 @@ const quotes = [
 const practice = `Die wichtigste strategische Entscheidung, die Agenturen jetzt treffen müssen, ist keine Technologieentscheidung. Es ist eine Positionierungsentscheidung: Boutique oder Netzwerk? Spezialist oder Integrator? Wer sich nicht entscheidet, entscheidet sich für das Mittelfeld — und das Mittelfeld schrumpft. Konkret bedeutet das: Kernkompetenz radikal benennen und konsequent kommunizieren. Leistungen außerhalb dieser Kompetenz transparent an spezialisierte Partner abgeben. Und In-Housing nicht als Bedrohung lesen, sondern als Chance, den eigenen Wertbeitrag auf das zu konzentrieren, was kein internes Team je replizieren kann.`;
 ---
 
-<Base title="The middle is disappearing – frst" headerOverlay>
+<Base title="Die Mitte verschwindet – frst" headerOverlay lang="de" translations={['de']}>
   <!-- Hero mit buntem Verlauf (wie auf der Work-Seite) -->
   <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-screen md:max-h-[900px]">
     <div
@@ -68,8 +69,8 @@ const practice = `Die wichtigste strategische Entscheidung, die Agenturen jetzt 
     ></div>
     <div class="container-frst relative pt-40 pb-12">
       <div class="md:ml-[9%]">
-        <p class="eyebrow text-[14px]">Article · 5 min read</p>
-        <h1 class="mt-8 text-[8vw] leading-[1.05] font-normal md:text-5xl lg:text-7xl">The middle is disappearing.</h1>
+        <p class="eyebrow text-[14px]">Artikel · 5 Min. Lesezeit</p>
+        <h1 class="mt-8 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">Die Mitte verschwindet.</h1>
       </div>
     </div>
   </section>
@@ -160,8 +161,8 @@ const practice = `Die wichtigste strategische Entscheidung, die Agenturen jetzt 
         <h2 class="text-[30px] leading-snug">Ableitung in die Praxis</h2>
         <p class="mt-6 max-w-[78ch] text-[16px] leading-relaxed">{practice}</p>
 
-        <p class="eyebrow mt-10 text-[14px]" lang="en">The middle is disappearing</p>
-        <a href="/perspectives" class="btn-outline mt-6 border-night text-[16px] hover:bg-night hover:text-cream" lang="en">Back to Perspectives</a>
+        <p class="eyebrow mt-10 text-[14px]">Die Mitte verschwindet</p>
+        <a href="/de/perspectives" class="btn-outline mt-6 border-night text-[16px] hover:bg-night hover:text-cream">Zurück zu Perspektiven</a>
       </div>
     </div>
   </section>
@@ -171,32 +172,9 @@ const practice = `Die wichtigste strategische Entscheidung, die Agenturen jetzt 
     <Media tone="dusk" label="Artikelbild" class="min-h-[320px] w-full md:min-h-[560px]" />
     <div class="flex flex-col items-center justify-center bg-night px-5 py-20 text-center text-cream md:px-16">
       <p class="max-w-[28ch] text-[30px] leading-snug" lang="de">Das Mittelfeld ist kein Geschäftsmodell. Es ist ein Aufschub.</p>
-      <a href="#" class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">Download article</a>
+      <a href="#" class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">Artikel herunterladen</a>
     </div>
   </section>
 
-  <!-- Newsletter (wie auf der Startseite) -->
-  <section class="bg-lilac">
-    <div class="container-frst grid gap-10 py-16 md:grid-cols-[1fr_3fr]">
-      <div>
-        <p class="eyebrow text-[14px]">Let’s talk</p>
-        <h2 class="mt-4 text-[30px] leading-tight font-normal">Stay<br />Connected</h2>
-      </div>
-      <form class="grid gap-8 md:grid-cols-3 md:pt-6" action="#" method="post">
-        {[
-          { name: 'firstName', label: 'First Name', type: 'text' },
-          { name: 'lastName', label: 'Last Name', type: 'text' },
-          { name: 'email', label: 'E-Mail', type: 'email' },
-        ].map((f) => (
-          <label class="flex flex-col gap-6 text-[16px]">
-            {f.label}
-            <input name={f.name} type={f.type} class="text-[16px] border-b border-night/30 bg-transparent pb-2 outline-none focus:border-violet focus:shadow-[0_1px_0_0_var(--color-violet)]" />
-          </label>
-        ))}
-        <div>
-          <button type="submit" class="btn-outline border-night text-[16px] hover:bg-night hover:text-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet">Subscribe</button>
-        </div>
-      </form>
-    </div>
-  </section>
+  <Newsletter lang="de" />
 </Base>

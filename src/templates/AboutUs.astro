@@ -1,0 +1,128 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Arrow from '../components/Arrow.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useLang(lang);
+
+// Namen, Rollen, Stellen und Prinzipien sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
+const lorem = t(
+  'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.',
+  'Wir bauen unvergessliche Marken, die begeistern und Menschen mitnehmen. Deshalb stellen wir interdisziplinäre Teams zusammen, die von zukunftsweisender Technologie getragen werden.',
+);
+
+// Standorte: Bilder sind Platzhalter, Adressdaten wie angegeben.
+const locations = [
+  { city: 'Stuttgart', lines: ['Feuersee', 'Creative Hub'], phone: '+49 (0) 711 410 270 74', tone: 'desert', imageLeft: true },
+  { city: 'New York', lines: ['Brooklyn', 'Creative Hub'], phone: '7189371234', tone: 'sky', imageLeft: false },
+  { city: 'Berlin', lines: ['Prenzlauer Berg', 'Creative Hub'], phone: '030123456', tone: 'dusk', imageLeft: true },
+] as const;
+
+const jobsMail = 'jobs@frst.agency';
+const mailto = (subject: string) => `mailto:${jobsMail}?subject=${encodeURIComponent(subject)}`;
+
+const jobs = [
+  { title: t('Senior Strategist (m/w/d)', 'Senior Strategist (m/w/d)'), place: t('Göppingen · Full-time', 'Göppingen · Vollzeit') },
+  { title: t('Creative Technologist (m/w/d)', 'Creative Technologist (m/w/d)'), place: t('Göppingen · Full-time', 'Göppingen · Vollzeit') },
+  { title: t('Working Student Communication (m/w/d)', 'Werkstudent Kommunikation (m/w/d)'), place: t('Göppingen · Part-time', 'Göppingen · Teilzeit') },
+];
+---
+
+<Base title={t('About us – frst', 'Über uns – frst')} headerOverlay lang={lang}>
+  <!-- Hero (wie Perspectives) -->
+  <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-screen md:max-h-[900px]">
+    <div
+      class="pointer-events-none absolute top-1/2 left-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-[55%] rounded-full bg-[radial-gradient(circle,#93c0f5_0%,#4d6fd0_25%,#1f1d6b_50%,transparent_70%)]"
+    ></div>
+    <div class="container-frst relative grid gap-10 pt-40 pb-10 md:grid-cols-2 md:items-end">
+      <div class="md:self-center">
+        <p class="eyebrow text-[14px]">{t('About us', 'Über uns')}</p>
+        <h1 class="mt-14 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{t('Made for the', 'Gemacht für den')}<br />{t('unguarded moment.', 'unverstellten Moment.')}</h1>
+        <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{t(
+          'frst is a family-owned company, led by brothers, with an eye for people. We see our work as an interaction between humans. In every conversation we look for the moment the mask drops and something real is said. That is where the best ideas begin.',
+          'frst ist ein inhabergeführtes Familienunternehmen, geleitet von Brüdern, mit einem Blick für Menschen. Wir verstehen unsere Arbeit als Zusammenspiel von Menschen. In jedem Gespräch suchen wir den Moment, in dem die Maske fällt und etwas Echtes gesagt wird. Dort beginnen die besten Ideen.',
+        )}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Manifest -->
+  <section id="manifest" class="container-frst scroll-mt-20 pt-14 pb-20 md:pt-20 md:pb-28">
+    <div class="text-2xl leading-snug [&>p]:mb-8">
+      <p>{t('We believe the best ideas begin where people stop performing. frst is a family-owned company, led by brothers, with an eye for people.', 'Wir glauben, dass die besten Ideen dort beginnen, wo Menschen aufhören, etwas darzustellen. frst ist ein inhabergeführtes Familienunternehmen, geleitet von Brüdern, mit einem Blick für Menschen.')}</p>
+      <p>{t('We look for the moment the mask drops and something real is said. We see beyond belonging and we ask better questions.', 'Wir suchen den Moment, in dem die Maske fällt und etwas Echtes gesagt wird. Wir sehen über Zugehörigkeit hinaus und stellen bessere Fragen.')}</p>
+      <p>{t('We build nothing behind closed doors. Because brands that are made for the unguarded moment are the ones people trust.', 'Wir bauen nichts hinter verschlossenen Türen. Denn Marken, die für den unverstellten Moment gemacht sind, sind die, denen Menschen vertrauen.')}</p>
+    </div>
+  </section>
+
+  <!-- Superpod -->
+  <section id="superpod" class="relative flex min-h-[520px] scroll-mt-20 items-center overflow-hidden text-cream md:min-h-[640px]">
+    <div class="absolute inset-0"><Media tone="night" label="Superpod" class="h-full w-full" /></div>
+    <div class="absolute inset-0 bg-night/40"></div>
+    <div class="container-frst relative py-20 md:py-28">
+      <p class="eyebrow text-[14px]">Superpod</p>
+      <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">{t('Every project, out in the open.', 'Jedes Projekt, offen einsehbar.')}</h2>
+      <p class="mt-8 max-w-md text-[16px] leading-relaxed">{t('Superpod is frst’s own platform. It makes every project transparent, from the first briefing to the final launch.', 'Superpod ist die eigene Plattform von frst. Sie macht jedes Projekt transparent, vom ersten Briefing bis zum finalen Launch.')}</p>
+      <a href="https://superpod.frst.agency" target="_blank" rel="noopener noreferrer" class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">{t('Sign in', 'Anmelden')}</a>
+    </div>
+  </section>
+
+  <!-- Standorte -->
+  <section id="locations" class="container-frst scroll-mt-20 py-16 md:py-24" aria-label={t('Locations', 'Standorte')}>
+    {locations.map((loc) => (
+      <div class="grid gap-y-8 py-8 md:grid-cols-2 md:gap-x-16 md:py-12">
+        <Media
+          tone={loc.tone}
+          label={loc.city}
+          class={`aspect-[3/2] w-full ${loc.imageLeft ? '' : 'md:order-2'}`}
+        />
+        <div class={`flex items-center ${loc.imageLeft ? '' : 'md:order-1'}`}>
+          <div>
+            <h3 class="text-[30px] leading-snug">{loc.city}</h3>
+            {loc.lines.length > 0 && (
+              <address class="mt-6 text-[16px] leading-relaxed not-italic">
+                {loc.lines.map((line) => <span class="block">{line}</span>)}
+                <a href={`tel:${loc.phone.replace(/\(0\)|[^+\d]/g, '')}`} class="block hover:text-violet focus-visible:text-violet">{loc.phone}</a>
+              </address>
+            )}
+          </div>
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <!-- Careers -->
+  <section id="careers" class="scroll-mt-20 bg-night text-cream">
+    <div class="container-frst grid gap-12 py-20 md:py-28 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
+      <div>
+        <p class="eyebrow text-[14px]">{t('Careers', 'Karriere')}</p>
+        <h2 class="mt-8 text-[30px] leading-snug">{t('Join us.', 'Werde Teil von frst.')}</h2>
+        <p class="mt-10 max-w-sm text-[16px] leading-relaxed opacity-90">{lorem}</p>
+      </div>
+      <div>
+        <ul class="border-t border-cream/30">
+          {jobs.map((job) => (
+            <li class="border-b border-cream/30">
+              <a href={mailto(t('Application: ', 'Bewerbung: ') + job.title)} class="group grid grid-cols-[1fr_auto] items-center gap-4 py-6 transition-[padding] duration-300 hover:pl-3">
+                <div>
+                  <h3 class="text-[24px] leading-snug">{job.title}</h3>
+                  <p class="mt-2 text-[14px] opacity-80">{job.place}</p>
+                </div>
+                <span class="transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a href={mailto(t('Open application', 'Initiativbewerbung'))} class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">{t('Open application', 'Initiativbewerbung')}</a>
+      </div>
+    </div>
+  </section>
+
+  <Newsletter lang={lang} />
+</Base>

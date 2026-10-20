@@ -2,35 +2,68 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import BookDemoDialog from '../components/BookDemoDialog.astro';
+import { defaultLang, localePath, stripLang, useLang, type Lang } from '../i18n';
 
 interface Props {
   title?: string;
   description?: string;
   headerOverlay?: boolean;
   headerLight?: boolean;
+  /** Sprache dieser Seite */
+  lang?: Lang;
+  /** In welchen Sprachen es diese Seite gibt (für Umschalter und hreflang). Standard: beide. */
+  translations?: Lang[];
 }
 const {
-  title = 'frst – The agency for tomorrow',
-  description = 'We build memorable brands that spark excitement and ignite engagement.',
   headerOverlay = false,
   headerLight = false,
+  lang = defaultLang,
+  translations = ['en', 'de'],
 } = Astro.props;
+const t = useLang(lang);
+const title = Astro.props.title ?? t('frst – The agency for tomorrow', 'frst – Die Agentur für morgen');
+const description =
+  Astro.props.description ??
+  t(
+    'We build memorable brands that spark excitement and ignite engagement.',
+    'Wir bauen einprägsame Marken, die begeistern und Menschen erreichen.',
+  );
+
+// Adressen der Sprachvarianten dieser Seite (für Umschalter, canonical und hreflang)
+const basePath = stripLang(Astro.url.pathname).replace(/(.)\/$/, '$1');
+const pathFor = (target: Lang) => localePath(target, basePath);
+const other: Lang = lang === 'de' ? 'en' : 'de';
+// Gibt es die Seite in der anderen Sprache nicht, führt der Umschalter zur Startseite der anderen Sprache
+const switchHref = translations.includes(other) ? pathFor(other) : localePath(other, '/');
+const origin = Astro.site ? Astro.site.origin : '';
+const canonical = origin + pathFor(lang);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {
+      translations.length > 1 &&
+        translations.map((code) => <link rel="alternate" hreflang={code} href={origin + pathFor(code)} />)
+    }
+    {translations.includes(defaultLang) && <link rel="alternate" hreflang="x-default" href={origin + pathFor(defaultLang)} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_US'} />
   </head>
   <body class="min-h-screen">
-    <Header overlay={headerOverlay} light={headerLight} />
+    <Header overlay={headerOverlay} light={headerLight} lang={lang} switchHref={switchHref} />
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
+    <BookDemoDialog lang={lang} />
   </body>
 </html>

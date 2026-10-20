@@ -1,0 +1,330 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Arrow from '../components/Arrow.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { localePath, useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useLang(lang);
+const l = (href: string) => localePath(lang, href);
+// Der Artikel „The middle is disappearing“ existiert nur auf Deutsch.
+const articleHref = '/de/perspectives/the-middle-is-disappearing';
+
+const intro = t(
+  'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.',
+  'Wir bauen unvergessliche Marken, die begeistern und Menschen mitnehmen. Deshalb stellen wir interdisziplinäre Teams zusammen, die von zukunftsweisender Technologie getragen werden.',
+);
+
+const pillars = [
+  {
+    no: t('Pillar 1', 'Säule 1'),
+    title: t('Research Drops', 'Research Drops'),
+    subtitle: t('Evidence every six weeks', 'Belege im Sechs-Wochen-Takt'),
+    text: t('Every six weeks, we test one thesis with data, interviews, and surveys. Eight editions a year. No guesswork. No long reports. Just clear, reliable insights. At the end of the year, one major report brings everything together and validates the findings.', 'Alle sechs Wochen prüfen wir eine These mit Daten, Interviews und Umfragen. Acht Ausgaben im Jahr. Kein Rätselraten. Keine langen Berichte. Nur klare, verlässliche Erkenntnisse. Am Jahresende führt ein großer Report alles zusammen und bestätigt die Ergebnisse.'),
+    why: t('You get evidence, not opinion—clear, concise, and on a regular schedule.', 'Du bekommst Belege statt Meinung – klar, knapp und in regelmäßigem Takt.'),
+  },
+  {
+    no: t('Pillar 2', 'Säule 2'),
+    title: t('CMO Roundtables', 'CMO-Roundtables'),
+    subtitle: t('Peer conversations, backed by research', 'Austausch auf Augenhöhe, gestützt auf Research'),
+    text: t('Three times a year, 10–15 marketing and C-suite leaders come together. No panels. No pitches. Three themes: trust, creativity, and the future of agencies. What’s shared in the room stays in the room. The insights feed into the next study.', 'Dreimal im Jahr kommen 10 bis 15 Marketing- und C-Level-Verantwortliche zusammen. Keine Panels. Keine Pitches. Drei Themen: Vertrauen, Kreativität und die Zukunft der Agentur. Was im Raum besprochen wird, bleibt im Raum. Die Erkenntnisse fließen in die nächste Studie ein.'),
+    why: t('Bring your questions to the table. Explore them with the right people—and help turn the answers into research.', 'Bring deine Fragen mit an den Tisch. Geh ihnen mit den richtigen Leuten nach – und hilf mit, aus den Antworten Research zu machen.'),
+  },
+  {
+    no: t('Pillar 3', 'Säule 3'),
+    title: t('Perspectives', 'Perspektiven'),
+    subtitle: t('Fresh thinking between Research Drops', 'Frisches Denken zwischen den Research Drops'),
+    text: t('Every Friday, we share a point of view, a research insight, or an interview clip. A way into the conversation without waiting six weeks for the next drop. Ideas that help you move forward.', 'Jeden Freitag teilen wir eine Haltung, eine Research-Erkenntnis oder einen Interview-Clip. Ein Einstieg ins Gespräch, ohne sechs Wochen auf den nächsten Drop zu warten. Ideen, die dich weiterbringen.'),
+    why: t('Stay close to the conversation, week after week. A steady stream of insight—never too much, never too little.', 'Bleib Woche für Woche nah am Gespräch. Ein stetiger Strom an Erkenntnissen – nie zu viel, nie zu wenig.'),
+  },
+];
+
+const disciplines = [
+  { no: '01', title: t('Brand Strategy', 'Markenstrategie'), text: t('A position built on evidence, so your brand knows where it stands and where it is going.', 'Eine Position auf Basis von Belegen, damit deine Marke weiß, wo sie steht und wohin sie will.') },
+  { no: '02', title: t('Creative Concept', 'Kreativkonzept'), text: t('Original ideas from the right people, chosen for your project and shaped with you.', 'Originelle Ideen von den richtigen Menschen, ausgewählt für dein Projekt und gemeinsam mit dir geformt.') },
+  { no: '03', title: t('Campaign & Craft', 'Kampagne & Handwerk'), text: t('Campaigns, content and film, from first concept to launch. Crafted with care, built to move people.', 'Kampagnen, Content und Film, vom ersten Konzept bis zum Launch. Mit Sorgfalt gemacht, um Menschen zu bewegen.') },
+  { no: '04', title: t('AI driven Technology', 'KI-gestützte Technologie'), text: t('Dare to change outcomes: sharper insights, faster briefings, teams matched with precision.', 'Mut, Ergebnisse zu verändern: schärfere Insights, schnellere Briefings, präzise zusammengestellte Teams.') },
+];
+---
+
+<Base headerOverlay lang={lang}>
+  <!-- Hero -->
+  <section class="relative flex min-h-[640px] items-end overflow-hidden text-cream md:h-screen md:max-h-[900px]">
+    <div class="absolute inset-0"><Media tone="dusk" class="h-full w-full" /></div>
+    <!-- Hintergrundvideo: Datei unter public/videos/hero.mp4 ablegen. Ohne Datei bleibt der Verlauf sichtbar. -->
+    <video
+      class="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      aria-hidden="true"
+    >
+      <source src="/videos/hero.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-gradient-to-t from-night/60 via-transparent to-night/30"></div>
+    <div class="container-frst relative grid gap-10 pt-40 pb-6 md:grid-cols-2">
+      <div>
+        <p class="eyebrow text-[14px]">{t('A space for what’s next.', 'Ein Raum für das, was als Nächstes kommt.')}</p>
+        <h1 class="mt-6 text-[8vw] leading-[1.05] font-light whitespace-nowrap md:text-5xl lg:text-7xl">{t('see beyond belonging*', 'über Zugehörigkeit hinaussehen*')}</h1>
+        <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{t('*Belonging is the comfort of the familiar: We help brands see beyond it.', '*Zugehörigkeit ist der Komfort des Vertrauten: Wir helfen Marken, darüber hinauszusehen.')}</p>
+        <a href={l('/about-us')} class="mt-16 inline-flex h-7 w-7 items-center justify-center rounded-full border border-cream/80" aria-label={t('Go to the About us page', 'Zur Über-uns-Seite')}>
+          <Arrow class="rotate-90" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="container-frst pt-20 pb-14 md:pt-28 md:pb-20">
+    <p class="eyebrow text-[14px]">{t('Work', 'Projekte')}</p>
+    <div class="mt-8 grid gap-12 md:grid-cols-12 md:gap-8">
+      <a href={l('/work/naeher-am-leben')} class="group grid gap-6 md:col-span-8 md:grid-cols-[3fr_2fr] md:items-center">
+        <Media tone="night" class="aspect-[4/3] w-full" />
+        <div>
+          <p class="eyebrow text-[14px]">Volksbank Göppingen</p>
+          <h3 class="mt-3 text-[24px]">Näher am Leben</h3>
+          <p class="mt-2 text-[14px]">{t('Strategy · Campaign · Content · Digital', 'Strategie · Kampagne · Content · Digital')}</p>
+          <Arrow class="mt-6" />
+        </div>
+      </a>
+      <div class="md:col-span-3 md:col-start-10">
+        <Media tone="night" class="aspect-[4/3] w-full" />
+        <p class="eyebrow text-[14px] mt-6">{t('Perspectives', 'Perspektiven')}</p>
+        <h3 class="mt-3 text-[24px]">Lorem Ipsum</h3>
+        <p class="mt-2 text-[14px]">{t('Article · 6 min read', 'Artikel · 6 Min. Lesezeit')}</p>
+        <Arrow class="mt-6" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Why frst -->
+  <section id="why-frst" class="container-frst pt-14 pb-20 md:pt-20 md:pb-28">
+    <div class="text-2xl leading-snug md:columns-2 md:gap-16 [&>p]:mb-8 [&>p]:break-inside-avoid">
+      <p>
+        {t('We were never interested in doing things just because they’ve always been done that way. We believe the most interesting things happen when different minds meet, familiar ideas are challenged and there’s room for something unexpected.', 'Es hat uns nie interessiert, Dinge nur deshalb zu tun, weil sie schon immer so getan wurden. Wir glauben, dass die interessantesten Dinge passieren, wenn unterschiedliche Köpfe aufeinandertreffen, Vertrautes in Frage gestellt wird und Raum für Unerwartetes bleibt.')}
+      </p>
+      <p>
+        {t('That’s why frst is more than an agency. It’s a space for curious minds, challenging conversations and the kind of collaboration that makes new things possible.', 'Deshalb ist frst mehr als eine Agentur. Es ist ein Raum für neugierige Köpfe, fordernde Gespräche und eine Zusammenarbeit, die Neues möglich macht.')}
+      </p>
+      <p>
+        {t('We bring together people from brands, creativity, technology and academia. People who question the obvious, share what they know and are open to what they don’t.', 'Wir bringen Menschen aus Marken, Kreation, Technologie und Wissenschaft zusammen. Menschen, die das Offensichtliche hinterfragen, ihr Wissen teilen und offen sind für das, was sie nicht wissen.')}
+      </p>
+      <p>
+        {t('We use technology to expand what’s possible. But we believe it takes human intuition, imagination and judgment to make something matter.', 'Wir nutzen Technologie, um das Mögliche zu erweitern. Aber wir glauben, dass es menschliche Intuition, Vorstellungskraft und Urteilskraft braucht, damit etwas wirklich zählt.')}
+      </p>
+      <p>
+        {t('Together, we explore new ways to build brands, create culture and move things forward. Not by producing more of what already exists, but by making room for what doesn’t.', 'Gemeinsam erkunden wir neue Wege, Marken aufzubauen, Kultur zu gestalten und Dinge voranzubringen. Nicht, indem wir mehr von dem produzieren, was es schon gibt, sondern indem wir Raum schaffen für das, was es noch nicht gibt.')}
+      </p>
+      <p>
+        {t('We don’t believe the future belongs to those with all the answers. It belongs to those willing to ask better questions, see things differently and create together.', 'Wir glauben nicht, dass die Zukunft denen gehört, die alle Antworten haben. Sie gehört denen, die bereit sind, bessere Fragen zu stellen, die Dinge anders zu sehen und gemeinsam zu gestalten.')}
+      </p>
+      <p>{t('We are frst. A space for what’s next.', 'Wir sind frst. Ein Raum für das, was als Nächstes kommt.')}</p>
+    </div>
+  </section>
+
+  <!-- Future of the Agency -->
+  <section class="grid md:grid-cols-2">
+    <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-10">
+      <h2 class="text-[30px]">{t('The middle is disappearing', 'Die Mitte verschwindet')}</h2>
+      <p class="mt-6 max-w-md text-[16px] leading-relaxed opacity-90">{intro}</p>
+      <a href={articleHref} class="mt-8" aria-label={t('Go to the article The middle is disappearing (in German)', 'Zum Artikel Die Mitte verschwindet')}><Arrow /></a>
+    </div>
+    <a href={articleHref} class="group block overflow-hidden" aria-label={t('Go to the article The middle is disappearing (in German)', 'Zum Artikel Die Mitte verschwindet')}>
+      <Media tone="mist" class="min-h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:h-full md:min-h-[480px]" />
+    </a>
+  </section>
+
+  <!-- What we do -->
+  <section id="what-we-do" class="container-frst py-20 md:py-28">
+    <p class="eyebrow text-[14px]">{t('Services', 'Leistungen')}</p>
+    <div class="mt-8 grid gap-12 lg:grid-cols-[1fr_1.4fr_1fr]">
+      <div>
+        <h2 class="text-[30px] leading-snug">{t('End-to-end for your brand.', 'Von A bis Z für deine Marke.')}</h2>
+        <p class="mt-6 max-w-md text-[16px] leading-relaxed">
+          {t('frst is a creative hub. We bring together the right insights, artists and technology for everything your brand needs next. Four disciplines give it shape. One open process keeps you inside the work, from day one.', 'frst ist ein Creative Hub. Wir bringen die richtigen Insights, Künstlerinnen und Künstler und die passende Technologie zusammen, für alles, was deine Marke als Nächstes braucht. Vier Disziplinen geben ihr Form. Ein offener Prozess hält dich von Tag eins an mitten in der Arbeit.')}
+        </p>
+        <a href={l('/what-we-do')} class="mt-8 inline-block" aria-label={t('Go to the Services page', 'Zur Leistungen-Seite')}><Arrow /></a>
+      </div>
+      <div class="relative grid grid-cols-6 gap-4 lg:pt-12">
+        <Media tone="desert" class="col-span-4 col-start-2 aspect-[3/4]" />
+        <div class="absolute top-1/3 left-0 hidden h-52 w-52 items-center justify-center rounded-full border border-night/60 text-center text-[16px] leading-snug uppercase lg:flex">
+          {t('Four disciplines', 'Vier Disziplinen')}<br />{t('one partner', 'ein Partner')}
+        </div>
+        <Media tone="mist" class="col-span-4 aspect-[4/3]" />
+        <Media tone="sky" class="col-span-2 mt-8 aspect-[2/3]" />
+      </div>
+      <ol class="flex flex-col gap-10">
+        {disciplines.map((d) => (
+          <li class="grid grid-cols-[4rem_1fr] text-[16px]">
+            <span class="text-[24px] leading-snug">{d.no}</span>
+            <div>
+              <h3 class="text-[24px] leading-snug">{d.title}</h3>
+              <p class="mt-2 max-w-[34ch] text-[16px] leading-relaxed">{d.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Perspectives -->
+  <section id="perspectives" class="container-frst py-20 md:py-28">
+    <div class="grid gap-12 md:grid-cols-[1fr_1.3fr]">
+      <div>
+        <p class="eyebrow text-[14px]">{t('Perspectives', 'Perspektiven')}</p>
+        <h2 class="mt-8 max-w-md text-[30px] leading-snug">{t('Outside views, on purpose.', 'Blicke von außen, mit Absicht.')}</h2>
+        <p class="mt-6 max-w-md text-[16px] leading-relaxed">
+          {t('Most agencies talk about themselves. We would rather listen. In our talks, we meet people from outside our world and learn how they see things. What we learn becomes films, podcasts, articles and whitepapers, including the findings of our research.', 'Die meisten Agenturen reden über sich selbst. Wir hören lieber zu. In unseren Gesprächen treffen wir Menschen von außerhalb unserer Welt und lernen, wie sie die Dinge sehen. Was wir lernen, wird zu Filmen, Podcasts, Artikeln und Whitepapern, auch mit den Ergebnissen aus unserem Research.')}
+        </p>
+        <a href={l('/perspectives')} class="mt-8 inline-block" aria-label={t('All perspectives', 'Alle Perspektiven')}><Arrow /></a>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <a href={articleHref}>
+          <Media tone="night" class="aspect-[4/3] w-full" />
+          <p class="eyebrow text-[14px] mt-6">{t('Perspectives', 'Perspektiven')}</p>
+          <h3 class="mt-3 text-[24px]">{t('The middle is disappearing', 'Die Mitte verschwindet')}</h3>
+          <p class="mt-2 text-[14px]">{t('Article · 5 min read', 'Artikel · 5 Min. Lesezeit')}</p>
+          <Arrow class="mt-6" />
+        </a>
+        <a href="#">
+          <Media tone="night" class="aspect-[4/3] w-full" />
+          <p class="eyebrow text-[14px] mt-6">{t('The Next Chapter', 'Das nächste Kapitel')}</p>
+          <h3 class="mt-3 text-[24px]">{t('A Clearer Tomorrow', 'Ein klareres Morgen')}</h3>
+          <p class="mt-2 text-[14px]">{t('Strategy · Campaign · Content · Digital', 'Strategie · Kampagne · Content · Digital')}</p>
+          <Arrow class="mt-6" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Newsletter lang={lang} />
+
+  <!-- Research -->
+  <section id="research" class="grid md:grid-cols-2">
+    <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-10">
+      <p class="eyebrow text-[14px]">Research</p>
+      <h2 class="mt-8 text-[30px] leading-snug">{t('We asked the people who know.', 'Wir haben die gefragt, die es wissen.')}</h2>
+      <p class="mt-6 max-w-md text-[16px] leading-relaxed opacity-90">
+        {t('Together with TH Köln, we asked a representative group of clients what they really expect from agencies. It had not been done before. The answers are not always comfortable. They are very useful. We share what we found, so the whole industry can move forward.', 'Gemeinsam mit der TH Köln haben wir eine repräsentative Gruppe von Auftraggebern gefragt, was sie von Agenturen wirklich erwarten. Das gab es so noch nicht. Die Antworten sind nicht immer bequem. Sie sind sehr nützlich. Wir teilen, was wir gefunden haben, damit die ganze Branche vorankommt.')}
+      </p>
+      <a href={l('/research')} class="mt-8" aria-label={t('Go to the Research page', 'Zur Research-Seite')}><Arrow /></a>
+    </div>
+    <a href={l('/research')} class="group block overflow-hidden" aria-label={t('Go to the Research page', 'Zur Research-Seite')}>
+      <Media tone="mist" class="min-h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:h-full md:min-h-[480px]" />
+    </a>
+  </section>
+
+  <!-- CMO Community -->
+  <section id="cmo-community" class="container-frst py-20 md:py-28">
+    <div class="grid gap-12 lg:grid-cols-[1fr_2.4fr]">
+      <div>
+        <p class="eyebrow text-[14px]">CMO Community</p>
+        <h2 class="mt-8 max-w-md text-[30px] leading-snug">{t('The Future of Agency Relationships', 'Die Zukunft der Agenturbeziehung')}</h2>
+        <p class="mt-6 max-w-md text-[16px] leading-relaxed">
+          {t('The agency-client relationship is under pressure. AI. More transparency. New expectations. But the pressure isn’t on agencies themselves—it’s on the model companies and agencies use to work together. frst is exploring what needs to change.', 'Die Beziehung zwischen Agentur und Kunde steht unter Druck. KI. Mehr Transparenz. Neue Erwartungen. Doch der Druck liegt nicht auf den Agenturen selbst, sondern auf dem Modell, mit dem Unternehmen und Agenturen zusammenarbeiten. frst untersucht, was sich ändern muss.')}
+        </p>
+        <p class="mt-4 max-w-md text-[16px] leading-relaxed">{t('Evidence-led. Built with you.', 'Evidenzbasiert. Mit dir gebaut.')}</p>
+        <a href={l('/cmo-community')} class="mt-8 inline-block" aria-label={t('Go to the CMO Community', 'Zur CMO Community')}><Arrow /></a>
+      </div>
+      <div class="grid items-start gap-4 md:grid-cols-3">
+        {pillars.map((pillar) => (
+          <div class="flex flex-col rounded-2xl border border-night/20 bg-cream p-5 text-night transition-colors duration-300 hover:bg-lilac" data-pillar>
+            <p class="eyebrow text-[14px] opacity-70">{pillar.no}</p>
+            <h3 class="mt-8 text-[24px]">{pillar.title}</h3>
+            <p class="mt-1 text-[14px] opacity-80">{pillar.subtitle}</p>
+            <div
+              id={`pillar-${pillar.no.replace(/\D/g, '')}`}
+              class="mt-6 max-h-[5.5rem] overflow-hidden transition-[max-height] duration-500 ease-out data-[collapsed]:[mask-image:linear-gradient(to_bottom,black_45%,transparent)] motion-reduce:transition-none"
+              data-pillar-content
+              data-collapsed
+            >
+              <p class="text-[16px] leading-relaxed">{pillar.text}</p>
+              <p class="mt-6 text-[14px] tracking-[0.08em] uppercase opacity-70">{t('Why it matters', 'Warum das zählt')}</p>
+              <p class="mt-2 text-[16px] leading-relaxed">{pillar.why}</p>
+            </div>
+            <div class="mt-8">
+              <button
+                type="button"
+                class="group -m-2 p-2 transition-opacity hover:opacity-60"
+                aria-expanded="false"
+                aria-controls={`pillar-${pillar.no.replace(/\D/g, '')}`}
+                aria-label={t('Read more', 'Mehr lesen')}
+                data-label-more={t('Read more', 'Mehr lesen')}
+                data-label-less={t('Read less', 'Weniger lesen')}
+                data-pillar-toggle
+              >
+                <svg class="h-3 w-4 transition-transform duration-300 group-aria-expanded:rotate-45 motion-reduce:transition-none" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+                  <path d="M2 6h12M8 0v12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- About us Teaser -->
+  <section id="about" class="grid md:grid-cols-2">
+    <div class="flex flex-col justify-center bg-black px-5 py-20 text-cream md:px-10">
+      <p class="eyebrow text-[14px]">{t('About us', 'Über uns')}</p>
+      <h2 class="mt-8 text-[30px] leading-snug">{t('Made for the unguarded moment.', 'Gemacht für den unverstellten Moment.')}</h2>
+      <p class="mt-6 max-w-md text-[16px] leading-relaxed opacity-90">
+        {t('frst is a family-owned company, led by brothers, with an eye for people. We see our work as an interaction between humans. In every conversation we look for the moment the mask drops and something real is said. That is where the best ideas begin.', 'frst ist ein inhabergeführtes Familienunternehmen, geleitet von Brüdern, mit einem Blick für Menschen. Wir verstehen unsere Arbeit als Zusammenspiel von Menschen. In jedem Gespräch suchen wir den Moment, in dem die Maske fällt und etwas Echtes gesagt wird. Dort beginnen die besten Ideen.')}
+      </p>
+      <a href={l('/about-us')} class="mt-8" aria-label={t('Go to the About us page', 'Zur Über-uns-Seite')}><Arrow /></a>
+    </div>
+    <a href={l('/about-us')} class="group block overflow-hidden" aria-label={t('Go to the About us page', 'Zur Über-uns-Seite')}>
+      <Media tone="mist" class="min-h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:h-full md:min-h-[480px]" />
+    </a>
+  </section>
+
+  <!-- Kontakt -->
+  <section id="contact" class="relative overflow-hidden bg-stone text-cream">
+    <div
+      class="pointer-events-none absolute top-1/2 left-1/2 h-[480px] w-[480px] -translate-x-1/4 -translate-y-1/3 rounded-full bg-[radial-gradient(circle,#ffd9a0_0%,#f59a3c_30%,transparent_70%)] opacity-90"
+    ></div>
+    <div class="container-frst relative py-24 md:py-32">
+      <p class="eyebrow text-[14px]">{t('Let’s get in touch', 'Lass uns ins Gespräch kommen')}</p>
+      <h2 class="mt-8 max-w-5xl text-[8vw] leading-[1.05] md:text-5xl lg:text-7xl">{t('Have an idea? A challenge? Book a demo.', 'Du hast eine Idee? Eine Herausforderung? Buche eine Demo.')}</h2>
+      <a href="#" data-book-demo class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">{t('Book a demo', 'Demo buchen')}</a>
+    </div>
+  </section>
+
+  <script>
+    // Pillar-Kacheln: zeigen zunächst nur einen Teil des Textes, „Mehr lesen“ klappt die Kachel auf
+    document.querySelectorAll<HTMLElement>('[data-pillar]').forEach((tile) => {
+      const content = tile.querySelector<HTMLElement>('[data-pillar-content]');
+      const toggle = tile.querySelector<HTMLButtonElement>('[data-pillar-toggle]');
+      if (!content || !toggle) return;
+
+      const open = () => {
+        content.style.maxHeight = `${content.scrollHeight}px`;
+        content.removeAttribute('data-collapsed');
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', toggle.dataset.labelLess ?? '');
+      };
+      const close = () => {
+        // Von der aktuellen Höhe aus zuklappen, damit die Animation sauber läuft
+        content.style.maxHeight = `${content.scrollHeight}px`;
+        void content.offsetHeight;
+        content.style.maxHeight = '';
+        content.setAttribute('data-collapsed', '');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', toggle.dataset.labelMore ?? '');
+      };
+
+      toggle.addEventListener('click', () => (toggle.getAttribute('aria-expanded') === 'true' ? close() : open()));
+      // Bei Größenänderung der Seite die aufgeklappte Höhe nachziehen
+      window.addEventListener('resize', () => {
+        if (toggle.getAttribute('aria-expanded') === 'true') content.style.maxHeight = `${content.scrollHeight}px`;
+      });
+    });
+  </script>
+</Base>

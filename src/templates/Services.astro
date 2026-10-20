@@ -1,0 +1,110 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Arrow from '../components/Arrow.astro';
+import { localePath, useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useLang(lang);
+
+const intro = t(
+  'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.',
+  'Wir bauen unvergessliche Marken, die begeistern und Menschen mitnehmen. Deshalb stellen wir interdisziplinäre Teams zusammen, die von zukunftsweisender Technologie getragen werden.',
+);
+
+// `id` bleibt in beiden Sprachen gleich, damit die Anker aus der Navigation funktionieren.
+const services = [
+  { id: undefined, no: '', title: '', text: t('Seeing beyond belonging is a way of looking. It only counts if it changes what we see. So we turned it into four disciplines and one open process: research at the start, the right people for every task, and you inside the work from day one.', 'Über Zugehörigkeit hinauszusehen ist eine Art zu schauen. Sie zählt nur, wenn sie verändert, was wir sehen. Deshalb haben wir daraus vier Disziplinen und einen offenen Prozess gemacht: Research am Anfang, die richtigen Menschen für jede Aufgabe und du von Tag eins an mittendrin.'), tags: '' },
+  { id: 'brand-strategy', no: '01', title: t('Brand Strategy', 'Markenstrategie'), text: t('Brands need a clear point of view, and a point of view needs evidence. We combine research, data and experience to understand your business, your audiences and the forces reshaping your market. From there we define positioning, purpose and identity: a brand that guides your teams and stands apart in the market.', 'Marken brauchen eine klare Haltung, und eine Haltung braucht Belege. Wir verbinden Research, Daten und Erfahrung, um dein Geschäft, deine Zielgruppen und die Kräfte zu verstehen, die deinen Markt verändern. Daraus entwickeln wir Positionierung, Purpose und Identität: eine Marke, die deine Teams leitet und sich im Markt abhebt.'), tags: t('Market Research · Audience Insights · Brand Positioning · Brand Purpose · Brand Identity · Tone of Voice', 'Marktforschung · Zielgruppen-Insights · Markenpositionierung · Markenpurpose · Markenidentität · Tone of Voice') },
+  { id: 'creative-concept', no: '02', title: t('Creative Concept', 'Kreativkonzept'), text: t('A concept is the idea everything else depends on. We build every creative team from our network of artists, writers, designers, filmmakers and technologists, chosen for what your project demands. Led by people with a point of view, they develop ideas that are original, clear and made for your brand, shaped with you.', 'Ein Konzept ist die Idee, von der alles andere abhängt. Jedes Kreativteam stellen wir aus unserem Netzwerk von Künstlerinnen, Autoren, Designerinnen, Filmemachern und Technologinnen zusammen, ausgewählt nach dem, was dein Projekt verlangt. Geführt von Menschen mit Haltung entwickeln sie Ideen, die originell, klar und für deine Marke gemacht sind, gemeinsam mit dir geformt.'), tags: t('Creative Direction · Concept Development · Storytelling · Naming & Claims · Visual Worlds · Creative Workshops', 'Creative Direction · Konzeptentwicklung · Storytelling · Naming & Claims · Bildwelten · Kreativ-Workshops') },
+  { id: 'campaign-and-craft', no: '03', title: t('Campaign and Craft', 'Kampagne und Handwerk'), text: t('Ideas only matter when they reach people. We turn concepts into campaigns, content and film for every channel, and care about every detail along the way, from the first frame to the final launch. One line of thinking, many formats, produced to a standard we are proud to put our name on. Measured by results.', 'Ideen zählen nur, wenn sie Menschen erreichen. Wir machen aus Konzepten Kampagnen, Content und Film für jeden Kanal und kümmern uns um jedes Detail, vom ersten Bild bis zum finalen Launch. Eine Denkrichtung, viele Formate, produziert auf einem Niveau, für das wir gerne mit unserem Namen stehen. Gemessen an Ergebnissen.'), tags: t('Integrated Campaigns · Film & Documentary · Photo & Motion · Social Content · Websites & Digital Experiences · Audio & Podcast', 'Integrierte Kampagnen · Film & Dokumentation · Foto & Motion · Social Content · Websites & digitale Erlebnisse · Audio & Podcast') },
+  { id: 'ai-driven-technology', no: '04', title: t('AI driven Technology', 'KI-gestützte Technologie'), text: t('Technology should make teams better, not make everything look the same. We use AI where it changes outcomes: sharper insights, faster briefings, more precise teams. Superpod, our own platform, makes every project transparent. We also build custom AI solutions for your creative and marketing workflows.', 'Technologie soll Teams besser machen, nicht alles gleich aussehen lassen. Wir setzen KI dort ein, wo sie Ergebnisse verändert: schärfere Insights, schnellere Briefings, präzisere Teams. Superpod, unsere eigene Plattform, macht jedes Projekt transparent. Außerdem entwickeln wir individuelle KI-Lösungen für deine Kreativ- und Marketing-Workflows.'), tags: t('AI Workflows · Marketing Automation · Data & Reporting · Superpod Platform · Custom Software · Team Enablement', 'KI-Workflows · Marketing-Automatisierung · Daten & Reporting · Superpod-Plattform · Individualsoftware · Team Enablement') },
+];
+
+const steps = [
+  { title: t('Research', 'Research'), text: t('Look beyond: Research, not guesses. We ask those who know. You join from day one.', 'Weiter schauen: Research statt Vermutungen. Wir fragen die, die es wissen. Du bist von Tag eins dabei.') },
+  { title: t('Briefing', 'Briefing'), text: t('Frame the task: Superpod AI sharpens the brief. You review and approve. Then we start.', 'Die Aufgabe fassen: Superpod AI schärft das Briefing. Du prüfst und gibst frei. Dann legen wir los.') },
+  { title: t('Talent matching', 'Talent-Matching'), text: t('Assemble the team: Superpod matches the right artists, not whoever is free.', 'Das Team zusammenstellen: Superpod findet die passenden Künstlerinnen und Künstler, nicht die, die gerade frei sind.') },
+  { title: t('Co-creation', 'Co-Creation'), text: t('Work happens in the open: You shape ideas early with us. No surprises.', 'Die Arbeit passiert offen: Du formst Ideen früh mit uns. Keine Überraschungen.') },
+  { title: t('Launch and learn', 'Launch und Learnings'), text: t('Move forward: Launch together, measure what matters. Results shape what’s next.', 'Weitergehen: Gemeinsam launchen, messen, was zählt. Ergebnisse bestimmen, was als Nächstes kommt.') },
+];
+---
+
+<Base title={t('Services – frst', 'Leistungen – frst')} headerOverlay lang={lang}>
+  <!-- Hero -->
+  <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-screen md:max-h-[900px]">
+    <div
+      class="pointer-events-none absolute top-1/2 left-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-[55%] rounded-full bg-[radial-gradient(circle,#93c0f5_0%,#4d6fd0_25%,#1f1d6b_50%,transparent_70%)]"
+    ></div>
+    <div class="container-frst relative grid gap-10 pt-40 pb-6 md:grid-cols-2">
+      <div>
+        <p class="eyebrow text-[14px]">{t('Services', 'Leistungen')}</p>
+        <h1 class="mt-6 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{t('End to end', 'Von A bis Z')}<br />{t('for your brand.', 'für deine Marke.')}</h1>
+        <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{t('Four disciplines. One team, built around your project.', 'Vier Disziplinen. Ein Team, zusammengestellt für dein Projekt.')}</p>
+        <a href="#services" class="mt-16 inline-flex h-7 w-7 items-center justify-center rounded-full border border-cream/80" aria-label={t('Keep scrolling', 'Weiter scrollen')}>
+          <Arrow class="rotate-90" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our services -->
+  <section id="services" class="container-frst scroll-mt-20 py-20 md:py-24">
+    <p class="eyebrow text-[14px]">{t('Our services', 'Unsere Leistungen')}</p>
+    <div class="mt-10 grid gap-x-16 gap-y-14 md:gap-y-24 md:grid-cols-2 lg:grid-cols-3">
+      {services.map((s) => (
+        <article id={s.id} class="scroll-mt-24">
+          {s.no ? <p class="text-[16px] leading-snug">{s.no}</p> : <p class="invisible text-[16px] leading-snug" aria-hidden="true">&nbsp;</p>}
+          {s.title ? <h2 class="mt-[0.6rem] text-[24px] leading-snug font-light">{s.title}</h2> : <p class="invisible mt-[0.6rem] text-[24px] leading-snug" aria-hidden="true">&nbsp;</p>}
+          <p class="mt-6 max-w-[34ch] text-[16px] leading-relaxed">{s.text}</p>
+          {s.tags && <p class="mt-6 text-[14px]">{s.tags}</p>}
+        </article>
+      ))}
+      <Media tone="night" label="Services" class="aspect-[2/1] w-full self-start lg:col-start-3 lg:mt-[0.4rem]" />
+    </div>
+  </section>
+
+  <!-- Our approaches -->
+  <section id="process" class="container-frst scroll-mt-20 py-20 md:py-24">
+    <div>
+      <p class="eyebrow text-[14px]">{t('Our approaches', 'Unsere Ansätze')}</p>
+      <div class="mt-8 lg:grid lg:grid-cols-5 lg:gap-x-16">
+        <h2 class="text-[8vw] leading-[1.05] font-light md:text-5xl lg:col-span-3 lg:text-7xl">{t('The Process built around your Ambition.', 'Der Prozess, gebaut um deinen Anspruch.')}</h2>
+      </div>
+      <div class="mt-10 lg:grid lg:grid-cols-5 lg:gap-x-16">
+        <p class="text-[16px] leading-relaxed lg:col-span-3">{t(
+          'Every project follows five steps. What fills them is different every time: the research, the people, the goal. What stays the same is that you are part of each one, with the same briefing, the same plan and the same view of progress as our team. Nothing is built behind closed doors.',
+          'Jedes Projekt folgt fünf Schritten. Was sie füllt, ist jedes Mal anders: das Research, die Menschen, das Ziel. Gleich bleibt, dass du bei jedem Schritt dabei bist, mit demselben Briefing, demselben Plan und demselben Blick auf den Fortschritt wie unser Team. Nichts entsteht hinter verschlossenen Türen.',
+        )}</p>
+      </div>
+    </div>
+
+    <ol class="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-x-16">
+      {steps.map((step, i) => (
+        <li class="relative pr-6 lg:pr-0">
+          <p class="text-[16px] leading-snug">{String(i + 1).padStart(2, '0')}</p>
+          <h3 class="eyebrow mt-4 text-[14px]">{step.title}</h3>
+          <div class="relative mt-5">
+            <p class="text-[16px] leading-relaxed">{step.text}</p>
+            {i < steps.length - 1 && <Arrow class="absolute top-[52px] -right-10 hidden -translate-y-1/2 lg:block" />}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- Selected work -->
+  <section id="selected-work" class="grid scroll-mt-20 md:grid-cols-[1.35fr_1fr]">
+    <a href={localePath(lang, '/work/naeher-am-leben')} class="group block overflow-hidden" aria-label={t('Go to the case study Näher am Leben', 'Zur Case-Seite Näher am Leben')}>
+      <Media tone="night" label="Selected Work" class="min-h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 md:h-full md:min-h-[440px]" />
+    </a>
+    <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-24">
+      <p class="eyebrow text-[14px]">{t('Selected work', 'Ausgewählte Projekte')}</p>
+      <h2 class="mt-6 text-[30px] leading-snug font-light">Näher am Leben</h2>
+      <p class="mt-6 max-w-md text-[16px] leading-relaxed opacity-90">{intro}</p>
+    </div>
+  </section>
+</Base>

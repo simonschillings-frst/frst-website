@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Video from '../components/Video.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useLang(lang);
+
+// Texte und Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
+const facts = [
+  { label: t('Project', 'Projekt'), value: t('Campaign', 'Kampagne') },
+  { label: t('Client', 'Kunde'), value: 'Volksbank Göppingen' },
+  { label: t('Location', 'Ort'), value: 'Göppingen' },
+  { label: t('Year', 'Jahr'), value: '2025' },
+];
+
+const paragraph =
+  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+---
+
+<Base title="Näher am Leben – Volksbank Göppingen – frst" headerLight lang={lang}>
+  <!-- Titel -->
+  <section class="container-frst pt-24 pb-14 md:pt-36 md:pb-16">
+    <div class="md:ml-[16%]" data-align-nav>
+      <h1 class="text-5xl leading-[1.05] font-light md:text-7xl">Näher am Leben.</h1>
+      <p class="mt-8 text-lg font-light md:text-2xl">Volksbank Göppingen</p>
+    </div>
+  </section>
+
+  <!-- Hauptmotiv über die ganze Breite -->
+  <section>
+    <!-- Bewegtbild: Datei unter public/videos/naeher-am-leben.mp4 ablegen (stumm, Loop). Ohne Datei bleibt der Verlauf sichtbar. -->
+    <Video src="/videos/naeher-am-leben.mp4" loop tone="dusk" class="aspect-[16/10] w-full md:aspect-[12/5]" lang={lang} />
+  </section>
+
+  <!-- Projektdaten und Text -->
+  <section class="container-frst py-14 md:py-20">
+    <div class="grid gap-10 md:grid-cols-[1fr_1.35fr] md:gap-0">
+      <dl class="grid h-fit grid-cols-[7rem_1fr] gap-x-4 gap-y-2 text-[14px]">
+        {facts.map((fact) => (
+          <>
+            <dt class="uppercase">{fact.label}:</dt>
+            <dd>{fact.value}</dd>
+          </>
+        ))}
+      </dl>
+      <div class="space-y-6 text-[20px] leading-relaxed">
+        <p>{paragraph}</p>
+        <p>{paragraph}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bildergalerie (Anordnung wie bei Wieden+Kennedy: Film, Doppelbild, Dreierreihe, durchlaufender Bilderstreifen) -->
+  <!-- Film / großes Bewegtbild über die ganze Breite (wie das Hauptmotiv oben) -->
+  <section>
+    <Media tone="night" label="Film" class="aspect-video w-full" />
+  </section>
+
+  <section class="container-frst mt-2 pb-2">
+    <!-- Zwei Bilder nebeneinander -->
+    <div class="grid gap-2 md:grid-cols-2">
+      <Media tone="desert" label="Out of home" class="aspect-[4/5] w-full" />
+      <Media tone="mist" label="Print" class="aspect-[4/5] w-full" />
+    </div>
+
+    <!-- Drei Bilder nebeneinander -->
+    <div class="mt-2 grid gap-2 md:grid-cols-3">
+      <Media tone="sky" label="Social" class="aspect-[3/4] w-full" />
+      <Media tone="dusk" label="Social" class="aspect-[3/4] w-full" />
+      <Media tone="night" label="Social" class="aspect-[3/4] w-full" />
+    </div>
+  </section>
+
+  <!-- Durchlaufender Bilderstreifen über die ganze Breite (seitlich scrollbar, auch per Tastatur) -->
+  <section class="pb-16 md:pb-24" aria-label={t('More visuals', 'Weitere Motive')}>
+    <div class="mt-2 h-[50vh] overflow-x-auto xl:h-screen" tabindex="0" role="region" aria-label={t('Image gallery, scrolls sideways', 'Bildergalerie, seitlich scrollbar')}>
+      <div class="flex h-full min-w-max gap-2">
+        <Media tone="desert" label="Motiv 1" class="h-full aspect-[4/5] shrink-0" />
+        <Media tone="night" label="Motiv 2" class="h-full aspect-[3/4] shrink-0" />
+        <Media tone="mist" label="Motiv 3" class="h-full aspect-[5/4] shrink-0" />
+        <Media tone="dusk" label="Motiv 4" class="h-full aspect-[4/5] shrink-0" />
+        <Media tone="sky" label="Motiv 5" class="h-full aspect-[3/4] shrink-0" />
+        <Media tone="desert" label="Motiv 6" class="h-full aspect-[5/4] shrink-0" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Teilen -->
+  <section class="container-frst pb-20 md:pb-28">
+    <p class="flex flex-wrap items-center gap-x-10 gap-y-3 text-[14px]">
+      <span>{t('Share on', 'Teilen auf')}</span>
+      <a href="#" class="transition-colors duration-200 hover:text-violet focus-visible:text-violet">Instagram</a>
+      <a href="#" class="transition-colors duration-200 hover:text-violet focus-visible:text-violet">LinkedIn</a>
+    </p>
+  </section>
+
+  <Newsletter lang={lang} dark />
+
+  <script>
+    // Titel linksbündig mit dem ersten Navigationspunkt („Why frst“) ausrichten
+    const block = document.querySelector<HTMLElement>('[data-align-nav]');
+    const align = () => {
+      const link = document.querySelector<HTMLElement>('header nav[data-main-nav] a, header nav[data-main-nav] summary, header nav[data-main-nav] button');
+      if (!block || !block.parentElement) return;
+      if (!link || link.offsetParent === null || window.innerWidth < 768) {
+        block.style.marginLeft = '';
+        return;
+      }
+      const offset = link.getBoundingClientRect().left + parseFloat(getComputedStyle(link).paddingLeft) - block.parentElement.getBoundingClientRect().left - parseFloat(getComputedStyle(block.parentElement).paddingLeft);
+      block.style.marginLeft = `${Math.max(0, offset)}px`;
+    };
+    align();
+    window.addEventListener('resize', align);
+    window.addEventListener('load', align);
+  </script>
+</Base>

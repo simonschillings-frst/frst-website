@@ -1,0 +1,124 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Arrow from '../components/Arrow.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { localePath, useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useLang(lang);
+
+// Texte (außer den Texten von der Startseite), Termine und Zahlen sind Platzhalter.
+const lorem = t(
+  'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.',
+  'Wir bauen unvergessliche Marken, die begeistern und Menschen mitnehmen. Deshalb stellen wir interdisziplinäre Teams zusammen, die von zukunftsweisender Technologie getragen werden.',
+);
+
+const events = [
+  { no: '01', date: t('12 Nov 2026', '12. Nov. 2026'), title: t('CMO Roundtable: Trust', 'CMO-Roundtable: Vertrauen'), place: 'Stuttgart', href: '#' },
+  { no: '02', date: t('04 Feb 2027', '04. Feb. 2027'), title: t('CMO Roundtable: Creativity', 'CMO-Roundtable: Kreativität'), place: t('Munich', 'München'), href: '#' },
+  { no: '03', date: t('17 Jun 2027', '17. Juni 2027'), title: t('CMO Roundtable: The Future of Agencies', 'CMO-Roundtable: Die Zukunft der Agentur'), place: 'Berlin', href: '#' },
+];
+
+const factText = t('Lorem Ipsum dolor sit amet Ectur centran et amos.', 'Lorem Ipsum dolor sit amet Ectur centran et amos.');
+const facts = [
+  { value: '120+', text: factText },
+  { value: '3', text: factText },
+  { value: '15', text: factText },
+  { value: '100%', text: factText },
+];
+---
+
+<Base title={t('CMO Community – frst', 'CMO Community – frst')} headerOverlay lang={lang}>
+  <!-- Hero -->
+  <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-screen md:max-h-[900px]">
+    <div
+      class="pointer-events-none absolute top-1/2 left-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-[55%] rounded-full bg-[radial-gradient(circle,#93c0f5_0%,#4d6fd0_25%,#1f1d6b_50%,transparent_70%)]"
+    ></div>
+    <div class="container-frst relative grid gap-10 pt-40 pb-10 md:grid-cols-2 md:items-end">
+      <div class="md:self-center">
+        <p class="eyebrow text-[14px]">CMO Community</p>
+        <h1 class="mt-14 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{t('The Future of', 'Die Zukunft der')}<br />{t('Agency Relationships.', 'Agenturbeziehung.')}</h1>
+        <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{t(
+          'The agency-client relationship is under pressure. AI. More transparency. New expectations. But the pressure isn’t on agencies themselves—it’s on the model companies and agencies use to work together. frst is exploring what needs to change.',
+          'Die Beziehung zwischen Agentur und Kunde steht unter Druck. KI. Mehr Transparenz. Neue Erwartungen. Doch der Druck liegt nicht auf den Agenturen selbst, sondern auf dem Modell, mit dem Unternehmen und Agenturen zusammenarbeiten. frst untersucht, was sich ändern muss.',
+        )}</p>
+        <a href="#events" class="mt-12 inline-flex h-7 w-7 items-center justify-center rounded-full border border-cream/80" aria-label={t('Keep scrolling', 'Weiter scrollen')}>
+          <Arrow class="rotate-90" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events -->
+  <section id="events" class="container-frst scroll-mt-20 py-16 md:py-24">
+    <p class="eyebrow text-[14px]">Events</p>
+    <div class="mt-10 grid items-start gap-10 md:grid-cols-[1.4fr_1fr] md:gap-16">
+      <ul>
+        {events.map((event) => (
+          <li>
+            <a
+              href={event.href}
+              class="group grid grid-cols-[3rem_1fr_auto] items-start gap-4 py-6 transition-[padding] duration-300 hover:pl-3 md:grid-cols-[4.5rem_1fr_auto]"
+            >
+              <span class="text-[24px] leading-snug">{event.no}</span>
+              <div>
+                <h3 class="text-[24px] leading-snug">{event.title}</h3>
+                <p class="mt-5 max-w-[40ch] text-[16px] leading-relaxed">{lorem}</p>
+                <p class="mt-4 text-[14px]">{event.date} · {event.place}</p>
+              </div>
+              <span class="mt-2 transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <Media tone="night" label="Events" class="aspect-[11/10] w-full" />
+    </div>
+  </section>
+
+  <!-- Roundtables -->
+  <section id="roundtables" class="grid scroll-mt-20 md:grid-cols-[1fr_1.3fr]">
+    <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-10">
+      <p class="eyebrow text-[14px]">Roundtables</p>
+      <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">{t('Peer conversations, backed by research', 'Austausch auf Augenhöhe, gestützt auf Research')}</h2>
+      <p class="mt-8 max-w-md text-[16px] leading-relaxed opacity-90">{t(
+        'Three times a year, 10–15 marketing and C-suite leaders come together. No panels. No pitches. Three themes: trust, creativity, and the future of agencies. What’s shared in the room stays in the room. The insights feed into the next study.',
+        'Dreimal im Jahr kommen 10 bis 15 Marketing- und C-Level-Verantwortliche zusammen. Keine Panels. Keine Pitches. Drei Themen: Vertrauen, Kreativität und die Zukunft der Agentur. Was im Raum besprochen wird, bleibt im Raum. Die Erkenntnisse fließen in die nächste Studie ein.',
+      )}</p>
+    </div>
+    <Media tone="dusk" label="Roundtables" class="min-h-[320px] w-full md:h-full md:min-h-[420px]" />
+  </section>
+
+  <!-- CMO Network -->
+  <section id="network" class="container-frst scroll-mt-20 py-20 md:py-28">
+    <div class="grid gap-12 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
+      <div>
+        <p class="eyebrow text-[14px]">{t('CMO Network', 'CMO-Netzwerk')}</p>
+        <h2 class="mt-8 text-[30px] leading-snug">{t('Different perspectives.', 'Verschiedene Perspektiven.')}<br />{t('Same direction.', 'Gleiche Richtung.')}</h2>
+        <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{lorem}</p>
+      </div>
+      <ul class="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        {facts.map((fact) => (
+          <li>
+            <p class="text-[30px] leading-none">{fact.value}</p>
+            <p class="mt-4 max-w-[26ch] text-[16px] leading-relaxed">{fact.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Mitmachen -->
+  <section class="relative overflow-hidden bg-stone text-cream">
+    <div class="container-frst relative py-24 md:py-32">
+      <p class="eyebrow text-[14px]">{t('Join the community', 'Der Community beitreten')}</p>
+      <h2 class="mt-8 max-w-4xl text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{t('Bring your questions to the table.', 'Bring deine Fragen mit an den Tisch.')}</h2>
+      <a href={localePath(lang, '/#contact')} class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">{t('Request an invitation', 'Einladung anfragen')}</a>
+    </div>
+  </section>
+
+  <Newsletter lang={lang} />
+</Base>

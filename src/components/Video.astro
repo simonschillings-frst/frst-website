@@ -1,0 +1,148 @@
+---
+/**
+ * Video in drei Varianten:
+ *
+ * 1. Lokal, Loop ohne Ton (Hero, Hintergründe, kurze Clips):
+ *    <Video src="/videos/hero.mp4" poster="/images/hero.jpg" loop lang={lang} />
+ *    Startet stumm von selbst, hat einen Pause-Knopf und pausiert bei „reduzierte Bewegung“.
+ *
+ * 2. Lokal mit Ton und Player:
+ *    <Video src="/videos/film.mp4" poster="/images/film.jpg" captions="/videos/film-de.vtt" title="…" lang={lang} />
+ *
+ * 3. Vimeo oder YouTube (nur die ID aus dem Link angeben):
+ *    <Video vimeo="123456789" poster="/images/talk.jpg" title="Talk mit …" lang={lang} />
+ *    <Video youtube="dQw4w9WgXcQ" poster="/images/talk.jpg" title="…" lang={lang} />
+ *    Datenschutz: Der fremde Player wird erst nach Klick geladen („Klick zum Laden“).
+ *    Vorher fließen keine Daten an Vimeo/YouTube. Dienst in der Datenschutzerklärung nennen.
+ *
+ * Ohne `poster` wird ein Farbverlauf als Platzhalter gezeigt (`tone`, siehe Media.astro).
+ * Größe und Seitenverhältnis kommen über `class`, Standard ist 16:9.
+ */
+import { defaultLang, useLang, type Lang } from '../i18n';
+import type { Tone } from '../data/navigation';
+
+interface Props {
+  lang?: Lang;
+  /** Lokale Videodatei, z. B. "/videos/hero.mp4" (Ordner public/videos/) */
+  src?: string;
+  /** Vimeo-ID, z. B. "123456789" aus vimeo.com/123456789 */
+  vimeo?: string;
+  /** YouTube-ID, z. B. "dQw4w9WgXcQ" aus youtube.com/watch?v=dQw4w9WgXcQ */
+  youtube?: string;
+  /** Vorschaubild, z. B. "/images/talk.jpg" */
+  poster?: string;
+  /** Titel des Videos: wird vorgelesen und für den Player gebraucht */
+  title?: string;
+  /** Nur lokal: stummer Endlos-Loop ohne Player (Deko/Hintergrund) */
+  loop?: boolean;
+  /** Nur lokal mit Ton: Untertiteldatei (.vtt) */
+  captions?: string;
+  tone?: Tone;
+  class?: string;
+}
+
+const { lang = defaultLang, src, vimeo, youtube, poster, title = '', loop = false, captions, tone = 'night', class: className = 'aspect-video w-full' } = Astro.props;
+const t = useLang(lang);
+
+const provider = vimeo ? 'Vimeo' : youtube ? 'YouTube' : null;
+const embedUrl = vimeo
+  ? `https://player.vimeo.com/video/${vimeo}?dnt=1&autoplay=1`
+  : youtube
+    ? `https://www.youtube-nocookie.com/embed/${youtube}?autoplay=1&rel=0`
+    : null;
+
+const tones = {
+  night: 'from-[#05030f] via-[#1c1640] to-[#6b7a8f]',
+  desert: 'from-[#e8a07e] via-[#c96f4a] to-[#6e3a26]',
+  mist: 'from-[#8d8f88] via-[#6f6e66] to-[#3e3b34]',
+  sky: 'from-[#bcd8ef] via-[#7fb0d8] to-[#e9eef2]',
+  dusk: 'from-[#4b4a6b] via-[#c78a7a] to-[#1a1a2a]',
+};
+---
+
+{src && loop && (
+  <div class:list={['relative overflow-hidden bg-gradient-to-br', tones[tone], className]} data-video-loop>
+    <video src={src} poster={poster} autoplay muted loop playsinline preload="metadata" aria-hidden="true" class="h-full w-full object-cover"></video>
+    <button
+      type="button"
+      data-video-toggle
+      class="absolute right-3 bottom-3 flex h-9 w-9 items-center justify-center rounded-full bg-night/60 text-cream transition-colors duration-200 hover:bg-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"
+      aria-label={t('Pause video', 'Video pausieren')}
+      data-label-pause={t('Pause video', 'Video pausieren')}
+      data-label-play={t('Play video', 'Video abspielen')}
+    >
+      <svg data-icon-pause viewBox="0 0 12 12" class="h-3 w-3" fill="currentColor" aria-hidden="true"><path d="M2 1h3v10H2zM7 1h3v10H7z" /></svg>
+      <svg data-icon-play viewBox="0 0 12 12" class="hidden h-3 w-3" fill="currentColor" aria-hidden="true"><path d="M3 1l8 5-8 5z" /></svg>
+    </button>
+  </div>
+)}
+
+{src && !loop && (
+  <video src={src} poster={poster} controls playsinline preload="metadata" title={title || undefined} class:list={['bg-night object-cover', className]}>
+    {captions && <track kind="captions" src={captions} srclang={lang} label={t('English', 'Deutsch')} default />}
+  </video>
+)}
+
+{embedUrl && (
+  <div class:list={['group relative overflow-hidden bg-night text-cream', className]} data-video-embed={embedUrl} data-video-title={title}>
+    {poster
+      ? <img src={poster} alt="" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none" />
+      : <div class:list={['absolute inset-0 bg-gradient-to-br', tones[tone]]}></div>}
+    <div class="absolute inset-0 flex items-center justify-center bg-night/20">
+      <button
+        type="button"
+        data-video-play
+        class="flex h-16 w-16 items-center justify-center rounded-full border border-cream/80 bg-night/40 transition-colors duration-200 hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"
+        aria-label={title ? t(`Play video: ${title}`, `Video abspielen: ${title}`) : t('Play video', 'Video abspielen')}
+      >
+        <svg viewBox="0 0 12 12" class="ml-1 h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M3 1l8 5-8 5z" /></svg>
+      </button>
+    </div>
+    <p class="absolute inset-x-0 bottom-0 bg-night/75 px-3 py-2 text-[12px] leading-snug">
+      {t(`When you play the video, data is sent to ${provider}.`, `Beim Abspielen werden Daten an ${provider} übertragen.`)}{' '}
+      <a href="/de/datenschutz" hreflang="de" class="underline underline-offset-2 hover:opacity-80">{t('Privacy policy (in German)', 'Datenschutz')}</a>
+    </p>
+  </div>
+)}
+
+<script>
+  // Lokale Loops: Pause-Knopf und Rücksicht auf „reduzierte Bewegung“
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('[data-video-loop]').forEach((wrapper) => {
+    const video = wrapper.querySelector('video');
+    const button = wrapper.querySelector<HTMLButtonElement>('[data-video-toggle]');
+    if (!video || !button) return;
+    const update = () => {
+      const paused = video.paused;
+      button.setAttribute('aria-label', (paused ? button.dataset.labelPlay : button.dataset.labelPause) ?? '');
+      button.querySelector('[data-icon-pause]')?.classList.toggle('hidden', paused);
+      button.querySelector('[data-icon-play]')?.classList.toggle('hidden', !paused);
+    };
+    if (reduceMotion) {
+      video.removeAttribute('autoplay');
+      video.pause();
+    }
+    // Datei fehlt oder lädt nicht: Pause-Knopf ausblenden, Verlauf bleibt sichtbar
+    const hideButton = () => button.classList.add('hidden');
+    if (video.error) hideButton();
+    video.addEventListener('error', hideButton);
+    video.addEventListener('play', update);
+    video.addEventListener('pause', update);
+    button.addEventListener('click', () => (video.paused ? video.play() : video.pause()));
+    update();
+  });
+
+  // Vimeo/YouTube: Player erst nach Klick laden
+  document.querySelectorAll<HTMLElement>('[data-video-embed]').forEach((wrapper) => {
+    wrapper.querySelector('[data-video-play]')?.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = wrapper.dataset.videoEmbed ?? '';
+      iframe.title = wrapper.dataset.videoTitle || 'Video';
+      iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.className = 'absolute inset-0 h-full w-full';
+      wrapper.replaceChildren(iframe);
+      iframe.focus();
+    });
+  });
+</script>

@@ -1,16 +1,28 @@
 ---
 import Logo from './Logo.astro';
-import { navItems } from '../data/navigation';
+import { getNavItems } from '../data/navigation';
+import { defaultLang, localePath, useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = defaultLang } = Astro.props;
+const t = useLang(lang);
+const l = (href: string) => localePath(lang, href);
+const navItems = getNavItems(lang);
 ---
 
 <footer class="bg-cream text-night">
   <div class="container-frst flex flex-col gap-8 py-12 md:flex-row md:items-center md:justify-between">
-    <a href="/" aria-label="frst Startseite"><Logo class="h-7 w-auto" /></a>
-    <nav aria-label="Footer-Navigation">
+    <a href={l('/')} aria-label={t('frst home', 'frst Startseite')}><Logo class="h-7 w-auto" /></a>
+    <nav aria-label={t('Footer navigation', 'Footer-Navigation')}>
       <ul class="flex flex-wrap gap-x-7 gap-y-3 text-[16px]">
-        {navItems.filter((i) => i.label !== 'About us').map((item) => (
+        {navItems.filter((i) => i.key !== 'about').map((item) => (
           <li><a href={item.href} class="hover:underline">{item.label}</a></li>
         ))}
+        <li><a href={l('/imprint')} class="hover:underline">{t('Imprint', 'Impressum')}</a></li>
+        <!-- Die Datenschutzerklärung gibt es (rechtlich verbindlich) auf Deutsch -->
+        <li><a href="/de/datenschutz" class="hover:underline" hreflang="de">{t('Privacy Policy', 'Datenschutz')}</a></li>
       </ul>
     </nav>
   </div>

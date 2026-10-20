@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import { useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useLang(lang);
+
+// Angaben laut https://frst.agency/impressum/ (Stand: Abruf am 19.10.2026). Bitte vor dem Livegang rechtlich prüfen.
+const sections = [
+  { title: t('Provider', 'Anbieter'), lines: ['frst GmbH', 'Senefelderstraße 19A', '70178 Stuttgart', t('Germany', 'Deutschland')] },
+  { title: t('Represented by', 'Vertreten durch'), lines: ['Simon Schillings', 'Timo Schillings'] },
+  { title: t('Contact', 'Kontakt'), lines: [t('Phone: ', 'Telefon: ') + '+49 (0) 711 410 270 74', t('E-mail: ', 'E-Mail: ') + 'hello@frst.agency'] },
+  {
+    title: t('Commercial register', 'Handelsregister'),
+    lines: [t('Register court: Amtsgericht Stuttgart', 'Registergericht: Amtsgericht Stuttgart'), t('Register number: HRB 753796', 'Registernummer: HRB 753796')],
+  },
+  {
+    title: t('VAT ID', 'Umsatzsteuer-ID'),
+    lines: [t('VAT identification number according to § 27a UStG:', 'Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:'), 'DE303460634'],
+  },
+];
+---
+
+<Base title={t('Imprint – frst', 'Impressum – frst')} headerLight lang={lang}>
+  <section class="container-frst pt-24 pb-20 md:pt-36 md:pb-28">
+    <h1 class="text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{t('Imprint', 'Impressum')}</h1>
+    <div class="mt-14 grid gap-x-16 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+      {sections.map((section) => (
+        <div>
+          <h2 class="eyebrow text-[14px]">{section.title}</h2>
+          <p class="mt-5 text-[16px] leading-relaxed">
+            {section.lines.map((line) => <span class="block">{line}</span>)}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-16 grid gap-x-16 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+      <div>
+        <h2 class="eyebrow text-[14px]">{t('EU dispute resolution', 'EU-Streitschlichtung')}</h2>
+        <p class="mt-5 text-[16px] leading-relaxed">
+          {t('The European Commission provides a platform for online dispute resolution (ODR):', 'Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:')}{' '}
+          <a href="https://ec.europa.eu/consumers/odr/" class="underline underline-offset-4 hover:text-violet focus-visible:text-violet" target="_blank" rel="noopener noreferrer">ec.europa.eu/consumers/odr</a>.{' '}
+          {t('Our e-mail address can be found above.', 'Unsere E-Mail-Adresse finden Sie oben im Impressum.')}
+        </p>
+      </div>
+      <div>
+        <h2 class="eyebrow text-[14px]">{t('Consumer dispute resolution', 'Verbraucherschlichtung')}</h2>
+        <p class="mt-5 text-[16px] leading-relaxed">{t('We are neither willing nor obliged to take part in dispute resolution proceedings before a consumer arbitration board.', 'Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.')}</p>
+      </div>
+    </div>
+  </section>
+</Base>
