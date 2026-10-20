@@ -203,7 +203,10 @@ const isCurrent = (href: string) => {
         target="_blank"
         rel="noopener noreferrer"
         data-hide-menu
-        class:list={['btn-outline bg-white text-[16px] text-night hover:bg-cream', light ? 'border-night/30' : 'border-white']}
+        class:list={[
+          'btn-outline text-[16px]',
+          light ? 'border-night hover:bg-night hover:text-cream' : 'border-cream/80 hover:bg-cream hover:text-night',
+        ]}
       >
         {t('Sign in', 'Anmelden')}
       </a>
@@ -241,7 +244,7 @@ const isCurrent = (href: string) => {
           ))}
           <li class="flex flex-wrap gap-[15px] pt-8">
             <a href={l('/#contact')} data-book-demo class:list={['btn-outline', 'text-[16px]', light ? 'border-night' : 'border-cream/80']}>{t('Book a demo', 'Demo buchen')}</a>
-            <a href="https://superpod.frst.agency" target="_blank" rel="noopener noreferrer" class:list={['btn-outline bg-white text-[16px] text-night', light ? 'border-night/30' : 'border-white']}>{t('Sign in', 'Anmelden')}</a>
+            <a href="https://superpod.frst.agency" target="_blank" rel="noopener noreferrer" class:list={['btn-outline', 'text-[16px]', light ? 'border-night' : 'border-cream/80']}>{t('Sign in', 'Anmelden')}</a>
           </li>
           <li class="pt-6 text-base">
             <span aria-current="true" lang={lang}>{lang.toUpperCase()}</span>
