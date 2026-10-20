@@ -40,7 +40,7 @@ const disciplines = [
 
 <Base headerOverlay>
   <!-- Hero -->
-  <section class="relative flex min-h-[640px] items-center overflow-hidden text-cream md:h-screen md:max-h-[900px]">
+  <section class="relative flex min-h-[640px] items-end overflow-hidden text-cream md:h-screen md:max-h-[900px]">
     <div class="absolute inset-0"><Media tone="dusk" class="h-full w-full" /></div>
     <!-- Hintergrundvideo: Datei unter public/videos/hero.mp4 ablegen. Ohne Datei bleibt der Verlauf sichtbar. -->
     <video
@@ -55,17 +55,15 @@ const disciplines = [
       <source src="/videos/hero.mp4" type="video/mp4" />
     </video>
     <div class="absolute inset-0 bg-gradient-to-t from-night/60 via-transparent to-night/30"></div>
-    <div class="container-frst relative py-24">
+    <div class="container-frst relative grid gap-10 pt-40 pb-6 md:grid-cols-2">
       <div>
         <p class="eyebrow text-[14px]">A space for what’s next.</p>
-        <h1 class="mt-4 text-[8vw] leading-[1.05] font-light whitespace-nowrap md:text-5xl lg:text-7xl">see beyond belonging*</h1>
-        <p class="mt-8 max-w-2xl text-[16px] leading-relaxed opacity-90">*Belonging is the comfort of the familiar: We help brands see beyond it.</p>
+        <h1 class="mt-6 text-[8vw] leading-[1.05] font-light whitespace-nowrap md:text-5xl lg:text-7xl">see beyond belonging*</h1>
+        <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">*Belonging is the comfort of the familiar: We help brands see beyond it.</p>
+        <a href="/about-us" class="mt-16 inline-flex h-7 w-7 items-center justify-center rounded-full border border-cream/80" aria-label="Zur About-us-Seite">
+          <Arrow class="rotate-90" />
+        </a>
       </div>
-    </div>
-    <div class="container-frst absolute inset-x-0 bottom-10">
-      <a href="/about-us" class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-cream/80" aria-label="Zur About-us-Seite">
-        <Arrow class="rotate-90" />
-      </a>
     </div>
   </section>
 
@@ -94,8 +92,7 @@ const disciplines = [
 
   <!-- Why frst -->
   <section id="why-frst" class="container-frst pt-14 pb-20 md:pt-20 md:pb-28">
-    <p class="eyebrow text-[14px]">Why frst</p>
-    <div class="mt-10 text-2xl leading-snug md:columns-2 md:gap-16 [&>p]:mb-8 [&>p]:break-inside-avoid">
+    <div class="text-2xl leading-snug md:columns-2 md:gap-16 [&>p]:mb-8 [&>p]:break-inside-avoid">
       <p>
         We were never interested in doing things just because they’ve always been done that way. We believe the most interesting things happen when different minds meet, familiar ideas are challenged and there’s room for something unexpected.
       </p>
@@ -132,14 +129,14 @@ const disciplines = [
 
   <!-- What we do -->
   <section id="what-we-do" class="container-frst py-20 md:py-28">
-    <p class="eyebrow text-[14px]">What we do</p>
+    <p class="eyebrow text-[14px]">Services</p>
     <div class="mt-8 grid gap-12 lg:grid-cols-[1fr_1.4fr_1fr]">
       <div>
         <h2 class="text-[30px] leading-snug">End-to-end for your brand.</h2>
         <p class="mt-6 max-w-md text-[16px] leading-relaxed">
           frst is a creative hub. We bring together the right insights, artists and technology for everything your brand needs next. Four disciplines give it shape. One open process keeps you inside the work, from day one.
         </p>
-        <a href="/what-we-do" class="mt-8 inline-block" aria-label="Zur What-we-do-Seite"><Arrow /></a>
+        <a href="/what-we-do" class="mt-8 inline-block" aria-label="Zur Services-Seite"><Arrow /></a>
       </div>
       <div class="relative grid grid-cols-6 gap-4 lg:pt-12">
         <Media tone="desert" class="col-span-4 col-start-2 aspect-[3/4]" />
@@ -197,7 +194,7 @@ const disciplines = [
   <section class="bg-lilac">
     <div class="container-frst grid gap-10 py-16 md:grid-cols-[1fr_3fr]">
       <div>
-        <p class="eyebrow text-[14px]">Let’s talk</p>
+        <p class="eyebrow text-[14px]">Keep in touch</p>
         <h2 class="mt-4 text-[30px] leading-tight font-light">Stay<br />Connected</h2>
       </div>
       <form class="grid gap-8 md:grid-cols-3 md:pt-6" action="#" method="post">
@@ -217,7 +214,7 @@ const disciplines = [
             <input type="checkbox" name="newsletterConsent" required class="mt-1 h-4 w-4 shrink-0 accent-violet focus-visible:outline-violet focus-visible:outline-2 focus-visible:outline-offset-2" />
             <span>
               I agree that frst uses my name and e-mail address to send me the newsletter. I can withdraw my consent at any time with effect for the future, for example via the unsubscribe link in every newsletter. Further information can be found in the{' '}
-              <a href=\"/datenschutz\" class="underline underline-offset-4 hover:text-violet focus-visible:text-violet">privacy policy</a>. *
+              <a href="/datenschutz" class="underline underline-offset-4 hover:text-violet focus-visible:text-violet">privacy policy</a>. *
             </span>
           </label>
           <p class="mt-4 text-[14px] leading-relaxed">* Required fields.</p>
@@ -314,8 +311,8 @@ const disciplines = [
     ></div>
     <div class="container-frst relative py-24 md:py-32">
       <p class="eyebrow text-[14px]">Let’s get in touch</p>
-      <h2 class="mt-8 max-w-5xl text-[8vw] leading-[1.05] md:text-5xl lg:text-7xl">Have an idea? A challenge? Let’s talk.</h2>
-      <a href="#" class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">Let’s Talk</a>
+      <h2 class="mt-8 max-w-5xl text-[8vw] leading-[1.05] md:text-5xl lg:text-7xl">Have an idea? A challenge? Book a demo.</h2>
+      <a href="#" data-book-demo class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">Book a demo</a>
     </div>
   </section>
 

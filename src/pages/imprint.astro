@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Angaben laut https://frst.agency/impressum/ (Stand: Abruf am 19.10.2026). Bitte vor dem Livegang rechtlich prüfen.
+const sections = [
+  { title: 'Provider', lines: ['frst GmbH', 'Senefelderstraße 19A', '70178 Stuttgart', 'Germany'] },
+  { title: 'Represented by', lines: ['Simon Schillings', 'Timo Schillings'] },
+  { title: 'Contact', lines: ['Phone: +49 (0) 711 410 270 74', 'E-mail: hello@frst.agency'] },
+  { title: 'Commercial register', lines: ['Register court: Amtsgericht Stuttgart', 'Register number: HRB 753796'] },
+  { title: 'VAT ID', lines: ['VAT identification number according to § 27a UStG:', 'DE303460634'] },
+];
+---
+
+<Base title="Imprint – frst" headerLight>
+  <section class="container-frst pt-24 pb-20 md:pt-36 md:pb-28">
+    <h1 class="text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">Imprint</h1>
+    <div class="mt-14 grid gap-x-16 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+      {sections.map((section) => (
+        <div>
+          <h2 class="eyebrow text-[14px]">{section.title}</h2>
+          <p class="mt-5 text-[16px] leading-relaxed">
+            {section.lines.map((line) => <span class="block">{line}</span>)}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-16 grid gap-x-16 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+      <div>
+        <h2 class="eyebrow text-[14px]">EU dispute resolution</h2>
+        <p class="mt-5 text-[16px] leading-relaxed">
+          The European Commission provides a platform for online dispute resolution (ODR):{' '}
+          <a href="https://ec.europa.eu/consumers/odr/" class="underline underline-offset-4 hover:text-violet focus-visible:text-violet" target="_blank" rel="noopener noreferrer">ec.europa.eu/consumers/odr</a>.
+          Our e-mail address can be found above.
+        </p>
+      </div>
+      <div>
+        <h2 class="eyebrow text-[14px]">Consumer dispute resolution</h2>
+        <p class="mt-5 text-[16px] leading-relaxed">We are neither willing nor obliged to take part in dispute resolution proceedings before a consumer arbitration board.</p>
+      </div>
+    </div>
+  </section>
+</Base>

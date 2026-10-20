@@ -35,15 +35,8 @@ export interface NavItem {
  */
 export const navItems: NavItem[] = [
   {
-    key: 'why',
-    label: 'Why frst',
-    href: '/',
-    layout: 'cards',
-    children: [],
-  },
-  {
     key: 'what',
-    label: 'What We Do',
+    label: 'Services',
     href: '/what-we-do',
     layout: 'list-media',
     children: [
@@ -102,9 +95,9 @@ export const navItems: NavItem[] = [
     href: '/cmo-community',
     layout: 'cards',
     children: [
-      { title: 'Events', subtitle: 'CMO Community', href: '/#cmo-community' },
-      { title: 'Roundtables', subtitle: 'CMO Community', href: '/#cmo-community' },
-      { title: 'CMO Network', subtitle: 'CMO Community', href: '/#cmo-community' },
+      { title: 'Events', subtitle: 'CMO Community', href: '/cmo-community#events' },
+      { title: 'Roundtables', subtitle: 'CMO Community', href: '/cmo-community#roundtables' },
+      { title: 'CMO Network', subtitle: 'CMO Community', href: '/cmo-community#network' },
     ],
   },
   {
@@ -113,9 +106,8 @@ export const navItems: NavItem[] = [
     href: '/about-us',
     layout: 'cards',
     children: [
-      { title: 'Team', subtitle: 'About us', href: '/#about' },
-      { title: 'Philosophy', subtitle: 'About us', href: '/#about' },
-      { title: 'Careers', subtitle: 'About us', href: '/#about' },
+      { title: 'Superpod', subtitle: 'About us', href: '/about-us#superpod' },
+      { title: 'Careers', subtitle: 'About us', href: '/about-us#careers' },
     ],
   },
 ];

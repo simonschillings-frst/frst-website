@@ -69,14 +69,15 @@ const quotes = [
 
 <Base title="Research – frst" headerOverlay>
   <!-- Hero -->
-  <section class="relative flex min-h-[640px] items-end overflow-hidden bg-[linear-gradient(155deg,#2a2c5e_0%,#41457a_50%,#b0808c_100%)] text-cream md:h-screen md:max-h-[900px]">
-    <div class="container-frst relative grid gap-10 pt-40 pb-10 md:grid-cols-2 md:items-end">
-      <div class="md:self-center">
-        <p class="eyebrow text-[14px]">Research</p>
-        <h1 class="mt-14 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">Better questions.<br />Deeper Insights.</h1>
-        <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{intro}</p>
+  <section class="relative flex min-h-[640px] items-center overflow-hidden bg-[linear-gradient(155deg,#2a2c5e_0%,#41457a_50%,#b0808c_100%)] text-cream md:h-screen md:max-h-[900px]">
+    <h1 class="sr-only">Research</h1>
+    <!-- Manifest-Text im Hero: einspaltig, linksbündig (gleicher Text wie auf About us, Platzhalter) -->
+    <div class="container-frst relative py-32">
+      <div class="text-2xl leading-snug font-light md:text-[30px] [&>p]:mb-8 [&>p:last-child]:mb-0">
+        <p>We believe the best ideas begin where people stop performing. frst is a family-owned company, led by brothers, with an eye for people.</p>
+        <p>We look for the moment the mask drops and something real is said. We see beyond belonging and we ask better questions.</p>
+        <p>We build nothing behind closed doors. Because brands that are made for the unguarded moment are the ones people trust.</p>
       </div>
-      <p class="max-w-sm text-[16px] leading-relaxed opacity-90 md:justify-self-end md:pb-16">{intro}</p>
     </div>
   </section>
 
@@ -164,7 +165,7 @@ const quotes = [
             <input type="checkbox" name="studyConsent" required class="mt-1 h-4 w-4 shrink-0 accent-violet focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream" />
             <span>
               I agree that frst uses my name and e-mail address to send me the study. I can withdraw my consent at any time with effect for the future. Further information can be found in the{' '}
-              <a href=\"/datenschutz\" class="underline underline-offset-4 hover:opacity-80 focus-visible:opacity-80">privacy policy</a>. *
+              <a href="/datenschutz" class="underline underline-offset-4 hover:opacity-80 focus-visible:opacity-80">privacy policy</a>. *
             </span>
           </label>
           <p class="mt-4 text-[14px] leading-relaxed">* Required fields.</p>
@@ -253,7 +254,7 @@ const quotes = [
             <input type="checkbox" name="consent" required class="mt-1 h-4 w-4 shrink-0 accent-violet focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet" />
             <span>
               I agree that frst processes my details (name, e-mail address, company, function, job title) to organise my participation in the study and to contact me about it. I can withdraw my consent at any time with effect for the future, for example by e-mail. Further information can be found in the{' '}
-              <a href=\"/datenschutz\" class="underline underline-offset-4 hover:text-violet focus-visible:text-violet">privacy policy</a>. *
+              <a href="/datenschutz" class="underline underline-offset-4 hover:text-violet focus-visible:text-violet">privacy policy</a>. *
             </span>
           </label>
           <p class="mt-4 text-[14px] leading-relaxed opacity-80">* Required fields. Participation is voluntary. Your details are deleted once the study has ended, unless you agree to further contact.</p>

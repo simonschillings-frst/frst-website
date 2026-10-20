@@ -1,5 +1,24 @@
 ---
 import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Arrow from '../components/Arrow.astro';
+
+// Texte (außer den Texten von der Startseite), Termine und Zahlen sind Platzhalter.
+const lorem =
+  'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.';
+
+const events = [
+  { no: '01', date: '12 Nov 2026', title: 'CMO Roundtable: Trust', place: 'Stuttgart', href: '#' },
+  { no: '02', date: '04 Feb 2027', title: 'CMO Roundtable: Creativity', place: 'Munich', href: '#' },
+  { no: '03', date: '17 Jun 2027', title: 'CMO Roundtable: The Future of Agencies', place: 'Berlin', href: '#' },
+];
+
+const facts = [
+  { value: '120+', text: 'Lorem Ipsum dolor sit amet Ectur centran et amos.' },
+  { value: '3', text: 'Lorem Ipsum dolor sit amet Ectur centran et amos.' },
+  { value: '15', text: 'Lorem Ipsum dolor sit amet Ectur centran et amos.' },
+  { value: '100%', text: 'Lorem Ipsum dolor sit amet Ectur centran et amos.' },
+];
 ---
 
 <Base title="CMO Community – frst" headerOverlay>
@@ -8,8 +27,115 @@ import Base from '../layouts/Base.astro';
     <div
       class="pointer-events-none absolute top-1/2 left-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-[55%] rounded-full bg-[radial-gradient(circle,#93c0f5_0%,#4d6fd0_25%,#1f1d6b_50%,transparent_70%)]"
     ></div>
-    <div class="container-frst relative pt-40 pb-10">
-      <h1 class="text-5xl leading-[1.05] font-light md:text-6xl">CMO Community</h1>
+    <div class="container-frst relative grid gap-10 pt-40 pb-10 md:grid-cols-2 md:items-end">
+      <div class="md:self-center">
+        <p class="eyebrow text-[14px]">CMO Community</p>
+        <h1 class="mt-14 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">The Future of<br />Agency Relationships.</h1>
+        <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">The agency-client relationship is under pressure. AI. More transparency. New expectations. But the pressure isn’t on agencies themselves—it’s on the model companies and agencies use to work together. frst is exploring what needs to change.</p>
+        <a href="#events" class="mt-12 inline-flex h-7 w-7 items-center justify-center rounded-full border border-cream/80" aria-label="Weiter scrollen">
+          <Arrow class="rotate-90" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events -->
+  <section id="events" class="container-frst scroll-mt-20 py-16 md:py-24">
+    <p class="eyebrow text-[14px]">Events</p>
+    <div class="mt-10 grid items-start gap-10 md:grid-cols-[1.4fr_1fr] md:gap-16">
+      <ul>
+        {events.map((event) => (
+          <li>
+            <a
+              href={event.href}
+              class="group grid grid-cols-[3rem_1fr_auto] items-start gap-4 py-6 transition-[padding] duration-300 hover:pl-3 md:grid-cols-[4.5rem_1fr_auto]"
+            >
+              <span class="text-[24px] leading-snug">{event.no}</span>
+              <div>
+                <h3 class="text-[24px] leading-snug">{event.title}</h3>
+                <p class="mt-5 max-w-[40ch] text-[16px] leading-relaxed">{lorem}</p>
+                <p class="mt-4 text-[14px]">{event.date} · {event.place}</p>
+              </div>
+              <span class="mt-2 transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <Media tone="night" label="Events" class="aspect-[11/10] w-full" />
+    </div>
+  </section>
+
+  <!-- Roundtables -->
+  <section id="roundtables" class="grid scroll-mt-20 md:grid-cols-[1fr_1.3fr]">
+    <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-10">
+      <p class="eyebrow text-[14px]">Roundtables</p>
+      <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">Peer conversations, backed by research</h2>
+      <p class="mt-8 max-w-md text-[16px] leading-relaxed opacity-90">Three times a year, 10–15 marketing and C-suite leaders come together. No panels. No pitches. Three themes: trust, creativity, and the future of agencies. What’s shared in the room stays in the room. The insights feed into the next study.</p>
+    </div>
+    <Media tone="dusk" label="Roundtables" class="min-h-[320px] w-full md:h-full md:min-h-[420px]" />
+  </section>
+
+  <!-- CMO Network -->
+  <section id="network" class="container-frst scroll-mt-20 py-20 md:py-28">
+    <div class="grid gap-12 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
+      <div>
+        <p class="eyebrow text-[14px]">CMO Network</p>
+        <h2 class="mt-8 text-[30px] leading-snug">Different perspectives.<br />Same direction.</h2>
+        <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{lorem}</p>
+      </div>
+      <ul class="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        {facts.map((fact) => (
+          <li>
+            <p class="text-[30px] leading-none">{fact.value}</p>
+            <p class="mt-4 max-w-[26ch] text-[16px] leading-relaxed">{fact.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Mitmachen -->
+  <section class="relative overflow-hidden bg-stone text-cream">
+    <div class="container-frst relative py-24 md:py-32">
+      <p class="eyebrow text-[14px]">Join the community</p>
+      <h2 class="mt-8 max-w-4xl text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">Bring your questions to the table.</h2>
+      <a href="/#contact" class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">Request an invitation</a>
+    </div>
+  </section>
+
+  <!-- Newsletter (Stay Connected) -->
+  <section class="bg-lilac">
+    <div class="container-frst grid gap-10 py-16 md:grid-cols-[1fr_3fr]">
+      <div>
+        <p class="eyebrow text-[14px]">Keep in touch</p>
+        <h2 class="mt-4 text-[30px] leading-snug">Stay Connected</h2>
+      </div>
+      <form class="grid gap-8 md:grid-cols-3 md:pt-6" action="#" method="post">
+        {[
+          { name: 'firstName', label: 'First Name', type: 'text' },
+          { name: 'lastName', label: 'Last Name', type: 'text' },
+          { name: 'email', label: 'E-Mail', type: 'email' },
+        ].map((f) => (
+          <label class="flex flex-col gap-6 text-[16px]">
+            <span>{f.label} <span aria-hidden="true">*</span></span>
+            <input name={f.name} type={f.type} required autocomplete={f.name === 'firstName' ? 'given-name' : f.name === 'lastName' ? 'family-name' : 'email'} class="border-b border-night/30 bg-transparent pb-2 text-[16px] outline-none focus:border-violet" />
+          </label>
+        ))}
+        <!-- Einwilligung (DSGVO): nicht vorausgewählt, freiwillig, Widerruf jederzeit möglich -->
+        <div class="md:col-span-3">
+          <label class="flex items-start gap-3 text-[14px] leading-relaxed">
+            <input type="checkbox" name="newsletterConsent" required class="mt-1 h-4 w-4 shrink-0 accent-violet focus-visible:outline-violet focus-visible:outline-2 focus-visible:outline-offset-2" />
+            <span>
+              I agree that frst uses my name and e-mail address to send me the newsletter. I can withdraw my consent at any time with effect for the future, for example via the unsubscribe link in every newsletter. Further information can be found in the{' '}
+              <a href="/datenschutz" class="underline underline-offset-4 hover:text-violet focus-visible:text-violet">privacy policy</a>. *
+            </span>
+          </label>
+          <p class="mt-4 text-[14px] leading-relaxed">* Required fields.</p>
+        </div>
+        <div>
+          <button type="submit" class="btn-outline border-night px-4 py-1 text-[16px] hover:bg-night hover:text-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet">Subscribe</button>
+        </div>
+      </form>
     </div>
   </section>
 </Base>

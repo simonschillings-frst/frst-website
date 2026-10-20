@@ -1,0 +1,128 @@
+---
+// Pop-up „Book a demo“. Öffnet sich über jedes Element mit `data-book-demo`.
+// Formular hat noch kein Backend (action="#"); Texte der Einwilligung sind Platzhalter und rechtlich zu prüfen.
+const fields = [
+  { name: 'email', label: 'Business email', type: 'email', autocomplete: 'email', placeholder: 'Enter your business email' },
+  { name: 'fullName', label: 'Full name', type: 'text', autocomplete: 'name', placeholder: 'Enter your full name' },
+  { name: 'company', label: 'Company name', type: 'text', autocomplete: 'organization', placeholder: 'Enter your company name' },
+];
+const sizes = ['1–10', '11–50', '51–200', '201–1,000', '1,000+'];
+---
+
+<dialog
+  id="book-demo"
+  aria-labelledby="book-demo-title"
+  class="m-auto w-[calc(100%-2rem)] max-w-3xl rounded-3xl bg-cream p-0 text-night backdrop:bg-night/70 backdrop:backdrop-blur-sm"
+>
+  <div class="relative px-6 py-12 md:px-12 md:py-14">
+    <button
+      type="button"
+      data-book-demo-close
+      class="absolute top-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-night/40 text-[16px] hover:border-violet hover:text-violet focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet"
+      aria-label="Close"
+    >
+      <svg viewBox="0 0 12 12" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11" /></svg>
+    </button>
+
+    <h2 id="book-demo-title" class="text-center text-[30px] leading-snug">Book a demo with our experts</h2>
+
+    <form class="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2" action="/api/book-demo" method="post" data-book-demo-form>
+      <!-- Honeypot gegen Spam: für Menschen unsichtbar, nicht ausfüllen -->
+      <div class="sr-only" aria-hidden="true">
+        <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+      </div>
+      {fields.map((field) => (
+        <label class="flex flex-col gap-3 text-[16px]">
+          <span>{field.label} <span aria-hidden="true">*</span></span>
+          <input
+            name={field.name}
+            type={field.type}
+            autocomplete={field.autocomplete}
+            placeholder={field.placeholder}
+            required
+            class="border-b border-night/40 bg-transparent pb-2 text-[16px] outline-none placeholder:text-night/50 focus:border-violet focus-visible:border-violet"
+          />
+        </label>
+      ))}
+      <label class="flex flex-col gap-3 text-[16px]">
+        <span>Company size <span aria-hidden="true">*</span></span>
+        <select name="companySize" required class="border-b border-night/40 bg-transparent pb-2 text-[16px] outline-none focus:border-violet focus-visible:border-violet">
+          <option value="" disabled selected>Select the size of your company</option>
+          {sizes.map((size) => <option value={size}>{size}</option>)}
+        </select>
+      </label>
+
+      <!-- Einwilligung (DSGVO): nicht vorausgewählt, ausdrücklich und freiwillig, Widerruf jederzeit möglich -->
+      <div class="sm:col-span-2">
+        <label class="flex items-start gap-3 text-[14px] leading-relaxed">
+          <input type="checkbox" name="consent" required class="mt-1 h-4 w-4 shrink-0 accent-violet focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet" />
+          <span>
+            I agree that frst processes my details (business email, name, company, company size) to contact me about a demo and to arrange an appointment. I can withdraw my consent at any time with effect for the future, for example by e-mail. Further information can be found in the{' '}
+            <a href="/datenschutz" class="underline underline-offset-4 hover:text-violet focus-visible:text-violet">privacy policy</a>. *
+          </span>
+        </label>
+        <p class="mt-4 text-[14px] leading-relaxed opacity-80">* Required fields. Your details are used only to arrange the demo.</p>
+      </div>
+
+      <p class="text-[16px] leading-relaxed sm:col-span-2" role="status" aria-live="polite" data-book-demo-status hidden></p>
+
+      <div class="flex sm:col-span-2 sm:justify-end">
+        <button type="submit" class="btn-outline border-night px-5 py-2 text-[16px] hover:bg-night hover:text-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet">Book a demo</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('book-demo') as HTMLDialogElement | null;
+  if (dialog) {
+    let opener: HTMLElement | null = null;
+    document.querySelectorAll<HTMLElement>('[data-book-demo]').forEach((trigger) => {
+      trigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        opener = trigger;
+        if (!dialog.open) dialog.showModal();
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    const close = () => dialog.close();
+    dialog.querySelector('[data-book-demo-close]')?.addEventListener('click', close);
+    // Klick auf den abgedunkelten Hintergrund schließt das Pop-up
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) close();
+    });
+    // Formular absenden: Anfrage geht an /api/book-demo und von dort per E-Mail an demo@frst.agency
+    const form = dialog.querySelector<HTMLFormElement>('[data-book-demo-form]');
+    const status = dialog.querySelector<HTMLElement>('[data-book-demo-status]');
+    const submit = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form || !status || !submit) return;
+      const values = Object.fromEntries(new FormData(form).entries());
+      const payload = { ...values, consent: form.querySelector<HTMLInputElement>('[name="consent"]')?.checked === true };
+      submit.disabled = true;
+      status.hidden = false;
+      status.textContent = 'Sending …';
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!response.ok) throw new Error('failed');
+        form.reset();
+        status.textContent = 'Thank you! We have received your request and will get back to you shortly.';
+      } catch {
+        status.textContent = 'Sorry, something went wrong. Please try again or write to demo@frst.agency.';
+        submit.disabled = false;
+      }
+    });
+
+    dialog.addEventListener('close', () => {
+      if (status) { status.hidden = true; status.textContent = ''; }
+      if (submit) submit.disabled = false;
+      document.body.style.overflow = '';
+      opener?.focus();
+    });
+  }
+</script>

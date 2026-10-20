@@ -11,6 +11,8 @@ import { navItems } from '../data/navigation';
         {navItems.filter((i) => i.label !== 'About us').map((item) => (
           <li><a href={item.href} class="hover:underline">{item.label}</a></li>
         ))}
+        <li><a href="/imprint" class="hover:underline">Imprint</a></li>
+        <li><a href="/datenschutz" class="hover:underline">Privacy Policy</a></li>
       </ul>
     </nav>
   </div>

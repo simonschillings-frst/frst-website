@@ -162,16 +162,29 @@ const isCurrent = (href: string) => {
       </ul>
     </nav>
 
-    <a
-      href="/#contact"
-      data-hide-menu
-      class:list={[
-        'btn-outline hidden text-[16px] lg:inline-flex',
-        light ? 'border-night hover:bg-night hover:text-cream' : 'border-cream/80 hover:bg-cream hover:text-night',
-      ]}
-    >
-      Let’s Talk
-    </a>
+    <div class="hidden items-center gap-[15px] lg:flex">
+      <a
+        href="/#contact"
+        data-book-demo
+        data-hide-menu
+        class:list={[
+          'btn-outline text-[16px]',
+          light ? 'border-night hover:bg-night hover:text-cream' : 'border-cream/80 hover:bg-cream hover:text-night',
+        ]}
+      >
+        Book a demo
+      </a>
+
+      <a
+        href="https://superpod.frst.agency"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-hide-menu
+        class:list={['btn-outline bg-white text-[16px] text-night hover:bg-cream', light ? 'border-night/30' : 'border-white']}
+      >
+        Sign in
+      </a>
+    </div>
 
     <!-- Mobil: Fullscreen-Menü mit aufklappbaren Bereichen -->
     <details class="group relative lg:hidden" data-mobile-menu>
@@ -203,7 +216,10 @@ const isCurrent = (href: string) => {
               )}
             </li>
           ))}
-          <li class="pt-8"><a href="/#contact" class:list={['btn-outline', 'text-[16px]', light ? 'border-night' : 'border-cream/80']}>Let’s Talk</a></li>
+          <li class="flex flex-wrap gap-[15px] pt-8">
+            <a href="/#contact" data-book-demo class:list={['btn-outline', 'text-[16px]', light ? 'border-night' : 'border-cream/80']}>Book a demo</a>
+            <a href="https://superpod.frst.agency" target="_blank" rel="noopener noreferrer" class:list={['btn-outline bg-white text-[16px] text-night', light ? 'border-night/30' : 'border-white']}>Sign in</a>
+          </li>
         </ul>
       </nav>
     </details>
