@@ -54,7 +54,6 @@ const paragraph =
     </div>
   </section>
 
-  <!-- Bildergalerie (Bilderstreifen, Doppelbild, Dreierreihe) -->
   <!-- Bilderstreifen über die ganze Breite: Ab 768 px bleibt er beim Scrollen stehen und fährt seitlich durch.
        Auf dem Handy und bei „reduzierte Bewegung“ normal seitlich scrollbar (Wischen, Trackpad, Tastatur). -->
   <section aria-label={t('More visuals', 'Weitere Motive')} data-strip>
@@ -72,19 +71,9 @@ const paragraph =
     </div>
   </section>
 
-  <section class="container-frst mt-2 pb-16 md:pb-24">
-    <!-- Zwei Bilder nebeneinander -->
-    <div class="grid gap-2 md:grid-cols-2">
-      <Media src="/images/marccain-truck-02.jpeg" alt="MARCCAIN NYC – Truck" class="aspect-[4/5] w-full" />
-      <Media src="/images/marccain-winter-01.jpg" alt="MARCCAIN NYC – Winter" class="aspect-[4/5] w-full" />
-    </div>
-
-    <!-- Drei Bilder nebeneinander -->
-    <div class="mt-2 grid gap-2 md:grid-cols-3">
-      <!-- Breite Kachel über zwei Spalten, gleich hoch wie die rechte -->
-      <Media src="/images/marccain-winter-model-01.jpg?v=4" alt="MARCCAIN NYC – Winter Model" class="aspect-[3/4] w-full md:col-span-2 md:aspect-auto md:h-0 md:min-h-full" />
-      <Media src="/images/marccain-winter-02.png" alt="MARCCAIN NYC – Winter 2" class="aspect-[3/4] w-full" />
-    </div>
+  <!-- Video über die ganze Breite. Platzhalter: durch <Video src="/videos/marccain-….mp4" … /> ersetzen. -->
+  <section class="mt-2 pb-16 md:pb-24">
+    <Media tone="night" label="Video" class="aspect-video w-full" />
   </section>
 
   <!-- Teilen -->
