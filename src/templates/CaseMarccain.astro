@@ -54,13 +54,25 @@ const paragraph =
     </div>
   </section>
 
-  <!-- Bildergalerie (Anordnung wie bei Wieden+Kennedy: Film, Doppelbild, Dreierreihe, durchlaufender Bilderstreifen) -->
-  <!-- Film / großes Bewegtbild über die ganze Breite (wie das Hauptmotiv oben) -->
-  <section>
-    <Media tone="night" label="Film" class="aspect-video w-full" />
+  <!-- Bildergalerie (Bilderstreifen, Doppelbild, Dreierreihe) -->
+  <!-- Bilderstreifen über die ganze Breite: Ab 768 px bleibt er beim Scrollen stehen und fährt seitlich durch.
+       Auf dem Handy und bei „reduzierte Bewegung“ normal seitlich scrollbar (Wischen, Trackpad, Tastatur). -->
+  <section aria-label={t('More visuals', 'Weitere Motive')} data-strip>
+    <div data-strip-runway>
+      <div data-strip-pin>
+        <div class="h-[50vh] snap-x overflow-x-auto xl:h-screen" tabindex="0" role="region" aria-label={t('Image gallery, scrolls sideways', 'Bildergalerie, seitlich scrollbar')} data-strip-track>
+          <div class="flex h-full min-w-max gap-2 will-change-transform [&>*]:snap-start" data-strip-row>
+            <Media tone="desert" label="Motiv 1" class="h-full aspect-[4/5] shrink-0" />
+            <Media tone="night" label="Motiv 2" class="h-full aspect-[3/4] shrink-0" />
+            <Media tone="mist" label="Motiv 3" class="h-full aspect-[5/4] shrink-0" />
+            <Media tone="dusk" label="Motiv 4" class="h-full aspect-[4/5] shrink-0" />
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="container-frst mt-2 pb-2">
+  <section class="container-frst mt-2 pb-16 md:pb-24">
     <!-- Zwei Bilder nebeneinander -->
     <div class="grid gap-2 md:grid-cols-2">
       <Media src="/images/marccain-truck.jpg" alt="MARCCAIN NYC – Truck" class="aspect-[4/5] w-full" />
@@ -72,20 +84,6 @@ const paragraph =
       <Media tone="sky" label="Social" class="aspect-[3/4] w-full" />
       <Media tone="dusk" label="Social" class="aspect-[3/4] w-full" />
       <Media tone="night" label="Social" class="aspect-[3/4] w-full" />
-    </div>
-  </section>
-
-  <!-- Durchlaufender Bilderstreifen über die ganze Breite (seitlich scrollbar, auch per Tastatur) -->
-  <section class="pb-16 md:pb-24" aria-label={t('More visuals', 'Weitere Motive')}>
-    <div class="mt-2 h-[50vh] overflow-x-auto xl:h-screen" tabindex="0" role="region" aria-label={t('Image gallery, scrolls sideways', 'Bildergalerie, seitlich scrollbar')}>
-      <div class="flex h-full min-w-max gap-2">
-        <Media tone="desert" label="Motiv 1" class="h-full aspect-[4/5] shrink-0" />
-        <Media tone="night" label="Motiv 2" class="h-full aspect-[3/4] shrink-0" />
-        <Media tone="mist" label="Motiv 3" class="h-full aspect-[5/4] shrink-0" />
-        <Media tone="dusk" label="Motiv 4" class="h-full aspect-[4/5] shrink-0" />
-        <Media tone="sky" label="Motiv 5" class="h-full aspect-[3/4] shrink-0" />
-        <Media tone="desert" label="Motiv 6" class="h-full aspect-[5/4] shrink-0" />
-      </div>
     </div>
   </section>
 
@@ -116,5 +114,49 @@ const paragraph =
     align();
     window.addEventListener('resize', align);
     window.addEventListener('load', align);
+
+    // Bilderstreifen als Karussell: Der Streifen bleibt oben stehen, während die Seite weiterscrollt,
+    // und fährt dabei seitlich durch. Die Seite wird dafür um die seitliche Strecke länger.
+    document.querySelectorAll<HTMLElement>('[data-strip]').forEach((strip) => {
+      const runway = strip.querySelector<HTMLElement>('[data-strip-runway]');
+      const pin = strip.querySelector<HTMLElement>('[data-strip-pin]');
+      const track = strip.querySelector<HTMLElement>('[data-strip-track]');
+      const row = strip.querySelector<HTMLElement>('[data-strip-row]');
+      if (!runway || !pin || !track || !row) return;
+
+      const active = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)');
+      let distance = 0;
+
+      const move = () => {
+        if (!active.matches || distance <= 0) return;
+        const offset = parseFloat(pin.style.top) || 0;
+        const progress = Math.min(1, Math.max(0, (offset - runway.getBoundingClientRect().top) / distance));
+        row.style.transform = `translateX(${-progress * distance}px)`;
+      };
+
+      const setup = () => {
+        if (!active.matches) {
+          runway.style.height = '';
+          pin.classList.remove('sticky');
+          pin.style.top = '';
+          track.style.overflowX = '';
+          row.style.transform = '';
+          return;
+        }
+        track.scrollLeft = 0;
+        track.style.overflowX = 'hidden';
+        pin.classList.add('sticky');
+        // Senkrecht mittig im Bildschirm stehen bleiben (bei voller Höhe oben)
+        pin.style.top = `${Math.max(0, (window.innerHeight - pin.offsetHeight) / 2)}px`;
+        distance = Math.max(0, row.scrollWidth - track.clientWidth);
+        runway.style.height = `${pin.offsetHeight + distance}px`;
+        move();
+      };
+
+      window.addEventListener('scroll', move, { passive: true });
+      window.addEventListener('resize', setup);
+      active.addEventListener('change', setup);
+      setup();
+    });
   </script>
 </Base>
