@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
+import Video from '../components/Video.astro';
 import Arrow from '../components/Arrow.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { localePath, useLang, type Lang } from '../i18n';
@@ -55,18 +56,10 @@ const disciplines = [
   <!-- Hero -->
   <section class="relative flex min-h-[640px] items-end overflow-hidden text-cream md:h-screen md:max-h-[900px]">
     <div class="absolute inset-0"><Media tone="dusk" class="h-full w-full" /></div>
-    <!-- Hintergrundvideo: Datei unter public/videos/hero.mp4 ablegen. Ohne Datei bleibt der Verlauf sichtbar. -->
-    <video
-      class="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="metadata"
-      aria-hidden="true"
-    >
-      <source src="/videos/hero.mp4" type="video/mp4" />
-    </video>
+    <!-- Hintergrundvideo von Vimeo (nicht gelistet): startet sofort, stumm, Loop. Bis es läuft, ist der Verlauf sichtbar. -->
+    <Video vimeo="1237557138" vimeoHash="23f2f0c558" background title="frst Web-Teaser" class="absolute inset-0" lang={lang} />
+    <!-- Farbverlauf zu 30 % multipliziert über dem Video -->
+    <div class="pointer-events-none absolute inset-0 opacity-30 mix-blend-multiply"><Media tone="dusk" class="h-full w-full" /></div>
     <div class="absolute inset-0 bg-gradient-to-t from-night/60 via-transparent to-night/30"></div>
     <div class="container-frst relative grid gap-10 pt-40 pb-6 md:grid-cols-2">
       <div>
@@ -85,7 +78,12 @@ const disciplines = [
     <p class="eyebrow text-[14px]">{t('Work', 'Projekte')}</p>
     <div class="mt-8 grid gap-12 md:grid-cols-12 md:gap-8">
       <a href={l('/work/naeher-am-leben')} class="group grid gap-6 md:col-span-8 md:grid-cols-[3fr_2fr] md:items-center">
-        <Media tone="night" class="aspect-[4/3] w-full" />
+        <!-- Teaser-Video von Vimeo: Standbild, läuft beim Hovern -->
+        <div class="relative">
+          <Video vimeo="1237542606" vimeoHash="21b4e08e8f" teaser tone="night" title="Volksbank Göppingen – Näher am Leben" class="aspect-[4/3] w-full" lang={lang} />
+          <!-- Farbverlauf zu 30 % multipliziert über dem Video (wie im Header) -->
+          <div class="pointer-events-none absolute inset-0 opacity-30 mix-blend-multiply"><Media tone="dusk" class="h-full w-full" /></div>
+        </div>
         <div>
           <p class="eyebrow text-[14px]">Volksbank Göppingen</p>
           <h3 class="mt-3 text-[24px]">Näher am Leben</h3>
