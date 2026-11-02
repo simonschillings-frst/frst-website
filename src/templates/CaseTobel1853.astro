@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import HoverLoop from '../components/HoverLoop.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useLang(lang);
+
+const title = 'tobel 1853';
+const project = t('Brand · Content', 'Marke · Content');
+
+// Texte und Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
+const facts = [
+  { label: t('Project', 'Projekt'), value: project },
+  { label: t('Client', 'Kunde'), value: '—' },
+  { label: t('Location', 'Ort'), value: '—' },
+  { label: t('Year', 'Jahr'), value: '—' },
+];
+
+const paragraph =
+  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+---
+
+<Base title={`${title} – frst`} headerLight lang={lang}>
+  <!-- Titel -->
+  <section class="container-frst pt-24 pb-14 md:pt-36 md:pb-16">
+    <div class="md:ml-[16%]" data-align-nav>
+      <h1 class="text-5xl leading-[1.05] font-light md:text-7xl">{title}</h1>
+      <p class="mt-8 text-lg font-light md:text-2xl">{project}</p>
+    </div>
+  </section>
+
+  <!-- Hauptmotiv über die ganze Breite -->
+  <section>
+    <Media src="/images/tobel-header.jpg" alt={`${title} – Logo vor einem Wald im Morgenlicht`} class="aspect-[16/10] w-full md:aspect-[12/5]" />
+  </section>
+
+  <!-- Projektdaten und Text -->
+  <section class="container-frst py-14 md:py-20">
+    <div class="grid gap-10 md:grid-cols-[1fr_1.35fr] md:gap-0">
+      <div class="flex flex-col">
+        <dl class="grid h-fit grid-cols-[7rem_1fr] gap-x-4 gap-y-2 text-[14px]">
+          {facts.map((fact) => (
+            <>
+              <dt class="uppercase">{fact.label}:</dt>
+              <dd>{fact.value}</dd>
+            </>
+          ))}
+        </dl>
+        <!-- Kreis „Vom Einfachen das Beste“ dreht sich langsam -->
+        <img src="/images/tobel-kreis.svg" alt="Vom Einfachen das Beste" class="mt-10 w-32 animate-[spin_30s_linear_infinite] motion-reduce:animate-none md:m-auto md:w-44" />
+      </div>
+      <div class="space-y-6 text-[20px] leading-relaxed">
+        <p>{paragraph}</p>
+        <p>{paragraph}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bildergalerie (großes Bild, Dreierreihe, großes Bild) -->
+  <!-- Film / großes Bewegtbild über die ganze Breite (wie das Hauptmotiv oben) -->
+  <section>
+    <Media tone="mist" alt={`${title} – Bild 3`} class="aspect-video w-full" />
+  </section>
+
+  <section class="container-frst mt-2">
+    <!-- Drei Bilder nebeneinander -->
+    <div class="grid gap-2 md:grid-cols-3">
+      <HoverLoop images={['/images/261102_frst_tobel_vcard_Mockup.jpg', '/images/261102_frst_tobel_vcard_Mockup_hinten.jpg']} alt={`${title} – Stapel Visitenkarten aus Kraftpapier mit Logo auf einem Holztisch`} class="aspect-[3/4] w-full" />
+      <Media src="/images/tobel-detail.avif" alt={`${title} – Sitzecke mit zwei grünen Sesseln unter Holzbalken`} class="aspect-[3/4] w-full" />
+      <Media src="/images/tobel-menu.jpg" alt={`${title} – Menükarte`} class="aspect-[3/4] w-full" />
+    </div>
+  </section>
+
+  <!-- Zweites großes Bild über die ganze Breite -->
+  <section class="mt-2">
+    <Media tone="mist" alt={`${title} – Bild 7`} class="aspect-video w-full" />
+  </section>
+
+  <Newsletter lang={lang} dark />
+
+  <script>
+    // Titel linksbündig mit dem ersten Navigationspunkt („Why frst“) ausrichten
+    const block = document.querySelector<HTMLElement>('[data-align-nav]');
+    const align = () => {
+      const link = document.querySelector<HTMLElement>('header nav[data-main-nav] a, header nav[data-main-nav] summary, header nav[data-main-nav] button');
+      if (!block || !block.parentElement) return;
+      if (!link || link.offsetParent === null || window.innerWidth < 768) {
+        block.style.marginLeft = '';
+        return;
+      }
+      const offset = link.getBoundingClientRect().left + parseFloat(getComputedStyle(link).paddingLeft) - block.parentElement.getBoundingClientRect().left - parseFloat(getComputedStyle(block.parentElement).paddingLeft);
+      block.style.marginLeft = `${Math.max(0, offset)}px`;
+    };
+    align();
+    window.addEventListener('resize', align);
+    window.addEventListener('load', align);
+  </script>
+</Base>
