@@ -1,0 +1,139 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import HoverLoop from '../components/HoverLoop.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useLang(lang);
+
+// Texte und Bilder sind Platzhalter. Mit `src="/images/..."` durch die Originalfotos ersetzen.
+const facts = [
+  { label: t('Project', 'Projekt'), value: t('Brand · Redesign', 'Marke · Redesign') },
+  { label: t('Client', 'Kunde'), value: 'Menold Bezler' },
+  { label: t('Location', 'Ort'), value: '—' },
+  { label: t('Year', 'Jahr'), value: '—' },
+];
+
+const paragraph =
+  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+---
+
+<Base title="MENOLD BEZLER – frst" headerLight lang={lang}>
+  <!-- Titel -->
+  <section class="container-frst pt-24 pb-14 md:pt-36 md:pb-16">
+    <div class="md:ml-[16%]" data-align-nav>
+      <h1 class="text-5xl leading-[1.05] font-light md:text-7xl">MENOLD BEZLER</h1>
+      <p class="mt-8 text-lg font-light md:text-2xl">{t('Brand · Redesign', 'Marke · Redesign')}</p>
+    </div>
+  </section>
+
+  <!-- Hauptmotiv über die ganze Breite -->
+  <section>
+    <Media src="/images/mb-logo-header.svg" alt="Menold Bezler – Logo" class="aspect-[16/10] w-full md:aspect-[12/5]" />
+  </section>
+
+  <!-- Projektdaten und Text -->
+  <section class="container-frst py-14 md:py-20">
+    <div class="grid gap-10 md:grid-cols-[1fr_1.35fr] md:gap-0">
+      <dl class="grid h-fit grid-cols-[7rem_1fr] gap-x-4 gap-y-2 text-[14px]">
+        {facts.map((fact) => (
+          <>
+            <dt class="uppercase">{fact.label}:</dt>
+            <dd>{fact.value}</dd>
+          </>
+        ))}
+      </dl>
+      <div class="space-y-6 text-[20px] leading-relaxed">
+        <p>{paragraph}</p>
+        <p>{paragraph}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bilderstreifen über die ganze Breite: Ab 768 px bleibt er beim Scrollen stehen und fährt seitlich durch.
+       Auf dem Handy und bei „reduzierte Bewegung“ normal seitlich scrollbar (Wischen, Trackpad, Tastatur). -->
+  <section aria-label={t('More visuals', 'Weitere Motive')} data-strip>
+    <div data-strip-runway>
+      <div data-strip-pin>
+        <div class="h-[50vh] snap-x overflow-x-auto xl:h-screen" tabindex="0" role="region" aria-label={t('Image gallery, scrolls sideways', 'Bildergalerie, seitlich scrollbar')} data-strip-track>
+          <div class="flex h-full min-w-max gap-2 will-change-transform [&>*]:snap-start" data-strip-row>
+            <Media src="/images/mb-resonanz-screen.jpg" alt="Menold Bezler – Bühne mit leuchtendem Schriftzug „Resonanz“ vor Publikum" class="h-full aspect-[3/2] shrink-0" />
+            <HoverLoop images={['/images/mb-visitenkarte-v1-hoch.jpg', '/images/mb-visitenkarte-v2-hoch.jpg', '/images/mb-visitenkarte-v3-hoch.jpg', '/images/mb-visitenkarte-v4-hoch.jpg']} alt="Menold Bezler – Stapel Visitenkarten mit Logo auf Terrazzo" class="h-full aspect-[3/4] shrink-0" />
+            <Media src="/images/schachtel-klein-v2.jpg" alt="Menold Bezler – Kartenset-Schachtel „Fragen, die bewegen.“" class="h-full aspect-[3/4] shrink-0" />
+            <Media src="/images/mb-totebag-stuhl.jpg" alt="Menold Bezler – dunkelgrüne Tote Bag mit Logo an einem Holzstuhl" class="h-full aspect-[3/4] shrink-0" />
+            <Media src="/images/mb-handy-instagram.jpg" alt="Menold Bezler – Instagram-Post „Wenn dein Leben nicht die längste Rückstellung ever werden soll.“ auf einem Smartphone" class="h-full aspect-[3/4] shrink-0" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Newsletter lang={lang} dark />
+
+  <script>
+    // Titel linksbündig mit dem ersten Navigationspunkt („Why frst“) ausrichten
+    const block = document.querySelector<HTMLElement>('[data-align-nav]');
+    const align = () => {
+      const link = document.querySelector<HTMLElement>('header nav[data-main-nav] a, header nav[data-main-nav] summary, header nav[data-main-nav] button');
+      if (!block || !block.parentElement) return;
+      if (!link || link.offsetParent === null || window.innerWidth < 768) {
+        block.style.marginLeft = '';
+        return;
+      }
+      const offset = link.getBoundingClientRect().left + parseFloat(getComputedStyle(link).paddingLeft) - block.parentElement.getBoundingClientRect().left - parseFloat(getComputedStyle(block.parentElement).paddingLeft);
+      block.style.marginLeft = `${Math.max(0, offset)}px`;
+    };
+    align();
+    window.addEventListener('resize', align);
+    window.addEventListener('load', align);
+
+    // Bilderstreifen als Karussell: Der Streifen bleibt oben stehen, während die Seite weiterscrollt,
+    // und fährt dabei seitlich durch. Die Seite wird dafür um die seitliche Strecke länger.
+    document.querySelectorAll<HTMLElement>('[data-strip]').forEach((strip) => {
+      const runway = strip.querySelector<HTMLElement>('[data-strip-runway]');
+      const pin = strip.querySelector<HTMLElement>('[data-strip-pin]');
+      const track = strip.querySelector<HTMLElement>('[data-strip-track]');
+      const row = strip.querySelector<HTMLElement>('[data-strip-row]');
+      if (!runway || !pin || !track || !row) return;
+
+      const active = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)');
+      let distance = 0;
+
+      const move = () => {
+        if (!active.matches || distance <= 0) return;
+        const offset = parseFloat(pin.style.top) || 0;
+        const progress = Math.min(1, Math.max(0, (offset - runway.getBoundingClientRect().top) / distance));
+        row.style.transform = `translateX(${-progress * distance}px)`;
+      };
+
+      const setup = () => {
+        if (!active.matches) {
+          runway.style.height = '';
+          pin.classList.remove('sticky');
+          pin.style.top = '';
+          track.style.overflowX = '';
+          row.style.transform = '';
+          return;
+        }
+        track.scrollLeft = 0;
+        track.style.overflowX = 'hidden';
+        pin.classList.add('sticky');
+        // Senkrecht mittig im Bildschirm stehen bleiben (bei voller Höhe oben)
+        pin.style.top = `${Math.max(0, (window.innerHeight - pin.offsetHeight) / 2)}px`;
+        distance = Math.max(0, row.scrollWidth - track.clientWidth);
+        runway.style.height = `${pin.offsetHeight + distance}px`;
+        move();
+      };
+
+      window.addEventListener('scroll', move, { passive: true });
+      window.addEventListener('resize', setup);
+      active.addEventListener('change', setup);
+      setup();
+    });
+  </script>
+</Base>

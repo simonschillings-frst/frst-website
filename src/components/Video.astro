@@ -26,6 +26,10 @@
  *    Füllt die Fläche wie ein Hintergrundbild, ohne Logo und Bedienelemente, mit Pause-Knopf.
  *    Achtung Datenschutz: wird sofort beim Seitenaufruf geladen (ohne Klick), Daten gehen an Vimeo.
  *
+ * 4a. Wie 4, aber weiter unten auf der Seite: Das Video beginnt erst, wenn es ins Bild scrollt, und zwar von vorn:
+ *    <Video vimeo="1238421108" vimeoHash="511ea06429" background startInView class="aspect-video w-full" lang={lang} />
+ *    Achtung Datenschutz: wird ohne Klick geladen, sobald es sich dem sichtbaren Bereich nähert.
+ *
  * 4b. Vimeo als Teaser in einer verlinkten Kachel (Standbild, läuft nur beim Hovern/Fokus, ohne Knopf):
  *    <Video vimeo="1237542606" vimeoHash="21b4e08e8f" teaser class="aspect-[4/3] w-full" lang={lang} />
  *
@@ -45,6 +49,8 @@ interface Props {
   vimeoHash?: string;
   /** Nur Vimeo: stummer Hintergrund-Loop ohne Bedienelemente, startet sofort */
   background?: boolean;
+  /** Nur mit `background`: startet erst beim Reinscrollen von vorn, statt schon beim Seitenaufruf */
+  startInView?: boolean;
   /** YouTube-ID, z. B. "dQw4w9WgXcQ" aus youtube.com/watch?v=dQw4w9WgXcQ */
   youtube?: string;
   /** Vorschaubild, z. B. "/images/talk.jpg" */
@@ -61,7 +67,7 @@ interface Props {
   class?: string;
 }
 
-const { lang = defaultLang, src, vimeo, vimeoHash, background = false, youtube, poster, title = '', loop = false, teaser = false, captions, tone = 'night', class: className = 'aspect-video w-full' } = Astro.props;
+const { lang = defaultLang, src, vimeo, vimeoHash, background = false, startInView = false, youtube, poster, title = '', loop = false, teaser = false, captions, tone = 'night', class: className = 'aspect-video w-full' } = Astro.props;
 const t = useLang(lang);
 
 const provider = vimeo ? 'Vimeo' : youtube ? 'YouTube' : null;
@@ -85,9 +91,10 @@ const tones = {
 ---
 
 {backgroundUrl && (
-  <div class:list={['overflow-hidden bg-gradient-to-br', tones[tone], { relative: teaser }, className]} style="container-type: size" data-video-background={background ? '' : undefined} data-video-vimeo-teaser={teaser ? '' : undefined}>
+  <div class:list={['overflow-hidden bg-gradient-to-br', tones[tone], { relative: teaser || startInView }, className]} style="container-type: size" data-video-background={background && !startInView ? '' : undefined} data-video-start-in-view={background && startInView ? '' : undefined} data-video-vimeo-teaser={teaser ? '' : undefined}>
     <iframe
-      src={backgroundUrl}
+      src={startInView ? undefined : backgroundUrl}
+      data-src={startInView ? backgroundUrl : undefined}
       title={title || 'Video'}
       aria-hidden="true"
       tabindex="-1"
@@ -253,6 +260,54 @@ const tones = {
       },
       onPlay: () => iframe.classList.remove('opacity-0'),
     });
+    button.addEventListener('click', () => {
+      paused = !paused;
+      send(paused ? 'pause' : 'play');
+      update();
+    });
+    update();
+  });
+
+  // Vimeo-Hintergrund weiter unten auf der Seite: lädt kurz bevor er ins Bild kommt und wartet auf dem ersten Bild.
+  // Startet beim Reinscrollen von vorn und springt nach dem Rausscrollen wieder an den Anfang.
+  document.querySelectorAll<HTMLElement>('[data-video-start-in-view]').forEach((wrapper) => {
+    const iframe = wrapper.querySelector('iframe');
+    const button = wrapper.querySelector<HTMLButtonElement>('[data-video-toggle]');
+    if (!iframe || !button) return;
+    let paused = reduceMotion;
+    let inView = false;
+    let send: ReturnType<typeof connectVimeo> = () => {};
+    const update = () => {
+      button.setAttribute('aria-label', (paused ? button.dataset.labelPlay : button.dataset.labelPause) ?? '');
+      button.querySelector('[data-icon-pause]')?.classList.toggle('hidden', paused);
+      button.querySelector('[data-icon-play]')?.classList.toggle('hidden', !paused);
+    };
+    const rewind = () => {
+      send('pause');
+      send('setCurrentTime', 0);
+    };
+    const loader = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      loader.disconnect();
+      iframe.src = iframe.dataset.src ?? '';
+      // Hintergrund-Modus startet von selbst: außerhalb des Bildes gleich wieder anhalten
+      send = connectVimeo(iframe, {
+        onPlay: () => {
+          iframe.classList.remove('opacity-0');
+          if (!inView || paused) rewind();
+        },
+      });
+    }, { rootMargin: '100% 0px' });
+    loader.observe(wrapper);
+    new IntersectionObserver(([entry]) => {
+      if (entry.intersectionRatio >= 0.3 && !inView) {
+        inView = true;
+        if (!paused) send('play');
+      } else if (!entry.isIntersecting && inView) {
+        inView = false;
+        rewind();
+      }
+    }, { threshold: [0, 0.3] }).observe(wrapper);
     button.addEventListener('click', () => {
       paused = !paused;
       send(paused ? 'pause' : 'play');

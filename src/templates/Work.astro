@@ -27,7 +27,7 @@ const cases = [
 
 const strip = [
   { title: t('Open Doors', 'Offene Türen'), tags: t('Brand · Content', 'Marke · Content'), tone: 'mist', frame: 'aspect-[3/4]' },
-  { title: t('Fast Forward', 'Fast Forward'), tags: t('Campaign · AI', 'Kampagne · KI'), tone: 'desert', frame: 'aspect-square' },
+  { title: 'MENOLD BEZLER', href: localePath(lang, '/work/menold-bezler'), tags: t('Brand · Redesign', 'Marke · Redesign'), tone: 'desert', frame: 'aspect-square', image: '/images/mb-logo-header.svg' },
   { title: t('Quiet Power', 'Leise Stärke'), tags: t('Strategy · Film', 'Strategie · Film'), tone: 'night', frame: 'aspect-[4/5]' },
   { title: t('Blue Hour', 'Blaue Stunde'), tags: t('Creative · Design', 'Kreation · Design'), tone: 'sky', frame: 'aspect-[3/2]' },
   { title: t('Real Talk', 'Klartext'), tags: t('Content · Social', 'Content · Social'), tone: 'dusk', frame: 'aspect-[3/4]' },
@@ -131,9 +131,9 @@ const words = [t('Strategy', 'Strategie'), t('Creative', 'Kreation'), t('Brand',
       <ul class="mt-10 flex items-end gap-5 px-5 will-change-transform md:px-10" data-hscroll-track>
         {strip.map((item) => (
           <li class="w-[70vw] shrink-0 sm:w-[44vw] md:w-[26rem]">
-            <a href="#" class="group block">
+            <a href={'href' in item ? item.href : '#'} class="group block">
               <div class="overflow-hidden">
-                <Media tone={item.tone} class={`${item.frame} w-full transition-transform duration-700 ease-out group-hover:scale-105`} />
+                <Media src={'image' in item ? item.image : undefined} alt={'image' in item ? item.title : undefined} tone={item.tone} class={`${item.frame} w-full transition-transform duration-700 ease-out group-hover:scale-105`} />
               </div>
               <h3 class="mt-5 text-[24px] leading-snug">{item.title}</h3>
               <p class="mt-1 text-[14px] opacity-70">{item.tags}</p>
