@@ -48,7 +48,7 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       children: [
         { title: t('Our services', 'Unsere Leistungen'), subtitle: t('Four disciplines. One team, built around your project.', 'Vier Disziplinen. Ein Team, zusammengestellt für dein Projekt.'), href: l('/what-we-do#services') },
         { title: t('Our approaches', 'Unsere Ansätze'), subtitle: t('The Process built around your Ambition.', 'Der Prozess, gebaut um deinen Anspruch.'), href: l('/what-we-do#process') },
-        { title: t('Selected work', 'Ausgewählte Projekte'), subtitle: 'Näher am Leben', href: l('/what-we-do#selected-work') },
+        { title: t('Selected work', 'Ausgewählte Projekte'), subtitle: 'MARCCAIN NYC', href: l('/what-we-do#selected-work') },
       ],
       media: {
         label: t('Latest Media', 'Neueste Medien'),
