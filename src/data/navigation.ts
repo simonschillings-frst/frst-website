@@ -9,6 +9,8 @@ export interface MenuLink {
   subtitle?: string;
   /** Platzhalterbild im Mega-Menü; ohne Angabe wird abwechselnd night, desert, mist verwendet */
   tone?: Tone;
+  /** Bild im Mega-Menü; ersetzt den Platzhalter */
+  image?: string;
 }
 
 export interface NavItem {
@@ -76,7 +78,7 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       href: l('/work'),
       layout: 'cards',
       children: [
-        { title: t('Cases', 'Cases'), subtitle: t('Work', 'Projekte'), href: l('/work#cases') },
+        { title: t('Cases', 'Cases'), subtitle: t('Work', 'Projekte'), href: l('/work#cases'), image: '/images/marccain-teaser-navi.jpg' },
         { title: t('Results', 'Ergebnisse'), subtitle: t('Work', 'Projekte'), href: l('/work#results') },
       ],
     },
