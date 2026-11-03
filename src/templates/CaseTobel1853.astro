@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
-import HoverLoop from '../components/HoverLoop.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { useLang, type Lang } from '../i18n';
 
@@ -12,7 +11,7 @@ const { lang } = Astro.props;
 const t = useLang(lang);
 
 const title = 'tobel 1853';
-const project = t('Brand · Content', 'Marke · Content');
+const project = t('Brand · Corporate Identity', 'Marke · Corporate Identity');
 
 // Texte und Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
 const facts = [
@@ -20,6 +19,16 @@ const facts = [
   { label: t('Client', 'Kunde'), value: '—' },
   { label: t('Location', 'Ort'), value: '—' },
   { label: t('Year', 'Jahr'), value: '—' },
+];
+
+const tiles = [
+  { src: '/images/261102_frst_tobel_vcard_Mockup.jpg', alt: 'Stapel Visitenkarten aus Kraftpapier mit Logo auf einem Holztisch' },
+  { src: '/images/tobel-detail.avif', alt: 'Sitzecke mit zwei grünen Sesseln unter Holzbalken' },
+  { src: '/images/tobel-menu.jpg', alt: 'Menükarte' },
+  { src: '/images/tobel-weinkuehlschrank.webp', alt: 'Hand nimmt eine Flasche aus dem Weinkühlschrank' },
+  // Querformat: Ausschnitt nach links, damit der Flyer mittig in der Kachel sitzt
+  { src: '/images/tobel-flyer-mockup-2.jpg', alt: 'Flyer mit Sessel und Blumenvase auf einem Holztisch neben einer Tasse Cappuccino', position: 'object-[38%_50%]' },
+  { src: '/images/tobel-bistro.webp', alt: 'Bistro mit Holztisch und kleinem Tisch vor einer Wandnische' },
 ];
 
 const paragraph =
@@ -43,18 +52,14 @@ const paragraph =
   <!-- Projektdaten und Text -->
   <section class="container-frst py-14 md:py-20">
     <div class="grid gap-10 md:grid-cols-[1fr_1.35fr] md:gap-0">
-      <div class="flex flex-col">
-        <dl class="grid h-fit grid-cols-[7rem_1fr] gap-x-4 gap-y-2 text-[14px]">
-          {facts.map((fact) => (
-            <>
-              <dt class="uppercase">{fact.label}:</dt>
-              <dd>{fact.value}</dd>
-            </>
-          ))}
-        </dl>
-        <!-- Kreis „Vom Einfachen das Beste“ dreht sich langsam -->
-        <img src="/images/tobel-kreis.svg" alt="Vom Einfachen das Beste" class="mt-10 w-32 animate-[spin_30s_linear_infinite] motion-reduce:animate-none md:m-auto md:w-44" />
-      </div>
+      <dl class="grid h-fit grid-cols-[7rem_1fr] gap-x-4 gap-y-2 text-[14px]">
+        {facts.map((fact) => (
+          <>
+            <dt class="uppercase">{fact.label}:</dt>
+            <dd>{fact.value}</dd>
+          </>
+        ))}
+      </dl>
       <div class="space-y-6 text-[20px] leading-relaxed">
         <p>{paragraph}</p>
         <p>{paragraph}</p>
@@ -62,24 +67,23 @@ const paragraph =
     </div>
   </section>
 
-  <!-- Bildergalerie (großes Bild, Dreierreihe, großes Bild) -->
+  <!-- Bildergalerie (großes Bild, zwei Dreierreihen) -->
   <!-- Film / großes Bewegtbild über die ganze Breite (wie das Hauptmotiv oben) -->
-  <section>
-    <Media tone="mist" alt={`${title} – Bild 3`} class="aspect-video w-full" />
+  <section class="relative">
+    <Media src="/images/tobel-website.jpg" alt={`${title} – Website`} class="aspect-video w-full" />
+    <!-- Kreis „Vom Einfachen das Beste“ dreht sich langsam -->
+    <img src="/images/tobel-kreis-weiss.svg" alt="Vom Einfachen das Beste" class="absolute top-[12.3%] left-[6.92%] w-[11.2%] animate-[spin_30s_linear_infinite] motion-reduce:animate-none" />
   </section>
 
   <section class="container-frst mt-2">
-    <!-- Drei Bilder nebeneinander -->
+    <!-- Zwei Reihen mit je drei Bildern -->
     <div class="grid gap-2 md:grid-cols-3">
-      <HoverLoop images={['/images/261102_frst_tobel_vcard_Mockup.jpg', '/images/261102_frst_tobel_vcard_Mockup_hinten.jpg']} alt={`${title} – Stapel Visitenkarten aus Kraftpapier mit Logo auf einem Holztisch`} class="aspect-[3/4] w-full" />
-      <Media src="/images/tobel-detail.avif" alt={`${title} – Sitzecke mit zwei grünen Sesseln unter Holzbalken`} class="aspect-[3/4] w-full" />
-      <Media src="/images/tobel-menu.jpg" alt={`${title} – Menükarte`} class="aspect-[3/4] w-full" />
+      {tiles.map((tile) => (
+        <div class="group overflow-hidden">
+          <Media src={tile.src} alt={`${title} – ${tile.alt}`} class={`aspect-[3/4] w-full transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${tile.position ?? ''}`} />
+        </div>
+      ))}
     </div>
-  </section>
-
-  <!-- Zweites großes Bild über die ganze Breite -->
-  <section class="mt-2">
-    <Media tone="mist" alt={`${title} – Bild 7`} class="aspect-video w-full" />
   </section>
 
   <Newsletter lang={lang} dark />
