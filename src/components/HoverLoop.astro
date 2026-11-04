@@ -1,0 +1,75 @@
+---
+/**
+ * Mehrere Bilder an derselben Stelle, die im Loop wechseln:
+ *    <HoverLoop images={['/images/a.jpg', '/images/b.jpg']} alt="…" class="aspect-video w-full" />
+ * Am Desktop läuft der Loop nur, solange der Cursor auf dem Bild ist, ohne Maus (Handy, Tablet),
+ * solange das Bild im Blick ist. Danach und bei „reduzierter Bewegung“ steht das erste Bild.
+ */
+interface Props {
+  images: string[];
+  alt: string;
+  class?: string;
+}
+const { images, alt, class: className } = Astro.props;
+---
+
+<div class:list={['relative overflow-hidden', className]} data-hover-loop>
+  {images.map((src, i) => (
+    <img src={src} alt={i === 0 ? alt : ''} aria-hidden={i === 0 ? undefined : 'true'} loading="lazy" class:list={['absolute inset-0 h-full w-full object-cover', { 'opacity-0': i > 0 }]} />
+  ))}
+</div>
+
+<script>
+  const INTERVAL = 700;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canHover = window.matchMedia('(hover: hover)').matches;
+
+  if (!reduceMotion) {
+    document.querySelectorAll<HTMLElement>('[data-hover-loop]').forEach((wrapper) => {
+      const images = Array.from(wrapper.querySelectorAll('img'));
+      let current = 0;
+      let timer = 0;
+      const show = (next: number) => {
+        images[current].classList.add('opacity-0');
+        images[next].classList.remove('opacity-0');
+        current = next;
+      };
+      const start = () => {
+        window.clearInterval(timer);
+        timer = window.setInterval(() => show((current + 1) % images.length), INTERVAL);
+        show((current + 1) % images.length);
+      };
+      const stop = () => {
+        window.clearInterval(timer);
+        show(0);
+      };
+      if (canHover) {
+        // Cursor-Position auch beim Scrollen prüfen: Im Karussell fährt das Bild unter dem ruhenden Cursor durch
+        let x = -1;
+        let y = -1;
+        let inside = false;
+        const check = () => {
+          const box = wrapper.getBoundingClientRect();
+          const over = x >= box.left && x <= box.right && y >= box.top && y <= box.bottom;
+          if (over === inside) return;
+          inside = over;
+          if (over) start();
+          else stop();
+        };
+        window.addEventListener('mousemove', (event) => {
+          x = event.clientX;
+          y = event.clientY;
+          check();
+        }, { passive: true });
+        window.addEventListener('scroll', check, { passive: true });
+        document.documentElement.addEventListener('mouseleave', () => {
+          x = -1;
+          y = -1;
+          check();
+        });
+      } else {
+        new IntersectionObserver(([entry]) => (entry.isIntersecting ? start() : stop()), { threshold: 0.5 }).observe(wrapper);
+      }
+    });
+  }
+</script>

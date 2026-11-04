@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1082" height="1080" viewBox="0 0 1082 1080">
+  <defs>
+    <clipPath id="clip-sachlich_modern-2_5">
+      <rect width="1082" height="1080"/>
+    </clipPath>
+  </defs>
+  <g id="sachlich_modern-2_5" data-name="sachlich&amp;modern-2 – 5" clip-path="url(#clip-sachlich_modern-2_5)">
+    <rect width="1082" height="1080" fill="#fff"/>
+    <rect id="Rechteck_71" data-name="Rechteck 71" width="1125" height="1138" transform="translate(-14 -30)" fill="#1c3124"/>
+    <text id="Aa" transform="translate(217 359)" fill="#afff2e" font-size="300" font-family="Inter"><tspan x="-175.635" y="291">Aa</tspan></text>
+    <text id="Regular" transform="translate(87 947)" fill="#afff2e" font-size="55" font-family="Inter"><tspan x="0" y="53">Regular</tspan></text>
+    <text id="Inter" transform="translate(81 66)" fill="#afff2e" font-size="55" font-family="Inter"><tspan x="0" y="53">Inter</tspan></text>
+  </g>
+</svg>

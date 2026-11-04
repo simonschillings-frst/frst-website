@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useLang(lang);
+
+const title = 'tobel 1853';
+const project = t('Brand · Corporate Identity', 'Marke · Corporate Identity');
+
+// Texte und Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
+const facts = [
+  { label: t('Project', 'Projekt'), value: project },
+  { label: t('Client', 'Kunde'), value: '—' },
+  { label: t('Location', 'Ort'), value: '—' },
+  { label: t('Year', 'Jahr'), value: '—' },
+];
+
+const tiles = [
+  { src: '/images/261102_frst_tobel_vcard_Mockup.jpg', alt: 'Stapel Visitenkarten aus Kraftpapier mit Logo auf einem Holztisch' },
+  { src: '/images/tobel-detail.avif', alt: 'Sitzecke mit zwei grünen Sesseln unter Holzbalken' },
+  { src: '/images/tobel-menu.jpg', alt: 'Menükarte' },
+  { src: '/images/tobel-weinkuehlschrank.webp', alt: 'Hand nimmt eine Flasche aus dem Weinkühlschrank' },
+  // Querformat: Ausschnitt nach links, damit der Flyer mittig in der Kachel sitzt
+  { src: '/images/tobel-flyer-mockup-2.jpg', alt: 'Flyer mit Sessel und Blumenvase auf einem Holztisch neben einer Tasse Cappuccino', position: 'object-[38%_50%]' },
+  { src: '/images/tobel-bistro.webp', alt: 'Bistro mit Holztisch und kleinem Tisch vor einer Wandnische' },
+];
+
+const paragraph =
+  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+---
+
+<Base title={`${title} – frst`} headerLight lang={lang}>
+  <!-- Titel -->
+  <section class="container-frst pt-24 pb-14 md:pt-36 md:pb-16">
+    <div class="md:ml-[16%]" data-align-nav>
+      <h1 class="text-5xl leading-[1.05] font-light md:text-7xl">{title}</h1>
+      <p class="mt-8 text-lg font-light md:text-2xl">{project}</p>
+    </div>
+  </section>
+
+  <!-- Hauptmotiv über die ganze Breite -->
+  <section>
+    <Media src="/images/tobel-header.jpg" alt={`${title} – Logo vor einem Wald im Morgenlicht`} class="aspect-[16/10] w-full md:aspect-[12/5]" />
+  </section>
+
+  <!-- Projektdaten und Text -->
+  <section class="container-frst py-14 md:py-20">
+    <div class="grid gap-10 md:grid-cols-[1fr_1.35fr] md:gap-0">
+      <dl class="grid h-fit grid-cols-[7rem_1fr] gap-x-4 gap-y-2 text-[14px]">
+        {facts.map((fact) => (
+          <>
+            <dt class="uppercase">{fact.label}:</dt>
+            <dd>{fact.value}</dd>
+          </>
+        ))}
+      </dl>
+      <div class="space-y-6 text-[20px] leading-relaxed">
+        <p>{paragraph}</p>
+        <p>{paragraph}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bildergalerie (großes Bild, zwei Dreierreihen) -->
+  <!-- Film / großes Bewegtbild über die ganze Breite (wie das Hauptmotiv oben) -->
+  <section class="relative">
+    <Media src="/images/tobel-website.jpg" alt={`${title} – Website`} class="aspect-video w-full" />
+    <!-- Kreis „Vom Einfachen das Beste“ dreht sich langsam -->
+    <img src="/images/tobel-kreis-weiss.svg" alt="Vom Einfachen das Beste" class="absolute top-[12.3%] left-[6.92%] w-[11.2%] animate-[spin_30s_linear_infinite] motion-reduce:animate-none" />
+  </section>
+
+  <section class="container-frst mt-2">
+    <!-- Zwei Reihen mit je drei Bildern -->
+    <div class="grid gap-2 md:grid-cols-3">
+      {tiles.map((tile) => (
+        <div class="group overflow-hidden">
+          <Media src={tile.src} alt={`${title} – ${tile.alt}`} class={`aspect-[3/4] w-full transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${tile.position ?? ''}`} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <Newsletter lang={lang} dark />
+
+  <script>
+    // Titel linksbündig mit dem ersten Navigationspunkt („Why frst“) ausrichten
+    const block = document.querySelector<HTMLElement>('[data-align-nav]');
+    const align = () => {
+      const link = document.querySelector<HTMLElement>('header nav[data-main-nav] a, header nav[data-main-nav] summary, header nav[data-main-nav] button');
+      if (!block || !block.parentElement) return;
+      if (!link || link.offsetParent === null || window.innerWidth < 768) {
+        block.style.marginLeft = '';
+        return;
+      }
+      const offset = link.getBoundingClientRect().left + parseFloat(getComputedStyle(link).paddingLeft) - block.parentElement.getBoundingClientRect().left - parseFloat(getComputedStyle(block.parentElement).paddingLeft);
+      block.style.marginLeft = `${Math.max(0, offset)}px`;
+    };
+    align();
+    window.addEventListener('resize', align);
+    window.addEventListener('load', align);
+  </script>
+</Base>
