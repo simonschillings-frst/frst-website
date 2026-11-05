@@ -12,11 +12,6 @@ interface Props {
 const { lang } = Astro.props;
 const t = useLang(lang);
 
-const intro = t(
-  'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.',
-  'Wir bauen unvergessliche Marken, die begeistern und Menschen mitnehmen. Deshalb stellen wir interdisziplinäre Teams zusammen, die von zukunftsweisender Technologie getragen werden.',
-);
-
 // Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
 const cases = [
   { eyebrow: 'Volksbank Göppingen', title: 'Näher am Leben', href: localePath(lang, '/work/naeher-am-leben'), tags: t('Strategy · Campaign · Content · Digital', 'Strategie · Kampagne · Content · Digital'), tone: 'dusk', frame: 'aspect-[16/10]', col: 'md:col-span-7', image: '/images/naeher-am-leben-Bushaltestelle_quer.jpg' },
@@ -62,7 +57,6 @@ const words = [t('Strategy', 'Strategie'), t('Creative', 'Kreation'), t('Brand',
         <p class="eyebrow text-[14px]">{t('Selected work', 'Ausgewählte Projekte')}</p>
         <h1 class="mt-14 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{t('One idea.', 'Eine Idee.')}<br />{t('Many shapes.', 'Viele Formen.')}</h1>
       </div>
-      <p class="max-w-xs text-[16px] leading-relaxed opacity-90 md:justify-self-end md:pb-6">{intro}</p>
     </div>
     <!-- Laufband: transparent am unteren Rand des Heros, Text in Cream -->
     <div class="absolute inset-x-0 bottom-0 overflow-hidden py-4 text-cream" aria-hidden="true">
@@ -85,7 +79,6 @@ const words = [t('Strategy', 'Strategie'), t('Creative', 'Kreation'), t('Brand',
         <p class="eyebrow text-[14px]">{t('Cases', 'Cases')}</p>
         <h2 class="mt-8 text-[30px] leading-snug">{t('Selected cases.', 'Ausgewählte Cases.')}</h2>
       </div>
-      <p class="hidden max-w-[30ch] text-[16px] leading-relaxed md:block">{intro}</p>
     </div>
     <ul class="mt-14 grid gap-x-6 gap-y-14 md:grid-cols-12">
       {cases.map((item) => (
