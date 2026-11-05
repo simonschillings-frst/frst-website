@@ -79,7 +79,7 @@ const paragraph =
       {[
         { src: '/images/mb-claim-kurven.svg', alt: 'Menold Bezler – Claim „Wenn du lieber Klagen als Ausreden hörst.“ neben dem Symbol aus zwei Winkeln' },
         { src: '/images/mb-airport.jpg', alt: 'Menold Bezler – Werbefläche in einem Flughafen mit dem Claim „Wenn du lieber Klagen als Ausreden hörst.“, Symbol und Porträt eines Mannes im Sakko' },
-        { src: '/images/mb-handy-instagram.jpg', alt: 'Menold Bezler – Instagram-Post „Wenn dein Leben nicht die längste Rückstellung ever werden soll.“ auf einem Smartphone' },
+        { src: '/images/web/mb-handy-instagram.jpg', alt: 'Menold Bezler – Instagram-Post „Wenn dein Leben nicht die längste Rückstellung ever werden soll.“ auf einem Smartphone' },
       ].map((slide, i) => (
         <Media src={slide.src} alt={slide.alt} class={`h-full w-full transition-opacity duration-300 motion-reduce:transition-none [grid-area:1/1] ${i > 0 ? 'opacity-0' : ''}`} />
       ))}
@@ -106,8 +106,8 @@ const paragraph =
         <div class="h-[50vh] snap-x overflow-x-auto xl:h-screen" tabindex="0" role="region" aria-label={t('Image gallery, scrolls sideways', 'Bildergalerie, seitlich scrollbar')} data-strip-track>
           <div class="flex h-full min-w-max gap-2 will-change-transform [&>*]:snap-start" data-strip-row>
             <Media src="/images/mb-resonanz-screen.jpg" alt="Menold Bezler – Bühne mit leuchtendem Schriftzug „Resonanz“ vor Publikum" class="h-full aspect-[3/2] shrink-0" />
-            <HoverLoop images={['/images/mb-visitenkarte-v1-hoch.jpg', '/images/mb-visitenkarte-v2-hoch.jpg', '/images/mb-visitenkarte-v3-hoch.jpg', '/images/mb-visitenkarte-v4-hoch.jpg']} alt="Menold Bezler – Stapel Visitenkarten mit Logo auf Terrazzo" class="h-full aspect-[3/4] shrink-0" />
-            <Media src="/images/schachtel-klein-v2.jpg" alt="Menold Bezler – Kartenset-Schachtel „Fragen, die bewegen.“" class="h-full aspect-[3/4] shrink-0" />
+            <HoverLoop images={['/images/web/mb-visitenkarte-v1-hoch.jpg', '/images/web/mb-visitenkarte-v2-hoch.jpg', '/images/web/mb-visitenkarte-v3-hoch.jpg', '/images/web/mb-visitenkarte-v4-hoch.jpg']} alt="Menold Bezler – Stapel Visitenkarten mit Logo auf Terrazzo" class="h-full aspect-[3/4] shrink-0" />
+            <Media src="/images/web/schachtel-klein-v2.jpg" alt="Menold Bezler – Kartenset-Schachtel „Fragen, die bewegen.“" class="h-full aspect-[3/4] shrink-0" />
             <Media src="/images/mb-totebag-stuhl.jpg" alt="Menold Bezler – dunkelgrüne Tote Bag mit Logo an einem Holzstuhl" class="h-full aspect-[3/4] shrink-0" />
           </div>
         </div>

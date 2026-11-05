@@ -67,7 +67,7 @@ export interface ArticleStory {
 }
 
 const obituary: ArticleStory = {
-  heroImage: { src: '/images/artikel-01-01-header.jpg', alt: 'Eine Digitalanzeige mit der Uhrzeit 5:55 spiegelt sich nachts in einer Pfütze', position: '25% 50%' },
+  heroImage: { src: '/images/web/artikel-01-01-header.jpg', alt: 'Eine Digitalanzeige mit der Uhrzeit 5:55 spiegelt sich nachts in einer Pfütze', position: '25% 50%' },
   bodyImage: { src: '/images/artikel-01-02-web.webp', alt: 'Schwarz-Weiß-Porträt einer Person in heller Bluse, das Gesicht ist aus dem Papier herausgerissen und von gerissenen Papierringen umgeben', label: 'artikel-01-02' },
   eyebrow: 'Nachruf',
   title: ['Hier ruht die abrechenbare Stunde.', 'Ihre Zeit ist gekommen.'],
@@ -127,7 +127,7 @@ const obituary: ArticleStory = {
 };
 
 const therapySession: ArticleStory = {
-  heroImage: { src: '/images/artikel-03-01-header.jpg', alt: 'Ein dunkler Mantel schwebt ohne Träger in einem leeren, spärlich beleuchteten Raum, an der Wand daneben der Schatten einer Person', position: '85% 50%' },
+  heroImage: { src: '/images/web/artikel-03-01-header.jpg', alt: 'Ein dunkler Mantel schwebt ohne Träger in einem leeren, spärlich beleuchteten Raum, an der Wand daneben der Schatten einer Person', position: '85% 50%' },
   bandImage: { src: '/images/artikel-03-02-web.jpg', alt: 'Zwei unscharfe Figuren stehen mit etwas Abstand nebeneinander in einer nebligen Landschaft in der Dämmerung, von hinten gesehen', position: '50% 56%' },
   paragraphs: [
     'Vertrauen ist die unsichtbare Grundlage jeder Agenturbeziehung. Bis irgendwann die Frage im Raum steht: Arbeitet die Agentur eigentlich für mich? Oder nur für sich?',
@@ -224,9 +224,9 @@ const therapySession: ArticleStory = {
 };
 
 const confession: ArticleStory = {
-  heroImage: { src: '/images/artikel-04-01-header.jpg', alt: 'Schillernder, gläsern wirkender Kopf im Profil, der Blick nach oben gerichtet, vor schwarzem Hintergrund', position: '24% 50%' },
+  heroImage: { src: '/images/web/artikel-04-01-header.jpg', alt: 'Schillernder, gläsern wirkender Kopf im Profil, der Blick nach oben gerichtet, vor schwarzem Hintergrund', position: '24% 50%' },
   teaserImage: '/images/artikel-04-01-teaser.jpg',
-  bandImage: { src: '/images/artikel-04-02-web.jpg', alt: 'Unscharfe dunkle Silhouette einer Person vor einem leuchtenden Farbverlauf aus Pink, Violett und Blau', position: '50% 35%' },
+  bandImage: { src: '/images/web/artikel-04-02-web.jpg', alt: 'Unscharfe dunkle Silhouette einer Person vor einem leuchtenden Farbverlauf aus Pink, Violett und Blau', position: '50% 35%' },
   paragraphs: [
     'Ein System, das jede Idee aufnimmt, jeder Argumentation folgt und jeden Gedanken freundlich bestätigt, kann sich irgendwann wie ein perfekter Sparringspartner anfühlen. Gerade dann, wenn wir einen bräuchten, der widerspricht. Der Denkfehler findet, Annahmen zerlegt und sagt: Das ist falsch.',
     'Das Problem ist, dass KI sehr gut darin geworden ist, uns zufriedenzustellen. Und je überzeugender sie dabei wird, desto schwerer erkennen wir, dass uns gerade niemand widerspricht.',
@@ -389,7 +389,7 @@ const manual: ArticleStory = {
 };
 
 const anatomy: ArticleStory = {
-  heroImage: { src: '/images/artikel-06-01-header.jpg', alt: 'Historische anatomische Zeichnung: ein menschliches Skelett von hinten gesehen, mit ausgestreckten Armen vor einem Sockel in einer Landschaft', position: '50% 3%' },
+  heroImage: { src: '/images/web/artikel-06-01-header.jpg', alt: 'Historische anatomische Zeichnung: ein menschliches Skelett von hinten gesehen, mit ausgestreckten Armen vor einem Sockel in einer Landschaft', position: '50% 3%' },
   teaserImage: '/images/artikel-06-01-teaser.jpg',
   noBand: true,
   paragraphs: [
@@ -478,9 +478,9 @@ const anatomy: ArticleStory = {
 };
 
 const blindSpot: ArticleStory = {
-  heroImage: { src: '/images/artikel-07-01-header.jpg', alt: 'Unscharfes, blau beleuchtetes Gesicht einer Person mit geschlossenen Augen und lockigem Haar vor schwarzem Hintergrund', position: '100% 30%' },
+  heroImage: { src: '/images/web/artikel-07-01-header.jpg', alt: 'Unscharfes, blau beleuchtetes Gesicht einer Person mit geschlossenen Augen und lockigem Haar vor schwarzem Hintergrund', position: '100% 30%' },
   teaserImage: '/images/artikel-07-01-teaser.jpg?v=3',
-  bandImage: { src: '/images/artikel-07-02-web.jpg', alt: 'Dunkle Silhouette einer Person im Nebel, von hinten blau angestrahlt, das Licht spiegelt sich auf dem nassen Boden', position: '50% 69%' },
+  bandImage: { src: '/images/web/artikel-07-02-web.jpg', alt: 'Dunkle Silhouette einer Person im Nebel, von hinten blau angestrahlt, das Licht spiegelt sich auf dem nassen Boden', position: '50% 69%' },
   paragraphs: [
     'Es gibt ein Kinderspiel, dessen Reiz darin liegt, dass eine Seite etwas sieht, was die andere nicht sieht. In Unternehmen ist das kein Spiel. Interne Teams sind so tief in das eigene Geschäftsmodell eingetaucht, dass sie bestimmte Fragen schlicht nicht mehr stellen können. Nicht weil sie es nicht wollen. Sondern weil sie nicht mehr wissen, dass es diese Fragen gibt.',
     'Externe Agenturen werden zunehmend genau dafür beauftragt: nicht um zu produzieren, sondern um zu sehen. Was von innen unsichtbar geworden ist, weil Nähe den Blick verändert.',
@@ -559,8 +559,8 @@ const blindSpot: ArticleStory = {
 };
 
 const nightmare: ArticleStory = {
-  heroImage: { src: '/images/artikel-08-01-header.jpg', alt: 'Eine Person sitzt von hinten gesehen auf einem weißen Plastikstuhl am Strand, daneben ein leerer Stuhl, darüber eine orange leuchtende Wolke in der Dämmerung', position: '24% 83%' },
-  bandImage: { src: '/images/artikel-08-02-web.jpg', alt: 'Unscharfe, dunkle Hand, die sich einem Licht aus Blau und Orange entgegenstreckt', position: '50% 57%' },
+  heroImage: { src: '/images/web/artikel-08-01-header.jpg', alt: 'Eine Person sitzt von hinten gesehen auf einem weißen Plastikstuhl am Strand, daneben ein leerer Stuhl, darüber eine orange leuchtende Wolke in der Dämmerung', position: '24% 83%' },
+  bandImage: { src: '/images/web/artikel-08-02-web.jpg', alt: 'Unscharfe, dunkle Hand, die sich einem Licht aus Blau und Orange entgegenstreckt', position: '50% 57%' },
   paragraphs: [
     'Der Nightmare Competitor ist ein Denkwerkzeug: Man stellt sich den Wettbewerber vor, den man am meisten fürchten würde. Einen, der alles richtig macht, was man selbst noch nicht wagt. Der ein Geschäftsmodell hat, das einen selbst aus dem Markt drängen würde. Und dann? Lebt man mit dem Albtraum. Oder man wird selbst dieser Wettbewerber, bevor es jemand anders tut.',
     'Beschreibung eines Albtraums für Agenturen. Für manche. Für andere: ein Fahrplan.',
@@ -680,7 +680,7 @@ export const researchArticles = (lang: Lang): ResearchArticle[] => {
       href: localePath(lang, '/perspectives/the-middle-is-disappearing'),
       text: t('AI isn’t destroying the agency. It’s destroying the middle.', 'KI zerstört nicht die Agentur. Sie zerstört das Mittelfeld.'),
       tone: 'dusk',
-      image: '/images/artikel-02-01-header.jpg',
+      image: '/images/web/artikel-02-01-header.jpg',
     },
     withPage(
       '03',
