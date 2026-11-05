@@ -29,7 +29,12 @@ export interface ArticleStory {
   /** Bild in der Textspalte statt des Bildstreifens. Ohne `src` steht dort ein Platzhalter mit `label`. */
   bodyImage?: { src?: string; alt?: string; label: string };
   /** Bild über die ganze Breite in seinem eigenen Format. Ohne Angabe steht dort ein Platzhalterstreifen. */
-  bandImage?: { src: string; alt: string };
+  /** Eigener Zuschnitt für den Block neben der Zusammenfassung, ohne Angabe das Header-Bild */
+  summaryImage?: { src: string };
+  /** Kein Bildband und kein Platzhalter zwischen Zitat und Text */
+  noBand?: boolean;
+  /** `position` legt den Bildausschnitt fest, z. B. `50% 35%` */
+  bandImage?: { src: string; alt: string; position?: string };
   eyebrow?: string;
   /** Jeder Eintrag steht in einer eigenen Zeile */
   title?: string[];
@@ -123,7 +128,7 @@ const obituary: ArticleStory = {
 
 const therapySession: ArticleStory = {
   heroImage: { src: '/images/artikel-03-01-header.jpg', alt: 'Ein dunkler Mantel schwebt ohne Träger in einem leeren, spärlich beleuchteten Raum, an der Wand daneben der Schatten einer Person', position: '85% 50%' },
-  bandImage: { src: '/images/artikel-03-02-web.jpg', alt: 'Zwei unscharfe Figuren stehen mit etwas Abstand nebeneinander in einer nebligen Landschaft in der Dämmerung, von hinten gesehen' },
+  bandImage: { src: '/images/artikel-03-02-web.jpg', alt: 'Zwei unscharfe Figuren stehen mit etwas Abstand nebeneinander in einer nebligen Landschaft in der Dämmerung, von hinten gesehen', position: '50% 56%' },
   paragraphs: [
     'Vertrauen ist die unsichtbare Grundlage jeder Agenturbeziehung. Bis irgendwann die Frage im Raum steht: Arbeitet die Agentur eigentlich für mich? Oder nur für sich?',
     'Das Problem beginnt selten mit einem großen Bruch. Es beginnt mit kleinen Irritationen. Der versprochene Berater verschwindet. Entscheidungen werden intransparent. Leistungen lassen sich kaum beurteilen. Beide Seiten merken, dass etwas nicht stimmt. Und sprechen trotzdem nicht darüber.',
@@ -221,6 +226,7 @@ const therapySession: ArticleStory = {
 const confession: ArticleStory = {
   heroImage: { src: '/images/artikel-04-01-header.jpg', alt: 'Schillernder, gläsern wirkender Kopf im Profil, der Blick nach oben gerichtet, vor schwarzem Hintergrund', position: '24% 50%' },
   teaserImage: '/images/artikel-04-01-teaser.jpg',
+  bandImage: { src: '/images/artikel-04-02-web.jpg', alt: 'Unscharfe dunkle Silhouette einer Person vor einem leuchtenden Farbverlauf aus Pink, Violett und Blau', position: '50% 35%' },
   paragraphs: [
     'Ein System, das jede Idee aufnimmt, jeder Argumentation folgt und jeden Gedanken freundlich bestätigt, kann sich irgendwann wie ein perfekter Sparringspartner anfühlen. Gerade dann, wenn wir einen bräuchten, der widerspricht. Der Denkfehler findet, Annahmen zerlegt und sagt: Das ist falsch.',
     'Das Problem ist, dass KI sehr gut darin geworden ist, uns zufriedenzustellen. Und je überzeugender sie dabei wird, desto schwerer erkennen wir, dass uns gerade niemand widerspricht.',
@@ -278,6 +284,10 @@ const confession: ArticleStory = {
 };
 
 const manual: ArticleStory = {
+  heroImage: { src: '/images/artikel-05-01-header.jpg?v=2', alt: 'Ein alter beiger Apple-Macintosh-Computer mit Tastatur und Maus steht allein in einem hellen, leeren Raum', position: '50% 60%' },
+  teaserImage: '/images/artikel-05-01-summary.jpg',
+  summaryImage: { src: '/images/artikel-05-01-summary.jpg' },
+  bandImage: { src: '/images/artikel-05-02-web.jpg', alt: 'Gesicht einer Person mit geschlossenen Augen im warmen Licht, darauf in grüner Schrift projiziert: error, please try again()', position: '50% 64%' },
   paragraphs: [
     'Kommunikation hatte immer eine klare Zielgruppe: Menschen. Alles, was Agenturen und Marken getan haben — Kampagnen, Botschaften, Kanalstrategien — war auf menschliche Aufmerksamkeit, Emotion und Entscheidung ausgerichtet. Diese Grundannahme beginnt zu kippen.',
     'Wenn Konsumenten ihre Kaufentscheidungen zunehmend an KI-Assistenten delegieren, verändert sich die Logik der Sichtbarkeit grundlegend. Wer für Algorithmen unsichtbar ist, existiert nicht — egal wie stark die Kampagne, egal wie hoch das Budget.',
@@ -379,6 +389,9 @@ const manual: ArticleStory = {
 };
 
 const anatomy: ArticleStory = {
+  heroImage: { src: '/images/artikel-06-01-header.jpg', alt: 'Historische anatomische Zeichnung: ein menschliches Skelett von hinten gesehen, mit ausgestreckten Armen vor einem Sockel in einer Landschaft', position: '50% 3%' },
+  teaserImage: '/images/artikel-06-01-teaser.jpg',
+  noBand: true,
   paragraphs: [
     'Wenn alles produzierbar wird, verändert sich der Wert des Unproduzierbaren. Bauchgefühl. Haltung. Feingefühl. Die Fähigkeit, einen kulturellen Moment zu lesen, bevor er im Mainstream angekommen ist. Diese Qualitäten klingen nach Soft Skills. In Wirklichkeit sind sie das, was übrig bleibt, wenn alles andere skaliert wurde.',
     'Das Menschliche ist kein Gegentrend zu KI. Es ist dessen natürliche Konsequenz. Je mehr Inhalte algorithmen-generiert sind, desto seltener — und teurer — wird das, was erkennbar von einem Menschen kommt. Was knapp wird, wird wertvoll.',
@@ -465,6 +478,9 @@ const anatomy: ArticleStory = {
 };
 
 const blindSpot: ArticleStory = {
+  heroImage: { src: '/images/artikel-07-01-header.jpg', alt: 'Unscharfes, blau beleuchtetes Gesicht einer Person mit geschlossenen Augen und lockigem Haar vor schwarzem Hintergrund', position: '100% 30%' },
+  teaserImage: '/images/artikel-07-01-teaser.jpg?v=3',
+  bandImage: { src: '/images/artikel-07-02-web.jpg', alt: 'Dunkle Silhouette einer Person im Nebel, von hinten blau angestrahlt, das Licht spiegelt sich auf dem nassen Boden', position: '50% 69%' },
   paragraphs: [
     'Es gibt ein Kinderspiel, dessen Reiz darin liegt, dass eine Seite etwas sieht, was die andere nicht sieht. In Unternehmen ist das kein Spiel. Interne Teams sind so tief in das eigene Geschäftsmodell eingetaucht, dass sie bestimmte Fragen schlicht nicht mehr stellen können. Nicht weil sie es nicht wollen. Sondern weil sie nicht mehr wissen, dass es diese Fragen gibt.',
     'Externe Agenturen werden zunehmend genau dafür beauftragt: nicht um zu produzieren, sondern um zu sehen. Was von innen unsichtbar geworden ist, weil Nähe den Blick verändert.',
@@ -543,6 +559,8 @@ const blindSpot: ArticleStory = {
 };
 
 const nightmare: ArticleStory = {
+  heroImage: { src: '/images/artikel-08-01-header.jpg', alt: 'Eine Person sitzt von hinten gesehen auf einem weißen Plastikstuhl am Strand, daneben ein leerer Stuhl, darüber eine orange leuchtende Wolke in der Dämmerung', position: '24% 83%' },
+  bandImage: { src: '/images/artikel-08-02-web.jpg', alt: 'Unscharfe, dunkle Hand, die sich einem Licht aus Blau und Orange entgegenstreckt', position: '50% 57%' },
   paragraphs: [
     'Der Nightmare Competitor ist ein Denkwerkzeug: Man stellt sich den Wettbewerber vor, den man am meisten fürchten würde. Einen, der alles richtig macht, was man selbst noch nicht wagt. Der ein Geschäftsmodell hat, das einen selbst aus dem Markt drängen würde. Und dann? Lebt man mit dem Albtraum. Oder man wird selbst dieser Wettbewerber, bevor es jemand anders tut.',
     'Beschreibung eines Albtraums für Agenturen. Für manche. Für andere: ein Fahrplan.',

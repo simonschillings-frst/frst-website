@@ -86,14 +86,14 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
         </div>
       </div>
     </section>
-  ) : (
+  ) : !story?.noBand && (
     <section aria-hidden={story?.bandImage ? undefined : 'true'}>
-      <Media src={story?.bandImage?.src} alt={story?.bandImage?.alt} tone="night" label={t('Article image', 'Artikelbild')} class={story?.bandImage ? 'h-auto w-full' : 'aspect-[2400/1295] w-full'} />
+      <Media src={story?.bandImage?.src} alt={story?.bandImage?.alt} position={story?.bandImage?.position} tone="night" label={t('Article image', 'Artikelbild')} class="aspect-[2400/1295] w-full md:aspect-[2400/648]" />
     </section>
   )}
 
   <!-- Befunde -->
-  <section class="px-5 py-16 md:px-10 md:py-24">
+  <section class:list={['px-5 py-16 md:px-10 md:py-24', { '!pt-0': story?.noBand }]}>
     <div class="mx-auto max-w-[1110px]">
       <div class="md:ml-[20%]">
         {story ? (
@@ -183,7 +183,7 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
   <!-- Zusammenfassung mit Bild -->
   <section class="grid md:grid-cols-[1fr_2fr]">
     <div class="relative min-h-[320px] md:min-h-[560px]">
-      <Media src={story?.heroImage?.src} alt={story?.heroImage?.alt} position={story?.heroImage?.position} tone="dusk" label={t('Article image', 'Artikelbild')} class={story?.heroImage ? 'absolute inset-0 h-full w-full' : 'min-h-[320px] w-full md:min-h-[560px]'} />
+      <Media src={story?.summaryImage?.src ?? story?.heroImage?.src} alt={story?.heroImage?.alt} position={story?.summaryImage ? undefined : story?.heroImage?.position} tone="dusk" label={t('Article image', 'Artikelbild')} class={story?.heroImage ? 'absolute inset-0 h-full w-full' : 'min-h-[320px] w-full md:min-h-[560px]'} />
     </div>
     <div class="flex flex-col items-center justify-center bg-night px-5 py-20 text-center text-cream md:px-16">
       <p class="max-w-[28ch] text-[30px] leading-snug">{story?.summary ?? short}</p>

@@ -67,7 +67,7 @@ export const obituaryEn: ArticleStory = {
 
 export const middleEn: ArticleStory = {
   heroImage: { src: '/images/artikel-02-01-header.jpg', alt: 'Two figures sit facing each other at a table in a wide steppe at dusk: one a dark silhouette, the other glowing white' },
-  bandImage: { src: '/images/artikel-02-02-web.jpg', alt: 'Two figures stand on either side of a deep crevice in a wide landscape: one a dark silhouette, the other glowing white' },
+  bandImage: { src: '/images/artikel-02-02-web.jpg', alt: 'Two figures stand on either side of a deep crevice in a wide landscape: one a dark silhouette, the other glowing white', position: '50% 53%' },
   paragraphs: [
     'There is a comfortable story the industry is telling itself right now: AI is a tool. We use it. We become more efficient. And in the end we are stronger than before. The story isn’t wrong. But it is incomplete.',
     'Because AI doesn’t only change how agencies work. It changes which agencies are still needed at all. What is repetitive disappears. What has no clear competence loses its reason to exist. What remains are the ends of the spectrum: the specialists and the networks. The middle in between is shrinking. Not dramatically. Not overnight. But structurally and unstoppably. What follows is not analysis. These are findings. Pointed, because the situation demands it. Sharpened, because the middle leaves no more room for indecision. A guide in six quote cards.',
@@ -145,7 +145,7 @@ export const middleEn: ArticleStory = {
 
 export const therapySessionEn: ArticleStory = {
   heroImage: { src: '/images/artikel-03-01-header.jpg', alt: 'A dark coat floats with no one wearing it in an empty, dimly lit room, the shadow of a person on the wall beside it', position: '85% 50%' },
-  bandImage: { src: '/images/artikel-03-02-web.jpg', alt: 'Two blurred figures stand a little apart in a misty landscape at dusk, seen from behind' },
+  bandImage: { src: '/images/artikel-03-02-web.jpg', alt: 'Two blurred figures stand a little apart in a misty landscape at dusk, seen from behind', position: '50% 56%' },
   paragraphs: [
     'Trust is the invisible foundation of every agency relationship. Until at some point the question hangs in the room: is the agency actually working for me? Or only for itself?',
     'The problem rarely begins with a major rupture. It begins with small irritations. The promised consultant disappears. Decisions become opaque. The work can hardly be assessed. Both sides notice that something isn’t right. And still don’t talk about it.',
@@ -243,6 +243,7 @@ export const therapySessionEn: ArticleStory = {
 export const confessionEn: ArticleStory = {
   heroImage: { src: '/images/artikel-04-01-header.jpg', alt: 'Iridescent, glass-like head in profile, gazing upward, against a black background', position: '24% 50%' },
   teaserImage: '/images/artikel-04-01-teaser.jpg',
+  bandImage: { src: '/images/artikel-04-02-web.jpg', alt: 'Blurred dark silhouette of a person against a glowing gradient of pink, violet and blue', position: '50% 35%' },
   paragraphs: [
     'A system that takes in every idea, follows every argument and kindly confirms every thought can eventually feel like the perfect sparring partner. Precisely when we would need one who disagrees. Who finds flaws in our thinking, takes assumptions apart and says: that’s wrong.',
     'The problem is that AI has become very good at pleasing us. And the more convincing it becomes at this, the harder it is for us to recognize that no one is contradicting us right now.',
@@ -300,6 +301,10 @@ export const confessionEn: ArticleStory = {
 };
 
 export const manualEn: ArticleStory = {
+  heroImage: { src: '/images/artikel-05-01-header.jpg?v=2', alt: 'An old beige Apple Macintosh computer with keyboard and mouse stands alone in a bright, empty room', position: '50% 60%' },
+  teaserImage: '/images/artikel-05-01-summary.jpg',
+  summaryImage: { src: '/images/artikel-05-01-summary.jpg' },
+  bandImage: { src: '/images/artikel-05-02-web.jpg', alt: 'Face of a person with closed eyes in warm light, with green text projected onto it: error, please try again()', position: '50% 64%' },
   paragraphs: [
     'Communication has always had a clear target group: people. Everything agencies and brands have done, from campaigns to messages to channel strategies, was aimed at human attention, emotion and decision-making. This basic assumption is starting to tip.',
     'When consumers increasingly delegate their purchasing decisions to AI assistants, the logic of visibility changes fundamentally. Whoever is invisible to algorithms doesn’t exist, no matter how strong the campaign, no matter how high the budget.',
@@ -401,6 +406,9 @@ export const manualEn: ArticleStory = {
 };
 
 export const anatomyEn: ArticleStory = {
+  heroImage: { src: '/images/artikel-06-01-header.jpg', alt: 'Historical anatomical drawing: a human skeleton seen from behind, arms outstretched, in front of a plinth in a landscape', position: '50% 3%' },
+  teaserImage: '/images/artikel-06-01-teaser.jpg',
+  noBand: true,
   paragraphs: [
     'When everything becomes producible, the value of what can’t be produced changes. Gut feeling. Attitude. Sensitivity. The ability to read a cultural moment before it reaches the mainstream. These qualities sound like soft skills. In reality, they are what is left when everything else has been scaled.',
     'The human is not a countertrend to AI. It is its natural consequence. The more content is generated by algorithms, the rarer, and more expensive, what recognizably comes from a person becomes. What becomes scarce becomes valuable.',
@@ -487,6 +495,8 @@ export const anatomyEn: ArticleStory = {
 };
 
 export const nightmareEn: ArticleStory = {
+  heroImage: { src: '/images/artikel-08-01-header.jpg', alt: 'A person seen from behind sits on a white plastic chair on the beach, next to an empty chair, with a glowing orange cloud above at dusk', position: '24% 83%' },
+  bandImage: { src: '/images/artikel-08-02-web.jpg', alt: 'Blurred dark hand reaching towards a light of blue and orange', position: '50% 57%' },
   paragraphs: [
     'The nightmare competitor is a thinking tool: you imagine the competitor you would fear most. One that does everything right that you don’t yet dare to do yourself. That has a business model that would push you out of the market. And then? You live with the nightmare. Or you become that competitor yourself, before someone else does.',
     'A description of a nightmare for agencies. For some. For others: a roadmap.',
@@ -575,6 +585,9 @@ export const nightmareEn: ArticleStory = {
 };
 
 export const blindSpotEn: ArticleStory = {
+  heroImage: { src: '/images/artikel-07-01-header.jpg', alt: 'Blurred, blue-lit face of a person with closed eyes and curly hair against a black background', position: '100% 30%' },
+  teaserImage: '/images/artikel-07-01-teaser.jpg?v=3',
+  bandImage: { src: '/images/artikel-07-02-web.jpg', alt: 'Dark silhouette of a person in fog, backlit in blue, the light reflecting on the wet floor', position: '50% 69%' },
   paragraphs: [
     'There is a children’s game whose appeal lies in one side seeing something the other doesn’t. In companies, this is no game. Internal teams are so deeply immersed in their own business model that they simply can’t ask certain questions anymore. Not because they don’t want to. But because they no longer know these questions exist.',
     'External agencies are increasingly hired for exactly this: not to produce, but to see. What has become invisible from the inside because closeness changes how we look.',
