@@ -12,8 +12,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = useLang(lang);
 const l = (href: string) => localePath(lang, href);
-// Der Artikel „The middle is disappearing“ existiert nur auf Deutsch.
-const articleHref = '/de/perspectives/the-middle-is-disappearing';
+const articleHref = l('/perspectives/the-middle-is-disappearing');
 
 const intro = t(
   'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.',
@@ -132,9 +131,9 @@ const disciplines = [
       <p class="eyebrow text-[14px]">Research</p>
       <h2 class="mt-8 text-[30px]">{t('The middle is disappearing', 'Die Mitte verschwindet')}</h2>
       <p class="mt-6 max-w-md text-[16px] leading-relaxed opacity-90">{intro}</p>
-      <a href={articleHref} class="mt-8" aria-label={t('Go to the article The middle is disappearing (in German)', 'Zum Artikel Die Mitte verschwindet')}><Arrow /></a>
+      <a href={articleHref} class="mt-8" aria-label={t('Go to the article The middle is disappearing', 'Zum Artikel Die Mitte verschwindet')}><Arrow /></a>
     </div>
-    <a href={articleHref} class="group block overflow-hidden" aria-label={t('Go to the article The middle is disappearing (in German)', 'Zum Artikel Die Mitte verschwindet')}>
+    <a href={articleHref} class="group block overflow-hidden" aria-label={t('Go to the article The middle is disappearing', 'Zum Artikel Die Mitte verschwindet')}>
       <Media tone="mist" class="min-h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:h-full md:min-h-[480px]" />
     </a>
   </section>

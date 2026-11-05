@@ -5,10 +5,10 @@ import { researchArticles } from '../../data/researchArticles';
 export function getStaticPaths() {
   return researchArticles('en')
     .filter((article) => article.slug)
-    .map((article) => ({ params: { slug: article.slug }, props: { title: article.title } }));
+    .map((article) => ({ params: { slug: article.slug }, props: { title: article.title, lead: article.lead, story: article.story } }));
 }
 
-const { title } = Astro.props;
+const { title, lead, story } = Astro.props;
 ---
 
-<Article lang="en" title={title} />
+<Article lang="en" title={title} lead={lead} story={story} />

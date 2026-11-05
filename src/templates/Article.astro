@@ -2,13 +2,16 @@
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
 import Newsletter from '../components/Newsletter.astro';
+import type { ArticleStory } from '../data/researchArticles';
 import { localePath, useLang, type Lang } from '../i18n';
 
 interface Props {
   lang: Lang;
   title: string;
+  lead?: string;
+  story?: ArticleStory;
 }
-const { lang, title } = Astro.props;
+const { lang, title, lead, story } = Astro.props;
 const t = useLang(lang);
 const l = (href: string) => localePath(lang, href);
 
@@ -42,13 +45,25 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
   <!-- Einleitung -->
   <section class="px-5 py-16 md:px-10 md:py-24">
     <div class="mx-auto max-w-[1110px]">
-      <p class="max-w-[34ch] text-[24px] leading-snug font-light">{short}</p>
+      <p class="max-w-[34ch] text-[24px] leading-snug font-light">{lead ?? short}</p>
 
       <div class="mt-12 md:ml-[20%]">
-        <p class="max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
-        <p class="mt-8 max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
+        {story ? (
+          <>
+            {story.eyebrow && <p class="eyebrow text-[14px]">{story.eyebrow}</p>}
+            {story.title && <h2 class="mt-8 text-[30px] leading-snug">{story.title.map((line, i) => <>{i > 0 && <br />}{line}</>)}</h2>}
+            {story.paragraphs.map((paragraph, i) => (
+              <p class:list={['max-w-[78ch] text-[16px] leading-relaxed', i > 0 && 'mt-8', i === 0 && story.title && 'mt-10']}>{paragraph}</p>
+            ))}
+          </>
+        ) : (
+          <>
+            <p class="max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
+            <p class="mt-8 max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
+          </>
+        )}
 
-        <blockquote class="mx-auto mt-20 max-w-[34ch] text-center text-[30px] leading-snug">{medium}</blockquote>
+        <blockquote class="mx-auto mt-20 max-w-[34ch] text-center text-[30px] leading-snug">{story?.quote ?? medium}</blockquote>
       </div>
     </div>
   </section>
@@ -62,12 +77,28 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
   <section class="px-5 py-16 md:px-10 md:py-24">
     <div class="mx-auto max-w-[1110px]">
       <div class="md:ml-[20%]">
-        {statements.map((statement, i) => (
-          <div class:list={[i > 0 && 'mt-16']}>
-            <h2 class="max-w-[34ch] text-[24px] leading-snug">{statement.title}</h2>
-            <p class="mt-4 max-w-[78ch] text-[16px] leading-relaxed">{statement.text}</p>
-          </div>
-        ))}
+        {story ? (
+          <>
+            {story.continuation.intro?.map((paragraph, i) => (
+              <p class:list={['max-w-[78ch] text-[16px] leading-relaxed whitespace-pre-line', i > 0 && 'mt-8']}>{paragraph}</p>
+            ))}
+            {story.continuation.sections.map((section, s) => (
+              <>
+                <h2 class:list={['max-w-[34ch] text-[24px] leading-snug', (s > 0 || story.continuation.intro) && 'mt-16']}>{section.title}</h2>
+                {section.paragraphs.map((paragraph, i) => (
+                  <p class:list={['max-w-[78ch] text-[16px] leading-relaxed whitespace-pre-line', i > 0 ? 'mt-8' : 'mt-4']}>{paragraph}</p>
+                ))}
+              </>
+            ))}
+          </>
+        ) : (
+          statements.map((statement, i) => (
+            <div class:list={[i > 0 && 'mt-16']}>
+              <h2 class="max-w-[34ch] text-[24px] leading-snug">{statement.title}</h2>
+              <p class="mt-4 max-w-[78ch] text-[16px] leading-relaxed">{statement.text}</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   </section>
@@ -76,8 +107,8 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
   <section class="px-5 pb-16 md:px-10 md:pb-24">
     <div class="mx-auto max-w-[1110px]">
       <div class="md:ml-[20%]">
-        <h2 class="text-[30px] leading-snug">Lorem ipsum</h2>
-        <p class="mt-6 max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
+        <h2 class="text-[30px] leading-snug">{story?.research.title ?? 'Lorem ipsum'}</h2>
+        <p class="mt-6 max-w-[78ch] text-[16px] leading-relaxed">{story?.research.text ?? long}</p>
       </div>
     </div>
   </section>
@@ -85,9 +116,9 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
   <!-- Zahlen -->
   <section class="bg-night text-cream">
     <div class="container-frst py-16 md:py-20">
-      <h2 class="text-[30px] leading-snug">Lorem ipsum</h2>
+      <h2 class="text-[30px] leading-snug">{story?.facts.title ?? 'Lorem ipsum'}</h2>
       <ul class="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-5">
-        {facts.map((fact) => (
+        {(story?.facts.items ?? facts).map((fact) => (
           <li>
             <p class="text-[30px] leading-none">{fact.value}</p>
             <p class="mt-4 text-[16px] leading-relaxed">{fact.text}</p>
@@ -99,9 +130,9 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
 
   <!-- Zitate -->
   <section class="container-frst py-16 md:py-24">
-    <h2 class="text-[30px] leading-snug">Lorem ipsum</h2>
+    <h2 class="text-[30px] leading-snug">{story?.quotes.title ?? 'Lorem ipsum'}</h2>
     <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {quotes.map((quote) => (
+      {(story?.quotes.items ?? quotes).map((quote) => (
         <li>
           <figure class="flex h-full min-h-[260px] cursor-default flex-col justify-between rounded-2xl border border-night/20 bg-cream p-5 text-night transition-[transform,background-color,border-color,color] duration-300 ease-out hover:-translate-y-1 hover:border-night hover:bg-night hover:text-cream motion-reduce:transition-none">
             <div>
@@ -121,8 +152,8 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
   <section class="px-5 pb-16 md:px-10 md:pb-24">
     <div class="mx-auto max-w-[1110px]">
       <div class="md:ml-[20%]">
-        <h2 class="text-[30px] leading-snug">Lorem ipsum</h2>
-        <p class="mt-6 max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
+        <h2 class="text-[30px] leading-snug">{story?.practice.title ?? 'Lorem ipsum'}</h2>
+        <p class="mt-6 max-w-[78ch] text-[16px] leading-relaxed">{story?.practice.text ?? long}</p>
 
         <p class="eyebrow mt-10 text-[14px]">{title}</p>
         <a href={l('/research#articles')} class="btn-outline mt-6 border-night text-[16px] hover:bg-night hover:text-cream">{t('Back to Research', 'Zurück zu Research')}</a>
@@ -134,7 +165,7 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
   <section class="grid md:grid-cols-[1fr_2fr]">
     <Media tone="dusk" label={t('Article image', 'Artikelbild')} class="min-h-[320px] w-full md:min-h-[560px]" />
     <div class="flex flex-col items-center justify-center bg-night px-5 py-20 text-center text-cream md:px-16">
-      <p class="max-w-[28ch] text-[30px] leading-snug">{short}</p>
+      <p class="max-w-[28ch] text-[30px] leading-snug">{story?.summary ?? short}</p>
       <a href="#" class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">{t('Download article', 'Artikel herunterladen')}</a>
     </div>
   </section>
