@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { localePath, useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  title: string;
+}
+const { lang, title } = Astro.props;
+const t = useLang(lang);
+const l = (href: string) => localePath(lang, href);
+
+// Blindtext: Inhalte später durch den echten Artikel ersetzen
+const short = `Lorem ipsum dolor sit amet, consetetur sadipscing elitr.`;
+const medium = `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.`;
+const long = `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.`;
+
+const statements = Array.from({ length: 6 }, () => ({ title: short, text: long }));
+const facts = Array.from({ length: 5 }, () => ({ value: '00 %', text: medium }));
+const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem ipsum · Dolor sit amet' }));
+---
+
+<Base title={`${title} – frst`} headerOverlay lang={lang}>
+  <!-- Hero mit buntem Verlauf (wie auf der Work-Seite) -->
+  <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-screen md:max-h-[900px]">
+    <div
+      class="pointer-events-none absolute top-1/2 left-[70%] h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#ffd9a0_0%,#f59a3c_28%,#6026fe55_55%,transparent_72%)] opacity-80"
+    ></div>
+    <div
+      class="pointer-events-none absolute bottom-[-25%] left-[8%] h-[640px] w-[640px] rounded-full bg-[radial-gradient(circle,#93c0f5_0%,#4d6fd0_30%,#6026fe55_55%,transparent_72%)] opacity-60"
+    ></div>
+    <div class="container-frst relative pt-40 pb-12">
+      <div class="md:ml-[9%]">
+        <p class="eyebrow text-[14px]">{t('Article · 5 min read', 'Artikel · 5 Min. Lesezeit')}</p>
+        <h1 class="mt-8 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{title}</h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Einleitung -->
+  <section class="px-5 py-16 md:px-10 md:py-24">
+    <div class="mx-auto max-w-[1110px]">
+      <p class="max-w-[34ch] text-[24px] leading-snug font-light">{short}</p>
+
+      <div class="mt-12 md:ml-[20%]">
+        <p class="max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
+        <p class="mt-8 max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
+
+        <blockquote class="mx-auto mt-20 max-w-[34ch] text-center text-[30px] leading-snug">{medium}</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bildband über die ganze Breite -->
+  <section aria-hidden="true">
+    <Media tone="night" label={t('Article image', 'Artikelbild')} class="h-[260px] w-full md:h-[420px]" />
+  </section>
+
+  <!-- Befunde -->
+  <section class="px-5 py-16 md:px-10 md:py-24">
+    <div class="mx-auto max-w-[1110px]">
+      <div class="md:ml-[20%]">
+        {statements.map((statement, i) => (
+          <div class:list={[i > 0 && 'mt-16']}>
+            <h2 class="max-w-[34ch] text-[24px] leading-snug">{statement.title}</h2>
+            <p class="mt-4 max-w-[78ch] text-[16px] leading-relaxed">{statement.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Forschungslage -->
+  <section class="px-5 pb-16 md:px-10 md:pb-24">
+    <div class="mx-auto max-w-[1110px]">
+      <div class="md:ml-[20%]">
+        <h2 class="text-[30px] leading-snug">Lorem ipsum</h2>
+        <p class="mt-6 max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zahlen -->
+  <section class="bg-night text-cream">
+    <div class="container-frst py-16 md:py-20">
+      <h2 class="text-[30px] leading-snug">Lorem ipsum</h2>
+      <ul class="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-5">
+        {facts.map((fact) => (
+          <li>
+            <p class="text-[30px] leading-none">{fact.value}</p>
+            <p class="mt-4 text-[16px] leading-relaxed">{fact.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Zitate -->
+  <section class="container-frst py-16 md:py-24">
+    <h2 class="text-[30px] leading-snug">Lorem ipsum</h2>
+    <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {quotes.map((quote) => (
+        <li>
+          <figure class="flex h-full min-h-[260px] cursor-default flex-col justify-between rounded-2xl border border-night/20 bg-cream p-5 text-night transition-[transform,background-color,border-color,color] duration-300 ease-out hover:-translate-y-1 hover:border-night hover:bg-night hover:text-cream motion-reduce:transition-none">
+            <div>
+              <svg viewBox="0 0 16 12" class="h-3 w-4" fill="currentColor" aria-hidden="true">
+                <path d="M0 12V7.2C0 3.2 2.2.6 6 0l.6 1.6C4.4 2.4 3.4 3.8 3.4 5.4H6V12H0Zm9.4 0V7.2C9.4 3.2 11.6.6 15.4 0L16 1.6c-2.2.8-3.2 2.2-3.2 3.8h2.6V12H9.4Z" />
+              </svg>
+              <blockquote class="mt-4 text-[16px] leading-snug">{t(`“${quote.text}”`, `„${quote.text}“`)}</blockquote>
+            </div>
+            <figcaption class="mt-8 text-[14px] leading-tight">{quote.source}</figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Ableitung in die Praxis -->
+  <section class="px-5 pb-16 md:px-10 md:pb-24">
+    <div class="mx-auto max-w-[1110px]">
+      <div class="md:ml-[20%]">
+        <h2 class="text-[30px] leading-snug">Lorem ipsum</h2>
+        <p class="mt-6 max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
+
+        <p class="eyebrow mt-10 text-[14px]">{title}</p>
+        <a href={l('/research#articles')} class="btn-outline mt-6 border-night text-[16px] hover:bg-night hover:text-cream">{t('Back to Research', 'Zurück zu Research')}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zusammenfassung mit Bild -->
+  <section class="grid md:grid-cols-[1fr_2fr]">
+    <Media tone="dusk" label={t('Article image', 'Artikelbild')} class="min-h-[320px] w-full md:min-h-[560px]" />
+    <div class="flex flex-col items-center justify-center bg-night px-5 py-20 text-center text-cream md:px-16">
+      <p class="max-w-[28ch] text-[30px] leading-snug">{short}</p>
+      <a href="#" class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">{t('Download article', 'Artikel herunterladen')}</a>
+    </div>
+  </section>
+
+  <Newsletter lang={lang} />
+</Base>

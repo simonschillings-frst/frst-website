@@ -1,0 +1,12 @@
+---
+import Take from '../../../templates/Take.astro';
+import { takes } from '../../../data/takes';
+
+export function getStaticPaths() {
+  return takes('de').map((take) => ({ params: { slug: take.slug }, props: { title: take.title } }));
+}
+
+const { title } = Astro.props;
+---
+
+<Take lang="de" title={title} />

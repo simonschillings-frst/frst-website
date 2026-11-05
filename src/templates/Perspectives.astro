@@ -4,6 +4,7 @@ import Media from '../components/Media.astro';
 import Video from '../components/Video.astro';
 import Arrow from '../components/Arrow.astro';
 import Newsletter from '../components/Newsletter.astro';
+import { takes } from '../data/takes';
 import { useLang, type Lang } from '../i18n';
 
 interface Props {
@@ -20,17 +21,17 @@ const longText = `${intro} ${intro} ${intro}`;
 
 // Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
 
-const topics = [
-  // Take-Vorschauen für den Slider (Platzhalter, Titel/Teaser/Link später ersetzen)
-  { id: 'article-1', label: 'Take', tone: 'dusk', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
-  { id: 'article-2', label: 'Take', tone: 'night', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
-  { id: 'article-3', label: 'Take', tone: 'sky', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
-  { id: 'article-4', label: 'Take', tone: 'night', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
-  { id: 'article-5', label: 'Take', tone: 'desert', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
-  { id: 'article-6', label: 'Take', tone: 'mist', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
-  { id: 'article-7', label: 'Take', tone: 'sky', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
-  { id: 'article-8', label: 'Take', tone: 'dusk', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
-];
+// Der neueste Take steht oben, die übrigen im Slider
+const [newestTake, ...sliderTakes] = takes(lang);
+const topics = sliderTakes.map((take) => ({
+  id: take.slug,
+  label: 'Take',
+  tone: take.tone,
+  href: take.href,
+  title: take.title,
+  text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.',
+  meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit'),
+}));
 
 const videos = [
   { title: t('Talk with Dr. Ilke Heller', 'Talk mit Dr. Ilke Heller'), tags: t('Design Thinking', 'Design Thinking'), tone: 'night', youtube: 'XTrlKfSNs-8', poster: '/images/talk-heller.jpg' },
@@ -60,14 +61,14 @@ const videos = [
   <!-- Neuester Take -->
   <section id="newest" class="container-frst scroll-mt-20 py-16 md:py-24">
     <div class="grid items-center gap-10 md:grid-cols-[1.4fr_1fr] md:gap-16">
-      <a href="#" class="group block overflow-hidden" aria-label={t('What happens when creativity meets AI?', 'Was passiert, wenn Kreativität auf KI trifft?')}>
-        <Media tone="night" label={t('Newest take', 'Neuester Take')} class="aspect-[16/9] w-full transition-transform duration-700 ease-out group-hover:scale-105" />
+      <a href={newestTake.href} class="group block overflow-hidden" aria-label={newestTake.title}>
+        <Media tone={newestTake.tone} label={t('Newest take', 'Neuester Take')} class="aspect-[16/9] w-full transition-transform duration-700 ease-out group-hover:scale-105" />
       </a>
       <div>
         <p class="eyebrow text-[14px]">{t('Newest take', 'Neuester Take')}</p>
-        <h2 class="mt-6 max-w-[20ch] text-[30px] leading-snug">{t('What happens when creativity meets AI?', 'Was passiert, wenn Kreativität auf KI trifft?')}</h2>
+        <h2 class="mt-6 max-w-[20ch] text-[30px] leading-snug">{newestTake.title}</h2>
         <p class="mt-6 max-w-[48ch] text-[16px] leading-relaxed">{longText}</p>
-        <a href="#" class="mt-6 inline-block" aria-label={t('Read take', 'Take lesen')}><Arrow /></a>
+        <a href={newestTake.href} class="mt-6 inline-block" aria-label={t('Read take', 'Take lesen')}><Arrow /></a>
       </div>
     </div>
   </section>

@@ -1,0 +1,14 @@
+---
+import Article from '../../../templates/Article.astro';
+import { researchArticles } from '../../../data/researchArticles';
+
+export function getStaticPaths() {
+  return researchArticles('de')
+    .filter((article) => article.slug)
+    .map((article) => ({ params: { slug: article.slug }, props: { title: article.title } }));
+}
+
+const { title } = Astro.props;
+---
+
+<Article lang="de" title={title} />
