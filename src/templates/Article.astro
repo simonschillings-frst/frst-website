@@ -28,12 +28,21 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
 <Base title={`${title} – frst`} headerOverlay lang={lang}>
   <!-- Hero mit buntem Verlauf (wie auf der Work-Seite) -->
   <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-screen md:max-h-[900px]">
-    <div
-      class="pointer-events-none absolute top-1/2 left-[70%] h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#ffd9a0_0%,#f59a3c_28%,#6026fe55_55%,transparent_72%)] opacity-80"
-    ></div>
-    <div
-      class="pointer-events-none absolute bottom-[-25%] left-[8%] h-[640px] w-[640px] rounded-full bg-[radial-gradient(circle,#93c0f5_0%,#4d6fd0_30%,#6026fe55_55%,transparent_72%)] opacity-60"
-    ></div>
+    {story?.heroImage ? (
+      <>
+        <img src={story.heroImage.src} alt={story.heroImage.alt} class="absolute inset-0 h-full w-full object-cover" style={story.heroImage.position && `object-position: ${story.heroImage.position}`} fetchpriority="high" />
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/70 via-transparent to-night/40"></div>
+      </>
+    ) : (
+      <>
+        <div
+          class="pointer-events-none absolute top-1/2 left-[70%] h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#ffd9a0_0%,#f59a3c_28%,#6026fe55_55%,transparent_72%)] opacity-80"
+        ></div>
+        <div
+          class="pointer-events-none absolute bottom-[-25%] left-[8%] h-[640px] w-[640px] rounded-full bg-[radial-gradient(circle,#93c0f5_0%,#4d6fd0_30%,#6026fe55_55%,transparent_72%)] opacity-60"
+        ></div>
+      </>
+    )}
     <div class="container-frst relative pt-40 pb-12">
       <div class="md:ml-[9%]">
         <p class="eyebrow text-[14px]">{t('Article · 5 min read', 'Artikel · 5 Min. Lesezeit')}</p>
@@ -68,10 +77,20 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
     </div>
   </section>
 
-  <!-- Bildband über die ganze Breite -->
-  <section aria-hidden="true">
-    <Media tone="night" label={t('Article image', 'Artikelbild')} class="h-[260px] w-full md:h-[420px]" />
-  </section>
+  <!-- Bild in der Textspalte, ohne Angabe ein Bildband über die ganze Breite -->
+  {story?.bodyImage ? (
+    <section class="px-5 md:px-10">
+      <div class="mx-auto max-w-[1110px]">
+        <div class="text-[16px] md:ml-[20%]">
+          <Media src={story.bodyImage.src} alt={story.bodyImage.alt} label={story.bodyImage.label} tone="mist" class={story.bodyImage.src ? 'mx-auto h-auto w-full max-w-[480px]' : 'aspect-[3/2] w-full max-w-[78ch]'} />
+        </div>
+      </div>
+    </section>
+  ) : (
+    <section aria-hidden={story?.bandImage ? undefined : 'true'}>
+      <Media src={story?.bandImage?.src} alt={story?.bandImage?.alt} tone="night" label={t('Article image', 'Artikelbild')} class={story?.bandImage ? 'h-auto w-full' : 'aspect-[2400/1295] w-full'} />
+    </section>
+  )}
 
   <!-- Befunde -->
   <section class="px-5 py-16 md:px-10 md:py-24">
@@ -163,7 +182,9 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
 
   <!-- Zusammenfassung mit Bild -->
   <section class="grid md:grid-cols-[1fr_2fr]">
-    <Media tone="dusk" label={t('Article image', 'Artikelbild')} class="min-h-[320px] w-full md:min-h-[560px]" />
+    <div class="relative min-h-[320px] md:min-h-[560px]">
+      <Media src={story?.heroImage?.src} alt={story?.heroImage?.alt} position={story?.heroImage?.position} tone="dusk" label={t('Article image', 'Artikelbild')} class={story?.heroImage ? 'absolute inset-0 h-full w-full' : 'min-h-[320px] w-full md:min-h-[560px]'} />
+    </div>
     <div class="flex flex-col items-center justify-center bg-night px-5 py-20 text-center text-cream md:px-16">
       <p class="max-w-[28ch] text-[30px] leading-snug">{story?.summary ?? short}</p>
       <a href="#" class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">{t('Download article', 'Artikel herunterladen')}</a>

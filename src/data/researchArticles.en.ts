@@ -6,6 +6,8 @@ import type { ArticleStory } from './researchArticles';
  */
 
 export const obituaryEn: ArticleStory = {
+  heroImage: { src: '/images/artikel-01-01-header.jpg', alt: 'A digital display showing the time 5:55 reflected in a puddle at night', position: '25% 50%' },
+  bodyImage: { src: '/images/artikel-01-02-web.webp', alt: 'Black-and-white portrait of a person in a light blouse, the face torn out of the paper and surrounded by rings of torn paper', label: 'artikel-01-02' },
   eyebrow: 'Obituary',
   title: ['Here lies the billable hour.', 'Its time has come.'],
   paragraphs: [
@@ -64,6 +66,8 @@ export const obituaryEn: ArticleStory = {
 };
 
 export const middleEn: ArticleStory = {
+  heroImage: { src: '/images/artikel-02-01-header.jpg', alt: 'Two figures sit facing each other at a table in a wide steppe at dusk: one a dark silhouette, the other glowing white' },
+  bandImage: { src: '/images/artikel-02-02-web.jpg', alt: 'Two figures stand on either side of a deep crevice in a wide landscape: one a dark silhouette, the other glowing white' },
   paragraphs: [
     'There is a comfortable story the industry is telling itself right now: AI is a tool. We use it. We become more efficient. And in the end we are stronger than before. The story isn’t wrong. But it is incomplete.',
     'Because AI doesn’t only change how agencies work. It changes which agencies are still needed at all. What is repetitive disappears. What has no clear competence loses its reason to exist. What remains are the ends of the spectrum: the specialists and the networks. The middle in between is shrinking. Not dramatically. Not overnight. But structurally and unstoppably. What follows is not analysis. These are findings. Pointed, because the situation demands it. Sharpened, because the middle leaves no more room for indecision. A guide in six quote cards.',
@@ -140,6 +144,8 @@ export const middleEn: ArticleStory = {
 };
 
 export const therapySessionEn: ArticleStory = {
+  heroImage: { src: '/images/artikel-03-01-header.jpg', alt: 'A dark coat floats with no one wearing it in an empty, dimly lit room, the shadow of a person on the wall beside it', position: '85% 50%' },
+  bandImage: { src: '/images/artikel-03-02-web.jpg', alt: 'Two blurred figures stand a little apart in a misty landscape at dusk, seen from behind' },
   paragraphs: [
     'Trust is the invisible foundation of every agency relationship. Until at some point the question hangs in the room: is the agency actually working for me? Or only for itself?',
     'The problem rarely begins with a major rupture. It begins with small irritations. The promised consultant disappears. Decisions become opaque. The work can hardly be assessed. Both sides notice that something isn’t right. And still don’t talk about it.',
@@ -235,6 +241,8 @@ export const therapySessionEn: ArticleStory = {
 };
 
 export const confessionEn: ArticleStory = {
+  heroImage: { src: '/images/artikel-04-01-header.jpg', alt: 'Iridescent, glass-like head in profile, gazing upward, against a black background', position: '24% 50%' },
+  teaserImage: '/images/artikel-04-01-teaser.jpg',
   paragraphs: [
     'A system that takes in every idea, follows every argument and kindly confirms every thought can eventually feel like the perfect sparring partner. Precisely when we would need one who disagrees. Who finds flaws in our thinking, takes assumptions apart and says: that’s wrong.',
     'The problem is that AI has become very good at pleasing us. And the more convincing it becomes at this, the harder it is for us to recognize that no one is contradicting us right now.',

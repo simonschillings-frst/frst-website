@@ -9,8 +9,10 @@ interface Props {
   label?: string;
   tone?: 'night' | 'desert' | 'mist' | 'sky' | 'dusk';
   class?: string;
+  /** Bildausschnitt als CSS `object-position`, z. B. `85% 50%` */
+  position?: string;
 }
-const { src, alt = '', label, tone = 'night', class: className } = Astro.props;
+const { src, alt = '', label, tone = 'night', class: className, position } = Astro.props;
 
 const tones = {
   night: 'from-[#05030f] via-[#1c1640] to-[#6b7a8f]',
@@ -22,7 +24,7 @@ const tones = {
 ---
 
 {src ? (
-  <img src={src} alt={alt} class:list={['object-cover', className]} loading="lazy" />
+  <img src={src} alt={alt} class:list={['object-cover', className]} style={position && `object-position: ${position}`} loading="lazy" />
 ) : (
   <div
     role="img"

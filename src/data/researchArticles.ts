@@ -9,6 +9,8 @@ export interface ResearchArticle {
   href: string;
   text: string;
   tone: Tone;
+  /** Bild im Teaser, in der Regel der Header des Artikels. Ohne Angabe steht dort der Platzhalter. */
+  image?: string;
   /** Adresse der Blindtext-Unterseite unter /research/<slug>. Artikel mit eigener Seite haben keinen slug. */
   slug?: string;
   /** Sprache des Teasers, falls der Artikel nur in einer Sprache existiert */
@@ -20,6 +22,14 @@ export interface ResearchArticle {
 }
 
 export interface ArticleStory {
+  /** Bild im Header. Ohne Angabe steht dort der bunte Verlauf. */
+  heroImage?: { src: string; alt: string; position?: string };
+  /** Eigener Bildausschnitt für den Teaser. Ohne Angabe zeigt der Teaser das Header-Bild. */
+  teaserImage?: string;
+  /** Bild in der Textspalte statt des Bildstreifens. Ohne `src` steht dort ein Platzhalter mit `label`. */
+  bodyImage?: { src?: string; alt?: string; label: string };
+  /** Bild über die ganze Breite in seinem eigenen Format. Ohne Angabe steht dort ein Platzhalterstreifen. */
+  bandImage?: { src: string; alt: string };
   eyebrow?: string;
   /** Jeder Eintrag steht in einer eigenen Zeile */
   title?: string[];
@@ -52,6 +62,8 @@ export interface ArticleStory {
 }
 
 const obituary: ArticleStory = {
+  heroImage: { src: '/images/artikel-01-01-header.jpg', alt: 'Eine Digitalanzeige mit der Uhrzeit 5:55 spiegelt sich nachts in einer Pfütze', position: '25% 50%' },
+  bodyImage: { src: '/images/artikel-01-02-web.webp', alt: 'Schwarz-Weiß-Porträt einer Person in heller Bluse, das Gesicht ist aus dem Papier herausgerissen und von gerissenen Papierringen umgeben', label: 'artikel-01-02' },
   eyebrow: 'Nachruf',
   title: ['Hier ruht die abrechenbare Stunde.', 'Ihre Zeit ist gekommen.'],
   paragraphs: [
@@ -110,6 +122,8 @@ const obituary: ArticleStory = {
 };
 
 const therapySession: ArticleStory = {
+  heroImage: { src: '/images/artikel-03-01-header.jpg', alt: 'Ein dunkler Mantel schwebt ohne Träger in einem leeren, spärlich beleuchteten Raum, an der Wand daneben der Schatten einer Person', position: '85% 50%' },
+  bandImage: { src: '/images/artikel-03-02-web.jpg', alt: 'Zwei unscharfe Figuren stehen mit etwas Abstand nebeneinander in einer nebligen Landschaft in der Dämmerung, von hinten gesehen' },
   paragraphs: [
     'Vertrauen ist die unsichtbare Grundlage jeder Agenturbeziehung. Bis irgendwann die Frage im Raum steht: Arbeitet die Agentur eigentlich für mich? Oder nur für sich?',
     'Das Problem beginnt selten mit einem großen Bruch. Es beginnt mit kleinen Irritationen. Der versprochene Berater verschwindet. Entscheidungen werden intransparent. Leistungen lassen sich kaum beurteilen. Beide Seiten merken, dass etwas nicht stimmt. Und sprechen trotzdem nicht darüber.',
@@ -205,6 +219,8 @@ const therapySession: ArticleStory = {
 };
 
 const confession: ArticleStory = {
+  heroImage: { src: '/images/artikel-04-01-header.jpg', alt: 'Schillernder, gläsern wirkender Kopf im Profil, der Blick nach oben gerichtet, vor schwarzem Hintergrund', position: '24% 50%' },
+  teaserImage: '/images/artikel-04-01-teaser.jpg',
   paragraphs: [
     'Ein System, das jede Idee aufnimmt, jeder Argumentation folgt und jeden Gedanken freundlich bestätigt, kann sich irgendwann wie ein perfekter Sparringspartner anfühlen. Gerade dann, wenn wir einen bräuchten, der widerspricht. Der Denkfehler findet, Annahmen zerlegt und sagt: Das ist falsch.',
     'Das Problem ist, dass KI sehr gut darin geworden ist, uns zufriedenzustellen. Und je überzeugender sie dabei wird, desto schwerer erkennen wir, dass uns gerade niemand widerspricht.',
@@ -623,6 +639,7 @@ export const researchArticles = (lang: Lang): ResearchArticle[] => {
     slug,
     title,
     tone,
+    image: story?.teaserImage ?? story?.heroImage?.src,
     lead,
     story,
     text,
@@ -645,6 +662,7 @@ export const researchArticles = (lang: Lang): ResearchArticle[] => {
       href: localePath(lang, '/perspectives/the-middle-is-disappearing'),
       text: t('AI isn’t destroying the agency. It’s destroying the middle.', 'KI zerstört nicht die Agentur. Sie zerstört das Mittelfeld.'),
       tone: 'dusk',
+      image: '/images/artikel-02-01-header.jpg',
     },
     withPage(
       '03',
