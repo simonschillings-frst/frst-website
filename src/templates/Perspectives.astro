@@ -21,15 +21,15 @@ const longText = `${intro} ${intro} ${intro}`;
 // Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
 
 const topics = [
-  // Artikelvorschauen für den Slider (Platzhalter, Titel/Teaser/Link später ersetzen)
-  { id: 'article-1', label: t('Article', 'Artikel'), tone: 'dusk', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Article · 5 min read', 'Artikel · 5 Min. Lesezeit') },
-  { id: 'article-2', label: t('Article', 'Artikel'), tone: 'night', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Article · 5 min read', 'Artikel · 5 Min. Lesezeit') },
-  { id: 'article-3', label: t('Article', 'Artikel'), tone: 'sky', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Article · 5 min read', 'Artikel · 5 Min. Lesezeit') },
-  { id: 'article-4', label: t('Article', 'Artikel'), tone: 'night', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Article · 5 min read', 'Artikel · 5 Min. Lesezeit') },
-  { id: 'article-5', label: t('Article', 'Artikel'), tone: 'desert', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Article · 5 min read', 'Artikel · 5 Min. Lesezeit') },
-  { id: 'article-6', label: t('Article', 'Artikel'), tone: 'mist', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Article · 5 min read', 'Artikel · 5 Min. Lesezeit') },
-  { id: 'article-7', label: t('Article', 'Artikel'), tone: 'sky', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Article · 5 min read', 'Artikel · 5 Min. Lesezeit') },
-  { id: 'article-8', label: t('Article', 'Artikel'), tone: 'dusk', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Article · 5 min read', 'Artikel · 5 Min. Lesezeit') },
+  // Take-Vorschauen für den Slider (Platzhalter, Titel/Teaser/Link später ersetzen)
+  { id: 'article-1', label: 'Take', tone: 'dusk', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
+  { id: 'article-2', label: 'Take', tone: 'night', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
+  { id: 'article-3', label: 'Take', tone: 'sky', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
+  { id: 'article-4', label: 'Take', tone: 'night', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
+  { id: 'article-5', label: 'Take', tone: 'desert', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
+  { id: 'article-6', label: 'Take', tone: 'mist', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
+  { id: 'article-7', label: 'Take', tone: 'sky', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
+  { id: 'article-8', label: 'Take', tone: 'dusk', href: '#', title: 'Lorem ipsum dolor sit amet', text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.', meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit') },
 ];
 
 const videos = [
@@ -57,17 +57,17 @@ const videos = [
     </div>
   </section>
 
-  <!-- Neuester Artikel -->
+  <!-- Neuester Take -->
   <section id="newest" class="container-frst scroll-mt-20 py-16 md:py-24">
     <div class="grid items-center gap-10 md:grid-cols-[1.4fr_1fr] md:gap-16">
       <a href="#" class="group block overflow-hidden" aria-label={t('What happens when creativity meets AI?', 'Was passiert, wenn Kreativität auf KI trifft?')}>
-        <Media tone="night" label={t('Newest article', 'Neuester Artikel')} class="aspect-[16/9] w-full transition-transform duration-700 ease-out group-hover:scale-105" />
+        <Media tone="night" label={t('Newest take', 'Neuester Take')} class="aspect-[16/9] w-full transition-transform duration-700 ease-out group-hover:scale-105" />
       </a>
       <div>
-        <p class="eyebrow text-[14px]">{t('Newest article', 'Neuester Artikel')}</p>
+        <p class="eyebrow text-[14px]">{t('Newest take', 'Neuester Take')}</p>
         <h2 class="mt-6 max-w-[20ch] text-[30px] leading-snug">{t('What happens when creativity meets AI?', 'Was passiert, wenn Kreativität auf KI trifft?')}</h2>
         <p class="mt-6 max-w-[48ch] text-[16px] leading-relaxed">{longText}</p>
-        <a href="#" class="mt-6 inline-block" aria-label={t('Read article', 'Artikel lesen')}><Arrow /></a>
+        <a href="#" class="mt-6 inline-block" aria-label={t('Read take', 'Take lesen')}><Arrow /></a>
       </div>
     </div>
   </section>
@@ -136,10 +136,10 @@ const videos = [
   </section>
 
   <!-- Why frst: Themen -->
-  <section class="container-frst py-20 md:py-24">
+  <section id="our-takes" class="container-frst scroll-mt-20 py-20 md:py-24">
     <div class="grid gap-12 lg:grid-cols-[1fr_2.6fr] lg:gap-24" data-slider>
       <div>
-        <p class="eyebrow text-[14px]">{t('Articles', 'Artikel')}</p>
+        <p class="eyebrow text-[14px]">Our Takes</p>
         <h2 class="mt-8 text-[30px] leading-snug">{t('We dig deeper.', 'Wir graben tiefer.')}<br />{t('So you can go further.', 'Damit du weiterkommst.')}</h2>
         <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{intro}</p>
         <p class="mt-6 max-w-sm text-[16px] leading-relaxed">{intro}</p>
@@ -148,7 +148,7 @@ const videos = [
             type="button"
             data-slider-prev
             class="flex h-9 w-9 items-center justify-center rounded-full border border-night/40 transition-colors duration-200 hover:bg-night hover:text-cream disabled:pointer-events-none disabled:opacity-30"
-            aria-label={t('Previous articles', 'Vorherige Artikel')}
+            aria-label={t('Previous takes', 'Vorherige Takes')}
           >
             <Arrow class="rotate-180" />
           </button>
@@ -156,7 +156,7 @@ const videos = [
             type="button"
             data-slider-next
             class="flex h-9 w-9 items-center justify-center rounded-full border border-night/40 transition-colors duration-200 hover:bg-night hover:text-cream disabled:pointer-events-none disabled:opacity-30"
-            aria-label={t('Next articles', 'Nächste Artikel')}
+            aria-label={t('Next takes', 'Nächste Takes')}
           >
             <Arrow />
           </button>
