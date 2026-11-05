@@ -15,8 +15,8 @@ const l = (href: string) => localePath(lang, href);
 const articleHref = l('/perspectives/the-middle-is-disappearing');
 
 const intro = t(
-  'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.',
-  'Wir bauen unvergessliche Marken, die begeistern und Menschen mitnehmen. Deshalb stellen wir interdisziplinäre Teams zusammen, die von zukunftsweisender Technologie getragen werden.',
+  'There is a comfortable story the industry is telling itself right now: AI is a tool. We use it. We become more efficient. And in the end we are stronger than before. The story isn’t wrong. But it is incomplete.',
+  'Es gibt eine bequeme Geschichte, die die Branche sich gerade erzählt: KI ist ein Werkzeug. Wir nutzen es. Wir werden effizienter. Und am Ende sind wir stärker als zuvor. Die Geschichte ist nicht falsch. Aber sie ist unvollständig.',
 );
 
 const pillars = [
@@ -133,8 +133,9 @@ const disciplines = [
       <p class="mt-6 max-w-md text-[16px] leading-relaxed opacity-90">{intro}</p>
       <a href={articleHref} class="mt-8" aria-label={t('Go to the article The middle is disappearing', 'Zum Artikel Die Mitte verschwindet')}><Arrow /></a>
     </div>
-    <a href={articleHref} class="group block overflow-hidden" aria-label={t('Go to the article The middle is disappearing', 'Zum Artikel Die Mitte verschwindet')}>
-      <Media tone="mist" class="min-h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:h-full md:min-h-[480px]" />
+    <a href={articleHref} class="group relative block overflow-hidden md:min-h-[480px]" aria-label={t('Go to the article The middle is disappearing', 'Zum Artikel Die Mitte verschwindet')}>
+      <!-- Absolut positioniert, damit das Bild die Zeilenhöhe nicht vergrößert -->
+      <Media src="/images/web/artikel-02-01-header.jpg" class="h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:absolute md:inset-0 md:h-full" />
     </a>
   </section>
 
@@ -278,8 +279,9 @@ const disciplines = [
       </p>
       <a href={l('/about-us')} class="mt-8" aria-label={t('Go to the About us page', 'Zur Über-uns-Seite')}><Arrow /></a>
     </div>
-    <a href={l('/about-us')} class="group block overflow-hidden" aria-label={t('Go to the About us page', 'Zur Über-uns-Seite')}>
-      <Media tone="mist" class="min-h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:h-full md:min-h-[480px]" />
+    <a href={l('/about-us')} class="group relative block overflow-hidden md:min-h-[480px]" aria-label={t('Go to the About us page', 'Zur Über-uns-Seite')}>
+      <!-- Absolut positioniert, damit das Bild die Zeilenhöhe nicht vergrößert -->
+      <Media src="/images/web/about-header.jpg" position="50% 10%" class="h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:absolute md:inset-0 md:h-full" />
     </a>
   </section>
 
