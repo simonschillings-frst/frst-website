@@ -5,6 +5,8 @@
  * Am Desktop läuft der Loop nur, solange der Cursor auf dem Bild ist, ohne Maus (Handy, Tablet),
  * solange das Bild im Blick ist. Danach und bei „reduzierter Bewegung“ steht das erste Bild.
  */
+import { responsiveImage } from '../lib/images';
+
 interface Props {
   images: string[];
   alt: string;
@@ -15,7 +17,7 @@ const { images, alt, class: className } = Astro.props;
 
 <div class:list={['relative overflow-hidden', className]} data-hover-loop>
   {images.map((src, i) => (
-    <img src={src} alt={i === 0 ? alt : ''} aria-hidden={i === 0 ? undefined : 'true'} loading="lazy" class:list={['absolute inset-0 h-full w-full object-cover', { 'opacity-0': i > 0 }]} />
+    <img {...responsiveImage(src)} sizes="(min-width: 768px) 50vw, 100vw" alt={i === 0 ? alt : ''} aria-hidden={i === 0 ? undefined : 'true'} loading="lazy" class:list={['absolute inset-0 h-full w-full object-cover', { 'opacity-0': i > 0 }]} />
   ))}
 </div>
 

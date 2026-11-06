@@ -126,7 +126,7 @@ const words = [t('Strategy', 'Strategie'), t('Creative', 'Kreation'), t('Brand',
           <li class="w-[70vw] shrink-0 sm:w-[44vw] md:w-[26rem]">
             <a href={'href' in item ? item.href : '#'} class="group block">
               <div class="overflow-hidden">
-                <Media src={'image' in item ? item.image : undefined} alt={'image' in item ? item.title : undefined} tone={item.tone} class={`${item.frame} w-full transition-transform duration-700 ease-out group-hover:scale-105`} />
+                <Media sizes="(min-width: 768px) 50vw, 100vw" src={'image' in item ? item.image : undefined} alt={'image' in item ? item.title : undefined} tone={item.tone} class={`${item.frame} w-full transition-transform duration-700 ease-out group-hover:scale-105`} />
               </div>
               <h3 class="mt-5 text-[24px] leading-snug">{item.title}</h3>
               <p class="mt-1 text-[14px] opacity-70">{item.tags}</p>
