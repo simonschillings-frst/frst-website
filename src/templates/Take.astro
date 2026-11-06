@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import { useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  title: string;
+}
+const { lang, title } = Astro.props;
+const t = useLang(lang);
+
+// Blindtext: Inhalte später durch den echten Take ersetzen
+const short = `Lorem ipsum dolor sit amet, consetetur sadipscing elitr.`;
+const medium = `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.`;
+const long = `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.`;
+
+const paragraph = `${long} ${long}`;
+---
+
+<Base title={`${title} – frst`} headerOverlay lang={lang}>
+  <!-- Hero mit buntem Verlauf (wie auf der Artikel-Seite) -->
+  <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-screen md:max-h-[900px]">
+    <div
+      class="pointer-events-none absolute top-1/2 left-[70%] h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#ffd9a0_0%,#f59a3c_28%,#6026fe55_55%,transparent_72%)] opacity-80"
+    ></div>
+    <div
+      class="pointer-events-none absolute bottom-[-25%] left-[8%] h-[640px] w-[640px] rounded-full bg-[radial-gradient(circle,#93c0f5_0%,#4d6fd0_30%,#6026fe55_55%,transparent_72%)] opacity-60"
+    ></div>
+    <div class="container-frst relative pt-40 pb-12">
+      <div class="md:ml-[9%]">
+        <p class="eyebrow text-[14px]">{t('Take · 5 min read', 'Take · 5 Min. Lesezeit')}</p>
+        <h1 class="mt-8 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{title}</h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Einleitung -->
+  <section class="px-5 py-16 md:px-10 md:py-24">
+    <div class="mx-auto max-w-[1110px]">
+      <p class="max-w-[34ch] text-[24px] leading-snug font-light">{short}</p>
+
+      <div class="mt-12 md:ml-[20%]">
+        <p class="max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
+        <p class="mt-8 max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
+
+        <blockquote class="mx-auto mt-20 max-w-[34ch] text-center text-[30px] leading-snug">{medium}</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bildband über die ganze Breite -->
+  <section aria-hidden="true">
+    <Media tone="night" label={t('Take image', 'Take-Bild')} class="h-[260px] w-full md:h-[420px]" />
+  </section>
+
+  <!-- Fließtext -->
+  <section class="px-5 py-16 md:px-10 md:py-24">
+    <div class="mx-auto max-w-[1110px]">
+      <div class="md:ml-[20%]">
+        <h2 class="max-w-[34ch] text-[24px] leading-snug">{short}</h2>
+        <p class="mt-4 max-w-[78ch] text-[16px] leading-relaxed">{paragraph}</p>
+        <p class="mt-8 max-w-[78ch] text-[16px] leading-relaxed">{paragraph}</p>
+      </div>
+    </div>
+  </section>
+
+</Base>

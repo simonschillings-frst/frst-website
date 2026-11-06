@@ -12,10 +12,6 @@ export default defineConfig({
     locales: ['en', 'de'],
     routing: { prefixDefaultLocale: false },
   },
-  // Der deutsche Artikel liegt jetzt unter dem deutschen Pfad
-  redirects: {
-    '/perspectives/the-middle-is-disappearing': '/de/perspectives/the-middle-is-disappearing',
-  },
   vite: {
     plugins: [tailwindcss()],
   },

@@ -3,6 +3,8 @@ import Base from '../../../layouts/Base.astro';
 import Media from '../../../components/Media.astro';
 import Newsletter from '../../../components/Newsletter.astro';
 
+const heroImage = { src: '/images/web/artikel-02-01-header.jpg', alt: 'Zwei Figuren sitzen sich in einer weiten Steppe in der Dämmerung an einem Tisch gegenüber: eine als dunkle Silhouette, die andere weiß leuchtend' };
+
 // Artikeltext: KI zerstört nicht die Agentur. Sie zerstört das Mittelfeld.
 const lead = `KI zerstört nicht die Agentur. Sie zerstört das Mittelfeld.`;
 const intro = [
@@ -58,15 +60,11 @@ const quotes = [
 const practice = `Die wichtigste strategische Entscheidung, die Agenturen jetzt treffen müssen, ist keine Technologieentscheidung. Es ist eine Positionierungsentscheidung: Boutique oder Netzwerk? Spezialist oder Integrator? Wer sich nicht entscheidet, entscheidet sich für das Mittelfeld — und das Mittelfeld schrumpft. Konkret bedeutet das: Kernkompetenz radikal benennen und konsequent kommunizieren. Leistungen außerhalb dieser Kompetenz transparent an spezialisierte Partner abgeben. Und In-Housing nicht als Bedrohung lesen, sondern als Chance, den eigenen Wertbeitrag auf das zu konzentrieren, was kein internes Team je replizieren kann.`;
 ---
 
-<Base title="Die Mitte verschwindet – frst" headerOverlay lang="de" translations={['de']}>
-  <!-- Hero mit buntem Verlauf (wie auf der Work-Seite) -->
+<Base title="Die Mitte verschwindet – frst" headerOverlay lang="de">
+  <!-- Hero mit Bild -->
   <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-screen md:max-h-[900px]">
-    <div
-      class="pointer-events-none absolute top-1/2 left-[70%] h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#ffd9a0_0%,#f59a3c_28%,#6026fe55_55%,transparent_72%)] opacity-80"
-    ></div>
-    <div
-      class="pointer-events-none absolute bottom-[-25%] left-[8%] h-[640px] w-[640px] rounded-full bg-[radial-gradient(circle,#93c0f5_0%,#4d6fd0_30%,#6026fe55_55%,transparent_72%)] opacity-60"
-    ></div>
+    <img src={heroImage.src} alt={heroImage.alt} class="absolute inset-0 h-full w-full object-cover" fetchpriority="high" />
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/70 via-transparent to-night/40"></div>
     <div class="container-frst relative pt-40 pb-12">
       <div class="md:ml-[9%]">
         <p class="eyebrow text-[14px]">Artikel · 5 Min. Lesezeit</p>
@@ -78,7 +76,7 @@ const practice = `Die wichtigste strategische Entscheidung, die Agenturen jetzt 
   <!-- Einleitung -->
   <section class="px-5 py-16 md:px-10 md:py-24" lang="de">
     <div class="mx-auto max-w-[1110px]">
-      <p class="max-w-[48ch] text-[20px] leading-relaxed">{lead}</p>
+      <p class="max-w-[34ch] text-[24px] leading-snug font-light">{lead}</p>
 
       <div class="mt-12 md:ml-[20%]">
         {intro.map((paragraph, i) => (
@@ -91,8 +89,8 @@ const practice = `Die wichtigste strategische Entscheidung, die Agenturen jetzt 
   </section>
 
   <!-- Bildband über die ganze Breite -->
-  <section aria-hidden="true">
-    <Media tone="night" label="Artikelbild" class="h-[260px] w-full md:h-[420px]" />
+  <section>
+    <Media src="/images/artikel-02-02-web.jpg" alt="Zwei Figuren stehen sich in einer weiten Landschaft auf beiden Seiten einer tiefen Felsspalte gegenüber: eine als dunkle Silhouette, die andere weiß leuchtend" position="50% 53%" class="aspect-[2400/1295] w-full md:aspect-[2400/648]" />
   </section>
 
   <!-- Die sechs Befunde -->
@@ -169,7 +167,9 @@ const practice = `Die wichtigste strategische Entscheidung, die Agenturen jetzt 
 
   <!-- Zusammenfassung mit Bild -->
   <section class="grid md:grid-cols-[1fr_2fr]">
-    <Media tone="dusk" label="Artikelbild" class="min-h-[320px] w-full md:min-h-[560px]" />
+    <div class="relative min-h-[320px] md:min-h-[560px]">
+      <Media src={heroImage.src} alt={heroImage.alt} class="absolute inset-0 h-full w-full" />
+    </div>
     <div class="flex flex-col items-center justify-center bg-night px-5 py-20 text-center text-cream md:px-16">
       <p class="max-w-[28ch] text-[30px] leading-snug" lang="de">Das Mittelfeld ist kein Geschäftsmodell. Es ist ein Aufschub.</p>
       <a href="#" class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">Artikel herunterladen</a>

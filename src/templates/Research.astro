@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
 import Arrow from '../components/Arrow.astro';
+import { researchArticles } from '../data/researchArticles';
 import { localePath, useLang, type Lang } from '../i18n';
 
 interface Props {
@@ -17,27 +18,7 @@ const intro = t(
 );
 
 // Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
-const articleText = t('What AI means for the agency model – and what comes next.', 'Was KI für das Agenturmodell bedeutet – und was als Nächstes kommt.');
-const baseArticles = [
-  { no: '01', title: t('Time was the real value.', 'Zeit war der eigentliche Wert.'), href: '#', text: articleText, tone: 'night' },
-  { no: '02', title: t('The middle is disappearing', 'Die Mitte verschwindet'), href: '/de/perspectives/the-middle-is-disappearing', text: 'KI zerstört nicht die Agentur. Sie zerstört das Mittelfeld.', lang: 'de', tone: 'dusk' },
-  { no: '03', title: t('Trust goes the model stays.', 'Vertrauen geht, das Modell bleibt.'), href: '#', text: articleText, tone: 'sky' },
-  { no: '04', title: t('AI nods You believe', 'KI nickt. Du glaubst.'), href: '#', text: articleText, tone: 'desert' },
-];
-
-// Platzhalter 05–12, damit die Seitenaufteilung (4 Artikel pro Seite, bis zu 12 Artikel) sichtbar ist.
-// Beim Anlegen echter Artikel einfach hier ersetzen oder ergänzen.
-const placeholderTones = ['night', 'dusk', 'sky', 'desert'] as const;
-const articles = [
-  ...baseArticles,
-  ...Array.from({ length: 8 }, (_, k) => ({
-    no: String(k + 5).padStart(2, '0'),
-    title: 'Lorem Ipsum',
-    href: '#',
-    text: articleText,
-    tone: placeholderTones[k % placeholderTones.length],
-  })),
-];
+const articles = researchArticles(lang);
 const pageSize = 4;
 
 // Felder der Studien-Anmeldung (nur die nötigsten Angaben, siehe Datenminimierung)
@@ -123,7 +104,7 @@ const quotes = [
             data-article-image={i}
             data-active={i === 0 ? '' : undefined}
           >
-            <Media tone={article.tone as 'night' | 'dusk' | 'sky' | 'desert'} label={t('Articles', 'Artikel')} class="h-full w-full" />
+            <Media src={article.image} tone={article.tone as 'night' | 'dusk' | 'sky' | 'desert'} label={t('Articles', 'Artikel')} class="h-full w-full" />
           </div>
         ))}
       </a>

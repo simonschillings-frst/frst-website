@@ -79,14 +79,15 @@ const paragraph =
       {[
         { src: '/images/mb-claim-kurven.svg', alt: 'Menold Bezler – Claim „Wenn du lieber Klagen als Ausreden hörst.“ neben dem Symbol aus zwei Winkeln' },
         { src: '/images/mb-airport.jpg', alt: 'Menold Bezler – Werbefläche in einem Flughafen mit dem Claim „Wenn du lieber Klagen als Ausreden hörst.“, Symbol und Porträt eines Mannes im Sakko' },
-        { src: '/images/mb-handy-instagram.jpg', alt: 'Menold Bezler – Instagram-Post „Wenn dein Leben nicht die längste Rückstellung ever werden soll.“ auf einem Smartphone' },
+        { src: '/images/web/mb-handy-instagram.jpg', alt: 'Menold Bezler – Instagram-Post „Wenn dein Leben nicht die längste Rückstellung ever werden soll.“ auf einem Smartphone' },
       ].map((slide, i) => (
         <Media src={slide.src} alt={slide.alt} class={`h-full w-full transition-opacity duration-300 motion-reduce:transition-none [grid-area:1/1] ${i > 0 ? 'opacity-0' : ''}`} />
       ))}
     </div>
-    <div class="mt-3 flex gap-1 text-[20px]">
+    <!-- Nummern im selben Stil wie die Seitenzahlen auf der Research-Seite -->
+    <div class="mt-3 flex items-center gap-1 text-[16px]">
       {[1, 2, 3].map((number, i) => (
-        <button type="button" aria-label={t(`Show image ${number}`, `Bild ${number} zeigen`)} aria-current={i === 0 ? 'true' : undefined} class:list={['min-w-8 py-1 text-left transition-opacity duration-200 hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-current', { 'opacity-40': i > 0 }]}>{number}</button>
+        <button type="button" aria-label={t(`Show image ${number}`, `Bild ${number} zeigen`)} aria-current={i === 0 ? 'true' : undefined} class:list={['flex h-9 w-9 items-center justify-center rounded-full border transition-colors duration-200 hover:border-night/40 focus-visible:outline-2 focus-visible:outline-current', i === 0 ? 'border-night' : 'border-transparent']}>{number}</button>
       ))}
     </div>
   </section>
@@ -105,8 +106,8 @@ const paragraph =
         <div class="h-[50vh] snap-x overflow-x-auto xl:h-screen" tabindex="0" role="region" aria-label={t('Image gallery, scrolls sideways', 'Bildergalerie, seitlich scrollbar')} data-strip-track>
           <div class="flex h-full min-w-max gap-2 will-change-transform [&>*]:snap-start" data-strip-row>
             <Media src="/images/mb-resonanz-screen.jpg" alt="Menold Bezler – Bühne mit leuchtendem Schriftzug „Resonanz“ vor Publikum" class="h-full aspect-[3/2] shrink-0" />
-            <HoverLoop images={['/images/mb-visitenkarte-v1-hoch.jpg', '/images/mb-visitenkarte-v2-hoch.jpg', '/images/mb-visitenkarte-v3-hoch.jpg', '/images/mb-visitenkarte-v4-hoch.jpg']} alt="Menold Bezler – Stapel Visitenkarten mit Logo auf Terrazzo" class="h-full aspect-[3/4] shrink-0" />
-            <Media src="/images/schachtel-klein-v2.jpg" alt="Menold Bezler – Kartenset-Schachtel „Fragen, die bewegen.“" class="h-full aspect-[3/4] shrink-0" />
+            <HoverLoop images={['/images/web/mb-visitenkarte-v1-hoch.jpg', '/images/web/mb-visitenkarte-v2-hoch.jpg', '/images/web/mb-visitenkarte-v3-hoch.jpg', '/images/web/mb-visitenkarte-v4-hoch.jpg']} alt="Menold Bezler – Stapel Visitenkarten mit Logo auf Terrazzo" class="h-full aspect-[3/4] shrink-0" />
+            <Media src="/images/web/schachtel-klein-v2.jpg" alt="Menold Bezler – Kartenset-Schachtel „Fragen, die bewegen.“" class="h-full aspect-[3/4] shrink-0" />
             <Media src="/images/mb-totebag-stuhl.jpg" alt="Menold Bezler – dunkelgrüne Tote Bag mit Logo an einem Holzstuhl" class="h-full aspect-[3/4] shrink-0" />
           </div>
         </div>
@@ -166,7 +167,8 @@ const paragraph =
           image.setAttribute('aria-hidden', String(i !== current));
         });
         buttons.forEach((button, i) => {
-          button.classList.toggle('opacity-40', i !== current);
+          button.classList.toggle('border-night', i === current);
+          button.classList.toggle('border-transparent', i !== current);
           if (i === current) button.setAttribute('aria-current', 'true');
           else button.removeAttribute('aria-current');
         });
@@ -174,7 +176,7 @@ const paragraph =
       const pause = () => window.clearInterval(timer);
       const play = () => {
         pause();
-        if (autoplay && inView) timer = window.setInterval(() => show((current + 1) % images.length), 2500);
+        if (autoplay && inView) timer = window.setInterval(() => show((current + 1) % images.length), 1500);
       };
       buttons.forEach((button, i) => {
         button.addEventListener('click', () => {
