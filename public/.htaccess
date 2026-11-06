@@ -1,4 +1,14 @@
-# Einstellungen für den All-Inkl-Webspace (Apache): Komprimierung und Browser-Cache.
+# Einstellungen für den All-Inkl-Webspace (Apache): https-Umleitung, Komprimierung und Browser-Cache.
+
+# Alle Aufrufe über http:// dauerhaft auf https:// umleiten (SSL-Zertifikat ist im KAS aktiv).
+# Ausnahme: Let's Encrypt prüft beim Verlängern des Zertifikats über http://…/.well-known/acme-challenge/
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteCond %{REQUEST_URI} !^/\.well-known/acme-challenge/
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
 
 # Texte komprimiert ausliefern (HTML, CSS, JavaScript, SVG, Untertitel)
 <IfModule mod_deflate.c>
