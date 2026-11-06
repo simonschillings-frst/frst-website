@@ -2,6 +2,7 @@
 import Base from '../../../layouts/Base.astro';
 import Media from '../../../components/Media.astro';
 import Newsletter from '../../../components/Newsletter.astro';
+import { responsiveImage } from '../../../lib/images';
 
 const heroImage = { src: '/images/web/artikel-02-01-header.jpg', alt: 'Zwei Figuren sitzen sich in einer weiten Steppe in der Dämmerung an einem Tisch gegenüber: eine als dunkle Silhouette, die andere weiß leuchtend' };
 
@@ -63,7 +64,7 @@ const practice = `Die wichtigste strategische Entscheidung, die Agenturen jetzt 
 <Base title="Die Mitte verschwindet – frst" headerOverlay lang="de">
   <!-- Hero mit Bild -->
   <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-screen md:max-h-[900px]">
-    <img src={heroImage.src} alt={heroImage.alt} class="absolute inset-0 h-full w-full object-cover" fetchpriority="high" />
+    <img {...responsiveImage(heroImage.src)} sizes="100vw" alt={heroImage.alt} class="absolute inset-0 h-full w-full object-cover" fetchpriority="high" />
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/70 via-transparent to-night/40"></div>
     <div class="container-frst relative pt-40 pb-12">
       <div class="md:ml-[9%]">

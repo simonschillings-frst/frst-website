@@ -3,8 +3,10 @@
  * Video in drei Varianten:
  *
  * 1. Lokal, Loop ohne Ton (Hero, Hintergründe, kurze Clips):
- *    <Video src="/videos/hero.mp4" poster="/images/hero.jpg" loop lang={lang} />
- *    Startet stumm von selbst, hat einen Pause-Knopf und pausiert bei „reduzierte Bewegung“.
+ *    <Video src="/videos/hero.mp4" srcMobile="/videos/hero-720.mp4" poster="/videos/hero-poster.webp" loop eager lang={lang} />
+ *    Stumm, mit Pause-Knopf, pausiert bei „reduzierte Bewegung“. Mit `eager` (ganz oben auf der Seite) startet er sofort,
+ *    sonst lädt er erst kurz bevor er ins Bild kommt und zeigt bis dahin das Standbild (`poster`).
+ *    `srcMobile` ist optional: kleinere Fassung fürs Handy. Videos vorher komprimieren (z. B. 1080p um 1,5 Mbit/s, ohne Ton).
  *
  * 1b. Lokal als Teaser in einer verlinkten Kachel (z. B. Case-Übersicht):
  *    <Video src="/videos/case.mp4" teaser lang={lang} />
@@ -37,6 +39,7 @@
  * Größe und Seitenverhältnis kommen über `class`, Standard ist 16:9.
  */
 import { defaultLang, useLang, type Lang } from '../i18n';
+import { responsiveImage } from '../lib/images';
 import type { Tone } from '../data/navigation';
 
 interface Props {
@@ -59,6 +62,10 @@ interface Props {
   title?: string;
   /** Nur lokal: stummer Endlos-Loop ohne Player (Deko/Hintergrund) */
   loop?: boolean;
+  /** Nur lokal: kleinere Fassung fürs Handy (bis 767 px Breite), z. B. "/videos/hero-720.mp4" */
+  srcMobile?: string;
+  /** Nur mit `loop`: lädt und startet sofort (für Videos ganz oben). Sonst lädt der Loop erst kurz bevor er ins Bild kommt. */
+  eager?: boolean;
   /** Stummer Loop ohne Knopf für Kacheln, die selbst ein Link sind (lokal oder Vimeo) */
   teaser?: boolean;
   /** Nur lokal mit Ton: Untertiteldatei (.vtt) */
@@ -67,7 +74,7 @@ interface Props {
   class?: string;
 }
 
-const { lang = defaultLang, src, vimeo, vimeoHash, background = false, startInView = false, youtube, poster, title = '', loop = false, teaser = false, captions, tone = 'night', class: className = 'aspect-video w-full' } = Astro.props;
+const { lang = defaultLang, src, vimeo, vimeoHash, background = false, startInView = false, youtube, poster, title = '', loop = false, srcMobile, eager = false, teaser = false, captions, tone = 'night', class: className = 'aspect-video w-full' } = Astro.props;
 const t = useLang(lang);
 
 const provider = vimeo ? 'Vimeo' : youtube ? 'YouTube' : null;
@@ -123,8 +130,12 @@ const tones = {
 )}
 
 {src && loop && (
-  <div class:list={['relative overflow-hidden bg-gradient-to-br', tones[tone], className]} data-video-loop>
-    <video src={src} poster={poster} autoplay muted loop playsinline preload="metadata" aria-hidden="true" class="h-full w-full object-cover"></video>
+  <div class:list={['overflow-hidden bg-gradient-to-br', tones[tone], { relative: !/\b(absolute|fixed)\b/.test(className) }, className]} data-video-loop data-video-lazy={eager ? undefined : ''}>
+    <!-- Ohne `eager` lädt das Video erst beim Reinscrollen (siehe Skript unten), bis dahin ist nur das Standbild zu sehen -->
+    <video poster={poster} autoplay={eager} muted loop playsinline preload={eager ? 'auto' : 'none'} aria-hidden="true" class="h-full w-full object-cover">
+      {srcMobile && <source src={srcMobile} type="video/mp4" media="(max-width: 767px)" />}
+      <source src={src} type="video/mp4" />
+    </video>
     <button
       type="button"
       data-video-toggle
@@ -148,7 +159,7 @@ const tones = {
 {embedUrl && (
   <div class:list={['group relative overflow-hidden bg-night text-cream', className]} data-video-embed={embedUrl} data-video-title={title}>
     {poster
-      ? <img src={poster} alt="" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none" />
+      ? <img {...responsiveImage(poster)} sizes="(min-width: 768px) 50vw, 100vw" alt="" loading="lazy" decoding="async" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none" />
       : <div class:list={['absolute inset-0 bg-gradient-to-br', tones[tone]]}></div>}
     <div class="absolute inset-0 flex items-center justify-center bg-night/20">
       <button
@@ -180,9 +191,16 @@ const tones = {
       button.querySelector('[data-icon-pause]')?.classList.toggle('hidden', paused);
       button.querySelector('[data-icon-play]')?.classList.toggle('hidden', !paused);
     };
+    let userPaused = reduceMotion;
     if (reduceMotion) {
       video.removeAttribute('autoplay');
       video.pause();
+    } else if (wrapper.hasAttribute('data-video-lazy')) {
+      // Lädt kurz bevor der Loop ins Bild kommt, läuft nur solange er zu sehen ist
+      new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting && !userPaused) video.play().catch(() => {});
+        else if (!video.paused) video.pause();
+      }, { rootMargin: '50% 0px' }).observe(wrapper);
     }
     // Datei fehlt oder lädt nicht: Pause-Knopf ausblenden, Verlauf bleibt sichtbar
     const hideButton = () => button.classList.add('hidden');
@@ -190,7 +208,11 @@ const tones = {
     video.addEventListener('error', hideButton);
     video.addEventListener('play', update);
     video.addEventListener('pause', update);
-    button.addEventListener('click', () => (video.paused ? video.play() : video.pause()));
+    button.addEventListener('click', () => {
+      userPaused = !video.paused;
+      if (userPaused) video.pause();
+      else video.play().catch(() => {});
+    });
     update();
   });
 

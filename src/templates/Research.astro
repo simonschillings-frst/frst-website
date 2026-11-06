@@ -104,7 +104,7 @@ const quotes = [
             data-article-image={i}
             data-active={i === 0 ? '' : undefined}
           >
-            <Media src={article.image} tone={article.tone as 'night' | 'dusk' | 'sky' | 'desert'} label={t('Articles', 'Artikel')} class="h-full w-full" />
+            <Media sizes="(min-width: 768px) 50vw, 100vw" src={article.image} tone={article.tone as 'night' | 'dusk' | 'sky' | 'desert'} label={t('Articles', 'Artikel')} class="h-full w-full" />
           </div>
         ))}
       </a>

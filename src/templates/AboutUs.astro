@@ -4,6 +4,7 @@ import Media from '../components/Media.astro';
 import Arrow from '../components/Arrow.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { useLang, type Lang } from '../i18n';
+import { responsiveImage } from '../lib/images';
 
 interface Props {
   lang: Lang;
@@ -37,7 +38,7 @@ const jobs = [
 <Base title={t('About us – frst', 'Über uns – frst')} headerOverlay lang={lang}>
   <!-- Hero (wie Perspectives) -->
   <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-screen md:max-h-[900px]">
-    <img src="/images/web/about-header.jpg" alt={t('Two people in a bright office, one in a pink sweatshirt, the other in a black blazer leaning on a railing', 'Zwei Personen in einem hellen Büro, eine im rosa Sweatshirt, die andere im schwarzen Sakko an ein Geländer gelehnt')} class="absolute inset-0 h-full w-full object-cover" style="object-position: 50% 8%" fetchpriority="high" />
+    <img {...responsiveImage('/images/web/about-header.jpg')} sizes="100vw" alt={t('Two people in a bright office, one in a pink sweatshirt, the other in a black blazer leaning on a railing', 'Zwei Personen in einem hellen Büro, eine im rosa Sweatshirt, die andere im schwarzen Sakko an ein Geländer gelehnt')} class="absolute inset-0 h-full w-full object-cover" style="object-position: 50% 8%" fetchpriority="high" />
     <div class="pointer-events-none absolute inset-0 bg-night/30"></div>
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/70 via-transparent to-night/40"></div>
     <div class="container-frst relative grid gap-10 pt-40 pb-10 md:grid-cols-2 md:items-end">

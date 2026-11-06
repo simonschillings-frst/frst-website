@@ -55,8 +55,8 @@ const disciplines = [
   <!-- Hero -->
   <section class="relative flex min-h-[640px] items-end overflow-hidden text-cream md:h-screen md:max-h-[900px]">
     <div class="absolute inset-0"><Media tone="dusk" class="h-full w-full" /></div>
-    <!-- Hintergrundvideo von Vimeo (nicht gelistet): startet sofort, stumm, Loop. Bis es läuft, ist der Verlauf sichtbar. -->
-    <Video vimeo="1237557138" vimeoHash="23f2f0c558" background title="frst Web-Teaser" class="absolute inset-0" lang={lang} />
+    <!-- Hintergrundvideo (selbst gehostet, stumm, Loop): startet sofort, bis dahin ist das Standbild zu sehen. Handys laden die 720p-Fassung. -->
+    <Video src="/videos/frst-web-teaser.mp4" srcMobile="/videos/frst-web-teaser-720.mp4" poster="/videos/frst-web-teaser-poster.webp" loop eager tone="dusk" class="absolute inset-0" lang={lang} />
     <!-- Farbverlauf zu 30 % multipliziert über dem Video -->
     <div class="pointer-events-none absolute inset-0 opacity-30 mix-blend-multiply"><Media tone="dusk" class="h-full w-full" /></div>
     <div class="absolute inset-0 bg-gradient-to-t from-night/60 via-transparent to-night/30"></div>

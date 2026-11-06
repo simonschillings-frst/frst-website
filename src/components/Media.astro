@@ -1,4 +1,5 @@
 ---
+import { responsiveImage } from '../lib/images';
 /**
  * Bildfläche. Ohne `src` wird ein Platzhalter mit Verlauf gezeigt,
  * bis die Originalbilder aus XD da sind.
@@ -11,8 +12,14 @@ interface Props {
   class?: string;
   /** Bildausschnitt als CSS `object-position`, z. B. `85% 50%` */
   position?: string;
+  /** Für Bilder ganz oben auf der Seite: sofort laden statt erst beim Scrollen */
+  eager?: boolean;
+  /** Wie breit das Bild angezeigt wird (HTML `sizes`), z. B. "(min-width: 768px) 50vw, 100vw". Standard: volle Breite */
+  sizes?: string;
 }
-const { src, alt = '', label, tone = 'night', class: className, position } = Astro.props;
+const { src, alt = '', label, tone = 'night', class: className, position, eager = false, sizes = '100vw' } = Astro.props;
+// Verkleinerte WebP-Fassungen: der Browser wählt die passende Größe
+const image = src ? responsiveImage(src) : undefined;
 
 const tones = {
   night: 'from-[#05030f] via-[#1c1640] to-[#6b7a8f]',
@@ -24,7 +31,7 @@ const tones = {
 ---
 
 {src ? (
-  <img src={src} alt={alt} class:list={['object-cover', className]} style={position && `object-position: ${position}`} loading="lazy" />
+  <img {...image} sizes={image?.srcset ? sizes : undefined} alt={alt} class:list={['object-cover', className]} style={position && `object-position: ${position}`} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" />
 ) : (
   <div
     role="img"

@@ -1,0 +1,28 @@
+# Einstellungen für den All-Inkl-Webspace (Apache): Komprimierung und Browser-Cache.
+
+# Texte komprimiert ausliefern (HTML, CSS, JavaScript, SVG, Untertitel)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/vtt application/javascript text/javascript application/json image/svg+xml application/xml
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/avif .avif
+  AddType video/mp4 .mp4
+  AddType text/vtt .vtt
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Dateien mit Prüfsumme im Namen (_astro/, _img/) ändern sich nie: ein Jahr merken
+  <If "%{REQUEST_URI} =~ m#^/(_astro|_img)/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  # Bilder, Videos und Schriften unter festem Namen: eine Woche merken
+  <ElseIf "%{REQUEST_URI} =~ m#\.(jpe?g|png|webp|avif|gif|svg|mp4|webm|woff2?|ico)$#i">
+    Header set Cache-Control "public, max-age=604800"
+  </ElseIf>
+  # Seiten selbst: immer kurz nachfragen, ob es eine neue Fassung gibt
+  <ElseIf "%{REQUEST_URI} =~ m#(/|\.html)$#">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </ElseIf>
+</IfModule>

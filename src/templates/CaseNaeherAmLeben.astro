@@ -35,7 +35,7 @@ const paragraph =
   <!-- Hauptmotiv über die ganze Breite -->
   <section>
     <!-- Bewegtbild: Datei unter public/videos/naeher-am-leben.mp4 ablegen (stumm, Loop). Ohne Datei bleibt der Verlauf sichtbar. -->
-    <Video src="/videos/naeher-am-leben.mp4" loop tone="dusk" class="aspect-[16/10] w-full md:aspect-[12/5]" lang={lang} />
+    <Video src="/videos/naeher-am-leben.mp4" srcMobile="/videos/naeher-am-leben-720.mp4" poster="/videos/naeher-am-leben-poster.webp" loop eager tone="dusk" class="aspect-[16/10] w-full md:aspect-[12/5]" lang={lang} />
   </section>
 
   <!-- Projektdaten und Text -->
@@ -73,7 +73,7 @@ const paragraph =
     <div class="mt-2 grid gap-2 md:grid-cols-3">
       <Media src="/images/naeher-am-leben-Phone.jpg" alt="Näher am Leben – Phone" class="aspect-[3/4] w-full" />
       <Media src="/images/web/naeher-am-leben-laptop.jpg?v=3" alt="Näher am Leben – Laptop" class="aspect-[3/4] w-full" />
-      <Video src="/videos/naeher-am-leben-louisa-short.mp4" loop tone="night" class="aspect-[3/4] w-full" lang={lang} />
+      <Video src="/videos/naeher-am-leben-louisa-short.mp4" poster="/videos/naeher-am-leben-louisa-short-poster.webp" loop tone="night" class="aspect-[3/4] w-full" lang={lang} />
     </div>
   </section>
 

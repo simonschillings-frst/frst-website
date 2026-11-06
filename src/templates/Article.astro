@@ -4,6 +4,7 @@ import Media from '../components/Media.astro';
 import Newsletter from '../components/Newsletter.astro';
 import type { ArticleStory } from '../data/researchArticles';
 import { localePath, useLang, type Lang } from '../i18n';
+import { responsiveImage } from '../lib/images';
 
 interface Props {
   lang: Lang;
@@ -30,7 +31,7 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
   <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-screen md:max-h-[900px]">
     {story?.heroImage ? (
       <>
-        <img src={story.heroImage.src} alt={story.heroImage.alt} class="absolute inset-0 h-full w-full object-cover" style={story.heroImage.position && `object-position: ${story.heroImage.position}`} fetchpriority="high" />
+        <img {...responsiveImage(story.heroImage.src)} sizes="100vw" alt={story.heroImage.alt} class="absolute inset-0 h-full w-full object-cover" style={story.heroImage.position && `object-position: ${story.heroImage.position}`} fetchpriority="high" />
         <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/70 via-transparent to-night/40"></div>
       </>
     ) : (

@@ -34,7 +34,7 @@ const paragraph =
 
   <!-- Hauptmotiv über die ganze Breite -->
   <section>
-    <Media src="/images/web/marccain-header.jpg" alt="MARCCAIN NYC – Header" class="aspect-[16/10] w-full md:aspect-[12/5]" />
+    <Media eager src="/images/web/marccain-header.jpg" alt="MARCCAIN NYC – Header" class="aspect-[16/10] w-full md:aspect-[12/5]" />
   </section>
 
   <!-- Projektdaten und Text -->
@@ -62,10 +62,10 @@ const paragraph =
       <div data-strip-pin>
         <div class="h-[50vh] snap-x overflow-x-auto xl:h-screen" tabindex="0" role="region" aria-label={t('Image gallery, scrolls sideways', 'Bildergalerie, seitlich scrollbar')} data-strip-track>
           <div class="flex h-full min-w-max gap-2 will-change-transform [&>*]:snap-start" data-strip-row>
-            <Media src="/images/web/marccain-slider-01.jpg" alt="MARCCAIN NYC – Motiv 1" class="h-full aspect-[4/5] shrink-0" />
-            <Media src="/images/web/marccain-slider-02.jpg" alt="MARCCAIN NYC – Motiv 2" class="h-full aspect-[3/4] shrink-0" />
-            <Media src="/images/web/marccain-slider-03.jpg" alt="MARCCAIN NYC – Motiv 3" class="h-full aspect-[5/4] shrink-0" />
-            <Media src="/images/web/marccain-slider-04.jpg?v=2" alt="MARCCAIN NYC – Motiv 4" class="h-full aspect-[4/5] shrink-0" />
+            <Media sizes="(min-width: 1280px) 125vh, 60vh" src="/images/web/marccain-slider-01.jpg" alt="MARCCAIN NYC – Motiv 1" class="h-full aspect-[4/5] shrink-0" />
+            <Media sizes="(min-width: 1280px) 125vh, 60vh" src="/images/web/marccain-slider-02.jpg" alt="MARCCAIN NYC – Motiv 2" class="h-full aspect-[3/4] shrink-0" />
+            <Media sizes="(min-width: 1280px) 125vh, 60vh" src="/images/web/marccain-slider-03.jpg" alt="MARCCAIN NYC – Motiv 3" class="h-full aspect-[5/4] shrink-0" />
+            <Media sizes="(min-width: 1280px) 125vh, 60vh" src="/images/web/marccain-slider-04.jpg?v=2" alt="MARCCAIN NYC – Motiv 4" class="h-full aspect-[4/5] shrink-0" />
           </div>
         </div>
       </div>
