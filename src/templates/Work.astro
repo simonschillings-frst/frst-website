@@ -17,15 +17,13 @@ const cases = [
   { eyebrow: 'Volksbank Göppingen', title: 'Näher am Leben', href: localePath(lang, '/work/naeher-am-leben'), tags: t('Strategy · Campaign · Content · Digital', 'Strategie · Kampagne · Content · Digital'), tone: 'dusk', frame: 'aspect-[16/10]', col: 'md:col-span-7', image: '/images/web/naeher-am-leben-Bushaltestelle_quer.jpg' },
   { eyebrow: 'MARCCAIN', title: 'MARCCAIN NYC', href: localePath(lang, '/work/marccain'), tags: t('Brand · Creative · Design', 'Marke · Kreation · Design'), tone: 'sky', frame: 'aspect-[4/5]', col: 'md:col-span-5 md:mt-24', image: '/images/web/marccain-teaser.jpg?v=2' },
   { eyebrow: 'Corporate Design', title: 'COLLINA', href: localePath(lang, '/work/collina'), tags: 'Brand Identity · Social', tone: 'desert', frame: 'aspect-square', col: 'md:col-span-4', image: '/images/web/collina-header.jpg?v=2' },
-  { eyebrow: t('AI Experience','KI-Erlebnis'), title: 'Second Opinion', href: '#', tags: t('AI · Strategy · Digital', 'KI · Strategie · Digital'), tone: 'night', frame: 'aspect-[16/9]', col: 'md:col-span-8 md:mt-12' },
+  { eyebrow: 'Visuals', title: 'SCHOTT Aviation', href: localePath(lang, '/work/schott-aviation'), tags: t('Brand · Trade Fair · Design', 'Marke · Messe · Design'), tone: 'night', frame: 'aspect-[16/9]', col: 'md:col-span-8 md:mt-12', image: '/images/schott-aviation-messestand.jpg' },
 ] as const;
 
 const strip = [
   { title: 'tobel 1853', href: localePath(lang, '/work/tobel-1853'), tags: t('Brand · Corporate Identity', 'Marke · Corporate Identity'), tone: 'mist', frame: 'aspect-[3/4]', image: '/images/tobel-header.jpg' },
   { title: 'MENOLD BEZLER', href: localePath(lang, '/work/menold-bezler'), tags: t('Brand · Redesign', 'Marke · Redesign'), tone: 'desert', frame: 'aspect-square', image: '/images/mb-logo-header.svg' },
-  { title: t('Quiet Power', 'Leise Stärke'), tags: t('Strategy · Film', 'Strategie · Film'), tone: 'night', frame: 'aspect-[4/5]' },
-  { title: t('Blue Hour', 'Blaue Stunde'), tags: t('Creative · Design', 'Kreation · Design'), tone: 'sky', frame: 'aspect-[3/2]' },
-  { title: t('Real Talk', 'Klartext'), tags: t('Content · Social', 'Content · Social'), tone: 'dusk', frame: 'aspect-[3/4]' },
+  { title: 'Circular Packaging', href: localePath(lang, '/work/circular-packaging'), tags: t('Brand', 'Marke'), tone: 'night', frame: 'aspect-[4/5]', image: '/images/schott-pharma-teaserbild.jpg' },
 ] as const;
 
 const disciplines = [
@@ -119,21 +117,21 @@ const words = [t('Strategy', 'Strategie'), t('Creative', 'Kreation'), t('Brand',
           <p class="eyebrow text-[14px]">{t('More work', 'Weitere Projekte')}</p>
           <h2 class="mt-8 text-[30px] leading-snug">{t('Keep exploring.', 'Weiter entdecken.')}</h2>
         </div>
-        <p class="text-[14px] opacity-70">{t('Scroll ↓', 'Scrollen ↓')}</p>
       </div>
       <ul class="mt-10 flex items-end gap-5 px-5 will-change-transform md:px-10" data-hscroll-track>
         {strip.map((item) => (
-          <li class="w-[70vw] shrink-0 sm:w-[44vw] md:w-[26rem]">
+          <li class="w-[70vw] shrink-0 sm:w-[44vw] md:w-[26rem] md:grow">
             <a href={'href' in item ? item.href : '#'} class="group block">
               <div class="overflow-hidden">
-                <Media sizes="(min-width: 768px) 50vw, 100vw" src={'image' in item ? item.image : undefined} alt={'image' in item ? item.title : undefined} tone={item.tone} class={`${item.frame} w-full transition-transform duration-700 ease-out group-hover:scale-105`} />
+                <Media sizes="(min-width: 768px) 50vw, 100vw" src={'image' in item ? item.image : undefined} alt={'image' in item ? item.title : undefined} tone={item.tone} class={`${item.frame} w-full min-[1400px]:max-h-[min(55svh,calc(100svh-22rem))] transition-transform duration-700 ease-out group-hover:scale-105`} />
               </div>
               <h3 class="mt-5 text-[24px] leading-snug">{item.title}</h3>
               <p class="mt-1 text-[14px] opacity-70">{item.tags}</p>
             </a>
           </li>
         ))}
-        <li class="w-px shrink-0 md:w-5" aria-hidden="true"></li>
+        <!-- Abstand am Ende des Scrollens. Ab 1400 px passen die Kacheln ins Fenster und füllen die Breite selbst -->
+        <li class="w-px shrink-0 md:w-5 min-[1400px]:hidden" aria-hidden="true"></li>
       </ul>
     </div>
   </section>
