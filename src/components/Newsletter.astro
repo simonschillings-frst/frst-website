@@ -1,5 +1,5 @@
 ---
-import { defaultLang, localePath, useLang, type Lang } from '../i18n';
+import { defaultLang, localePath, privacyPath, useLang, type Lang } from '../i18n';
 
 interface Props {
   lang?: Lang;
@@ -57,7 +57,7 @@ const fields = [
               'Ich willige ein, dass frst meinen Namen und meine E-Mail-Adresse verwendet, um mir den Newsletter zu senden. Ich kann meine Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, zum Beispiel über den Abmeldelink in jedem Newsletter. Weitere Informationen finden sich in der',
             )}{' '}
             <a
-              href="/de/datenschutz"
+              href={privacyPath(lang)}
               hreflang="de"
               class:list={['underline underline-offset-4', dark ? 'hover:opacity-80 focus-visible:opacity-80' : 'hover:text-violet focus-visible:text-violet']}
             >{t('privacy policy (in German)', 'Datenschutzerklärung')}</a>. *

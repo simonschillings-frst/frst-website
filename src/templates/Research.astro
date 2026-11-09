@@ -4,14 +4,14 @@ import Media from '../components/Media.astro';
 import Video from '../components/Video.astro';
 import Arrow from '../components/Arrow.astro';
 import { researchArticles } from '../data/researchArticles';
-import { localePath, useLang, type Lang } from '../i18n';
+import { localePath, privacyPath, useLang, type Lang } from '../i18n';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
 const t = useLang(lang);
-const privacyHref = '/de/datenschutz';
+const privacyHref = privacyPath(lang);
 
 const intro = t(
   'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.',

@@ -38,7 +38,7 @@
  * Ohne `poster` wird ein Farbverlauf als Platzhalter gezeigt (`tone`, siehe Media.astro).
  * Größe und Seitenverhältnis kommen über `class`, Standard ist 16:9.
  */
-import { defaultLang, useLang, type Lang } from '../i18n';
+import { defaultLang, privacyPath, useLang, type Lang } from '../i18n';
 import { responsiveImage } from '../lib/images';
 import type { Tone } from '../data/navigation';
 
@@ -173,7 +173,7 @@ const tones = {
     </div>
     <p class="absolute inset-x-0 bottom-0 bg-night/75 px-3 py-2 text-[12px] leading-snug">
       {t(`When you play the video, data is sent to ${provider}.`, `Beim Abspielen werden Daten an ${provider} übertragen.`)}{' '}
-      <a href="/de/datenschutz" hreflang="de" class="underline underline-offset-2 hover:opacity-80">{t('Privacy policy (in German)', 'Datenschutz')}</a>
+      <a href={privacyPath(lang)} hreflang="de" class="underline underline-offset-2 hover:opacity-80">{t('Privacy policy (in German)', 'Datenschutz')}</a>
     </p>
   </div>
 )}

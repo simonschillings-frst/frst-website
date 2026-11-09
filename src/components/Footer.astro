@@ -1,7 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import { getNavItems } from '../data/navigation';
-import { defaultLang, localePath, useLang, type Lang } from '../i18n';
+import { defaultLang, localePath, privacyPath, useLang, type Lang } from '../i18n';
 
 interface Props {
   lang?: Lang;
@@ -20,9 +20,9 @@ const navItems = getNavItems(lang);
         {navItems.filter((i) => i.key !== 'about').map((item) => (
           <li><a href={item.href} class="hover:underline">{item.label}</a></li>
         ))}
-        <li><a href={l('/imprint')} class="hover:underline">{t('Imprint', 'Impressum')}</a></li>
-        <!-- Die Datenschutzerklärung gibt es (rechtlich verbindlich) auf Deutsch -->
-        <li><a href="/de/datenschutz" class="hover:underline" hreflang="de">{t('Privacy Policy', 'Datenschutz')}</a></li>
+        <!-- Impressum und Datenschutzerklärung sind inhaltlich immer deutsch, man bleibt aber im jeweiligen Sprachbereich -->
+        <li><a href={l('/imprint')} class="hover:underline" hreflang="de">{t('Imprint', 'Impressum')}</a></li>
+        <li><a href={privacyPath(lang)} class="hover:underline" hreflang="de">{t('Privacy', 'Datenschutz')}</a></li>
       </ul>
     </nav>
   </div>

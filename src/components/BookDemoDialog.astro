@@ -1,5 +1,5 @@
 ---
-import { defaultLang, useLang, type Lang } from '../i18n';
+import { defaultLang, privacyPath, useLang, type Lang } from '../i18n';
 
 interface Props {
   lang?: Lang;
@@ -73,7 +73,7 @@ const sizes = ['1–10', '11–50', '51–200', '201–1,000', '1,000+'];
               'I agree that frst processes my details (business email, name, company, company size) to contact me about a demo and to arrange an appointment. I can withdraw my consent at any time with effect for the future, for example by e-mail. Further information can be found in the',
               'Ich willige ein, dass frst meine Angaben (geschäftliche E-Mail-Adresse, Name, Unternehmen, Unternehmensgröße) verarbeitet, um mich zu einer Demo zu kontaktieren und einen Termin abzustimmen. Ich kann meine Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, zum Beispiel per E-Mail. Weitere Informationen finden sich in der',
             )}{' '}
-            <a href="/de/datenschutz" hreflang="de" class="underline underline-offset-4 hover:text-violet focus-visible:text-violet">{t('privacy policy (in German)', 'Datenschutzerklärung')}</a>. *
+            <a href={privacyPath(lang)} hreflang="de" class="underline underline-offset-4 hover:text-violet focus-visible:text-violet">{t('privacy policy (in German)', 'Datenschutzerklärung')}</a>. *
           </span>
         </label>
         <p class="mt-4 text-[14px] leading-relaxed opacity-80">{t('* Required fields. Your details are used only to arrange the demo.', '* Pflichtfelder. Deine Angaben werden nur verwendet, um die Demo zu vereinbaren.')}</p>
