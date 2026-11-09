@@ -22,6 +22,9 @@ export const localePath = (lang: Lang, href: string): string => {
   return `/de${href}`;
 };
 
+/** Adresse der Datenschutzerklärung (je Sprachbereich, der Text ist immer deutsch) */
+export const privacyPath = (lang: Lang): string => (lang === 'de' ? '/de/datenschutz' : '/privacy');
+
 /** Erkennt die Sprache aus der Adresse */
 export const langFromPath = (pathname: string): Lang => (pathname === '/de' || pathname.startsWith('/de/') ? 'de' : 'en');
 
