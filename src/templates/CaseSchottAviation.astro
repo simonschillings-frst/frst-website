@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { localePath, useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useLang(lang);
+
+// Texte sind Platzhalter.
+const facts = [
+  { label: t('Project', 'Projekt'), value: 'Visuals' },
+  { label: t('Client', 'Kunde'), value: 'SCHOTT Aviation' },
+  { label: t('Location', 'Ort'), value: '—' },
+  { label: t('Year', 'Jahr'), value: '—' },
+];
+
+const paragraph =
+  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+---
+
+<Base title="SCHOTT Aviation – frst" headerLight lang={lang}>
+  <!-- Titel -->
+  <section class="container-frst pt-24 pb-14 md:pt-36 md:pb-16">
+    <div class="md:ml-[16%]" data-align-nav>
+      <h1 class="text-5xl leading-[1.05] font-light md:text-7xl">SCHOTT Aviation</h1>
+      <p class="mt-8 text-lg font-light md:text-2xl">Visuals</p>
+    </div>
+  </section>
+
+  <!-- Hauptmotiv über die ganze Breite -->
+  <section>
+    <Media eager src="/images/schott-aviation-messestand.jpg" alt={t('SCHOTT Aviation – trade fair stand', 'SCHOTT Aviation – Messestand')} class="aspect-[16/10] w-full md:aspect-[12/5]" />
+  </section>
+
+  <!-- Projektdaten und Text -->
+  <section class="container-frst pt-6 pb-14 md:pt-8 md:pb-20">
+    <Breadcrumb
+      label={t('Breadcrumb', 'Brotkrumen-Navigation')}
+      items={[
+        { label: t('Home', 'Startseite'), href: localePath(lang, '/') },
+        { label: t('Work', 'Projekte'), href: localePath(lang, '/work') },
+        { label: 'SCHOTT Aviation' },
+      ]}
+      class="mb-12 md:mb-16"
+    />
+    <div class="grid gap-10 md:grid-cols-[1fr_1.35fr] md:gap-0">
+      <dl class="grid h-fit grid-cols-[7rem_1fr] gap-x-4 gap-y-2 text-[14px]">
+        {facts.map((fact) => (
+          <>
+            <dt class="uppercase">{fact.label}:</dt>
+            <dd>{fact.value}</dd>
+          </>
+        ))}
+      </dl>
+      <div class="space-y-6 text-[20px] leading-relaxed">
+        <p>{paragraph}</p>
+        <p>{paragraph}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bildergalerie (großes Bild, Doppelbild, großes Bild) -->
+  <section>
+    <Media src="/images/web/schott-aviation-01.jpg" alt={t('SCHOTT Aviation – illuminated cabin suites', 'SCHOTT Aviation – beleuchtete Kabinensuiten')} class="aspect-[16/10] w-full" />
+  </section>
+
+  <section class="container-frst mt-2">
+    <div class="grid gap-2 md:grid-cols-2">
+      <Media src="/images/web/schott-aviation-03.jpg" sizes="(min-width: 768px) 50vw, 100vw" alt={t('SCHOTT Aviation – seat with reading light', 'SCHOTT Aviation – Sitz mit Leseleuchte')} class="aspect-[16/10] w-full" />
+      <Media src="/images/web/schott-aviation-04.jpg" sizes="(min-width: 768px) 50vw, 100vw" alt={t('SCHOTT Aviation – suite by the window', 'SCHOTT Aviation – Suite am Fenster')} class="aspect-[16/10] w-full" />
+    </div>
+  </section>
+
+  <section class="mt-2">
+    <Media src="/images/web/schott-aviation-02.jpg" alt={t('SCHOTT Aviation – cabin with starry ceiling', 'SCHOTT Aviation – Kabine mit Sternenhimmel')} class="aspect-[16/10] w-full" />
+  </section>
+
+  <Newsletter lang={lang} dark />
+
+  <script>
+    // Titel linksbündig mit dem ersten Navigationspunkt ausrichten
+    const block = document.querySelector<HTMLElement>('[data-align-nav]');
+    const align = () => {
+      const link = document.querySelector<HTMLElement>('header nav[data-main-nav] a, header nav[data-main-nav] summary, header nav[data-main-nav] button');
+      if (!block || !block.parentElement) return;
+      if (!link || link.offsetParent === null || window.innerWidth < 768) {
+        block.style.marginLeft = '';
+        return;
+      }
+      const offset = link.getBoundingClientRect().left + parseFloat(getComputedStyle(link).paddingLeft) - block.parentElement.getBoundingClientRect().left - parseFloat(getComputedStyle(block.parentElement).paddingLeft);
+      block.style.marginLeft = `${Math.max(0, offset)}px`;
+    };
+    align();
+    window.addEventListener('resize', align);
+    window.addEventListener('load', align);
+  </script>
+</Base>

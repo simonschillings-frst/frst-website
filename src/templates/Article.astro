@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import Newsletter from '../components/Newsletter.astro';
 import type { ArticleStory } from '../data/researchArticles';
 import { localePath, useLang, type Lang } from '../i18n';
@@ -53,8 +54,17 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
   </section>
 
   <!-- Einleitung -->
-  <section class="px-5 py-16 md:px-10 md:py-24">
+  <section class="px-5 pt-6 pb-16 md:px-10 md:pt-8 md:pb-24">
     <div class="mx-auto max-w-[1110px]">
+      <Breadcrumb
+        label={t('Breadcrumb', 'Brotkrumen-Navigation')}
+        items={[
+          { label: t('Home', 'Startseite'), href: l('/') },
+          { label: 'Research', href: l('/research') },
+          { label: title },
+        ]}
+        class="mb-12 md:mb-20"
+      />
       <p class="max-w-[34ch] text-[24px] leading-snug font-light">{lead ?? short}</p>
 
       <div class="mt-12 md:ml-[20%]">

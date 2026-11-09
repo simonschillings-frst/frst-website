@@ -1,0 +1,27 @@
+---
+/**
+ * Brotkrumen-Navigation: zeigt, wo auf der Website man sich befindet.
+ * Einträge mit `href` sind Links, der letzte Eintrag ohne `href` ist die aktuelle Seite.
+ *   <Breadcrumb label={t('Breadcrumb', 'Brotkrumen')} items={[{ label: 'Home', href: '/' }, { label: 'Artikel' }]} />
+ */
+interface Props {
+  items: { label: string; href?: string }[];
+  /** Name der Navigation für Screenreader */
+  label: string;
+  class?: string;
+}
+const { items, label, class: className } = Astro.props;
+---
+
+<nav aria-label={label} class={className}>
+  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-[16px] leading-snug">
+    {items.map((item, i) => (
+      <li class="flex items-center gap-x-2">
+        {i > 0 && <span class="opacity-40" aria-hidden="true">/</span>}
+        {item.href
+          ? <a href={item.href} class="opacity-70 underline-offset-2 transition-opacity duration-200 hover:underline hover:opacity-100">{item.label}</a>
+          : <span aria-current="page">{item.label}</span>}
+      </li>
+    ))}
+  </ol>
+</nav>
