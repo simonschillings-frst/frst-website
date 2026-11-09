@@ -74,29 +74,34 @@ const disciplines = [
 
   <!-- Work -->
   <section id="work" class="container-frst pt-20 pb-14 md:pt-28 md:pb-20">
-    <p class="eyebrow text-[14px]">{t('Work', 'Projekte')}</p>
-    <div class="mt-8 grid gap-12 md:grid-cols-12 md:gap-8">
-      <a href={l('/work/naeher-am-leben')} class="group grid gap-6 md:col-span-8 md:grid-cols-[3fr_2fr] md:items-center">
-        <!-- Teaser-Video von Vimeo: Standbild, läuft beim Hovern -->
-        <div class="relative">
-          <Video vimeo="1237542606" vimeoHash="21b4e08e8f" teaser tone="night" title="Volksbank Göppingen – Näher am Leben" class="aspect-[4/3] w-full" lang={lang} />
-          <!-- Farbverlauf zu 30 % multipliziert über dem Video (wie im Header) -->
-          <div class="pointer-events-none absolute inset-0 opacity-30 mix-blend-multiply"><Media tone="dusk" class="h-full w-full" /></div>
-        </div>
-        <div>
-          <p class="eyebrow text-[14px]">Volksbank Göppingen</p>
-          <h3 class="mt-3 text-[24px]">Näher am Leben</h3>
-          <p class="mt-2 text-[14px]">{t('Strategy · Campaign · Content · Digital', 'Strategie · Kampagne · Content · Digital')}</p>
+    <div class="grid gap-12 md:grid-cols-12 md:gap-8">
+      <div class="md:col-span-8">
+        <p class="eyebrow text-[14px]">{t('Work', 'Projekte')}</p>
+        <a href={l('/work/naeher-am-leben')} class="group mt-8 grid gap-6 md:grid-cols-[3fr_2fr] md:items-center">
+          <!-- Teaser-Video von Vimeo: Standbild, läuft beim Hovern -->
+          <div class="relative">
+            <Video vimeo="1237542606" vimeoHash="21b4e08e8f" teaser tone="night" title="Volksbank Göppingen – Näher am Leben" class="aspect-[4/3] w-full" lang={lang} />
+            <!-- Farbverlauf zu 30 % multipliziert über dem Video (wie im Header) -->
+            <div class="pointer-events-none absolute inset-0 opacity-30 mix-blend-multiply"><Media tone="dusk" class="h-full w-full" /></div>
+          </div>
+          <div>
+            <p class="eyebrow text-[14px]">Volksbank Göppingen</p>
+            <h3 class="mt-3 text-[24px]">Näher am Leben</h3>
+            <p class="mt-2 text-[14px]">{t('Strategy · Campaign · Content · Digital', 'Strategie · Kampagne · Content · Digital')}</p>
+            <Arrow class="mt-6" />
+          </div>
+        </a>
+      </div>
+      <div class="md:col-span-3 md:col-start-10">
+        <p class="eyebrow text-[14px]">{t('Perspectives', 'Perspektiven')}</p>
+        <a href={l('/perspectives/lorem-ipsum')} class="mt-8 block">
+          <Media tone="night" class="aspect-[4/3] w-full" />
+          <p class="eyebrow text-[14px] mt-6">{t('Our Takes', 'Unsere Takes')}</p>
+          <h3 class="mt-3 text-[24px]">Lorem Ipsum</h3>
+          <p class="mt-2 text-[14px]">{t('Take · 6 min read', 'Take · 6 Min. Lesezeit')}</p>
           <Arrow class="mt-6" />
-        </div>
-      </a>
-      <a href={l('/perspectives/lorem-ipsum')} class="md:col-span-3 md:col-start-10">
-        <Media tone="night" class="aspect-[4/3] w-full" />
-        <p class="eyebrow text-[14px] mt-6">{t('Perspectives', 'Perspektiven')}</p>
-        <h3 class="mt-3 text-[24px]">Lorem Ipsum</h3>
-        <p class="mt-2 text-[14px]">{t('Take · 6 min read', 'Take · 6 Min. Lesezeit')}</p>
-        <Arrow class="mt-6" />
-      </a>
+        </a>
+      </div>
     </div>
   </section>
 
