@@ -44,19 +44,13 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       key: 'what',
       label: t('Services', 'Leistungen'),
       href: l('/what-we-do'),
-      layout: 'list-media',
+      layout: 'feature',
+      feature: { label: t('Services', 'Leistungen'), title: ['Lorem Ipsum', 'dolor sit', 'amet.'] },
       children: [
-        { title: t('Our services', 'Unsere Leistungen'), subtitle: t('Four disciplines. One team, built around your project.', 'Vier Disziplinen. Ein Team, zusammengestellt für dein Projekt.'), href: l('/what-we-do#services') },
-        { title: t('Our approaches', 'Unsere Ansätze'), subtitle: t('The Process built around your Ambition.', 'Der Prozess, gebaut um deinen Anspruch.'), href: l('/what-we-do#process') },
+        { title: t('What we offer', 'Was wir bieten'), subtitle: t('Four disciplines. One team, built around your project.', 'Vier Disziplinen. Ein Team, zusammengestellt für dein Projekt.'), href: l('/what-we-do#services') },
+        { title: t('Our process', 'Unser Prozess'), subtitle: t('The Process built around your Ambition.', 'Der Prozess, gebaut um deinen Anspruch.'), href: l('/what-we-do#process') },
         { title: t('Selected work', 'Ausgewählte Projekte'), subtitle: 'MARCCAIN NYC', href: l('/what-we-do#selected-work') },
       ],
-      media: {
-        label: t('Latest Media', 'Neueste Medien'),
-        items: [
-          { title: t('Latest Media: Lorem Ipsum', 'Neueste Medien: Lorem Ipsum'), subtitle: t('Agency Transformation', 'Agentur-Transformation'), href: '#', tone: 'dusk' },
-          { title: t('Latest Media: Lorem Ipsum', 'Neueste Medien: Lorem Ipsum'), subtitle: t('Agency Transformation', 'Agentur-Transformation'), href: '#', tone: 'desert' },
-        ],
-      },
     },
     {
       key: 'research',
