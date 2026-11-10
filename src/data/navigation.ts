@@ -28,7 +28,7 @@ export interface NavItem {
   /** Nur bei layout "list-media": Karten rechts neben der Liste */
   media?: { label: string; items: MenuLink[] };
   /** Nur bei layout "feature": Beschriftung und Titel (eine Zeile pro Eintrag) links */
-  feature?: { label: string; title: string[] };
+  feature?: { label?: string; title: string[] };
 }
 
 /*
@@ -45,7 +45,7 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       label: t('Services', 'Leistungen'),
       href: l('/what-we-do'),
       layout: 'feature',
-      feature: { label: t('Services', 'Leistungen'), title: ['Lorem Ipsum', 'dolor sit', 'amet.'] },
+      feature: { title: ['Lorem Ipsum', 'dolor sit', 'amet.'] },
       children: [
         { title: t('What we offer', 'Was wir bieten'), subtitle: t('Four disciplines. One team, built around your project.', 'Vier Disziplinen. Ein Team, zusammengestellt für dein Projekt.'), href: l('/what-we-do#services') },
         { title: t('Our process', 'Unser Prozess'), subtitle: t('The Process built around your Ambition.', 'Der Prozess, gebaut um deinen Anspruch.'), href: l('/what-we-do#process') },
@@ -57,7 +57,7 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       label: t('Research', 'Research'),
       href: l('/research'),
       layout: 'feature',
-      feature: { label: t('Our Approaches', 'Unsere Ansätze'), title: lang === 'de' ? ['Die', 'Zukunft', 'der Agentur'] : ['The', 'Future', 'of the Agency'] },
+      feature: { title: lang === 'de' ? ['Die', 'Zukunft', 'der Agentur'] : ['The', 'Future', 'of the Agency'] },
       children: [
         { title: t('Articles', 'Artikel'), subtitle: t('Thoughts on the future of the agency', 'Gedanken zur Zukunft der Agentur'), href: l('/research#articles') },
         { title: t('Study', 'Studie'), subtitle: t('Get the study', 'Studie anfordern'), href: l('/research#get-the-study') },
