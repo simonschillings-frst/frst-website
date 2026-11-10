@@ -56,10 +56,12 @@ const jobs = [
 
   <!-- Manifest -->
   <section id="manifest" class="container-frst scroll-mt-20 pt-14 pb-20 md:pt-20 md:pb-28">
-    <div class="text-2xl leading-snug [&>p]:mb-8">
-      <p>{t('We believe the best ideas begin where people stop performing. frst is a family-owned company, led by brothers, with an eye for people.', 'Wir glauben, dass die besten Ideen dort beginnen, wo Menschen aufhören, etwas darzustellen. frst ist ein inhabergeführtes Familienunternehmen, geleitet von Brüdern, mit einem Blick für Menschen.')}</p>
-      <p>{t('We look for the moment the mask drops and something real is said. We see beyond belonging and we ask better questions.', 'Wir suchen den Moment, in dem die Maske fällt und etwas Echtes gesagt wird. Wir sehen über Zugehörigkeit hinaus und stellen bessere Fragen.')}</p>
-      <p>{t('We build nothing behind closed doors. Because brands that are made for the unguarded moment are the ones people trust.', 'Wir bauen nichts hinter verschlossenen Türen. Denn Marken, die für den unverstellten Moment gemacht sind, sind die, denen Menschen vertrauen.')}</p>
+    <p class="eyebrow text-[14px]">Manifest</p>
+    <!-- Blindtext: später durch das echte Manifest ersetzen -->
+    <div class="mt-10 text-2xl leading-snug md:columns-2 md:gap-16">
+      {Array.from({ length: 3 }, (_, i) => (
+        <p class:list={[i > 0 && 'mt-6']}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+      ))}
     </div>
   </section>
 
@@ -79,6 +81,7 @@ const jobs = [
 
   <!-- Standorte -->
   <section id="locations" class="container-frst scroll-mt-20 py-16 md:py-24" aria-label={t('Locations', 'Standorte')}>
+    <p class="eyebrow text-[14px]">{t('Locations', 'Standorte')}</p>
     {locations.map((loc) => (
       <div class="grid gap-y-8 py-8 md:grid-cols-2 md:gap-x-16 md:py-12">
         <Media
