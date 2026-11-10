@@ -13,13 +13,32 @@ const { lang } = Astro.props;
 const t = useLang(lang);
 const privacyHref = privacyPath(lang);
 
-const intro = t(
-  'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.',
-  'Wir bauen unvergessliche Marken, die begeistern und Menschen mitnehmen. Deshalb stellen wir interdisziplinäre Teams zusammen, die von zukunftsweisender Technologie getragen werden.',
+const quotesIntro = t(
+  'Honest, surprising, uncomfortable. This is what clients told us about the agencies of tomorrow. Real quotes from real conversations.',
+  'Ehrlich, überraschend, unbequem. Das haben uns Kunden über die Agenturen von morgen erzählt. Echte Zitate aus echten Gesprächen.',
+);
+const numbersIntro = t(
+  'We’ve been keeping count. So much passion has gone into this study.',
+  'Wir haben mitgezählt. So viel Leidenschaft steckt in dieser Studie.',
 );
 
 // Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
 const articles = researchArticles(lang);
+
+const manifest = [
+  t(
+    'Curiosity drives progress: the urge to look beyond the known, the familiar, the expected, to spot gaps and to close them. It takes courage, because the answers may be uncomfortable. We believe that courage is worth it. A wider view leads to better decisions and a more open future.',
+    'Neugier treibt Fortschritt an: der Drang, über das Bekannte, Vertraute und Erwartete hinauszublicken, Lücken zu erkennen und sie zu schließen. Das braucht Mut, denn die Antworten können unbequem sein. Wir glauben, dass sich dieser Mut lohnt. Ein weiterer Blick führt zu besseren Entscheidungen und einer offeneren Zukunft.',
+  ),
+  t(
+    'We saw a gap in the research, so we asked clients of various sizes and industries one question: be honest, what do you expect from your creative partners in the future? To make sure the answers were honest and the method sound, we teamed up with TH Köln.',
+    'Wir haben eine Lücke in der Forschung gesehen und deshalb Kunden unterschiedlicher Größe und Branchen eine Frage gestellt: Ganz ehrlich, was erwartest du künftig von deinen kreativen Partnern? Damit die Antworten ehrlich und die Methode solide sind, haben wir uns mit der TH Köln zusammengetan.',
+  ),
+  t(
+    'Together we searched, we listened, and now we share what we learned. For clients, for agencies, for everyone who wants to work together better.',
+    'Gemeinsam haben wir gesucht, zugehört, und jetzt teilen wir, was wir gelernt haben. Für Kunden, für Agenturen, für alle, die besser zusammenarbeiten wollen.',
+  ),
+];
 const pageSize = 4;
 
 // Felder der Studien-Anmeldung (nur die nötigsten Angaben, siehe Datenminimierung)
@@ -63,19 +82,19 @@ const quotes = [
 
 <Base title="Research – frst" headerOverlay lang={lang}>
   <!-- Hero -->
-  <section class="relative flex min-h-[640px] items-center overflow-hidden bg-black text-cream md:h-screen md:max-h-[900px]">
+  <section class="relative min-h-[640px] overflow-hidden bg-black text-cream md:h-screen md:max-h-[900px]">
     <h1 class="sr-only">Research</h1>
     <!-- Hintergrundvideo (Flip-through der Studie, stumm, Loop): startet sofort, bis dahin ist das Standbild zu sehen. Handys laden die 720p-Fassung. -->
     <Video src="/videos/research-hero.mp4" srcMobile="/videos/research-hero-720.mp4" poster="/videos/research-hero-poster.webp" loop eager class="absolute inset-0" lang={lang} />
-    <!-- Abdunklung, damit der Text auch über den hellen Buchseiten lesbar bleibt -->
-    <div class="pointer-events-none absolute inset-0 bg-black/40" aria-hidden="true"></div>
-    <!-- Manifest-Text im Hero: einspaltig, linksbündig (gleicher Text wie auf About us, Platzhalter) -->
-    <div class="container-frst pointer-events-none relative py-32">
-      <div class="pointer-events-auto text-2xl leading-snug font-light md:text-[30px] [&>p]:mb-8 [&>p:last-child]:mb-0">
-        <p>{t('We believe the best ideas begin where people stop performing. frst is a family-owned company, led by brothers, with an eye for people.', 'Wir glauben, dass die besten Ideen dort beginnen, wo Menschen aufhören, etwas darzustellen. frst ist ein inhabergeführtes Familienunternehmen, geleitet von Brüdern, mit einem Blick für Menschen.')}</p>
-        <p>{t('We look for the moment the mask drops and something real is said. We see beyond belonging and we ask better questions.', 'Wir suchen den Moment, in dem die Maske fällt und etwas Echtes gesagt wird. Wir sehen über Zugehörigkeit hinaus und stellen bessere Fragen.')}</p>
-        <p>{t('We build nothing behind closed doors. Because brands that are made for the unguarded moment are the ones people trust.', 'Wir bauen nichts hinter verschlossenen Türen. Denn Marken, die für den unverstellten Moment gemacht sind, sind die, denen Menschen vertrauen.')}</p>
-      </div>
+  </section>
+
+  <!-- Manifest: zweispaltig wie „Why frst“ auf der Startseite, drei Absätze im Spaltenfluss -->
+  <section id="manifest" class="container-frst scroll-mt-20 pt-14 pb-20 md:pt-20 md:pb-28">
+    <p class="eyebrow text-[14px]">{t('The Future of the Agency', 'Die Zukunft der Agentur')}</p>
+    <div class="mt-10 text-2xl leading-snug md:columns-2 md:gap-16">
+      {manifest.map((paragraph, i) => (
+        <p class:list={[i > 0 && 'mt-6']}>{paragraph}</p>
+      ))}
     </div>
   </section>
 
@@ -180,12 +199,12 @@ const quotes = [
   </section>
 
   <!-- Stimmen -->
-  <section id="insights" class="container-frst scroll-mt-20 py-20 md:py-24">
+  <section id="quotes" class="container-frst scroll-mt-20 py-20 md:py-24">
     <div class="grid gap-12 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
       <div>
-        <p class="eyebrow text-[14px]">Insights</p>
-        <h2 class="mt-8 text-[30px] leading-snug">{t('Different perspectives.', 'Verschiedene Perspektiven.')}<br />{t('Same direction.', 'Gleiche Richtung.')}</h2>
-        <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{intro}</p>
+        <p class="eyebrow text-[14px]">Quotes</p>
+        <h2 class="mt-8 text-[30px] leading-snug">{t('In their own words.', 'In ihren eigenen Worten.')}</h2>
+        <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{quotesIntro}</p>
       </div>
       <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {quotes.map((quote) => (
@@ -208,12 +227,12 @@ const quotes = [
   </section>
 
   <!-- Facts -->
-  <section id="benchmark" class="scroll-mt-20 bg-night text-cream" data-facts>
+  <section id="by-the-numbers" class="scroll-mt-20 bg-night text-cream" data-facts>
     <div class="container-frst grid gap-12 py-16 md:py-20 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
       <div>
-        <p class="eyebrow text-[14px]">Benchmark</p>
-        <h2 class="mt-8 text-[30px] leading-snug">{t('Facts that', 'Fakten,')}<br />{t('make a difference.', 'die den Unterschied machen.')}</h2>
-        <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{intro}</p>
+        <p class="eyebrow text-[14px]">By the numbers</p>
+        <h2 class="mt-8 text-[30px] leading-snug">{t('Figures behind the answers', 'Die Zahlen hinter den Antworten')}</h2>
+        <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{numbersIntro}</p>
       </div>
       <ul class="grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
         {facts.map((fact) => (

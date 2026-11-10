@@ -28,7 +28,7 @@ export interface NavItem {
   /** Nur bei layout "list-media": Karten rechts neben der Liste */
   media?: { label: string; items: MenuLink[] };
   /** Nur bei layout "feature": Beschriftung und Titel (eine Zeile pro Eintrag) links */
-  feature?: { label: string; title: string[] };
+  feature?: { label?: string; title: string[] };
 }
 
 /*
@@ -45,11 +45,11 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       label: t('Services', 'Leistungen'),
       href: l('/what-we-do'),
       layout: 'feature',
-      feature: { label: t('Services', 'Leistungen'), title: ['Lorem Ipsum', 'dolor sit', 'amet.'] },
+      feature: { title: lang === 'de' ? ['Von A bis Z', 'für deine', 'Marke.'] : ['End-to-end', 'for your', 'brand.'] },
       children: [
         { title: t('What we offer', 'Was wir bieten'), subtitle: t('Four disciplines. One team, built around your project.', 'Vier Disziplinen. Ein Team, zusammengestellt für dein Projekt.'), href: l('/what-we-do#services') },
         { title: t('Our process', 'Unser Prozess'), subtitle: t('The Process built around your Ambition.', 'Der Prozess, gebaut um deinen Anspruch.'), href: l('/what-we-do#process') },
-        { title: t('Selected work', 'Ausgewählte Projekte'), subtitle: 'MARCCAIN NYC', href: l('/what-we-do#selected-work') },
+        { title: t('Selected work', 'Ausgewählte Projekte'), subtitle: 'New York City Activation', href: l('/what-we-do#selected-work') },
       ],
     },
     {
@@ -57,12 +57,12 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       label: t('Research', 'Research'),
       href: l('/research'),
       layout: 'feature',
-      feature: { label: t('Our Approaches', 'Unsere Ansätze'), title: lang === 'de' ? ['Die', 'Zukunft', 'der Agentur'] : ['The', 'Future', 'of the Agency'] },
+      feature: { title: lang === 'de' ? ['Die', 'Zukunft', 'der Agentur'] : ['The', 'Future', 'of the Agency'] },
       children: [
         { title: t('Articles', 'Artikel'), subtitle: t('Thoughts on the future of the agency', 'Gedanken zur Zukunft der Agentur'), href: l('/research#articles') },
         { title: t('Study', 'Studie'), subtitle: t('Get the study', 'Studie anfordern'), href: l('/research#get-the-study') },
-        { title: 'Insights', subtitle: t('Different perspectives. Same direction.', 'Verschiedene Perspektiven. Gleiche Richtung.'), href: l('/research#insights') },
-        { title: 'Benchmark', subtitle: t('Facts that make a difference.', 'Fakten, die den Unterschied machen.'), href: l('/research#benchmark') },
+        { title: 'Quotes', subtitle: t('Different perspectives. Same direction.', 'Verschiedene Perspektiven. Gleiche Richtung.'), href: l('/research#quotes') },
+        { title: 'By the numbers', subtitle: t('Facts that make a difference.', 'Fakten, die den Unterschied machen.'), href: l('/research#by-the-numbers') },
         { title: t('Research study', 'Research-Studie'), subtitle: t('Take part in our study.', 'Nimm teil an unserer Studie.'), href: l('/research#study') },
       ],
     },
@@ -72,8 +72,8 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       href: l('/work'),
       layout: 'cards',
       children: [
-        { title: t('Cases', 'Cases'), subtitle: t('Work', 'Projekte'), href: l('/work#cases'), image: '/images/marccain-teaser-navi.jpg' },
-        { title: t('Results', 'Ergebnisse'), subtitle: t('Work', 'Projekte'), href: l('/work#results') },
+        { title: t('Cases', 'Cases'), subtitle: t('Our philosophy brought to life', 'Unsere Philosophie, zum Leben erweckt'), href: l('/work#cases'), image: '/images/marccain-teaser-navi.jpg' },
+        { title: 'Mention', subtitle: t('What our clients love', 'Was unsere Kunden lieben'), href: l('/work#mention') },
       ],
     },
     {

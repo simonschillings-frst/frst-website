@@ -146,8 +146,9 @@ const isCurrent = (href: string) => {
               {item.layout === 'feature' && item.feature && (
                 <div class="container-frst pt-[30px] pb-11">
                   <div class="grid grid-cols-[32%_minmax(0,1fr)]">
-                    <div class="border-r border-night/20 pt-1.5 pr-6">
-                      <p class="mb-14 text-sm uppercase">{item.feature.label}</p>
+                    <!-- Titel senkrecht mittig in der Spalte -->
+                    <div class="flex flex-col justify-center border-r border-night/20 pr-6">
+                      {item.feature.label && <p class="mb-14 text-sm uppercase">{item.feature.label}</p>}
                       <p class="text-[clamp(30px,3.8vw,58px)] leading-none font-light tracking-[-0.01em] whitespace-nowrap">
                         {item.feature.title.map((line, i) => (
                           <>

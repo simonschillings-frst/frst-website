@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
 import Arrow from '../components/Arrow.astro';
+import Video from '../components/Video.astro';
 import { localePath, useLang, type Lang } from '../i18n';
 
 interface Props {
@@ -36,17 +37,16 @@ const steps = [
 <Base title={t('Services – frst', 'Leistungen – frst')} headerOverlay lang={lang}>
   <!-- Hero -->
   <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-screen md:max-h-[900px]">
-    <div
-      class="pointer-events-none absolute top-1/2 left-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-[55%] rounded-full bg-[radial-gradient(circle,#93c0f5_0%,#4d6fd0_25%,#1f1d6b_50%,transparent_70%)]"
-    ></div>
-    <div class="container-frst relative grid gap-10 pt-40 pb-6 md:grid-cols-2">
+    <!-- Hintergrundvideo „frst manifest“ von Vimeo (stumm, Loop, ohne Player). Lädt sofort, Daten gehen an Vimeo. -->
+    <Video vimeo="716453271" background title="frst manifest" class="absolute inset-0" lang={lang} />
+    <!-- Abdunkler (30 %) plus Verlauf, damit die helle Schrift auf dem Video lesbar bleibt -->
+    <div class="pointer-events-none absolute inset-0 bg-night/30"></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/60 via-transparent to-night/30"></div>
+    <div class="container-frst relative grid gap-10 pt-40 pb-16 md:grid-cols-2">
       <div>
         <p class="eyebrow text-[14px]">{t('Services', 'Leistungen')}</p>
         <h1 class="mt-6 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{t('End to end', 'Von A bis Z')}<br />{t('for your brand.', 'für deine Marke.')}</h1>
         <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{t('Four disciplines. One team, built around your project.', 'Vier Disziplinen. Ein Team, zusammengestellt für dein Projekt.')}</p>
-        <a href="#services" class="mt-16 inline-flex h-7 w-7 items-center justify-center rounded-full border border-cream/80" aria-label={t('Keep scrolling', 'Weiter scrollen')}>
-          <Arrow class="rotate-90" />
-        </a>
       </div>
     </div>
   </section>
@@ -63,7 +63,6 @@ const steps = [
           {s.tags && <p class="mt-6 text-[14px]">{s.tags}</p>}
         </article>
       ))}
-      <Media tone="night" label="Services" class="aspect-[2/1] w-full self-start lg:col-start-3 lg:mt-[0.4rem]" />
     </div>
   </section>
 
@@ -98,13 +97,14 @@ const steps = [
 
   <!-- Selected work -->
   <section id="selected-work" class="grid scroll-mt-20 md:grid-cols-[1.35fr_1fr]">
-    <a href={localePath(lang, '/work/marccain')} class="group relative block min-h-[320px] overflow-hidden md:min-h-[440px]" aria-label={t('Go to the case study MARCCAIN NYC', 'Zur Case-Seite MARCCAIN NYC')}>
-      <Media src="/images/marccain-teaser-navi.jpg" alt="MARCCAIN NYC" class="absolute inset-0 h-full w-full transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
+    <a href={localePath(lang, '/work/marccain')} class="group relative block min-h-[320px] overflow-hidden md:min-h-[440px]" aria-label={t('Go to the case study MARCCAIN New York City Activation', 'Zur Case-Seite MARCCAIN New York City Activation')}>
+      <Media src="/images/marccain-teaser-navi.jpg" alt="MARCCAIN New York City Activation" class="absolute inset-0 h-full w-full transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
     </a>
     <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-24">
       <p class="eyebrow text-[14px]">{t('Selected work', 'Ausgewählte Projekte')}</p>
-      <h2 class="mt-6 text-[30px] leading-snug font-light">MARCCAIN NYC</h2>
+      <h2 class="mt-6 text-[30px] leading-snug font-light">New York City Activation</h2>
       <p class="mt-6 max-w-md text-[16px] leading-relaxed opacity-90">{intro}</p>
+      <a href={localePath(lang, '/work/marccain')} class="mt-8 self-start" aria-label={t('Go to the case study MARCCAIN New York City Activation', 'Zur Case-Seite MARCCAIN New York City Activation')}><Arrow /></a>
     </div>
   </section>
 </Base>
