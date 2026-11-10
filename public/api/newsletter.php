@@ -5,7 +5,7 @@
 require __DIR__ . '/_mail.php';
 
 // Empfänger der Anmeldungen
-const NEWSLETTER_TO = 'nina.walker@frst.agency';
+const NEWSLETTER_TO = 'hello@frst.agency';
 
 $body = frst_read_body();
 
