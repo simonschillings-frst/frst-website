@@ -101,10 +101,12 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       key: 'about',
       label: t('About us', 'Über uns'),
       href: l('/about-us'),
-      layout: 'cards',
+      layout: 'feature',
+      feature: { title: lang === 'de' ? ['Gemacht für den', 'unverstellten', 'Moment.'] : ['Made for the', 'unguarded', 'moment.'] },
       children: [
-        { title: 'Superpod', subtitle: t('About us', 'Über uns'), href: l('/about-us#superpod') },
-        { title: t('Careers', 'Karriere'), subtitle: t('About us', 'Über uns'), href: l('/about-us#careers') },
+        { title: 'Manifest', subtitle: t('What we believe in.', 'Woran wir glauben.'), href: l('/about-us#manifest') },
+        { title: t('Locations', 'Standorte'), subtitle: 'Stuttgart · New York · Berlin', href: l('/about-us#locations') },
+        { title: t('Careers', 'Karriere'), subtitle: t('Join us.', 'Werde Teil von frst.'), href: l('/about-us#careers') },
       ],
     },
   ];
