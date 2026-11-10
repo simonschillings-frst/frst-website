@@ -90,7 +90,6 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       children: [
         { title: 'Our Takes', subtitle: t('Perspectives', 'Perspektiven'), href: l('/perspectives#our-takes') },
         { title: t('Videos', 'Videos'), subtitle: t('Perspectives', 'Perspektiven'), href: l('/perspectives#videos') },
-        { title: t('Podcast', 'Podcast'), subtitle: t('Perspectives', 'Perspektiven'), href: l('/perspectives#podcast') },
       ],
     },
     {
