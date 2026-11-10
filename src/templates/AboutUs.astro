@@ -12,13 +12,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = useLang(lang);
 
-// Namen, Rollen, Stellen und Prinzipien sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
-const lorem = t(
-  'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.',
-  'Wir bauen unvergessliche Marken, die begeistern und Menschen mitnehmen. Deshalb stellen wir interdisziplinäre Teams zusammen, die von zukunftsweisender Technologie getragen werden.',
-);
-
-// Standorte: Bilder sind Platzhalter, Adressdaten wie angegeben.
+// Standorte: Adressdaten wie angegeben, Bilder liegen in /images/web.
 const locations = [
   { city: 'Stuttgart', lines: ['Feuersee', 'Creative Hub'], phone: '+49 (0) 711 410 270 74', tone: 'desert', imageLeft: true, image: '/images/web/location-stuttgart.jpg', alt: t('Smiling man with dreadlocks and sunglasses in a courtyard in front of a white brick building', 'Lächelnder Mann mit Dreadlocks und Sonnenbrille in einem Innenhof vor einem weißen Backsteingebäude') },
   { city: 'New York', lines: ['Brooklyn', 'Creative Hub'], phone: '7189371234', tone: 'sky', imageLeft: false, image: '/images/web/location-new-york.jpg', alt: t('Person with curly hair seen from behind on a subway platform at Rector Street as a train passes', 'Person mit lockigen Haaren von hinten auf einem U-Bahnsteig an der Rector Street, während ein Zug vorbeifährt') },
@@ -29,9 +23,9 @@ const jobsMail = 'jobs@frst.agency';
 const mailto = (subject: string) => `mailto:${jobsMail}?subject=${encodeURIComponent(subject)}`;
 
 const jobs = [
-  { title: t('Senior Strategist (m/w/d)', 'Senior Strategist (m/w/d)'), place: t('Göppingen · Full-time', 'Göppingen · Vollzeit') },
-  { title: t('Creative Technologist (m/w/d)', 'Creative Technologist (m/w/d)'), place: t('Göppingen · Full-time', 'Göppingen · Vollzeit') },
-  { title: t('Working Student Communication (m/w/d)', 'Werkstudent Kommunikation (m/w/d)'), place: t('Göppingen · Part-time', 'Göppingen · Teilzeit') },
+  { title: t('Senior Strategist (m/w/d)', 'Senior Strategist (m/w/d)'), place: t('Full-time', 'Vollzeit') },
+  { title: t('Creative Technologist (m/w/d)', 'Creative Technologist (m/w/d)'), place: t('Full-time', 'Vollzeit') },
+  { title: t('Working Student Communication (m/w/d)', 'Werkstudent Kommunikation (m/w/d)'), place: t('Part-time', 'Teilzeit') },
 ];
 ---
 
@@ -111,8 +105,11 @@ const jobs = [
     <div class="container-frst grid gap-12 py-20 md:py-28 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
       <div>
         <p class="eyebrow text-[14px]">{t('Careers', 'Karriere')}</p>
-        <h2 class="mt-8 text-[30px] leading-snug">{t('Join us.', 'Werde Teil von frst.')}</h2>
-        <p class="mt-10 max-w-sm text-[16px] leading-relaxed opacity-90">{lorem}</p>
+        <h2 class="mt-8 text-[30px] leading-snug">{t('Grow beyond the job description.', 'Wachse über die Stellenbeschreibung hinaus.')}</h2>
+        <p class="mt-10 max-w-sm text-[16px] leading-relaxed opacity-90">{t(
+          'Every industry has its habits. We look behind them and build something else: a place where curious people grow, think freely and shape what comes next. See where you fit.',
+          'Jede Branche hat ihre Gewohnheiten. Wir schauen dahinter und bauen etwas anderes: einen Ort, an dem neugierige Menschen wachsen, frei denken und gestalten, was als Nächstes kommt. Finde heraus, wo du hinpasst.',
+        )}</p>
       </div>
       <div>
         <ul class="border-t border-cream/30">
