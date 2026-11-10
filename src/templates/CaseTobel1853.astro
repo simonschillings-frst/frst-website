@@ -11,7 +11,8 @@ interface Props {
 const { lang } = Astro.props;
 const t = useLang(lang);
 
-const title = 'tobel 1853';
+const brand = 'tobel 1853';
+const title = 'Vom Einfachen das Beste';
 const project = t('Brand · Corporate Identity', 'Marke · Corporate Identity');
 
 // Texte und Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
@@ -36,18 +37,18 @@ const paragraph =
   'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
 ---
 
-<Base title={`${title} – frst`} headerLight lang={lang}>
+<Base title={`${brand} ${title} – frst`} headerLight lang={lang}>
   <!-- Titel -->
   <section class="container-frst pt-24 pb-14 md:pt-36 md:pb-16">
     <div class="md:ml-[16%]" data-align-nav>
       <h1 class="text-5xl leading-[1.05] font-light md:text-7xl">{title}</h1>
-      <p class="mt-8 text-lg font-light md:text-2xl">{project}</p>
+      <p class="mt-8 text-lg font-light md:text-2xl">{brand}</p>
     </div>
   </section>
 
   <!-- Hauptmotiv über die ganze Breite -->
   <section>
-    <Media eager src="/images/tobel-header.jpg" alt={`${title} – Logo vor einem Wald im Morgenlicht`} class="aspect-[16/10] w-full md:aspect-[12/5]" />
+    <Media eager src="/images/tobel-header.jpg" alt={`${brand} – Logo vor einem Wald im Morgenlicht`} class="aspect-[16/10] w-full md:aspect-[12/5]" />
   </section>
 
   <!-- Projektdaten und Text -->
@@ -80,7 +81,7 @@ const paragraph =
   <!-- Bildergalerie (großes Bild, zwei Dreierreihen) -->
   <!-- Film / großes Bewegtbild über die ganze Breite (wie das Hauptmotiv oben) -->
   <section class="relative">
-    <Media src="/images/web/tobel-website.jpg" alt={`${title} – Website`} class="aspect-video w-full" />
+    <Media src="/images/web/tobel-website.jpg" alt={`${brand} – Website`} class="aspect-video w-full" />
     <!-- Kreis „Vom Einfachen das Beste“ dreht sich langsam -->
     <img src="/images/tobel-kreis-weiss.svg" alt="Vom Einfachen das Beste" class="absolute top-[12.3%] left-[6.92%] w-[11.2%] animate-[spin_30s_linear_infinite] motion-reduce:animate-none" />
   </section>
@@ -90,7 +91,7 @@ const paragraph =
     <div class="grid gap-2 md:grid-cols-3">
       {tiles.map((tile) => (
         <div class="group overflow-hidden">
-          <Media src={tile.src} alt={`${title} – ${tile.alt}`} class={`aspect-[3/4] w-full transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${tile.position ?? ''}`} />
+          <Media src={tile.src} alt={`${brand} – ${tile.alt}`} class={`aspect-[3/4] w-full transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${tile.position ?? ''}`} />
         </div>
       ))}
     </div>
