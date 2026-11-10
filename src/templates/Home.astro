@@ -107,27 +107,15 @@ const disciplines = [
 
   <!-- Why frst -->
   <section id="why-frst" class="container-frst pt-14 pb-20 md:pt-20 md:pb-28">
-    <div class="text-2xl leading-snug md:columns-2 md:gap-16 [&>p]:mb-8 [&>p]:break-inside-avoid">
-      <p>
-        {t('We were never interested in doing things just because they’ve always been done that way. We believe the most interesting things happen when different minds meet, familiar ideas are challenged and there’s room for something unexpected.', 'Es hat uns nie interessiert, Dinge nur deshalb zu tun, weil sie schon immer so getan wurden. Wir glauben, dass die interessantesten Dinge passieren, wenn unterschiedliche Köpfe aufeinandertreffen, Vertrautes in Frage gestellt wird und Raum für Unerwartetes bleibt.')}
-      </p>
-      <p>
-        {t('That’s why frst is more than an agency. It’s a space for curious minds, challenging conversations and the kind of collaboration that makes new things possible.', 'Deshalb ist frst mehr als eine Agentur. Es ist ein Raum für neugierige Köpfe, fordernde Gespräche und eine Zusammenarbeit, die Neues möglich macht.')}
-      </p>
-      <p>
-        {t('We bring together people from brands, creativity, technology and academia. People who question the obvious, share what they know and are open to what they don’t.', 'Wir bringen Menschen aus Marken, Kreation, Technologie und Wissenschaft zusammen. Menschen, die das Offensichtliche hinterfragen, ihr Wissen teilen und offen sind für das, was sie nicht wissen.')}
-      </p>
-      <p>
-        {t('We use technology to expand what’s possible. But we believe it takes human intuition, imagination and judgment to make something matter.', 'Wir nutzen Technologie, um das Mögliche zu erweitern. Aber wir glauben, dass es menschliche Intuition, Vorstellungskraft und Urteilskraft braucht, damit etwas wirklich zählt.')}
-      </p>
-      <p>
-        {t('Together, we explore new ways to build brands, create culture and move things forward. Not by producing more of what already exists, but by making room for what doesn’t.', 'Gemeinsam erkunden wir neue Wege, Marken aufzubauen, Kultur zu gestalten und Dinge voranzubringen. Nicht, indem wir mehr von dem produzieren, was es schon gibt, sondern indem wir Raum schaffen für das, was es noch nicht gibt.')}
-      </p>
-      <p>
-        {t('We don’t believe the future belongs to those with all the answers. It belongs to those willing to ask better questions, see things differently and create together.', 'Wir glauben nicht, dass die Zukunft denen gehört, die alle Antworten haben. Sie gehört denen, die bereit sind, bessere Fragen zu stellen, die Dinge anders zu sehen und gemeinsam zu gestalten.')}
-      </p>
-      <p>{t('We are frst. A space for what’s next.', 'Wir sind frst. Ein Raum für das, was als Nächstes kommt.')}</p>
+    <p class="eyebrow text-[14px]">{t('About us', 'Über uns')}</p>
+    <!-- Teaser: der volle Text steht auf About us (Manifest) -->
+    <div class="mt-10 text-2xl leading-snug md:columns-2 md:gap-16 [&>p]:mb-8 [&>p]:break-inside-avoid">
+      <p>{t('We were never interested in doing things just because they’ve always been done that way. We believe the most interesting things happen when different minds meet, familiar ideas are challenged and there’s room for something unexpected.', 'Es hat uns nie interessiert, Dinge nur deshalb zu tun, weil sie schon immer so getan wurden. Wir glauben, dass die interessantesten Dinge passieren, wenn unterschiedliche Köpfe aufeinandertreffen, Vertrautes in Frage gestellt wird und Raum für Unerwartetes bleibt.')}</p>
+      <p>{t('That’s why frst is more than an agency. It’s a space for curious minds, challenging conversations and the kind of collaboration that makes new things possible.', 'Deshalb ist frst mehr als eine Agentur. Es ist ein Raum für neugierige Köpfe, fordernde Gespräche und eine Zusammenarbeit, die Neues möglich macht.')}</p>
     </div>
+    <a href={l('/about-us#manifest')} aria-label={t('Read the full manifesto', 'Das ganze Manifest lesen')} class="group mt-8 inline-block">
+      <span class="inline-block transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
+    </a>
   </section>
 
   <!-- Future of the Agency -->
@@ -300,22 +288,6 @@ const disciplines = [
         ))}
       </div>
     </div>
-  </section>
-
-  <!-- About us Teaser -->
-  <section id="about" class="grid md:grid-cols-2">
-    <div class="flex flex-col justify-center bg-black px-5 py-20 text-cream md:px-10">
-      <p class="eyebrow text-[14px]">{t('About us', 'Über uns')}</p>
-      <h2 class="mt-8 text-[30px] leading-snug">{t('Made for the unguarded moment.', 'Gemacht für den unverstellten Moment.')}</h2>
-      <p class="mt-6 max-w-md text-[16px] leading-relaxed opacity-90">
-        {t('frst is a family-owned company, led by brothers, with an eye for people. We see our work as an interaction between humans. In every conversation we look for the moment the mask drops and something real is said. That is where the best ideas begin.', 'frst ist ein inhabergeführtes Familienunternehmen, geleitet von Brüdern, mit einem Blick für Menschen. Wir verstehen unsere Arbeit als Zusammenspiel von Menschen. In jedem Gespräch suchen wir den Moment, in dem die Maske fällt und etwas Echtes gesagt wird. Dort beginnen die besten Ideen.')}
-      </p>
-      <a href={l('/about-us')} class="mt-8" aria-label={t('Go to the About us page', 'Zur Über-uns-Seite')}><Arrow /></a>
-    </div>
-    <a href={l('/about-us')} class="group relative block overflow-hidden md:min-h-[480px]" aria-label={t('Go to the About us page', 'Zur Über-uns-Seite')}>
-      <!-- Absolut positioniert, damit das Bild die Zeilenhöhe nicht vergrößert -->
-      <Media src="/images/about-us-gruender.jpg" alt={t('Two people in dark clothing walking side by side on an airfield', 'Zwei Personen in dunkler Kleidung gehen nebeneinander über ein Rollfeld')} sizes="(min-width: 768px) 50vw, 100vw" class="h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:absolute md:inset-0 md:h-full" />
-    </a>
   </section>
 
   <!-- Kontakt -->
