@@ -12,26 +12,20 @@ interface Props {
 const { lang } = Astro.props;
 const t = useLang(lang);
 
-// Namen, Rollen, Stellen und Prinzipien sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
-const lorem = t(
-  'We build memorable brands that spark excitement and ignite engagement. That’s why we curate cross-functional teams powered by future-forward technology.',
-  'Wir bauen unvergessliche Marken, die begeistern und Menschen mitnehmen. Deshalb stellen wir interdisziplinäre Teams zusammen, die von zukunftsweisender Technologie getragen werden.',
-);
-
-// Standorte: Bilder sind Platzhalter, Adressdaten wie angegeben.
+// Standorte: Adressdaten wie angegeben, Bilder liegen in /images/web.
 const locations = [
-  { city: 'Stuttgart', lines: ['Feuersee', 'Creative Hub'], phone: '+49 (0) 711 410 270 74', tone: 'desert', imageLeft: true },
-  { city: 'New York', lines: ['Brooklyn', 'Creative Hub'], phone: '7189371234', tone: 'sky', imageLeft: false },
-  { city: 'Berlin', lines: ['Prenzlauer Berg', 'Creative Hub'], phone: '030123456', tone: 'dusk', imageLeft: true },
+  { city: 'Stuttgart', lines: ['Feuersee', 'Creative Hub'], email: 'stuttgart@frst.agency', tone: 'desert', imageLeft: true, image: '/images/web/location-stuttgart.jpg', alt: t('Smiling man with dreadlocks and sunglasses in a courtyard in front of a white brick building', 'Lächelnder Mann mit Dreadlocks und Sonnenbrille in einem Innenhof vor einem weißen Backsteingebäude') },
+  { city: 'New York', lines: ['Brooklyn', 'Creative Hub'], email: 'nyc@frst.agency', tone: 'sky', imageLeft: false, image: '/images/web/location-new-york.jpg', alt: t('Person with curly hair seen from behind on a subway platform at Rector Street as a train passes', 'Person mit lockigen Haaren von hinten auf einem U-Bahnsteig an der Rector Street, während ein Zug vorbeifährt') },
+  { city: 'Berlin', lines: ['Prenzlauer Berg', 'Creative Hub'], email: 'berlin@frst.agency', tone: 'dusk', imageLeft: true, image: '/images/web/location-berlin.jpg', alt: t('Five people in dark clothes walking towards the camera on an airfield under a grey sky', 'Fünf Personen in dunkler Kleidung laufen unter grauem Himmel auf einem Flugfeld auf die Kamera zu') },
 ] as const;
 
 const jobsMail = 'jobs@frst.agency';
 const mailto = (subject: string) => `mailto:${jobsMail}?subject=${encodeURIComponent(subject)}`;
 
 const jobs = [
-  { title: t('Senior Strategist (m/w/d)', 'Senior Strategist (m/w/d)'), place: t('Göppingen · Full-time', 'Göppingen · Vollzeit') },
-  { title: t('Creative Technologist (m/w/d)', 'Creative Technologist (m/w/d)'), place: t('Göppingen · Full-time', 'Göppingen · Vollzeit') },
-  { title: t('Working Student Communication (m/w/d)', 'Werkstudent Kommunikation (m/w/d)'), place: t('Göppingen · Part-time', 'Göppingen · Teilzeit') },
+  { title: t('Senior Strategist (m/w/d)', 'Senior Strategist (m/w/d)'), place: t('Full-time', 'Vollzeit') },
+  { title: t('Creative Technologist (m/w/d)', 'Creative Technologist (m/w/d)'), place: t('Full-time', 'Vollzeit') },
+  { title: t('Working Student Communication (m/w/d)', 'Werkstudent Kommunikation (m/w/d)'), place: t('Part-time', 'Teilzeit') },
 ];
 ---
 
@@ -56,10 +50,28 @@ const jobs = [
 
   <!-- Manifest -->
   <section id="manifest" class="container-frst scroll-mt-20 pt-14 pb-20 md:pt-20 md:pb-28">
-    <div class="text-2xl leading-snug [&>p]:mb-8">
-      <p>{t('We believe the best ideas begin where people stop performing. frst is a family-owned company, led by brothers, with an eye for people.', 'Wir glauben, dass die besten Ideen dort beginnen, wo Menschen aufhören, etwas darzustellen. frst ist ein inhabergeführtes Familienunternehmen, geleitet von Brüdern, mit einem Blick für Menschen.')}</p>
-      <p>{t('We look for the moment the mask drops and something real is said. We see beyond belonging and we ask better questions.', 'Wir suchen den Moment, in dem die Maske fällt und etwas Echtes gesagt wird. Wir sehen über Zugehörigkeit hinaus und stellen bessere Fragen.')}</p>
-      <p>{t('We build nothing behind closed doors. Because brands that are made for the unguarded moment are the ones people trust.', 'Wir bauen nichts hinter verschlossenen Türen. Denn Marken, die für den unverstellten Moment gemacht sind, sind die, denen Menschen vertrauen.')}</p>
+    <p class="eyebrow text-[14px]">Manifest</p>
+    <!-- Gleicher Text wie auf der Startseite (Why frst) -->
+    <div class="mt-10 text-2xl leading-snug md:columns-2 md:gap-16 [&>p]:mb-8 [&>p]:break-inside-avoid">
+      <p>
+        {t('We were never interested in doing things just because they’ve always been done that way. We believe the most interesting things happen when different minds meet, familiar ideas are challenged and there’s room for something unexpected.', 'Es hat uns nie interessiert, Dinge nur deshalb zu tun, weil sie schon immer so getan wurden. Wir glauben, dass die interessantesten Dinge passieren, wenn unterschiedliche Köpfe aufeinandertreffen, Vertrautes in Frage gestellt wird und Raum für Unerwartetes bleibt.')}
+      </p>
+      <p>
+        {t('That’s why frst is more than an agency. It’s a space for curious minds, challenging conversations and the kind of collaboration that makes new things possible.', 'Deshalb ist frst mehr als eine Agentur. Es ist ein Raum für neugierige Köpfe, fordernde Gespräche und eine Zusammenarbeit, die Neues möglich macht.')}
+      </p>
+      <p>
+        {t('We bring together people from brands, creativity, technology and academia. People who question the obvious, share what they know and are open to what they don’t.', 'Wir bringen Menschen aus Marken, Kreation, Technologie und Wissenschaft zusammen. Menschen, die das Offensichtliche hinterfragen, ihr Wissen teilen und offen sind für das, was sie nicht wissen.')}
+      </p>
+      <p>
+        {t('We use technology to expand what’s possible. But we believe it takes human intuition, imagination and judgment to make something matter.', 'Wir nutzen Technologie, um das Mögliche zu erweitern. Aber wir glauben, dass es menschliche Intuition, Vorstellungskraft und Urteilskraft braucht, damit etwas wirklich zählt.')}
+      </p>
+      <p>
+        {t('Together, we explore new ways to build brands, create culture and move things forward. Not by producing more of what already exists, but by making room for what doesn’t.', 'Gemeinsam erkunden wir neue Wege, Marken aufzubauen, Kultur zu gestalten und Dinge voranzubringen. Nicht, indem wir mehr von dem produzieren, was es schon gibt, sondern indem wir Raum schaffen für das, was es noch nicht gibt.')}
+      </p>
+      <p>
+        {t('We don’t believe the future belongs to those with all the answers. It belongs to those willing to ask better questions, see things differently and create together.', 'Wir glauben nicht, dass die Zukunft denen gehört, die alle Antworten haben. Sie gehört denen, die bereit sind, bessere Fragen zu stellen, die Dinge anders zu sehen und gemeinsam zu gestalten.')}
+      </p>
+      <p>{t('We are frst. A space for what’s next.', 'Wir sind frst. Ein Raum für das, was als Nächstes kommt.')}</p>
     </div>
   </section>
 
@@ -79,9 +91,12 @@ const jobs = [
 
   <!-- Standorte -->
   <section id="locations" class="container-frst scroll-mt-20 py-16 md:py-24" aria-label={t('Locations', 'Standorte')}>
+    <p class="eyebrow text-[14px]">{t('Locations', 'Standorte')}</p>
     {locations.map((loc) => (
       <div class="grid gap-y-8 py-8 md:grid-cols-2 md:gap-x-16 md:py-12">
         <Media
+          src={'image' in loc ? loc.image : undefined}
+          alt={'alt' in loc ? loc.alt : undefined}
           tone={loc.tone}
           label={loc.city}
           class={`aspect-[3/2] w-full ${loc.imageLeft ? '' : 'md:order-2'}`}
@@ -92,7 +107,7 @@ const jobs = [
             {loc.lines.length > 0 && (
               <address class="mt-6 text-[16px] leading-relaxed not-italic">
                 {loc.lines.map((line) => <span class="block">{line}</span>)}
-                <a href={`tel:${loc.phone.replace(/\(0\)|[^+\d]/g, '')}`} class="block hover:text-violet focus-visible:text-violet">{loc.phone}</a>
+                <a href={`mailto:${loc.email}`} class="block hover:text-violet focus-visible:text-violet">{loc.email}</a>
               </address>
             )}
           </div>
@@ -106,8 +121,11 @@ const jobs = [
     <div class="container-frst grid gap-12 py-20 md:py-28 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
       <div>
         <p class="eyebrow text-[14px]">{t('Careers', 'Karriere')}</p>
-        <h2 class="mt-8 text-[30px] leading-snug">{t('Join us.', 'Werde Teil von frst.')}</h2>
-        <p class="mt-10 max-w-sm text-[16px] leading-relaxed opacity-90">{lorem}</p>
+        <h2 class="mt-8 text-[30px] leading-snug">{t('Grow beyond the job description.', 'Wachse über die Stellenbeschreibung hinaus.')}</h2>
+        <p class="mt-10 max-w-sm text-[16px] leading-relaxed opacity-90">{t(
+          'Every industry has its habits. We look behind them and build something else: a place where curious people grow, think freely and shape what comes next. See where you fit.',
+          'Jede Branche hat ihre Gewohnheiten. Wir schauen dahinter und bauen etwas anderes: einen Ort, an dem neugierige Menschen wachsen, frei denken und gestalten, was als Nächstes kommt. Finde heraus, wo du hinpasst.',
+        )}</p>
       </div>
       <div>
         <ul class="border-t border-cream/30">
