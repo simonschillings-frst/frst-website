@@ -72,8 +72,8 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       href: l('/work'),
       layout: 'cards',
       children: [
-        { title: t('Cases', 'Cases'), subtitle: t('Work', 'Projekte'), href: l('/work#cases'), image: '/images/marccain-teaser-navi.jpg' },
-        { title: t('Results', 'Ergebnisse'), subtitle: t('Work', 'Projekte'), href: l('/work#results') },
+        { title: t('Cases', 'Cases'), subtitle: t('Our philosophy brought to life', 'Unsere Philosophie, zum Leben erweckt'), href: l('/work#cases'), image: '/images/marccain-teaser-navi.jpg' },
+        { title: 'Mention', subtitle: t('What our clients love', 'Was unsere Kunden lieben'), href: l('/work#mention') },
       ],
     },
     {

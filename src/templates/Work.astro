@@ -41,7 +41,13 @@ const results = [
   { value: '12', text: loremShort },
 ];
 
-const words = [t('Strategy', 'Strategie'), t('Creative', 'Kreation'), t('Brand', 'Marke'), t('Campaigns', 'Kampagnen'), t('AI', 'KI')];
+// Laufband im Header: die vier Disziplinen (Titel wie auf der Startseite)
+const words = [
+  t('Brand Strategy', 'Markenstrategie'),
+  t('Creative Concept', 'Kreativkonzept'),
+  t('Campaign & Craft', 'Kampagne & Handwerk'),
+  t('AI driven Technology', 'KI-gestützte Technologie'),
+];
 ---
 
 <Base title={t('Work – frst', 'Projekte – frst')} headerOverlay lang={lang}>
@@ -52,7 +58,7 @@ const words = [t('Strategy', 'Strategie'), t('Creative', 'Kreation'), t('Brand',
     ></div>
     <div class="container-frst relative grid gap-10 pt-40 pb-32 md:grid-cols-[2fr_1fr] md:items-end">
       <div>
-        <p class="eyebrow text-[14px]">{t('Selected work', 'Ausgewählte Projekte')}</p>
+        <p class="eyebrow text-[14px]">{t('Work', 'Projekte')}</p>
         <h1 class="mt-14 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{t('One idea.', 'Eine Idee.')}<br />{t('Many shapes.', 'Viele Formen.')}</h1>
       </div>
     </div>
@@ -162,9 +168,9 @@ const words = [t('Strategy', 'Strategie'), t('Creative', 'Kreation'), t('Brand',
   </section>
 
   <!-- 7. Ergebnisse mit hochzählenden Zahlen -->
-  <section id="results" class="scroll-mt-20 bg-night text-cream" data-facts>
+  <section id="mention" class="scroll-mt-20 bg-night text-cream" data-facts>
     <div class="container-frst py-16 md:py-24">
-      <p class="eyebrow text-[14px]">{t('Results', 'Ergebnisse')}</p>
+      <p class="eyebrow text-[14px]">Mention</p>
       <h2 class="mt-8 text-[30px] leading-snug">{t('Work that moves', 'Arbeit, die')}<br />{t('the needle.', 'etwas bewegt.')}</h2>
       <ul class="mt-16 grid gap-12 md:grid-cols-3 md:gap-8">
         {results.map((item, i) => (
