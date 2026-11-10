@@ -23,16 +23,8 @@ const cases = [
 const strip = [
   { eyebrow: 'tobel 1853', title: 'Vom Einfachen das Beste', href: localePath(lang, '/work/tobel-1853'), tags: t('Brand · Corporate Identity', 'Marke · Corporate Identity'), tone: 'mist', frame: 'aspect-[3/4]', image: '/images/tobel-header.jpg' },
   { eyebrow: 'Menold Bezler', title: 'Green is the new black.', href: localePath(lang, '/work/menold-bezler'), tags: t('Brand · Redesign', 'Marke · Redesign'), tone: 'desert', frame: 'aspect-square', image: '/images/mb-logo-header.svg' },
-  { eyebrow: 'SCHOTT', title: 'Circular Packaging', href: localePath(lang, '/work/circular-packaging'), tags: t('Brand', 'Marke'), tone: 'night', frame: 'aspect-[4/5]', image: '/images/schott-pharma-teaserbild.jpg' },
+  { eyebrow: 'SCHOTT PHARMA', title: 'Circular Packaging', href: localePath(lang, '/work/circular-packaging'), tags: t('Brand · Film · CSR', 'Marke · Film · CSR'), tone: 'night', frame: 'aspect-[4/5]', image: '/images/schott-pharma-teaserbild.jpg' },
 ] as const;
-
-const disciplines = [
-  { no: '01', title: t('Strategy', 'Strategie'), count: t('12 Cases', '12 Cases') },
-  { no: '02', title: t('Creative', 'Kreation'), count: t('18 Cases', '18 Cases') },
-  { no: '03', title: t('Brand', 'Marke'), count: t('9 Cases', '9 Cases') },
-  { no: '04', title: t('Campaigns', 'Kampagnen'), count: t('14 Cases', '14 Cases') },
-  { no: '05', title: t('AI', 'KI'), count: t('6 Cases', '6 Cases') },
-];
 
 const loremShort = 'Lorem Ipsum dolor sit amet Ectur centran et amos.';
 const results = [
@@ -142,28 +134,26 @@ const words = [
     </div>
   </section>
 
-  <!-- 6. Disziplinen als ruhige Liste -->
+  <!-- 6. Die vier Disziplinen (wie im Laufband), Pfeil führt zu What we offer -->
   <section class="container-frst py-16 md:py-20">
     <div class="grid gap-10 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
       <div>
-        <p class="eyebrow text-[14px]">{t('By discipline', 'Nach Disziplin')}</p>
-        <h2 class="mt-8 text-[30px] leading-snug">{t('Five disciplines.', 'Fünf Disziplinen.')}<br />{t('One partner.', 'Ein Partner.')}</h2>
+        <p class="eyebrow text-[14px]">{t('What we offer', 'Was wir bieten')}</p>
+        <h2 class="mt-8 text-[30px] leading-snug">{t('Four disciplines.', 'Vier Disziplinen.')}<br />{t('One partner.', 'Ein Partner.')}</h2>
       </div>
-      <ul class="border-t border-night/20">
-        {disciplines.map((item) => (
-          <li class="border-b border-night/20">
-            <a
-              href="#cases"
-              class="group grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 py-4 transition-[padding,color] duration-300 hover:pl-3 hover:text-violet md:grid-cols-[3rem_1fr_auto_2rem] md:py-5"
-            >
-              <span class="text-[24px] leading-none">{item.no}</span>
-              <span class="text-[24px] leading-none">{item.title}</span>
-              <span class="hidden text-[14px] opacity-70 md:inline">{item.count}</span>
-              <span class="justify-self-end transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <div>
+        <ol class="border-t border-night/20" data-typewriter>
+          {words.map((word, i) => (
+            <li class="grid grid-cols-[2.5rem_1fr] items-center gap-4 border-b border-night/20 py-4 md:grid-cols-[3rem_1fr] md:py-5">
+              <span class="relative text-[24px] leading-none" data-type>{String(i + 1).padStart(2, '0')}</span>
+              <span class="relative text-[24px] leading-none" data-type>{word}</span>
+            </li>
+          ))}
+        </ol>
+        <a href={localePath(lang, '/what-we-do#services')} aria-label={t('To What we offer', 'Zu Was wir bieten')} class="group mt-8 inline-block">
+          <span class="inline-block transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -215,6 +205,30 @@ const words = [
         animation: none;
       }
     }
+
+    /* Schreibmaschine: unsichtbarer Volltext hält die Breite (und bleibt für Screenreader lesbar), darüber wird getippt */
+    :global(.type-ghost) {
+      opacity: 0;
+    }
+    :global(.type-typed) {
+      position: absolute;
+      inset: 0;
+    }
+    :global(.type-typed.is-typing)::after {
+      content: '';
+      display: inline-block;
+      width: 2px;
+      height: 0.9em;
+      margin-left: 3px;
+      vertical-align: -0.08em;
+      background: currentColor;
+      animation: type-caret 0.9s steps(1) infinite;
+    }
+    @keyframes type-caret {
+      50% {
+        opacity: 0;
+      }
+    }
   </style>
 
   <script>
@@ -248,6 +262,51 @@ const words = [
 
       facts.addEventListener('mouseenter', run);
       facts.addEventListener('touchstart', run, { passive: true });
+    }
+  </script>
+  <script>
+    // What we offer: 01 bis 04 werden wie auf einer Schreibmaschine getippt, sobald die Liste ins Bild kommt
+    const typeList = document.querySelector<HTMLElement>('[data-typewriter]');
+
+    if (typeList && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const parts = Array.from(typeList.querySelectorAll<HTMLElement>('[data-type]')).map((el) => {
+        const full = el.textContent ?? '';
+        const ghost = document.createElement('span');
+        ghost.className = 'type-ghost';
+        ghost.textContent = full;
+        const typed = document.createElement('span');
+        typed.className = 'type-typed';
+        typed.setAttribute('aria-hidden', 'true');
+        el.replaceChildren(ghost, typed);
+        return { typed, full };
+      });
+
+      const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+      const type = async () => {
+        for (const [index, part] of parts.entries()) {
+          part.typed.classList.add('is-typing');
+          for (let i = 1; i <= part.full.length; i++) {
+            part.typed.textContent = part.full.slice(0, i);
+            // unregelmäßiger Anschlag wie bei einer echten Schreibmaschine
+            await wait(45 + Math.random() * 70);
+          }
+          const last = index === parts.length - 1;
+          await wait(last ? 1600 : index % 2 === 0 ? 180 : 320);
+          part.typed.classList.remove('is-typing');
+        }
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            observer.disconnect();
+            type();
+          }
+        },
+        { threshold: 0.4 },
+      );
+      observer.observe(typeList);
     }
   </script>
   <script>
