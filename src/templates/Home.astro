@@ -319,13 +319,14 @@ const disciplines = [
   </section>
 
   <!-- Kontakt -->
-  <section id="contact" class="relative overflow-hidden bg-stone text-cream">
-    <div
-      class="pointer-events-none absolute top-1/2 left-1/2 h-[480px] w-[480px] -translate-x-1/4 -translate-y-1/3 rounded-full bg-[radial-gradient(circle,#ffd9a0_0%,#f59a3c_30%,transparent_70%)] opacity-90"
-    ></div>
+  <section id="contact" class="relative overflow-hidden bg-night text-cream">
+    <!-- Hintergrundvideo (dasselbe wie im Superpod-Bereich auf About us): lädt erst kurz bevor der Bereich ins Bild kommt -->
+    <Video src="/videos/about-us-superpod.mp4" srcMobile="/videos/about-us-superpod-720.mp4" poster="/videos/about-us-superpod-poster.webp" loop tone="night" class="absolute inset-0" lang={lang} />
+    <!-- Abdunklung: am Handy über die ganze Fläche, ab Tablet nur links hinter dem Text -->
+    <div class="pointer-events-none absolute inset-0 bg-night/70 md:bg-transparent md:bg-gradient-to-r md:from-night/85 md:via-night/60 md:to-night/10"></div>
     <div class="container-frst relative py-24 md:py-32">
-      <p class="eyebrow text-[14px]">{t('Let’s get in touch', 'Lass uns ins Gespräch kommen')}</p>
-      <h2 class="mt-8 max-w-5xl text-[8vw] leading-[1.05] md:text-5xl lg:text-7xl">{t('Have an idea? A challenge? Book a demo.', 'Du hast eine Idee? Eine Herausforderung? Buche eine Demo.')}</h2>
+      <p class="eyebrow text-[14px]">{t('See your project in Superpod', 'Sieh dein Projekt in Superpod')}</p>
+      <h2 class="mt-8 max-w-5xl text-[8vw] leading-[1.05] md:text-5xl lg:text-7xl">{t('Watch an idea become a roadmap.', 'Sieh zu, wie aus einer Idee eine Roadmap wird.')}</h2>
       <a href="#" data-book-demo class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">{t('Book a demo', 'Demo buchen')}</a>
     </div>
   </section>
