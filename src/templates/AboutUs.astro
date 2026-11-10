@@ -20,9 +20,9 @@ const lorem = t(
 
 // Standorte: Bilder sind Platzhalter, Adressdaten wie angegeben.
 const locations = [
-  { city: 'Stuttgart', lines: ['Feuersee', 'Creative Hub'], phone: '+49 (0) 711 410 270 74', tone: 'desert', imageLeft: true },
-  { city: 'New York', lines: ['Brooklyn', 'Creative Hub'], phone: '7189371234', tone: 'sky', imageLeft: false },
-  { city: 'Berlin', lines: ['Prenzlauer Berg', 'Creative Hub'], phone: '030123456', tone: 'dusk', imageLeft: true },
+  { city: 'Stuttgart', lines: ['Feuersee', 'Creative Hub'], phone: '+49 (0) 711 410 270 74', tone: 'desert', imageLeft: true, image: '/images/web/location-stuttgart.jpg', alt: t('Smiling man with dreadlocks and sunglasses in a courtyard in front of a white brick building', 'Lächelnder Mann mit Dreadlocks und Sonnenbrille in einem Innenhof vor einem weißen Backsteingebäude') },
+  { city: 'New York', lines: ['Brooklyn', 'Creative Hub'], phone: '7189371234', tone: 'sky', imageLeft: false, image: '/images/web/location-new-york.jpg', alt: t('Person with curly hair seen from behind on a subway platform at Rector Street as a train passes', 'Person mit lockigen Haaren von hinten auf einem U-Bahnsteig an der Rector Street, während ein Zug vorbeifährt') },
+  { city: 'Berlin', lines: ['Prenzlauer Berg', 'Creative Hub'], phone: '030123456', tone: 'dusk', imageLeft: true, image: '/images/web/location-berlin.jpg', alt: t('Five people in dark clothes walking towards the camera on an airfield under a grey sky', 'Fünf Personen in dunkler Kleidung laufen unter grauem Himmel auf einem Flugfeld auf die Kamera zu') },
 ] as const;
 
 const jobsMail = 'jobs@frst.agency';
@@ -85,6 +85,8 @@ const jobs = [
     {locations.map((loc) => (
       <div class="grid gap-y-8 py-8 md:grid-cols-2 md:gap-x-16 md:py-12">
         <Media
+          src={'image' in loc ? loc.image : undefined}
+          alt={'alt' in loc ? loc.alt : undefined}
           tone={loc.tone}
           label={loc.city}
           class={`aspect-[3/2] w-full ${loc.imageLeft ? '' : 'md:order-2'}`}
