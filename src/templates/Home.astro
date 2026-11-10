@@ -156,12 +156,41 @@ const disciplines = [
         <a href={l('/what-we-do')} class="mt-8 inline-block" aria-label={t('Go to the Services page', 'Zur Leistungen-Seite')}><Arrow /></a>
       </div>
       <div class="relative grid grid-cols-6 gap-4 lg:pt-12">
-        <Media tone="desert" class="col-span-4 col-start-2 aspect-[3/4]" />
-        <div class="absolute top-1/3 left-0 hidden h-52 w-52 items-center justify-center rounded-full border border-night/60 text-center text-[16px] leading-snug uppercase lg:flex">
-          {t('Four disciplines', 'Vier Disziplinen')}<br />{t('one partner', 'ein Partner')}
+        <div class="relative col-span-4 col-start-2 self-start">
+          <!-- Hover: Bild zoomt leicht im festen Rahmen -->
+          <div class="group aspect-[9/10] w-[120%] max-w-none overflow-hidden">
+            <Media src="/images/what-we-do-water.webp" alt={t('Dark blue water surface with gentle waves', 'Dunkelblaue Wasseroberfläche mit sanften Wellen')} sizes="(min-width: 1024px) 30vw, 80vw" class="h-full w-full transition-transform duration-700 ease-out group-hover:scale-105" />
+          </div>
+          <!-- Kreis mit Text: die Bildkante läuft zwischen „Four“ und „disciplines“, der Kreis ist auf den ganzen Text zentriert.
+               Zwei gleiche Ebenen, jeweils an der Bildkante abgeschnitten: links dunkel auf Creme, rechts Creme auf dem Bild.
+               Ein unsichtbares „Four/One“ misst die Breite des linken Worts, damit die Lücke genau auf der Kante liegt. -->
+          {[
+            { box: 'right-full w-80', anchor: 'right-0', color: 'text-night', ring: 'border-night/60', hidden: false },
+            { box: 'left-0 w-[120%]', anchor: 'left-0', color: 'text-cream', ring: 'border-cream/70', hidden: true },
+          ].map((layer) => (
+            <div aria-hidden={layer.hidden ? 'true' : undefined} class:list={['pointer-events-none absolute inset-y-0 hidden overflow-hidden lg:block', layer.box, layer.color]}>
+              <div class:list={['absolute top-1/2 w-0', layer.anchor]}>
+                <div class="absolute right-0 -translate-y-1/2 text-[16px] leading-snug uppercase">
+                  <span class="invisible block pr-1.5 whitespace-nowrap">{t('Four', 'Vier')}<br />{t('One', 'Ein')}</span>
+                  <p class="absolute top-0 left-0 grid grid-cols-[auto_auto]">
+                    <span aria-hidden="true" class:list={['absolute top-1/2 left-1/2 h-52 w-52 -translate-1/2 rounded-full border', layer.ring]}></span>
+                    <span class="pr-1.5 text-right whitespace-nowrap">{t('Four', 'Vier')}<br />{t('One', 'Ein')}</span>
+                    <span class="pl-1.5 whitespace-nowrap">{t('disciplines', 'Disziplinen')}<br />{t('partner', 'Partner')}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-        <Media tone="mist" class="col-span-4 aspect-[4/3]" />
-        <Media tone="sky" class="col-span-2 mt-8 aspect-[2/3]" />
+        <!-- Eigene Zeile: ragt ab Desktop nach links, damit das hellblaue Feld quadratisch sein kann -->
+        <div class="col-span-6 grid grid-cols-[2fr_1fr] gap-4 lg:-ml-[15.6%] lg:grid-cols-[1.4fr_1fr]">
+          <div class="group aspect-[4/3] w-full overflow-hidden">
+            <Media src="/images/what-we-do-eye.webp" alt={t('Close-up of an eye looking upwards', 'Nahaufnahme eines Auges, das nach oben blickt')} position="53% 50%" sizes="(min-width: 1024px) 25vw, 66vw" class="h-full w-full transition-transform duration-700 ease-out group-hover:scale-105" />
+          </div>
+          <div class="group mt-8 aspect-square w-full overflow-hidden">
+            <Media src="/images/what-we-do-bubbles.webp" alt={t('Close-up of densely packed tiny bubbles', 'Nahaufnahme dicht gedrängter winziger Bläschen')} sizes="(min-width: 1024px) 18vw, 30vw" class="h-full w-full transition-transform duration-700 ease-out group-hover:scale-105" />
+          </div>
+        </div>
       </div>
       <ol class="flex flex-col gap-10">
         {disciplines.map((d) => (
