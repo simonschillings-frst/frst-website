@@ -8,6 +8,11 @@
   RewriteCond %{HTTP:X-Forwarded-Proto} !=https
   RewriteCond %{REQUEST_URI} !^/\.well-known/acme-challenge/
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Formulare: /api/newsletter und /api/book-demo laufen hier als PHP (auf Vercel als api/*.js)
+  RewriteRule ^api/(newsletter|book-demo)/?$ api/$1.php [L]
+  # Hilfsdatei nicht direkt aufrufbar
+  RewriteRule ^api/_mail\.php$ - [F,L]
 </IfModule>
 
 # Texte komprimiert ausliefern (HTML, CSS, JavaScript, SVG, Untertitel)
