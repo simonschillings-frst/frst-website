@@ -17,7 +17,7 @@ const navItems = getNavItems(lang);
     <a href={l('/')} aria-label={t('frst home', 'frst Startseite')}><Logo class="h-7 w-auto" /></a>
     <nav aria-label={t('Footer navigation', 'Footer-Navigation')}>
       <ul class="flex flex-wrap gap-x-7 gap-y-3 text-[16px]">
-        {navItems.filter((i) => i.key !== 'about').map((item) => (
+        {navItems.filter((i) => i.key !== 'cmo').map((item) => (
           <li><a href={item.href} class="hover:underline">{item.label}</a></li>
         ))}
         <!-- Impressum und Datenschutzerklärung sind inhaltlich immer deutsch, man bleibt aber im jeweiligen Sprachbereich -->
