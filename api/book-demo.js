@@ -1,13 +1,13 @@
 // Vercel Serverless Function: nimmt Anfragen aus dem „Book a demo“-Pop-up entgegen
-// und schickt sie per E-Mail an demo@frst.agency (Versand über Resend).
+// und schickt sie per E-Mail an hello@frst.agency (Versand über Resend).
 //
 // Benötigte Umgebungsvariablen (Vercel → Project Settings → Environment Variables):
 //   RESEND_API_KEY  API-Schlüssel von resend.com
 //   MAIL_FROM       Absender mit bei Resend verifizierter Domain, z. B. "frst Website <demo-form@frst.agency>"
 // Optional:
-//   DEMO_TO         Empfänger (Standard: demo@frst.agency)
+//   DEMO_TO         Empfänger (Standard: hello@frst.agency)
 
-const TO = process.env.DEMO_TO || 'demo@frst.agency';
+const TO = process.env.DEMO_TO || 'hello@frst.agency';
 
 const escapeHtml = (value) =>
   String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
