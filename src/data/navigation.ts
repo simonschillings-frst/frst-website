@@ -102,12 +102,11 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       label: t('About us', 'Über uns'),
       href: l('/about-us'),
       layout: 'feature',
-      // Blindtext: später durch den echten Titel ersetzen
-      feature: { title: ['Lorem ipsum', 'dolor sit', 'amet.'] },
+      feature: { title: lang === 'de' ? ['Gemacht für den', 'unverstellten', 'Moment.'] : ['Made for the', 'unguarded', 'moment.'] },
       children: [
         { title: 'Manifest', subtitle: t('What we believe in.', 'Woran wir glauben.'), href: l('/about-us#manifest') },
         { title: t('Locations', 'Standorte'), subtitle: 'Stuttgart · New York · Berlin', href: l('/about-us#locations') },
-        { title: t('Career', 'Karriere'), subtitle: t('Join us.', 'Werde Teil von frst.'), href: l('/about-us#careers') },
+        { title: t('Careers', 'Karriere'), subtitle: t('Join us.', 'Werde Teil von frst.'), href: l('/about-us#careers') },
       ],
     },
   ];
