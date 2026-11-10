@@ -5,7 +5,7 @@
 require __DIR__ . '/_mail.php';
 
 // Empfänger der Demo-Anfragen
-const DEMO_TO = 'demo@frst.agency';
+const DEMO_TO = 'hello@frst.agency';
 
 $body = frst_read_body();
 
