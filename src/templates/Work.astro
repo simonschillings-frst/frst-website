@@ -16,23 +16,15 @@ const t = useLang(lang);
 const cases = [
   { eyebrow: 'Volksbank Göppingen', title: 'Näher am Leben', href: localePath(lang, '/work/naeher-am-leben'), tags: t('Strategy · Campaign · Content · Digital', 'Strategie · Kampagne · Content · Digital'), tone: 'dusk', frame: 'aspect-[16/10]', col: 'md:col-span-7', image: '/images/web/naeher-am-leben-Bushaltestelle_quer.jpg' },
   { eyebrow: 'MARCCAIN', title: 'New York City Activation', href: localePath(lang, '/work/marccain'), tags: t('Brand · Creative · Design · Event', 'Marke · Kreation · Design · Event'), tone: 'sky', frame: 'aspect-[4/5]', col: 'md:col-span-5 md:mt-24', image: '/images/web/marccain-teaser.jpg?v=2' },
-  { eyebrow: 'Corporate Design', title: 'COLLINA', href: localePath(lang, '/work/collina'), tags: 'Brand Identity · Social', tone: 'desert', frame: 'aspect-square', col: 'md:col-span-4', image: '/images/web/collina-header.jpg?v=2' },
-  { eyebrow: 'Visuals', title: 'SCHOTT Aviation', href: localePath(lang, '/work/schott-aviation'), tags: t('Brand · Trade Fair · Design', 'Marke · Messe · Design'), tone: 'night', frame: 'aspect-[16/9]', col: 'md:col-span-8 md:mt-12', image: '/images/schott-aviation-messestand.jpg' },
+  { eyebrow: 'Collina', title: 'Corporate Identity', href: localePath(lang, '/work/collina'), tags: 'Branding · Brand Identity · Corporate Design · Interior Design', tone: 'desert', frame: 'aspect-square', col: 'md:col-span-4', image: '/images/web/collina-header.jpg?v=2' },
+  { eyebrow: 'SCHOTT', title: 'Enjoy the flight', href: localePath(lang, '/work/schott-aviation'), tags: t('Brand · Trade Fair · AI driven Design', 'Marke · Messe · KI-gestütztes Design'), tone: 'night', frame: 'aspect-[16/9]', col: 'md:col-span-8 md:mt-12', image: '/images/schott-aviation-messestand_neu.jpg' },
 ] as const;
 
 const strip = [
-  { title: 'tobel 1853', href: localePath(lang, '/work/tobel-1853'), tags: t('Brand · Corporate Identity', 'Marke · Corporate Identity'), tone: 'mist', frame: 'aspect-[3/4]', image: '/images/tobel-header.jpg' },
-  { title: 'MENOLD BEZLER', href: localePath(lang, '/work/menold-bezler'), tags: t('Brand · Redesign', 'Marke · Redesign'), tone: 'desert', frame: 'aspect-square', image: '/images/mb-logo-header.svg' },
-  { title: 'Circular Packaging', href: localePath(lang, '/work/circular-packaging'), tags: t('Brand', 'Marke'), tone: 'night', frame: 'aspect-[4/5]', image: '/images/schott-pharma-teaserbild.jpg' },
+  { eyebrow: 'tobel 1853', title: 'Vom Einfachen das Beste', href: localePath(lang, '/work/tobel-1853'), tags: t('Brand · Corporate Identity', 'Marke · Corporate Identity'), tone: 'mist', frame: 'aspect-[3/4]', image: '/images/tobel-header.jpg' },
+  { eyebrow: 'Menold Bezler', title: 'Green is the new black.', href: localePath(lang, '/work/menold-bezler'), tags: t('Brand · Redesign', 'Marke · Redesign'), tone: 'desert', frame: 'aspect-square', image: '/images/mb-logo-header.svg' },
+  { eyebrow: 'SCHOTT PHARMA', title: 'Circular Packaging', href: localePath(lang, '/work/circular-packaging'), tags: t('Brand · Film · CSR', 'Marke · Film · CSR'), tone: 'night', frame: 'aspect-[4/5]', image: '/images/schott-pharma-teaserbild.jpg' },
 ] as const;
-
-const disciplines = [
-  { no: '01', title: t('Strategy', 'Strategie'), count: t('12 Cases', '12 Cases') },
-  { no: '02', title: t('Creative', 'Kreation'), count: t('18 Cases', '18 Cases') },
-  { no: '03', title: t('Brand', 'Marke'), count: t('9 Cases', '9 Cases') },
-  { no: '04', title: t('Campaigns', 'Kampagnen'), count: t('14 Cases', '14 Cases') },
-  { no: '05', title: t('AI', 'KI'), count: t('6 Cases', '6 Cases') },
-];
 
 const loremShort = 'Lorem Ipsum dolor sit amet Ectur centran et amos.';
 const results = [
@@ -53,9 +45,8 @@ const words = [
 <Base title={t('Work – frst', 'Projekte – frst')} headerOverlay lang={lang}>
   <!-- 1. Hero: große Typo auf dunklem Grund mit Glow und Laufband am unteren Rand -->
   <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-screen md:max-h-[900px]">
-    <div
-      class="pointer-events-none absolute top-1/2 left-[70%] h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#ffd9a0_0%,#f59a3c_28%,#6026fe55_55%,transparent_72%)] opacity-80"
-    ></div>
+    <Media eager src="/images/web/marccain-header.jpg" alt="MARCCAIN New York City Activation" class="absolute inset-0 h-full w-full" />
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/70 via-transparent to-night/40"></div>
     <div class="container-frst relative grid gap-10 pt-40 pb-32 md:grid-cols-[2fr_1fr] md:items-end">
       <div>
         <p class="eyebrow text-[14px]">{t('Work', 'Projekte')}</p>
@@ -129,10 +120,11 @@ const words = [
           <li class="w-[70vw] shrink-0 sm:w-[44vw] md:w-[26rem] md:grow">
             <a href={'href' in item ? item.href : '#'} class="group block">
               <div class="overflow-hidden">
-                <Media sizes="(min-width: 768px) 50vw, 100vw" src={'image' in item ? item.image : undefined} alt={'image' in item ? item.title : undefined} tone={item.tone} class={`${item.frame} w-full min-[1400px]:max-h-[min(55svh,calc(100svh-22rem))] transition-transform duration-700 ease-out group-hover:scale-105`} />
+                <Media sizes="(min-width: 768px) 50vw, 100vw" src={'image' in item ? item.image : undefined} alt={'image' in item ? `${item.eyebrow} – ${item.title}` : undefined} tone={item.tone} class={`${item.frame} w-full min-[1400px]:max-h-[min(55svh,calc(100svh-22rem))] transition-transform duration-700 ease-out group-hover:scale-105`} />
               </div>
-              <h3 class="mt-5 text-[24px] leading-snug">{item.title}</h3>
-              <p class="mt-1 text-[14px] opacity-70">{item.tags}</p>
+              <p class="eyebrow mt-5 text-[14px]">{item.eyebrow}</p>
+              <h3 class="mt-3 text-[24px] leading-snug">{item.title}</h3>
+              <p class="mt-2 text-[14px] opacity-70">{item.tags}</p>
             </a>
           </li>
         ))}
@@ -142,28 +134,26 @@ const words = [
     </div>
   </section>
 
-  <!-- 6. Disziplinen als ruhige Liste -->
+  <!-- 6. Die vier Disziplinen (wie im Laufband), Pfeil führt zu What we offer -->
   <section class="container-frst py-16 md:py-20">
     <div class="grid gap-10 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
       <div>
-        <p class="eyebrow text-[14px]">{t('By discipline', 'Nach Disziplin')}</p>
-        <h2 class="mt-8 text-[30px] leading-snug">{t('Five disciplines.', 'Fünf Disziplinen.')}<br />{t('One partner.', 'Ein Partner.')}</h2>
+        <p class="eyebrow text-[14px]">{t('What we offer', 'Was wir bieten')}</p>
+        <h2 class="mt-8 text-[30px] leading-snug">{t('Four disciplines.', 'Vier Disziplinen.')}<br />{t('One partner.', 'Ein Partner.')}</h2>
       </div>
-      <ul class="border-t border-night/20">
-        {disciplines.map((item) => (
-          <li class="border-b border-night/20">
-            <a
-              href="#cases"
-              class="group grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 py-4 transition-[padding,color] duration-300 hover:pl-3 hover:text-violet md:grid-cols-[3rem_1fr_auto_2rem] md:py-5"
-            >
-              <span class="text-[24px] leading-none">{item.no}</span>
-              <span class="text-[24px] leading-none">{item.title}</span>
-              <span class="hidden text-[14px] opacity-70 md:inline">{item.count}</span>
-              <span class="justify-self-end transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <div>
+        <ol class="border-t border-night/20" data-typewriter>
+          {words.map((word, i) => (
+            <li class="grid grid-cols-[2.5rem_1fr] items-center gap-4 border-b border-night/20 py-4 md:grid-cols-[3rem_1fr] md:py-5">
+              <span class="relative text-[24px] leading-none" data-type>{String(i + 1).padStart(2, '0')}</span>
+              <span class="relative text-[24px] leading-none" data-type>{word}</span>
+            </li>
+          ))}
+        </ol>
+        <a href={localePath(lang, '/what-we-do#services')} aria-label={t('To What we offer', 'Zu Was wir bieten')} class="group mt-8 inline-block">
+          <span class="inline-block transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -215,6 +205,30 @@ const words = [
         animation: none;
       }
     }
+
+    /* Schreibmaschine: unsichtbarer Volltext hält die Breite (und bleibt für Screenreader lesbar), darüber wird getippt */
+    :global(.type-ghost) {
+      opacity: 0;
+    }
+    :global(.type-typed) {
+      position: absolute;
+      inset: 0;
+    }
+    :global(.type-typed.is-typing)::after {
+      content: '';
+      display: inline-block;
+      width: 2px;
+      height: 0.9em;
+      margin-left: 3px;
+      vertical-align: -0.08em;
+      background: currentColor;
+      animation: type-caret 0.9s steps(1) infinite;
+    }
+    @keyframes type-caret {
+      50% {
+        opacity: 0;
+      }
+    }
   </style>
 
   <script>
@@ -248,6 +262,51 @@ const words = [
 
       facts.addEventListener('mouseenter', run);
       facts.addEventListener('touchstart', run, { passive: true });
+    }
+  </script>
+  <script>
+    // What we offer: 01 bis 04 werden wie auf einer Schreibmaschine getippt, sobald die Liste ins Bild kommt
+    const typeList = document.querySelector<HTMLElement>('[data-typewriter]');
+
+    if (typeList && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const parts = Array.from(typeList.querySelectorAll<HTMLElement>('[data-type]')).map((el) => {
+        const full = el.textContent ?? '';
+        const ghost = document.createElement('span');
+        ghost.className = 'type-ghost';
+        ghost.textContent = full;
+        const typed = document.createElement('span');
+        typed.className = 'type-typed';
+        typed.setAttribute('aria-hidden', 'true');
+        el.replaceChildren(ghost, typed);
+        return { typed, full };
+      });
+
+      const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+      const type = async () => {
+        for (const [index, part] of parts.entries()) {
+          part.typed.classList.add('is-typing');
+          for (let i = 1; i <= part.full.length; i++) {
+            part.typed.textContent = part.full.slice(0, i);
+            // unregelmäßiger Anschlag wie bei einer echten Schreibmaschine
+            await wait(45 + Math.random() * 70);
+          }
+          const last = index === parts.length - 1;
+          await wait(last ? 1600 : index % 2 === 0 ? 180 : 320);
+          part.typed.classList.remove('is-typing');
+        }
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            observer.disconnect();
+            type();
+          }
+        },
+        { threshold: 0.4 },
+      );
+      observer.observe(typeList);
     }
   </script>
   <script>

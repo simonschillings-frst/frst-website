@@ -82,8 +82,8 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       href: l('/perspectives'),
       layout: 'cards',
       children: [
-        { title: 'Our Takes', subtitle: t('Perspectives', 'Perspektiven'), href: l('/perspectives#our-takes') },
-        { title: t('Videos', 'Videos'), subtitle: t('Perspectives', 'Perspektiven'), href: l('/perspectives#videos') },
+        { title: 'Our Takes', subtitle: t('Think like the wise, and speak like the crowd', 'Denke wie die Weisen und sprich wie die Menge'), href: l('/perspectives#our-takes') },
+        { title: 'Beyond Talks', subtitle: t('Thinking takes shape while speaking', 'Denken nimmt beim Sprechen Gestalt an'), href: l('/perspectives#videos') },
       ],
     },
     {
