@@ -18,9 +18,9 @@ const fields = [
 <section class={dark ? 'bg-night text-cream' : 'bg-lilac'}>
   <div class="container-frst grid gap-10 py-16 md:grid-cols-[1fr_3fr]">
     <div>
-      <p class="eyebrow text-[14px]">{t('Keep in touch', 'In Kontakt bleiben')}</p>
+      <p class="eyebrow text-[14px]">{t('Skip the echo chamber', 'Raus aus der Echokammer')}</p>
       <h2 class="mt-4 text-[30px] leading-snug font-light">
-        {lang === 'de' ? <>Immer<br />informiert</> : <>Stay<br />Connected</>}
+        {t('Join curious minds and get bold ideas.', 'Schließ dich neugierigen Köpfen an und hol dir mutige Ideen.')}
       </h2>
     </div>
     <form class="grid gap-8 md:grid-cols-3 md:pt-6" action="/api/newsletter" method="post" data-newsletter-form data-lang={lang}
