@@ -17,7 +17,8 @@ interface Props {
 const { overlay = false, light = false, lang = defaultLang, switchHref = '/' } = Astro.props;
 const t = useLang(lang);
 const l = (href: string) => localePath(lang, href);
-const navItems = getNavItems(lang);
+// CMO Community ist vorerst ausgeblendet (Seite bleibt erreichbar)
+const navItems = getNavItems(lang).filter((i) => i.key !== 'cmo');
 const otherLang: Lang = lang === 'de' ? 'en' : 'de';
 
 // Sprachumschalter vorerst aus: zum Start geht nur die englische Version online. Für DE wieder auf true setzen.
