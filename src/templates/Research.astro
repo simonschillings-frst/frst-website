@@ -63,19 +63,17 @@ const quotes = [
 
 <Base title="Research – frst" headerOverlay lang={lang}>
   <!-- Hero -->
-  <section class="relative flex min-h-[640px] items-center overflow-hidden bg-black text-cream md:h-screen md:max-h-[900px]">
+  <section class="relative min-h-[640px] overflow-hidden bg-black text-cream md:h-screen md:max-h-[900px]">
     <h1 class="sr-only">Research</h1>
     <!-- Hintergrundvideo (Flip-through der Studie, stumm, Loop): startet sofort, bis dahin ist das Standbild zu sehen. Handys laden die 720p-Fassung. -->
     <Video src="/videos/research-hero.mp4" srcMobile="/videos/research-hero-720.mp4" poster="/videos/research-hero-poster.webp" loop eager class="absolute inset-0" lang={lang} />
-    <!-- Abdunklung, damit der Text auch über den hellen Buchseiten lesbar bleibt -->
-    <div class="pointer-events-none absolute inset-0 bg-black/40" aria-hidden="true"></div>
-    <!-- Manifest-Text im Hero: einspaltig, linksbündig (gleicher Text wie auf About us, Platzhalter) -->
-    <div class="container-frst pointer-events-none relative py-32">
-      <div class="pointer-events-auto text-2xl leading-snug font-light md:text-[30px] [&>p]:mb-8 [&>p:last-child]:mb-0">
-        <p>{t('We believe the best ideas begin where people stop performing. frst is a family-owned company, led by brothers, with an eye for people.', 'Wir glauben, dass die besten Ideen dort beginnen, wo Menschen aufhören, etwas darzustellen. frst ist ein inhabergeführtes Familienunternehmen, geleitet von Brüdern, mit einem Blick für Menschen.')}</p>
-        <p>{t('We look for the moment the mask drops and something real is said. We see beyond belonging and we ask better questions.', 'Wir suchen den Moment, in dem die Maske fällt und etwas Echtes gesagt wird. Wir sehen über Zugehörigkeit hinaus und stellen bessere Fragen.')}</p>
-        <p>{t('We build nothing behind closed doors. Because brands that are made for the unguarded moment are the ones people trust.', 'Wir bauen nichts hinter verschlossenen Türen. Denn Marken, die für den unverstellten Moment gemacht sind, sind die, denen Menschen vertrauen.')}</p>
-      </div>
+  </section>
+
+  <!-- Manifest: zweispaltig wie „Why frst“ auf der Startseite, als durchlaufender Text ohne Absätze (Blindtext als Platzhalter) -->
+  <section id="manifest" class="container-frst scroll-mt-20 pt-14 pb-20 md:pt-20 md:pb-28">
+    <p class="eyebrow text-[14px]">Research</p>
+    <div class="mt-10 text-2xl leading-snug md:columns-2 md:gap-16">
+      <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est lorem ipsum dolor sit amet. Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore. At vero eos et accusam et justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna. Sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat. Sed diam voluptua, at vero eos. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros. Lorem ipsum dolor sit amet. Consetetur sadipscing elitr.</p>
     </div>
   </section>
 
