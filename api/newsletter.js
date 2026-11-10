@@ -6,9 +6,9 @@
 //   RESEND_API_KEY  API-Schlüssel von resend.com
 //   MAIL_FROM       Absender mit bei Resend verifizierter Domain
 // Optional:
-//   NEWSLETTER_TO   Empfänger (Standard: nina.walker@frst.agency)
+//   NEWSLETTER_TO   Empfänger (Standard: hello@frst.agency)
 
-const TO = process.env.NEWSLETTER_TO || 'nina.walker@frst.agency';
+const TO = process.env.NEWSLETTER_TO || 'hello@frst.agency';
 
 const escapeHtml = (value) =>
   String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
