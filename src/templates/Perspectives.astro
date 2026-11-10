@@ -52,7 +52,10 @@ const videos = [
       <div class="md:self-center">
         <p class="eyebrow text-[14px]">{t('Perspectives', 'Perspektiven')}</p>
         <h1 class="mt-14 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{t('Ideas worth', 'Ideen, über die')}<br />{t('thinking about.', 'es sich nachzudenken lohnt.')}</h1>
-        <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{intro}</p>
+        <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{t(
+          'Bold takes and honest talks from our universe. Ideas that look beyond the familiar, and conversations with people who work on the future. Read, watch, argue back.',
+          'Mutige Takes und ehrliche Gespräche aus unserem Universum. Ideen, die über das Vertraute hinausblicken, und Gespräche mit Menschen, die an der Zukunft arbeiten. Lesen, ansehen, widersprechen.',
+        )}</p>
       </div>
     </div>
   </section>
@@ -101,7 +104,7 @@ const videos = [
           {'youtube' in video ? (
             <div>
               <Video youtube={video.youtube} poster={video.poster} title={video.title} tone={video.tone} lang={lang} />
-              <p class="mt-8 text-[14px]">frst Talk</p>
+              <p class="mt-8 text-[14px]">Beyond Talk</p>
               <h3 class="mt-3 text-[24px] leading-snug">{video.title}</h3>
               <p class="mt-5 text-[14px] opacity-70">{video.tags}</p>
             </div>
@@ -110,7 +113,7 @@ const videos = [
               <div class="overflow-hidden">
                 <Media tone={video.tone} label="frst talk" class="aspect-video w-full transition-transform duration-700 ease-out group-hover:scale-105" />
               </div>
-              <p class="mt-8 text-[14px]">frst Talk</p>
+              <p class="mt-8 text-[14px]">Beyond Talk</p>
               <h3 class="mt-3 text-[24px] leading-snug">{video.title}</h3>
               <p class="mt-5 text-[14px] opacity-70">{video.tags}</p>
               <span class="mt-5 inline-block transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
@@ -126,7 +129,7 @@ const videos = [
     <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-10">
       <p class="eyebrow text-[14px]">Channel</p>
       <h2 class="mt-8 max-w-[16ch] text-[30px] leading-snug">{t('You think about it, we talk about it.', 'Du denkst darüber nach, wir sprechen darüber.')}</h2>
-      <p class="mt-8 max-w-xs text-[16px] leading-relaxed opacity-90">{intro}</p>
+      <p class="mt-8 max-w-xs text-[16px] leading-relaxed opacity-90">{t('Many perspectives in one place. Subscribe to our channel and join the discussion.', 'Viele Perspektiven an einem Ort. Abonniere unseren Kanal und diskutiere mit.')}</p>
       <a href="https://www.youtube.com/@frst.agency" target="_blank" rel="noopener noreferrer" class="btn-outline mt-10 self-start border-cream/80 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">{t('Watch on YouTube', 'Auf YouTube ansehen')}</a>
     </div>
     <a href="https://www.youtube.com/@frst.agency" target="_blank" rel="noopener noreferrer" class="group block overflow-hidden" aria-label={t('Watch the channel on YouTube', 'Kanal auf YouTube ansehen')}>
