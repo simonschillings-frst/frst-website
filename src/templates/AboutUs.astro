@@ -78,9 +78,9 @@ const jobs = [
   <!-- Superpod -->
   <section id="superpod" class="relative flex min-h-[520px] scroll-mt-20 items-center overflow-hidden text-cream md:min-h-[640px]">
     <!-- Hintergrundvideo (selbst gehostet, stumm, Loop): lädt erst kurz bevor der Bereich ins Bild kommt, bis dahin Standbild -->
-    <Video src="/videos/about-us-superpod.mp4" srcMobile="/videos/about-us-superpod-720.mp4" poster="/videos/about-us-superpod-poster.webp" loop tone="night" class="absolute inset-0" lang={lang} />
-    <!-- Abdunklung: am Handy über die ganze Fläche, ab Tablet nur links hinter dem Text, damit der Laptop rechts hell bleibt -->
-    <div class="pointer-events-none absolute inset-0 bg-night/70 md:bg-transparent md:bg-gradient-to-r md:from-night/60 md:via-night/20 md:to-transparent"></div>
+    <Video src="/videos/superpod-case.mp4" srcMobile="/videos/superpod-case-mobile.mp4" poster="/videos/superpod-case-poster.webp" loop tone="night" class="absolute inset-0" lang={lang} />
+    <!-- Abdunklung: am Handy über die ganze Fläche, ab Tablet von links nach rechts auslaufend -->
+    <div class="pointer-events-none absolute inset-0 bg-night/70 md:bg-transparent md:bg-gradient-to-r md:from-night/75 md:via-night/40 md:to-night/10"></div>
     <div class="container-frst relative py-20 md:py-28">
       <p class="eyebrow text-[14px]">Superpod</p>
       <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">{t('Every project, out in the open.', 'Jedes Projekt, offen einsehbar.')}</h2>
