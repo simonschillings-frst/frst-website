@@ -164,11 +164,17 @@ const quotes = [
         <p class="eyebrow text-[14px]">{t('Study', 'Studie')}</p>
         <h2 class="mt-4 text-[30px] leading-snug">{t('Get the Study', 'Studie anfordern')}</h2>
       </div>
-      <form class="grid gap-x-8 gap-y-8 md:grid-cols-3 md:pt-6" action="#" method="post">
+      <form class="grid gap-x-8 gap-y-8 md:grid-cols-3 md:pt-6" action="/api/study" method="post" data-study-mail="request" data-lang={lang}
+        data-msg-sending={t('Sending …', 'Wird gesendet …')}
+        data-msg-success={t('Thank you! We have received your details and will be in touch.', 'Vielen Dank! Deine Angaben sind bei uns angekommen, wir melden uns.')}
+        data-msg-error={t('Sorry, something went wrong. Please try again or write to hello@frst.agency.', 'Leider ist etwas schiefgelaufen. Bitte versuche es erneut oder schreibe an hello@frst.agency.')}>
+        <div class="sr-only" aria-hidden="true">
+          <label>{t('Website', 'Webseite')} <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
         {[
-          { name: 'studyFirstName', label: t('First Name', 'Vorname'), type: 'text', autocomplete: 'given-name' },
-          { name: 'studyLastName', label: t('Last Name', 'Nachname'), type: 'text', autocomplete: 'family-name' },
-          { name: 'studyEmail', label: t('E-Mail', 'E-Mail'), type: 'email', autocomplete: 'email' },
+          { name: 'firstName', label: t('First Name', 'Vorname'), type: 'text', autocomplete: 'given-name' },
+          { name: 'lastName', label: t('Last Name', 'Nachname'), type: 'text', autocomplete: 'family-name' },
+          { name: 'email', label: t('E-Mail', 'E-Mail'), type: 'email', autocomplete: 'email' },
         ].map((f) => (
           <label class="flex flex-col gap-6 text-[16px]">
             <span>{f.label} <span aria-hidden="true">*</span></span>
@@ -179,7 +185,7 @@ const quotes = [
         <!-- Einwilligung (DSGVO): nicht vorausgewählt, freiwillig, Widerruf jederzeit möglich -->
         <div class="md:col-span-3">
           <label class="flex items-start gap-3 text-[14px] leading-relaxed">
-            <input type="checkbox" name="studyConsent" required class="mt-1 h-4 w-4 shrink-0 accent-violet focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream" />
+            <input type="checkbox" name="consent" required class="mt-1 h-4 w-4 shrink-0 accent-violet focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream" />
             <span>
               {t(
                 'I agree that frst uses my name and e-mail address to send me the study. I can withdraw my consent at any time with effect for the future. Further information can be found in the',
@@ -191,6 +197,7 @@ const quotes = [
           <p class="mt-4 text-[14px] leading-relaxed">{t('* Required fields.', '* Pflichtfelder.')}</p>
         </div>
 
+        <p class="text-[16px] leading-relaxed md:col-span-3" role="status" aria-live="polite" data-study-status hidden></p>
         <div class="md:col-span-3">
           <button type="submit" class="btn-outline border-cream/80 px-4 py-1 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">{t('Get the Study', 'Studie anfordern')}</button>
         </div>
@@ -254,7 +261,13 @@ const quotes = [
         <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{t('Share a few details and we will get in touch with the next steps. Your data is used only for organising the study.', 'Teile uns ein paar Angaben mit, und wir melden uns mit den nächsten Schritten. Deine Daten werden nur zur Organisation der Studie verwendet.')}</p>
       </div>
 
-      <form class="grid gap-x-8 gap-y-8 sm:grid-cols-2" action="#" method="post" data-study-form>
+      <form class="grid gap-x-8 gap-y-8 sm:grid-cols-2" action="/api/study" method="post" data-study-form data-study-mail="participate" data-lang={lang}
+        data-msg-sending={t('Sending …', 'Wird gesendet …')}
+        data-msg-success={t('Thank you! We have received your details and will be in touch.', 'Vielen Dank! Deine Angaben sind bei uns angekommen, wir melden uns.')}
+        data-msg-error={t('Sorry, something went wrong. Please try again or write to hello@frst.agency.', 'Leider ist etwas schiefgelaufen. Bitte versuche es erneut oder schreibe an hello@frst.agency.')}>
+        <div class="sr-only" aria-hidden="true">
+          <label>{t('Website', 'Webseite')} <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
         {studyFields.map((field) => (
           <label class="flex flex-col gap-3 text-[16px]">
             <span>{field.label} <span aria-hidden="true">*</span></span>
@@ -283,6 +296,7 @@ const quotes = [
           <p class="mt-4 text-[14px] leading-relaxed opacity-80">{t('* Required fields. Participation is voluntary. Your details are deleted once the study has ended, unless you agree to further contact.', '* Pflichtfelder. Die Teilnahme ist freiwillig. Deine Angaben werden nach Ende der Studie gelöscht, sofern du nicht weiterem Kontakt zustimmst.')}</p>
         </div>
 
+        <p class="text-[16px] leading-relaxed sm:col-span-2" role="status" aria-live="polite" data-study-status hidden></p>
         <div class="sm:col-span-2">
           <button type="submit" class="btn-outline border-night px-5 py-2 text-[16px] hover:bg-night hover:text-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet">{t('Take part', 'Teilnehmen')}</button>
         </div>
@@ -366,6 +380,36 @@ const quotes = [
     }
   </script>
   <script>
+  // Research-Formulare (Studie anfordern, Studienteilnahme): gehen an /api/study und von dort per E-Mail an hello@frst.agency
+  document.querySelectorAll<HTMLFormElement>('[data-study-mail]').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('[data-study-status]');
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!status || !submit) return;
+      const payload = {
+        ...Object.fromEntries(new FormData(form).entries()),
+        consent: form.querySelector<HTMLInputElement>('[name="consent"]')?.checked === true,
+        type: form.dataset.studyMail,
+        lang: form.dataset.lang,
+      };
+      submit.disabled = true;
+      status.hidden = false;
+      status.textContent = form.dataset.msgSending ?? '';
+      try {
+        const response = await fetch(form.action, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+        if (!response.ok) throw new Error('failed');
+        form.reset();
+        status.textContent = form.dataset.msgSuccess ?? '';
+      } catch {
+        status.textContent = form.dataset.msgError ?? '';
+      }
+      submit.disabled = false;
+    });
+  });
+</script>
+
+<script>
     // Alle Zahlen im Fakten-Modul zählen gleichzeitig hoch, sobald die Maus die dunkle Fläche berührt
     const facts = document.querySelector<HTMLElement>('[data-facts]');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
