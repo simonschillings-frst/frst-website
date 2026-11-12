@@ -51,6 +51,7 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       children: [
         { title: t('What we offer', 'Was wir bieten'), subtitle: t('Four disciplines. One team, built around your project.', 'Vier Disziplinen. Ein Team, zusammengestellt für dein Projekt.'), href: l('/what-we-do#services') },
         { title: t('Our process', 'Unser Prozess'), subtitle: t('The Process built around your Ambition.', 'Der Prozess, gebaut um deinen Anspruch.'), href: l('/what-we-do#process') },
+        { title: 'Pricing', subtitle: t('Models that fit your project.', 'Modelle, die zu deinem Projekt passen.'), href: l('/what-we-do#pricing') },
         { title: t('Selected work', 'Ausgewählte Projekte'), subtitle: 'New York City Activation', href: l('/what-we-do#selected-work') },
       ],
     },

@@ -53,7 +53,7 @@ const designParagraphs = [
   'The name stands in lowercase, with the year beside it. No logo that performs, a mark that simply stands, like the farmstead itself.',
   'The same calm runs through everything a guest touches, from the website to the printed page. Inviting. Clear. Generous. Nothing is decoration. Nothing is noise.',
   'That is why the brand never needed a label. Others tell you what a place means. tobel1853 shows it, in proportions, in materials, in what is left out.',
-  'Vom Einfachen das Beste. The best from the simple.',
+  'Vom Einfachen das Beste. <em>The best from the simple.</em>',
 ];
 ---
 
@@ -112,7 +112,8 @@ const designParagraphs = [
       <div class="hidden md:block"></div>
       <div class="space-y-6 text-[20px] leading-relaxed">
         <h2 class="text-3xl leading-tight font-light md:text-4xl">{designLead}</h2>
-        {designParagraphs.map((text) => <p>{text}</p>)}
+        {/* Absätze als HTML, damit die englische Übersetzung des Titels kursiv (<em>) stehen kann */}
+        {designParagraphs.map((text) => <p set:html={text} />)}
       </div>
     </div>
   </section>

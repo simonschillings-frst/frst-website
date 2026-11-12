@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
 import Arrow from '../components/Arrow.astro';
 import Video from '../components/Video.astro';
+import PillarCards from '../components/PillarCards.astro';
 import { localePath, useLang, type Lang } from '../i18n';
 
 interface Props {
@@ -32,6 +33,20 @@ const steps = [
   { title: t('Co-creation', 'Co-Creation'), text: t('Work happens in the open: You shape ideas early with us. No surprises.', 'Die Arbeit passiert offen: Du formst Ideen früh mit uns. Keine Überraschungen.') },
   { title: t('Launch and learn', 'Launch und Learnings'), text: t('Move forward: Launch together, measure what matters. Results shape what’s next.', 'Weitergehen: Gemeinsam launchen, messen, was zählt. Ergebnisse bestimmen, was als Nächstes kommt.') },
 ];
+
+// Pricing: Aufbau wie die CMO-Community-Kacheln auf der Startseite.
+// Platzhalter: Modelle, Texte und Preise folgen.
+const lorem = t(
+  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.',
+  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.',
+);
+const pricing = [1, 2, 3].map((n) => ({
+  no: t(`Model ${n}`, `Modell ${n}`),
+  title: 'Lorem ipsum',
+  subtitle: 'Dolor sit amet',
+  text: lorem,
+  why: 'Stet clita kasd gubergren, no sea takimata sanctus est lorem ipsum dolor sit amet.',
+}));
 ---
 
 <Base title={t('Services – frst', 'Leistungen – frst')} headerOverlay lang={lang}>
@@ -93,6 +108,18 @@ const steps = [
         </li>
       ))}
     </ol>
+  </section>
+
+  <!-- Pricing (Aufbau wie CMO Community auf der Startseite) -->
+  <section id="pricing" class="container-frst scroll-mt-20 py-20 md:py-28">
+    <div class="grid gap-12 lg:grid-cols-[1fr_2.4fr]">
+      <div>
+        <p class="eyebrow text-[14px]">Pricing</p>
+        <h2 class="mt-8 max-w-md text-[30px] leading-snug">Lorem ipsum dolor sit amet</h2>
+        <p class="mt-6 max-w-md text-[16px] leading-relaxed">{lorem}</p>
+      </div>
+      <PillarCards lang={lang} items={pricing} idPrefix="pricing" whyLabel={t('What’s included', 'Was enthalten ist')} />
+    </div>
   </section>
 
   <!-- Selected work -->

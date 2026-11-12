@@ -4,6 +4,7 @@ import Media from '../components/Media.astro';
 import Video from '../components/Video.astro';
 import Arrow from '../components/Arrow.astro';
 import Newsletter from '../components/Newsletter.astro';
+import PillarCards from '../components/PillarCards.astro';
 import { localePath, useLang, type Lang } from '../i18n';
 import { takes } from '../data/takes';
 
@@ -259,41 +260,7 @@ const disciplines = [
         </p>
         <p class="mt-4 max-w-md text-[16px] leading-relaxed">{t('Evidence-led. Built with you.', 'Evidenzbasiert. Mit dir gebaut.')}</p>
       </div>
-      <div class="grid items-start gap-4 md:grid-cols-3">
-        {pillars.map((pillar) => (
-          <div class="flex flex-col rounded-2xl border border-night/20 bg-cream p-5 text-night transition-colors duration-300 hover:bg-lilac" data-pillar>
-            <p class="eyebrow text-[14px] opacity-70">{pillar.no}</p>
-            <h3 class="mt-8 text-[24px]">{pillar.title}</h3>
-            <p class="mt-1 text-[14px] opacity-80">{pillar.subtitle}</p>
-            <div
-              id={`pillar-${pillar.no.replace(/\D/g, '')}`}
-              class="mt-6 max-h-[5.5rem] overflow-hidden transition-[max-height] duration-500 ease-out data-[collapsed]:[mask-image:linear-gradient(to_bottom,black_45%,transparent)] motion-reduce:transition-none"
-              data-pillar-content
-              data-collapsed
-            >
-              <p class="text-[16px] leading-relaxed">{pillar.text}</p>
-              <p class="mt-6 text-[14px] tracking-[0.08em] uppercase opacity-70">{t('Why it matters', 'Warum das zählt')}</p>
-              <p class="mt-2 text-[16px] leading-relaxed">{pillar.why}</p>
-            </div>
-            <div class="mt-8">
-              <button
-                type="button"
-                class="group -m-2 p-2 transition-opacity hover:opacity-60"
-                aria-expanded="false"
-                aria-controls={`pillar-${pillar.no.replace(/\D/g, '')}`}
-                aria-label={t('Read more', 'Mehr lesen')}
-                data-label-more={t('Read more', 'Mehr lesen')}
-                data-label-less={t('Read less', 'Weniger lesen')}
-                data-pillar-toggle
-              >
-                <svg class="h-3 w-4 transition-transform duration-300 group-aria-expanded:rotate-45 motion-reduce:transition-none" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-                  <path d="M2 6h12M8 0v12" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+      <PillarCards lang={lang} items={pillars} idPrefix="pillar" />
     </div>
   </section>
 
@@ -310,34 +277,4 @@ const disciplines = [
     </div>
   </section>
 
-  <script>
-    // Pillar-Kacheln: zeigen zunächst nur einen Teil des Textes, „Mehr lesen“ klappt die Kachel auf
-    document.querySelectorAll<HTMLElement>('[data-pillar]').forEach((tile) => {
-      const content = tile.querySelector<HTMLElement>('[data-pillar-content]');
-      const toggle = tile.querySelector<HTMLButtonElement>('[data-pillar-toggle]');
-      if (!content || !toggle) return;
-
-      const open = () => {
-        content.style.maxHeight = `${content.scrollHeight}px`;
-        content.removeAttribute('data-collapsed');
-        toggle.setAttribute('aria-expanded', 'true');
-        toggle.setAttribute('aria-label', toggle.dataset.labelLess ?? '');
-      };
-      const close = () => {
-        // Von der aktuellen Höhe aus zuklappen, damit die Animation sauber läuft
-        content.style.maxHeight = `${content.scrollHeight}px`;
-        void content.offsetHeight;
-        content.style.maxHeight = '';
-        content.setAttribute('data-collapsed', '');
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', toggle.dataset.labelMore ?? '');
-      };
-
-      toggle.addEventListener('click', () => (toggle.getAttribute('aria-expanded') === 'true' ? close() : open()));
-      // Bei Größenänderung der Seite die aufgeklappte Höhe nachziehen
-      window.addEventListener('resize', () => {
-        if (toggle.getAttribute('aria-expanded') === 'true') content.style.maxHeight = `${content.scrollHeight}px`;
-      });
-    });
-  </script>
 </Base>
