@@ -188,7 +188,6 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
         <p class="mt-6 max-w-[78ch] text-[16px] leading-relaxed">{story?.practice.text ?? long}</p>
 
         <p class="eyebrow mt-10 text-[14px]">{title}</p>
-        <a href={l('/research#articles')} class="btn-outline mt-6 border-night text-[16px] hover:bg-night hover:text-cream">{t('Back to Research', 'Zurück zu Research')}</a>
       </div>
     </div>
   </section>
@@ -200,7 +199,7 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
     </div>
     <div class="flex flex-col items-center justify-center bg-night px-5 py-20 text-center text-cream md:px-16">
       <p class="max-w-[28ch] text-[30px] leading-snug">{story?.summary ?? short}</p>
-      <a href="#" class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">{t('Download article', 'Artikel herunterladen')}</a>
+      <a href={l('/research#articles')} class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">{t('Back to Research', 'Zurück zu Research')}</a>
     </div>
   </section>
 
