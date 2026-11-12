@@ -43,8 +43,5 @@ export const takes = (lang: Lang): Take[] => {
     take('lorem-ipsum-02', 'What Corporate Film Can Do That No Campaign Can', 'night', '/images/take-aura-02-hero.jpg', '/images/take-aura-02.jpg'),
     // Take 3
     take('lorem-ipsum-03', 'The Human Is Not the Magic Ingredient', 'sky', '/images/take-aura-03-hero.jpg', '/images/take-aura-03.jpg'),
-    // Platzhalter: Titel und Adresse später durch die echten Takes ersetzen
-    take('lorem-ipsum-04', 'Lorem ipsum', 'desert', '/images/take-aura-04-hero.jpg', '/images/take-aura-04.jpg'),
-    take('lorem-ipsum-05', 'Lorem ipsum', 'dusk', '/images/take-aura-05-hero.jpg', '/images/take-aura-05.jpg'),
   ];
 };
