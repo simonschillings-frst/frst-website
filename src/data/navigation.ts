@@ -92,7 +92,7 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       layout: 'cards',
       children: [
         { title: 'Our Takes', subtitle: t('Think like the wise, and speak like the crowd', 'Denke wie die Weisen und sprich wie die Menge'), href: l('/perspectives#our-takes'), image: '/images/take-aura-01-nav.jpg' },
-        { title: 'Beyond Talks', subtitle: t('Thinking takes shape while speaking', 'Denken nimmt beim Sprechen Gestalt an'), href: l('/perspectives#videos') },
+        { title: 'Beyond Talks', subtitle: t('Thinking takes shape while speaking', 'Denken nimmt beim Sprechen Gestalt an'), href: l('/perspectives#videos'), image: '/images/web/perspectives-channel.jpg?v=4' },
       ],
     },
     {

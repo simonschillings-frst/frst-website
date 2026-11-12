@@ -24,9 +24,10 @@ const longText = `${intro} ${intro} ${intro}`;
 // Der neueste Take steht oben und zusätzlich an erster Stelle im Slider
 const sliderTakes = takes(lang);
 const [newestTake] = sliderTakes;
-const topics = sliderTakes.map((take) => ({
+// Eyebrow durchnummeriert: Take 01, Take 02 …
+const topics = sliderTakes.map((take, i) => ({
   id: take.slug,
-  label: 'Take',
+  label: `Take ${String(i + 1).padStart(2, '0')}`,
   tone: take.tone,
   image: take.cardImage ?? take.image,
   href: take.href,
