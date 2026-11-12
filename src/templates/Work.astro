@@ -173,16 +173,37 @@ const words = [
     </div>
   </section>
 
-  <!-- 8. Ein großes Zitat -->
+  <!-- 8. Kundenstimmen: halbe Breite, versetzt untereinander (links, rechts, links). Auf dem Handy untereinander. Zitate bleiben im deutschen Original. -->
   <section class="bg-cream">
     <div class="container-frst py-20 md:py-32">
-      <svg viewBox="0 0 16 12" class="h-6 w-8 text-night" fill="currentColor" aria-hidden="true">
-        <path d="M0 12V7.2C0 3.2 2.2.6 6 0l.6 1.6C4.4 2.4 3.4 3.8 3.4 5.4H6V12H0Zm9.4 0V7.2C9.4 3.2 11.6.6 15.4 0L16 1.6c-2.2.8-3.2 2.2-3.2 3.8h2.6V12H9.4Z" />
-      </svg>
-      <blockquote class="mt-8 max-w-4xl text-[30px] leading-snug">
-        {t('“They did not just build a campaign, they gave us an attitude.”', '„Sie haben nicht nur eine Kampagne gebaut, sondern uns eine Haltung gegeben.“')}
-      </blockquote>
-      <p class="mt-8 text-[14px] leading-tight">{t('Client voice · Marketing Director', 'Kundenstimme · Marketing Director')}</p>
+      <h2 class="sr-only">{t('Client voices', 'Kundenstimmen')}</h2>
+      <div class="grid gap-14 md:grid-cols-2 md:gap-x-16 md:gap-y-20">
+        {[
+          {
+            text: '„Die Idee, flexible Teams auf meine Projekte abzustimmen, hat mich sofort begeistert. Ich bekomme passendes Know-how und bezahle nur, was ich brauche. Perfekt.“',
+            name: 'Christine Navratil',
+            role: 'Head of Marketing Concept & Campaigns, Conrad Electronic',
+          },
+          {
+            text: '„In NGOs muss es oft schnell gehen. Gleichzeitig sprechen viele Menschen mit. Das ist nicht immer einfach. frst hat binnen weniger Tage Unglaubliches für unsere PxP Kampagne geleistet. Das hat alle überzeugt, intern und extern.“',
+            name: 'Fetsum Sebhat',
+            role: 'Träger des Verdienstordens des Landes Berlin, PxP Festival',
+          },
+          {
+            text: '„Was ich an frst schätze, ist die Mischung aus vertrauten Gesichtern und neuen Impulsen. Flexible Netzwerke passen gut zu SCHOTT, und genau das finden wir hier vor.“',
+            name: 'Christina Rettig',
+            role: 'Head of Communications, SCHOTT',
+          },
+        ].map((quote, i) => (
+          <figure lang="de" class:list={['flex flex-col', i % 2 === 1 ? 'md:col-start-2' : 'md:col-start-1', ['md:row-start-1', 'md:row-start-2', 'md:row-start-3'][i]]}>
+            <blockquote class="text-[24px] leading-snug font-light">{quote.text}</blockquote>
+            <figcaption class="mt-8 text-[14px] leading-tight">
+              <span class="block">{quote.name}</span>
+              <span class="mt-1 block opacity-70">{quote.role}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
     </div>
   </section>
 
