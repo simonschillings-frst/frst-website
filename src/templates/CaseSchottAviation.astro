@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
+import Video from '../components/Video.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { localePath, useLang, type Lang } from '../i18n';
@@ -40,7 +41,7 @@ const paragraphs = [
 
   <!-- Hauptmotiv über die ganze Breite -->
   <section>
-    <Media eager src="/images/schott-aviation-messestand_neu.jpg" alt={t('SCHOTT Aviation – trade fair stand', 'SCHOTT Aviation – Messestand')} class="aspect-[16/10] w-full md:aspect-[12/5]" />
+    <Media eager src="/images/schott-aviation-mockup-2.jpg" alt={t('SCHOTT Aviation – trade fair stand', 'SCHOTT Aviation – Messestand')} class="aspect-[16/10] w-full md:aspect-[12/5]" />
   </section>
 
   <!-- Projektdaten und Text -->
@@ -72,7 +73,8 @@ const paragraphs = [
 
   <!-- Bildergalerie (großes Bild, Doppelbild, großes Bild) -->
   <section>
-    <Media src="/images/web/schott-aviation-01.jpg" alt={t('SCHOTT Aviation – illuminated cabin suites', 'SCHOTT Aviation – beleuchtete Kabinensuiten')} class="aspect-[16/10] w-full" />
+    <!-- Casefilm statt Bild: läuft stumm im Loop, mit „Ton an“-Knopf -->
+    <Video src="/videos/schott-aviation-case.mp4" srcMobile="/videos/schott-aviation-case-mobile.mp4" poster="/videos/schott-aviation-case-poster.webp" loop sound title={t('SCHOTT Aviation – case film', 'SCHOTT Aviation – Casefilm')} class="aspect-video w-full" lang={lang} />
   </section>
 
   <section class="container-frst mt-2">

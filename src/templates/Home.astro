@@ -113,13 +113,16 @@ const disciplines = [
   <section id="why-frst" class="container-frst pt-14 pb-20 md:pt-20 md:pb-28">
     <p class="eyebrow text-[14px]">{t('About us', 'Über uns')}</p>
     <!-- Teaser: der volle Text steht auf About us (Manifest) -->
-    <div class="mt-10 text-2xl leading-snug md:columns-2 md:gap-16 [&>p]:mb-8 [&>p]:break-inside-avoid">
+    <div class="mt-10 grid gap-y-8 text-2xl leading-snug md:grid-cols-2 md:gap-x-16">
       <p>{t('We were never interested in doing things just because they’ve always been done that way. We believe the most interesting things happen when different minds meet, familiar ideas are challenged and there’s room for something unexpected.', 'Es hat uns nie interessiert, Dinge nur deshalb zu tun, weil sie schon immer so getan wurden. Wir glauben, dass die interessantesten Dinge passieren, wenn unterschiedliche Köpfe aufeinandertreffen, Vertrautes in Frage gestellt wird und Raum für Unerwartetes bleibt.')}</p>
-      <p>{t('That’s why frst is more than an agency. It’s a space for curious minds, challenging conversations and the kind of collaboration that makes new things possible.', 'Deshalb ist frst mehr als eine Agentur. Es ist ein Raum für neugierige Köpfe, fordernde Gespräche und eine Zusammenarbeit, die Neues möglich macht.')}</p>
+      <div>
+        <p>{t('That’s why frst is more than an agency. It’s a space for curious minds, challenging conversations and the kind of collaboration that makes new things possible.', 'Deshalb ist frst mehr als eine Agentur. Es ist ein Raum für neugierige Köpfe, fordernde Gespräche und eine Zusammenarbeit, die Neues möglich macht.')}</p>
+        <!-- Pfeil unter dem rechten Absatz -->
+        <a href={l('/about-us#manifest')} aria-label={t('Read the full manifesto', 'Das ganze Manifest lesen')} class="group mt-8 inline-block">
+          <span class="inline-block transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
+        </a>
+      </div>
     </div>
-    <a href={l('/about-us#manifest')} aria-label={t('Read the full manifesto', 'Das ganze Manifest lesen')} class="group mt-8 inline-block">
-      <span class="inline-block transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
-    </a>
   </section>
 
   <!-- Future of the Agency -->

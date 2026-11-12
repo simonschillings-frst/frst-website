@@ -14,10 +14,13 @@ interface Props {
   position?: string;
   /** Für Bilder ganz oben auf der Seite: sofort laden statt erst beim Scrollen */
   eager?: boolean;
-  /** Wie breit das Bild angezeigt wird (HTML `sizes`), z. B. "(min-width: 768px) 50vw, 100vw". Standard: volle Breite */
+  /** Wie breit das Bild angezeigt wird (HTML `sizes`), z. B. "(min-width: 768px) 50vw, 100vw".
+   *  Standard: bei Bildern, die beim Scrollen laden, misst der Browser die Breite selbst ("auto"),
+   *  sonst volle Breite. Browser ohne "auto" (z. B. Safari) nehmen ebenfalls volle Breite. */
   sizes?: string;
 }
-const { src, alt = '', label, tone = 'night', class: className, position, eager = false, sizes = '100vw' } = Astro.props;
+const { src, alt = '', label, tone = 'night', class: className, position, eager = false, sizes: sizesProp } = Astro.props;
+const sizes = sizesProp ?? (eager ? '100vw' : 'auto, 100vw');
 // Verkleinerte WebP-Fassungen: der Browser wählt die passende Größe
 const image = src ? responsiveImage(src) : undefined;
 

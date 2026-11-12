@@ -8,6 +8,9 @@
  *    sonst lädt er erst kurz bevor er ins Bild kommt und zeigt bis dahin das Standbild (`poster`).
  *    `srcMobile` ist optional: kleinere Fassung fürs Handy. Videos vorher komprimieren (z. B. 1080p um 1,5 Mbit/s, ohne Ton).
  *
+ * 1a. Wie 1, aber mit „Ton an“-Knopf (Video startet stumm, Tonspur beim Komprimieren behalten):
+ *    <Video src="/videos/case.mp4" poster="/videos/case-poster.webp" loop sound title="Casefilm" lang={lang} />
+ *
  * 1b. Lokal als Teaser in einer verlinkten Kachel (z. B. Case-Übersicht):
  *    <Video src="/videos/case.mp4" teaser lang={lang} />
  *    Zeigt ein Standbild und läuft nur beim Hovern bzw. wenn der Link per Tastatur fokussiert ist.
@@ -64,6 +67,8 @@ interface Props {
   loop?: boolean;
   /** Nur lokal: kleinere Fassung fürs Handy (bis 767 px Breite), z. B. "/videos/hero-720.mp4" */
   srcMobile?: string;
+  /** Nur mit `loop`: zusätzlicher „Ton an/aus“-Knopf. Das Video startet trotzdem stumm (Autoplay-Regel der Browser). */
+  sound?: boolean;
   /** Nur mit `loop`: lädt und startet sofort (für Videos ganz oben). Sonst lädt der Loop erst kurz bevor er ins Bild kommt. */
   eager?: boolean;
   /** Stummer Loop ohne Knopf für Kacheln, die selbst ein Link sind (lokal oder Vimeo) */
@@ -74,7 +79,7 @@ interface Props {
   class?: string;
 }
 
-const { lang = defaultLang, src, vimeo, vimeoHash, background = false, startInView = false, youtube, poster, title = '', loop = false, srcMobile, eager = false, teaser = false, captions, tone = 'night', class: className = 'aspect-video w-full' } = Astro.props;
+const { lang = defaultLang, src, vimeo, vimeoHash, background = false, startInView = false, youtube, poster, title = '', loop = false, sound = false, srcMobile, eager = false, teaser = false, captions, tone = 'night', class: className = 'aspect-video w-full' } = Astro.props;
 const t = useLang(lang);
 
 const provider = vimeo ? 'Vimeo' : youtube ? 'YouTube' : null;
@@ -132,7 +137,7 @@ const tones = {
 {src && loop && (
   <div class:list={['overflow-hidden bg-gradient-to-br', tones[tone], { relative: !/\b(absolute|fixed)\b/.test(className) }, className]} data-video-loop data-video-lazy={eager ? undefined : ''}>
     <!-- Ohne `eager` lädt das Video erst beim Reinscrollen (siehe Skript unten), bis dahin ist nur das Standbild zu sehen -->
-    <video poster={poster} autoplay={eager} muted loop playsinline preload={eager ? 'auto' : 'none'} aria-hidden="true" class="h-full w-full object-cover">
+    <video poster={poster} autoplay={eager} muted loop playsinline preload={eager ? 'auto' : 'none'} aria-hidden={sound ? undefined : 'true'} title={sound && title ? title : undefined} class="h-full w-full object-cover">
       {srcMobile && <source src={srcMobile} type="video/mp4" media="(max-width: 767px)" />}
       <source src={src} type="video/mp4" />
     </video>
@@ -147,6 +152,17 @@ const tones = {
       <svg data-icon-pause viewBox="0 0 12 12" class="h-3 w-3" fill="currentColor" aria-hidden="true"><path d="M2 1h3v10H2zM7 1h3v10H7z" /></svg>
       <svg data-icon-play viewBox="0 0 12 12" class="hidden h-3 w-3" fill="currentColor" aria-hidden="true"><path d="M3 1l8 5-8 5z" /></svg>
     </button>
+    {sound && <button
+      type="button"
+      data-video-sound
+      class="absolute right-14 bottom-3 flex h-9 items-center gap-2 rounded-full bg-night/60 px-3 text-[13px] text-cream transition-colors duration-200 hover:bg-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"
+      data-label-on={t('Sound on', 'Ton an')}
+      data-label-off={t('Sound off', 'Ton aus')}
+    >
+      <svg data-icon-muted viewBox="0 0 16 16" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2z" fill="currentColor" stroke="none" /><path d="M11 6l4 4M15 6l-4 4" stroke-linecap="round" /></svg>
+      <svg data-icon-sound viewBox="0 0 16 16" class="hidden h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2z" fill="currentColor" stroke="none" /><path d="M11.5 5.5a3.5 3.5 0 0 1 0 5M13.5 3.5a6.5 6.5 0 0 1 0 9" stroke-linecap="round" /></svg>
+      <span data-sound-label>{t('Sound on', 'Ton an')}</span>
+    </button>}
   </div>
 )}
 
@@ -203,7 +219,11 @@ const tones = {
       }, { rootMargin: '50% 0px' }).observe(wrapper);
     }
     // Datei fehlt oder lädt nicht: Pause-Knopf ausblenden, Verlauf bleibt sichtbar
-    const hideButton = () => button.classList.add('hidden');
+    const soundButton = wrapper.querySelector<HTMLButtonElement>('[data-video-sound]');
+    const hideButton = () => {
+      button.classList.add('hidden');
+      soundButton?.classList.add('hidden');
+    };
     if (video.error) hideButton();
     video.addEventListener('error', hideButton);
     video.addEventListener('play', update);
@@ -212,6 +232,19 @@ const tones = {
       userPaused = !video.paused;
       if (userPaused) video.pause();
       else video.play().catch(() => {});
+    });
+    // „Ton an/aus“: Klick ist eine Nutzeraktion, deshalb darf das Video danach mit Ton laufen
+    soundButton?.addEventListener('click', () => {
+      video.muted = !video.muted;
+      const on = !video.muted;
+      const label = soundButton.querySelector('[data-sound-label]');
+      if (label) label.textContent = (on ? soundButton.dataset.labelOff : soundButton.dataset.labelOn) ?? '';
+      soundButton.querySelector('[data-icon-muted]')?.classList.toggle('hidden', on);
+      soundButton.querySelector('[data-icon-sound]')?.classList.toggle('hidden', !on);
+      if (on && video.paused) {
+        userPaused = false;
+        video.play().catch(() => {});
+      }
     });
     update();
   });

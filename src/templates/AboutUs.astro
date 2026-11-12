@@ -14,7 +14,7 @@ const t = useLang(lang);
 
 // Standorte: Adressdaten wie angegeben, Bilder liegen in /images/web.
 const locations = [
-  { city: 'Stuttgart', lines: ['Feuersee', 'Creative Hub'], email: 'stuttgart@frst.agency', tone: 'desert', imageLeft: true, image: '/images/web/location-stuttgart.jpg', alt: t('Smiling man with dreadlocks and sunglasses in a courtyard in front of a white brick building', 'Lächelnder Mann mit Dreadlocks und Sonnenbrille in einem Innenhof vor einem weißen Backsteingebäude') },
+  { city: 'Stuttgart', lines: ['Feuersee', 'Creative Hub'], email: 'stuttgart@frst.agency', tone: 'desert', imageLeft: true, image: '/images/web/location-stuttgart.jpg', alt: t('Smiling man with dreadlocks, sunglasses and a dark coat in a courtyard in front of a white brick building', 'Lächelnder Mann mit Dreadlocks, Sonnenbrille und dunklem Mantel in einem Innenhof vor einem weißen Backsteingebäude') },
   { city: 'New York', lines: ['Brooklyn', 'Creative Hub'], email: 'nyc@frst.agency', tone: 'sky', imageLeft: false, image: '/images/web/location-new-york.jpg', alt: t('Person with curly hair seen from behind on a subway platform at Rector Street as a train passes', 'Person mit lockigen Haaren von hinten auf einem U-Bahnsteig an der Rector Street, während ein Zug vorbeifährt') },
   { city: 'Berlin', lines: ['Prenzlauer Berg', 'Creative Hub'], email: 'berlin@frst.agency', tone: 'dusk', imageLeft: true, image: '/images/web/location-berlin.jpg', alt: t('Five people in dark clothes walking towards the camera on an airfield under a grey sky', 'Fünf Personen in dunkler Kleidung laufen unter grauem Himmel auf einem Flugfeld auf die Kamera zu') },
 ] as const;
@@ -78,9 +78,9 @@ const jobs = [
   <!-- Superpod -->
   <section id="superpod" class="relative flex min-h-[520px] scroll-mt-20 items-center overflow-hidden text-cream md:min-h-[640px]">
     <!-- Hintergrundvideo (selbst gehostet, stumm, Loop): lädt erst kurz bevor der Bereich ins Bild kommt, bis dahin Standbild -->
-    <Video src="/videos/about-us-superpod.mp4" srcMobile="/videos/about-us-superpod-720.mp4" poster="/videos/about-us-superpod-poster.webp" loop tone="night" class="absolute inset-0" lang={lang} />
-    <!-- Abdunklung: am Handy über die ganze Fläche, ab Tablet nur links hinter dem Text, damit der Laptop rechts hell bleibt -->
-    <div class="pointer-events-none absolute inset-0 bg-night/70 md:bg-transparent md:bg-gradient-to-r md:from-night/60 md:via-night/20 md:to-transparent"></div>
+    <Video src="/videos/superpod-case.mp4" srcMobile="/videos/superpod-case-mobile.mp4" poster="/videos/superpod-case-poster.webp" loop tone="night" class="absolute inset-0" lang={lang} />
+    <!-- Abdunklung: am Handy über die ganze Fläche, ab Tablet von links nach rechts auslaufend -->
+    <div class="pointer-events-none absolute inset-0 bg-night/70 md:bg-transparent md:bg-gradient-to-r md:from-night/75 md:via-night/40 md:to-night/10"></div>
     <div class="container-frst relative py-20 md:py-28">
       <p class="eyebrow text-[14px]">Superpod</p>
       <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">{t('Every project, out in the open.', 'Jedes Projekt, offen einsehbar.')}</h2>
