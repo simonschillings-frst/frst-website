@@ -11,6 +11,12 @@ export interface PillarCard {
   text: string;
   /** Zweiter Absatz unter einer kleinen Überschrift (Standard: „Why it matters“) */
   why?: string;
+  /** Weitere Absätze mit eigener kleiner Überschrift (z. B. „What we bring“, „What you get“) */
+  details?: { label: string; text: string }[];
+  /** Zeile unten in der Kachel, immer sichtbar (z. B. Abrechnungsmodell) */
+  meta?: string;
+  /** Hervorgehobene Kachel: dunkel gefüllt, dieser Text dreht sich als Kreis auf der oberen Ecke */
+  highlight?: string;
 }
 
 interface Props {
@@ -27,7 +33,28 @@ const t = useLang(lang);
 
 <div class="grid items-start gap-4 md:grid-cols-3">
   {items.map((item, i) => (
-    <div class="flex flex-col rounded-2xl border border-night/20 bg-cream p-5 text-night transition-colors duration-300 hover:bg-lilac" data-pillar>
+    <div
+      class:list={[
+        'relative flex flex-col rounded-2xl border p-5 transition-colors duration-300',
+        item.highlight ? 'mt-10 border-night bg-night text-cream md:mt-0' : 'border-night/20 bg-cream text-night hover:bg-lilac',
+      ]}
+      data-pillar
+    >
+      {item.highlight && (
+        /* Hinweis als sich langsam drehender Textkreis auf der Ecke (wie „Vom Einfachen das Beste“ im tobel-Case) */
+        <svg
+          class="pointer-events-none absolute -top-12 right-2 h-28 w-28 animate-[spin_24s_linear_infinite] text-night motion-reduce:animate-none md:right-0"
+          viewBox="0 0 100 100"
+          role="img"
+          aria-label={item.highlight}
+        >
+          <defs><path id={`${idPrefix}-ring-${i + 1}`} d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0" /></defs>
+          <circle cx="50" cy="50" r="49" class="fill-lilac" />
+          <text class="fill-current text-[8.4px] tracking-[0.06em] uppercase" aria-hidden="true">
+            <textPath href={`#${idPrefix}-ring-${i + 1}`} textLength="236" lengthAdjust="spacing">{item.highlight} ·</textPath>
+          </text>
+        </svg>
+      )}
       <p class="eyebrow text-[14px] opacity-70">{item.no}</p>
       <h3 class="mt-8 text-[24px]">{item.title}</h3>
       {item.subtitle && <p class="mt-1 text-[14px] opacity-80">{item.subtitle}</p>}
@@ -38,6 +65,12 @@ const t = useLang(lang);
         data-collapsed
       >
         <p class="text-[16px] leading-relaxed">{item.text}</p>
+        {item.details?.map((d) => (
+          <>
+            <p class="mt-6 text-[14px] tracking-[0.08em] uppercase opacity-70">{d.label}</p>
+            <p class="mt-2 text-[16px] leading-relaxed">{d.text}</p>
+          </>
+        ))}
         {item.why && (
           <>
             <p class="mt-6 text-[14px] tracking-[0.08em] uppercase opacity-70">{whyLabel ?? t('Why it matters', 'Warum das zählt')}</p>
@@ -45,6 +78,7 @@ const t = useLang(lang);
           </>
         )}
       </div>
+      {item.meta && <p class="mt-6 border-t border-current/20 pt-4 text-[14px] leading-snug">{item.meta}</p>}
       <div class="mt-8">
         <button
           type="button"
