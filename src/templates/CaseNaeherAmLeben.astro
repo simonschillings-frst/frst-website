@@ -20,8 +20,16 @@ const facts = [
   { label: t('Year', 'Jahr'), value: '2025' },
 ];
 
-const paragraph =
-  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+// Case-Text (bisher nur Englisch; deutsche Fassung folgt)
+const lead = 'When branches close, closeness shouldn’t.';
+
+const paragraphs = [
+  'Digitalization is changing banking. Branches are disappearing, and with them goes the one thing Volksbank Göppingen was built on: closeness. The question was how a bank can stay close when it is no longer around the corner.',
+  'We saw an opportunity, not a loss. People move, work remotely and live differently, and many are rethinking what really matters: community, trust, connection. Values that sound old-fashioned are not outdated. They are underrated. And closeness was never only about distance. It is about knowing what matters to you.',
+  'That became the idea: Näher am Leben – Closer to Life. Real cultural change doesn’t come from the outside, so we started inside. In co-creation workshops, people across the bank turned values into action. Closeness stopped being a place and became something you feel. Closer to Life grew into a mindset, a creative platform and a shared spirit.',
+  'Then we took it public, with real customers. Their questions, fears and dreams made the bank’s promise tangible. Connected across digital and analog channels, inside and outside the bank, the campaign brings brand and people together.',
+  'More than a campaign, it is a new way to be a bank. Rooted in values. Built for tomorrow.',
+];
 ---
 
 <Base title="Näher am Leben – Volksbank Göppingen – frst" headerLight lang={lang}>
@@ -60,8 +68,8 @@ const paragraph =
         ))}
       </dl>
       <div class="space-y-6 text-[20px] leading-relaxed">
-        <p>{paragraph}</p>
-        <p>{paragraph}</p>
+        <h2 class="text-3xl leading-tight font-light md:text-4xl">{lead}</h2>
+        {paragraphs.map((text) => <p>{text}</p>)}
       </div>
     </div>
   </section>
