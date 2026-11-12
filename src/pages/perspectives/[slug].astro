@@ -3,10 +3,10 @@ import Take from '../../templates/Take.astro';
 import { takes } from '../../data/takes';
 
 export function getStaticPaths() {
-  return takes('en').map((take) => ({ params: { slug: take.slug }, props: { title: take.title } }));
+  return takes('en').map((take) => ({ params: { slug: take.slug }, props: { title: take.title, image: take.image, content: take.content, minutes: take.minutes } }));
 }
 
-const { title } = Astro.props;
+const { title, image, content, minutes } = Astro.props;
 ---
 
-<Take lang="en" title={title} />
+<Take lang="en" title={title} image={image} content={content} minutes={minutes} />

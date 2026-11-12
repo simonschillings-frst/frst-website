@@ -16,12 +16,21 @@ const t = useLang(lang);
 const facts = [
   { label: t('Project', 'Projekt'), value: t('Campaign', 'Kampagne') },
   { label: t('Client', 'Kunde'), value: 'MARCCAIN' },
-  { label: t('Location', 'Ort'), value: 'New York' },
-  { label: t('Year', 'Jahr'), value: '—' },
+  { label: t('Year', 'Jahr'), value: '2024' },
 ];
 
-const paragraph =
-  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+// Case-Text (bisher nur Englisch; deutsche Fassung folgt)
+const lead = 'We didn’t book a stage in New York. We took the city.';
+
+const paragraphs = [
+  'Breaking into the US market is tough, especially in fashion. New York Fashion Week is the perfect moment, but an official presence is expensive, and you are one of many. Traditional out-of-home media has its own problem: high cost and high wastage.',
+  'So we asked a different question: what if the city itself became the runway?',
+  'In the heart of New York, a massive LED screen streamed Marc Cain’s Berlin show live. Around it: real models, a buzzing pop-up event, a DJ and VIP guests. Pure fashion energy, right in the street.',
+  'Everything was captured in real time and sent out into the world. The activation dominated the media and achieved the impact of a major out-of-home campaign: targeted, well timed, striking and unique. International artists made it possible, people who understand both local markets and global trends.',
+  'The insight was simple. A runway is not a place, it is a moment of attention. You can rent a venue, or you can create the moment yourself. We chose the second, and we did it where the whole fashion world was already looking.',
+  'An idea instead of a budget. A city instead of a venue. Attention earned, not rented.',
+  'No stage? No problem. We built our own.',
+];
 ---
 
 <Base title="MARCCAIN New York City Activation – frst" headerLight lang={lang}>
@@ -59,8 +68,8 @@ const paragraph =
         ))}
       </dl>
       <div class="space-y-6 text-[20px] leading-relaxed">
-        <p>{paragraph}</p>
-        <p>{paragraph}</p>
+        <h2 class="text-3xl leading-tight font-light md:text-4xl">{lead}</h2>
+        {paragraphs.map((text) => <p>{text}</p>)}
       </div>
     </div>
   </section>

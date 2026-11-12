@@ -11,6 +11,8 @@ export interface MenuLink {
   tone?: Tone;
   /** Bild im Mega-Menü; ersetzt den Platzhalter */
   image?: string;
+  /** Mehrere Bilder nebeneinander in der Karte (z. B. Porträts); hat Vorrang vor `image` */
+  images?: { src: string; alt: string }[];
 }
 
 export interface NavItem {
@@ -49,6 +51,7 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       children: [
         { title: t('What we offer', 'Was wir bieten'), subtitle: t('Four disciplines. One team, built around your project.', 'Vier Disziplinen. Ein Team, zusammengestellt für dein Projekt.'), href: l('/what-we-do#services') },
         { title: t('Our process', 'Unser Prozess'), subtitle: t('The Process built around your Ambition.', 'Der Prozess, gebaut um deinen Anspruch.'), href: l('/what-we-do#process') },
+        { title: 'Pricing', subtitle: t('Models that fit your project.', 'Modelle, die zu deinem Projekt passen.'), href: l('/what-we-do#pricing') },
         { title: t('Selected work', 'Ausgewählte Projekte'), subtitle: 'New York City Activation', href: l('/what-we-do#selected-work') },
       ],
     },
@@ -73,7 +76,14 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       layout: 'cards',
       children: [
         { title: t('Cases', 'Cases'), subtitle: t('Our philosophy brought to life', 'Unsere Philosophie, zum Leben erweckt'), href: l('/work#cases'), image: '/images/marccain-teaser-navi.jpg' },
-        { title: 'Mention', subtitle: t('What our clients love', 'Was unsere Kunden lieben'), href: l('/work#mention') },
+        { title: 'Mention', subtitle: t('What our clients love', 'Was unsere Kunden lieben'), href: l('/work#mention'),
+          // Die drei Kundinnen und Kunden aus den Zitaten auf der Work-Seite. Eigene Fassungen: Schwarzweiß, einheitlich belichtet, oben mit mehr Luft über dem Kopf
+          images: [
+            { src: '/images/mention-nav-bjoern.jpg', alt: t('Portrait of Björn Weller', 'Porträt von Björn Weller') },
+            { src: '/images/mention-nav-christina.jpg', alt: t('Portrait of Christina Rettig', 'Porträt von Christina Rettig') },
+            { src: '/images/mention-nav-fetsum.jpg', alt: t('Portrait of Fetsum Sebhat', 'Porträt von Fetsum Sebhat') },
+          ],
+        },
       ],
     },
     {
@@ -82,8 +92,8 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       href: l('/perspectives'),
       layout: 'cards',
       children: [
-        { title: 'Our Takes', subtitle: t('Think like the wise, and speak like the crowd', 'Denke wie die Weisen und sprich wie die Menge'), href: l('/perspectives#our-takes') },
-        { title: 'Beyond Talks', subtitle: t('Thinking takes shape while speaking', 'Denken nimmt beim Sprechen Gestalt an'), href: l('/perspectives#videos') },
+        { title: 'Our Takes', subtitle: t('Think like the wise, and speak like the crowd', 'Denke wie die Weisen und sprich wie die Menge'), href: l('/perspectives#our-takes'), image: '/images/take-aura-01-nav.jpg' },
+        { title: 'Beyond Talks', subtitle: t('Thinking takes shape while speaking', 'Denken nimmt beim Sprechen Gestalt an'), href: l('/perspectives#videos'), image: '/images/beyond-talks-teaser.jpg' },
       ],
     },
     {

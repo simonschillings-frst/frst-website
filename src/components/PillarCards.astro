@@ -1,0 +1,97 @@
+---
+// Aufklappbare Kacheln (z. B. CMO-Community-Säulen auf der Startseite, Pricing auf der Services-Seite).
+// Jede Kachel zeigt zunächst nur den Anfang des Textes, das Plus klappt sie auf.
+import { useLang, type Lang } from '../i18n';
+
+export interface PillarCard {
+  /** Kleine Zeile oben, z. B. „Pillar 1“ */
+  no: string;
+  title: string;
+  subtitle?: string;
+  text: string;
+  /** Zweiter Absatz unter einer kleinen Überschrift (Standard: „Why it matters“) */
+  why?: string;
+}
+
+interface Props {
+  lang: Lang;
+  items: PillarCard[];
+  /** Präfix für die IDs der aufklappbaren Bereiche, damit sie auf einer Seite eindeutig bleiben */
+  idPrefix: string;
+  /** Überschrift über `why`; ohne Angabe „Why it matters“ */
+  whyLabel?: string;
+}
+const { lang, items, idPrefix, whyLabel } = Astro.props;
+const t = useLang(lang);
+---
+
+<div class="grid items-start gap-4 md:grid-cols-3">
+  {items.map((item, i) => (
+    <div class="flex flex-col rounded-2xl border border-night/20 bg-cream p-5 text-night transition-colors duration-300 hover:bg-lilac" data-pillar>
+      <p class="eyebrow text-[14px] opacity-70">{item.no}</p>
+      <h3 class="mt-8 text-[24px]">{item.title}</h3>
+      {item.subtitle && <p class="mt-1 text-[14px] opacity-80">{item.subtitle}</p>}
+      <div
+        id={`${idPrefix}-${i + 1}`}
+        class="mt-6 max-h-[5.5rem] overflow-hidden transition-[max-height] duration-500 ease-out data-[collapsed]:[mask-image:linear-gradient(to_bottom,black_45%,transparent)] motion-reduce:transition-none"
+        data-pillar-content
+        data-collapsed
+      >
+        <p class="text-[16px] leading-relaxed">{item.text}</p>
+        {item.why && (
+          <>
+            <p class="mt-6 text-[14px] tracking-[0.08em] uppercase opacity-70">{whyLabel ?? t('Why it matters', 'Warum das zählt')}</p>
+            <p class="mt-2 text-[16px] leading-relaxed">{item.why}</p>
+          </>
+        )}
+      </div>
+      <div class="mt-8">
+        <button
+          type="button"
+          class="group -m-2 p-2 transition-opacity hover:opacity-60"
+          aria-expanded="false"
+          aria-controls={`${idPrefix}-${i + 1}`}
+          aria-label={t('Read more', 'Mehr lesen')}
+          data-label-more={t('Read more', 'Mehr lesen')}
+          data-label-less={t('Read less', 'Weniger lesen')}
+          data-pillar-toggle
+        >
+          <svg class="h-3 w-4 transition-transform duration-300 group-aria-expanded:rotate-45 motion-reduce:transition-none" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+            <path d="M2 6h12M8 0v12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  // Kacheln zeigen zunächst nur einen Teil des Textes, das Plus klappt die Kachel auf
+  document.querySelectorAll<HTMLElement>('[data-pillar]').forEach((tile) => {
+    const content = tile.querySelector<HTMLElement>('[data-pillar-content]');
+    const toggle = tile.querySelector<HTMLButtonElement>('[data-pillar-toggle]');
+    if (!content || !toggle) return;
+
+    const open = () => {
+      content.style.maxHeight = `${content.scrollHeight}px`;
+      content.removeAttribute('data-collapsed');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', toggle.dataset.labelLess ?? '');
+    };
+    const close = () => {
+      // Von der aktuellen Höhe aus zuklappen, damit die Animation sauber läuft
+      content.style.maxHeight = `${content.scrollHeight}px`;
+      void content.offsetHeight;
+      content.style.maxHeight = '';
+      content.setAttribute('data-collapsed', '');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', toggle.dataset.labelMore ?? '');
+    };
+
+    toggle.addEventListener('click', () => (toggle.getAttribute('aria-expanded') === 'true' ? close() : open()));
+    // Bei Größenänderung der Seite die aufgeklappte Höhe nachziehen
+    window.addEventListener('resize', () => {
+      if (toggle.getAttribute('aria-expanded') === 'true') content.style.maxHeight = `${content.scrollHeight}px`;
+    });
+  });
+</script>

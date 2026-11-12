@@ -21,16 +21,19 @@ const longText = `${intro} ${intro} ${intro}`;
 
 // Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
 
-// Der neueste Take steht oben, die übrigen im Slider
-const [newestTake, ...sliderTakes] = takes(lang);
-const topics = sliderTakes.map((take) => ({
+// Der neueste Take steht oben und zusätzlich an erster Stelle im Slider
+const sliderTakes = takes(lang);
+const [newestTake] = sliderTakes;
+// Eyebrow durchnummeriert: Take 01, Take 02 …
+const topics = sliderTakes.map((take, i) => ({
   id: take.slug,
-  label: 'Take',
+  label: `Take ${String(i + 1).padStart(2, '0')}`,
   tone: take.tone,
+  image: take.cardImage ?? take.image,
   href: take.href,
   title: take.title,
-  text: 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.',
-  meta: t('Take · 5 min read', 'Take · 5 Min. Lesezeit'),
+  text: take.content?.teaser ?? 'Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.',
+  meta: t(`Take · ${take.minutes} min read`, `Take · ${take.minutes} Min. Lesezeit`),
 }));
 
 const videos = [
@@ -38,8 +41,6 @@ const videos = [
   { title: t('Talk with Dr. Ilke Heller', 'Talk mit Dr. Ilke Heller'), tags: t('Design Thinking', 'Design Thinking'), tone: 'night', youtube: 'XTrlKfSNs-8', poster: '/images/talk-heller.jpg' },
   { title: t('Talk with Constantin Schiller', 'Talk mit Constantin Schiller'), tags: t('Social Media · Content · Digital', 'Social Media · Content · Digital'), tone: 'dusk', youtube: '4vnXQX7XxYA', poster: '/images/talk-schiller.jpg' },
   { title: t('Talk with Sebastian Corbé', 'Talk mit Sebastian Corbé'), tags: t('Strategy · Content · Archetypes', 'Strategie · Content · Archetypen'), tone: 'mist', youtube: 'gHJJ_ywRHzc', poster: '/images/talk-corbe.jpg' },
-  { title: t('Talk with First Name Last Name', 'Talk mit Vorname Nachname'), tags: t('Brand · Creative', 'Marke · Kreation'), tone: 'sky' },
-  { title: t('Talk with First Name Last Name', 'Talk mit Vorname Nachname'), tags: t('AI · Strategy', 'KI · Strategie'), tone: 'desert' },
 ] as const;
 ---
 
@@ -65,12 +66,13 @@ const videos = [
   <section id="newest" class="container-frst scroll-mt-20 py-16 md:py-24">
     <div class="grid items-center gap-10 md:grid-cols-[1.4fr_1fr] md:gap-16">
       <a href={newestTake.href} class="group block overflow-hidden" aria-label={newestTake.title}>
-        <Media tone={newestTake.tone} label={t('Newest take', 'Neuester Take')} class="aspect-[16/9] w-full transition-transform duration-700 ease-out group-hover:scale-105" />
+        <Media src={newestTake.teaserImage ?? newestTake.image} tone={newestTake.tone} alt="" sizes="(min-width: 768px) 60vw, 100vw" class="aspect-[16/9] w-full transition-transform duration-700 ease-out group-hover:scale-105" />
       </a>
       <div>
         <p class="eyebrow text-[14px]">{t('Newest take', 'Neuester Take')}</p>
         <h2 class="mt-6 max-w-[20ch] text-[30px] leading-snug">{newestTake.title}</h2>
-        <p class="mt-6 max-w-[48ch] text-[16px] leading-relaxed">{longText}</p>
+        <p class="mt-6 max-w-[48ch] text-[16px] leading-relaxed">{newestTake.content?.sections[0].paragraphs[0] ?? longText}</p>
+        <p class="mt-4 text-[14px]">{t(`Take · ${newestTake.minutes} min read`, `Take · ${newestTake.minutes} Min. Lesezeit`)}</p>
         <a href={newestTake.href} class="mt-6 inline-block" aria-label={t('Read take', 'Take lesen')}><Arrow /></a>
       </div>
     </div>
@@ -148,7 +150,8 @@ const videos = [
           'Short, clear and opinionated essays on brands, technology, culture and the way we work together. We don’t chase hot topics. We pick the questions that matter to us, say what we think and invite you to push back. Read one, and tell us where we are wrong. Or where we should go further.',
           'Kurze, klare Essays mit Haltung über Marken, Technologie, Kultur und die Art, wie wir zusammenarbeiten. Wir jagen keinen Trendthemen hinterher. Wir greifen die Fragen auf, die uns wichtig sind, sagen, was wir denken, und laden dich ein, zu widersprechen. Lies einen und sag uns, wo wir falschliegen. Oder wo wir weitergehen sollten.',
         )}</p>
-        <div class="mt-10 flex gap-2">
+        {/* Pfeile vorerst ausgeblendet: bei drei Takes gibt es nichts zu blättern. Für mehr Takes `hidden` wieder entfernen. */}
+        <div class="mt-10 hidden gap-2">
           <button
             type="button"
             data-slider-prev
@@ -172,7 +175,7 @@ const videos = [
           <li id={topic.id} class="w-[82%] shrink-0 snap-start scroll-mt-20 sm:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-6rem)/4)]">
             <a href={topic.href} class="group block">
               <div class="aspect-square overflow-hidden border border-night/20">
-                <Media tone={topic.tone} label={topic.label} class="h-full w-full transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
+                <Media src={topic.image} alt="" sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 82vw" tone={topic.tone} label={topic.image ? undefined : topic.label} class="h-full w-full transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
               </div>
               <p class="eyebrow mt-8 text-[14px]">{topic.label}</p>
               <h3 class="mt-4 text-[24px] leading-snug">{topic.title}</h3>

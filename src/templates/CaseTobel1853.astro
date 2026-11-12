@@ -19,7 +19,6 @@ const project = t('Brand · Corporate Identity', 'Marke · Corporate Identity');
 const facts = [
   { label: t('Project', 'Projekt'), value: project },
   { label: t('Client', 'Kunde'), value: '—' },
-  { label: t('Location', 'Ort'), value: '—' },
   { label: t('Year', 'Jahr'), value: '—' },
 ];
 
@@ -33,8 +32,29 @@ const tiles = [
   { src: '/images/tobel-bistro.webp', alt: 'Bistro mit Holztisch und kleinem Tisch vor einer Wandnische' },
 ];
 
-const paragraph =
-  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+// Case-Text (bisher nur Englisch; deutsche Fassung folgt)
+const lead = 'Hospitality adds meaning. We started where it already is.';
+
+const paragraphs = [
+  'Holiday brands love to charge their offer with meaning from the outside. Organic. Vegan. Wellness. Then they build into the very nature they claim to protect. Meaning becomes a claim. Scenery.',
+  'tobel1853 is a restored farmstead in the Allgäu, in the same family since 1853: apartments, bistro, events, retreats. A place like that doesn’t need meaning added. It needs a brand that starts where the meaning already is, at the origin, and makes it possible to find your way back to it.',
+  'That became the idea. People who stay here are not looking to forget. They are looking to remember where they come from.',
+  'The connection they find is not complicated. It is surprisingly simple, simpler than we are used to in everyday life. So the line was clear: Vom Einfachen das Beste. Honest food, sustainable craft, deep respect for nature. Real richness lies not in abundance, but in conscious choice.',
+  'We built the brand strategy and the entire corporate design on that line. Everything a guest meets follows the same principle: reduction to what matters.',
+  'Not an escape. An arrival.',
+];
+
+// Zweiter Textblock zum Design (zwischen Website-Bild und Bildreihen)
+const designLead = 'Classic in form. Modern in function.';
+
+const designParagraphs = [
+  'The design follows one principle: reduction. Not as a style, but as a decision. Every choice answers a single question: does it serve what matters?',
+  'So we kept what lasts and cut what performs. The form is classic: calm, confident, rooted in a place that has stood since 1853. The function is modern: clear, flexible, built for screens and for paper alike. Timeless elegance meets precision. Aesthetics and purpose become one.',
+  'The name stands in lowercase, with the year beside it. No logo that performs, a mark that simply stands, like the farmstead itself.',
+  'The same calm runs through everything a guest touches, from the website to the printed page. Inviting. Clear. Generous. Nothing is decoration. Nothing is noise.',
+  'That is why the brand never needed a label. Others tell you what a place means. tobel1853 shows it, in proportions, in materials, in what is left out.',
+  'Vom Einfachen das Beste. <em>The best from the simple.</em>',
+];
 ---
 
 <Base title={`${brand} ${title} – frst`} headerLight lang={lang}>
@@ -72,8 +92,8 @@ const paragraph =
         ))}
       </dl>
       <div class="space-y-6 text-[20px] leading-relaxed">
-        <p>{paragraph}</p>
-        <p>{paragraph}</p>
+        <h2 class="text-3xl leading-tight font-light md:text-4xl">{lead}</h2>
+        {paragraphs.map((text) => <p>{text}</p>)}
       </div>
     </div>
   </section>
@@ -86,7 +106,19 @@ const paragraph =
     <img src="/images/tobel-kreis-weiss.svg" alt="Vom Einfachen das Beste" class="absolute top-[12.3%] left-[6.92%] w-[11.2%] animate-[spin_30s_linear_infinite] motion-reduce:animate-none" />
   </section>
 
-  <section class="container-frst mt-2">
+  <!-- Zweiter Textblock (Design), in der Textspalte wie oben -->
+  <section class="container-frst py-14 md:py-20">
+    <div class="grid gap-10 md:grid-cols-[1fr_1.35fr] md:gap-0">
+      <div class="hidden md:block"></div>
+      <div class="space-y-6 text-[20px] leading-relaxed">
+        <h2 class="text-3xl leading-tight font-light md:text-4xl">{designLead}</h2>
+        {/* Absätze als HTML, damit die englische Übersetzung des Titels kursiv (<em>) stehen kann */}
+        {designParagraphs.map((text) => <p set:html={text} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="container-frst">
     <!-- Zwei Reihen mit je drei Bildern -->
     <div class="grid gap-2 md:grid-cols-3">
       {tiles.map((tile) => (

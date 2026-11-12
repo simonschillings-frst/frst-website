@@ -15,12 +15,32 @@ const t = useLang(lang);
 const facts = [
   { label: t('Project', 'Projekt'), value: 'Corporate Design' },
   { label: t('Client', 'Kunde'), value: 'COLLINA' },
-  { label: t('Location', 'Ort'), value: '—' },
-  { label: t('Year', 'Jahr'), value: '—' },
+  { label: t('Year', 'Jahr'), value: '2025' },
 ];
 
-const paragraph =
-  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+// Case-Text (bisher nur Englisch; deutsche Fassung folgt)
+const lead = 'Stuttgart doesn’t need another Italian restaurant. It needs a place to be.';
+
+const paragraphs = [
+  'Theaterhaus Stuttgart is a house for culture. Its founders wanted a table that carries that spirit beyond the stage: open to artists, neighbors and passers-by, with or without a ticket.',
+  'We didn’t design a logo for it. We built the brand from zero: name, strategy, identity, interior, every touchpoint.',
+  'The idea was simple. Theater and food are the same thing: live, shared, unrepeatable. So we built a bridge between stage and table, between art and cuisine, between Stuttgart and Italy.',
+  'The name carries it. Collina means hill in Italian. A hill is a meeting point, a place with a view, where a city comes together. Collina became a third place: not home, not work, but where artists meet their audience, friends meet before the show and strangers become a community after it. Real encounters, in real life.',
+  'It belongs to the theater and stands on its own. From the first espresso to the last glass, one line runs through everything.',
+  'Collina shows what we do when the job is not a campaign. We sense the mood of a city and become part of its cultural life. Creative, not reactive.',
+  'Some brands tell stories about culture. Collina is part of it.',
+];
+
+// Zweiter Textblock zum Design (zwischen den Bildern)
+const designLead = 'Not your nonna’s trattoria.';
+
+const designParagraphs = [
+  'Collina’s design started with a refusal. No checkered tablecloths. No fake Nonna. No kitsch. A new generation loves Italian food, just not the old story. It wants a place that feels like culture, not like a theme park.',
+  'So the identity speaks in two voices. The Signature is a handwritten script in signal red, like an autograph on a theater program. It appears on the espresso cup, the plate, the menu, the wall. It is not a logo. It is a person. The Statement is bold, lowercase type in fresh Italian green, and it says everything in four words: not your nonna’s trattoria. Crisp porcelain white keeps both clear.',
+  'We carried the system into space. Red bentwood chairs as an icon. Warm wood tables. Sheer curtains like a theater veil. On every table, a small lamp: a spotlight, so every guest gets a stage.',
+  'The menu reads like a playbill. The staff wear a spaghetti icon on their tees. Everything speaks one language: flexible, scalable, unmistakable.',
+  'Respect the tradition. Disrupt the execution.',
+];
 ---
 
 <Base title="COLLINA Corporate Identity – frst" headerLight lang={lang}>
@@ -58,8 +78,8 @@ const paragraph =
         ))}
       </dl>
       <div class="space-y-6 text-[20px] leading-relaxed">
-        <p>{paragraph}</p>
-        <p>{paragraph}</p>
+        <h2 class="text-3xl leading-tight font-light md:text-4xl">{lead}</h2>
+        {paragraphs.map((text) => <p>{text}</p>)}
       </div>
     </div>
   </section>
@@ -70,6 +90,17 @@ const paragraph =
     <div class="grid gap-2 md:grid-cols-2">
       <Media src="/images/web/collina-Shirt.jpeg" alt="COLLINA – Shirt" class="aspect-[4/5] w-full" />
       <Media src="/images/collina-espresso.jpg" alt="COLLINA – Espresso" class="aspect-[4/5] w-full" />
+    </div>
+  </section>
+
+  <!-- Zweiter Textblock (Design), in der Textspalte wie oben -->
+  <section class="container-frst py-14 md:py-20">
+    <div class="grid gap-10 md:grid-cols-[1fr_1.35fr] md:gap-0">
+      <div class="hidden md:block"></div>
+      <div class="space-y-6 text-[20px] leading-relaxed">
+        <h2 class="text-3xl leading-tight font-light md:text-4xl">{designLead}</h2>
+        {designParagraphs.map((text) => <p>{text}</p>)}
+      </div>
     </div>
   </section>
 

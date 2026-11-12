@@ -26,13 +26,6 @@ const strip = [
   { eyebrow: 'SCHOTT PHARMA', title: 'Circular Packaging', href: localePath(lang, '/work/circular-packaging'), tags: t('Brand · Film · CSR', 'Marke · Film · CSR'), tone: 'night', frame: 'aspect-[4/5]', image: '/images/schott-pharma-teaserbild.jpg' },
 ] as const;
 
-const loremShort = 'Lorem Ipsum dolor sit amet Ectur centran et amos.';
-const results = [
-  { value: '120+', text: loremShort },
-  { value: '35%', text: loremShort },
-  { value: '12', text: loremShort },
-];
-
 // Laufband im Header: die vier Disziplinen (Titel wie auf der Startseite)
 const words = [
   t('Brand Strategy', 'Markenstrategie'),
@@ -157,32 +150,55 @@ const words = [
     </div>
   </section>
 
-  <!-- 7. Ergebnisse mit hochzählenden Zahlen -->
-  <section id="mention" class="scroll-mt-20 bg-night text-cream" data-facts>
-    <div class="container-frst py-16 md:py-24">
-      <p class="eyebrow text-[14px]">Mention</p>
-      <h2 class="mt-8 text-[30px] leading-snug">{t('Work that moves', 'Arbeit, die')}<br />{t('the needle.', 'etwas bewegt.')}</h2>
-      <ul class="mt-16 grid gap-12 md:grid-cols-3 md:gap-8">
-        {results.map((item, i) => (
-          <li class={i === 1 ? 'md:mt-16' : i === 2 ? 'md:mt-32' : ''}>
-            <p class="text-7xl leading-none font-normal tabular-nums md:text-[8rem]" data-count>{item.value}</p>
-            <p class="mt-6 max-w-[26ch] text-[16px] leading-relaxed">{item.text}</p>
+  <!-- 7. Kundenstimmen: Aufbau wie „Quotes“ auf der Research-Seite (Text links, Karten rechts), mit Porträt unten in jeder Karte. Zitate bleiben im deutschen Original. -->
+  <section id="mention" class="scroll-mt-20 bg-cream">
+    <div class="container-frst grid gap-12 py-20 md:py-24 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
+      <div>
+        <p class="eyebrow text-[14px]">Mention</p>
+        <h2 class="mt-8 text-[30px] leading-snug">{t('What our Clients love', 'Was unsere Kunden lieben')}</h2>
+        <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{t('Fast, flexible, different every time. How the people we work with describe working with frst.', 'Schnell, flexibel, jedes Mal anders. So beschreiben die Menschen, mit denen wir arbeiten, die Zusammenarbeit mit frst.')}</p>
+      </div>
+      <!-- Subgrid: Zitat- und Namenszeile sind in allen Karten gleich hoch, so stehen die Porträts auf einer Höhe -->
+      <ul class="grid gap-4 md:grid-cols-3 md:grid-rows-[1fr_auto] md:gap-y-0">
+        {[
+          {
+            text: 'Ich bin begeistert, wie wandelbar frst ist. Von Content-Erstellung bis zu langjährigen Strategieprozessen. Ein Chamäleon in der Agenturlandschaft, das wir noch häufiger sehen werden.',
+            name: 'Björn Weller',
+            role: 'Head of Brand and Digital Experience, SCHOTT',
+            // Dieselben Schwarzweiß-Porträts wie in der Mention-Kachel im Menü; für Björn ein quadratischer Ausschnitt mit dem Gesicht in der Mitte des Kreises
+            image: '/images/mention-quote-bjoern.jpg',
+          },
+          {
+            text: 'In NGOs muss es oft schnell gehen. Gleichzeitig sprechen viele Menschen mit. Das ist nicht immer einfach. frst hat binnen weniger Tage Unglaubliches für unsere PxP Kampagne geleistet. Das hat alle überzeugt, intern und extern.',
+            name: 'Fetsum Sebhat',
+            role: 'Träger des Verdienstordens des Landes Berlin, PxP Festival',
+            image: '/images/mention-nav-fetsum.jpg',
+          },
+          {
+            text: 'Was ich an frst schätze, ist die Mischung aus vertrauten Gesichtern und neuen Impulsen. Flexible Netzwerke passen gut zu SCHOTT, und genau das finden wir hier vor.',
+            name: 'Christina Rettig',
+            role: 'Head of Communications, SCHOTT',
+            image: '/images/mention-nav-christina.jpg',
+          },
+        ].map((quote) => (
+          <li class="md:row-span-2 md:grid md:grid-rows-subgrid">
+            <figure lang="de" class="flex h-full min-h-[260px] cursor-default flex-col justify-between rounded-2xl md:row-span-2 md:grid md:grid-rows-subgrid md:gap-0 border border-night/20 bg-cream p-5 text-night transition-[transform,background-color,border-color,color] duration-300 ease-out hover:-translate-y-1 hover:border-night hover:bg-night hover:text-cream motion-reduce:transition-none">
+              <div>
+                <svg viewBox="0 0 16 12" class="h-3 w-4" fill="currentColor" aria-hidden="true">
+                  <path d="M0 12V7.2C0 3.2 2.2.6 6 0l.6 1.6C4.4 2.4 3.4 3.8 3.4 5.4H6V12H0Zm9.4 0V7.2C9.4 3.2 11.6.6 15.4 0L16 1.6c-2.2.8-3.2 2.2-3.2 3.8h2.6V12H9.4Z" />
+                </svg>
+                <blockquote class="mt-4 text-[16px] leading-snug">„{quote.text}“</blockquote>
+              </div>
+              <figcaption class="mt-8 flex items-start gap-3 text-[14px] leading-tight">
+                <div class="aspect-square w-14 shrink-0 overflow-hidden rounded-full">
+                  <Media src={quote.image} alt={`Porträt von ${quote.name}`} sizes="120px" position="50% 30%" class="h-full w-full" />
+                </div>
+                <span>{quote.name}<br /><span class="opacity-70">{quote.role}</span></span>
+              </figcaption>
+            </figure>
           </li>
         ))}
       </ul>
-    </div>
-  </section>
-
-  <!-- 8. Ein großes Zitat -->
-  <section class="bg-cream">
-    <div class="container-frst py-20 md:py-32">
-      <svg viewBox="0 0 16 12" class="h-6 w-8 text-night" fill="currentColor" aria-hidden="true">
-        <path d="M0 12V7.2C0 3.2 2.2.6 6 0l.6 1.6C4.4 2.4 3.4 3.8 3.4 5.4H6V12H0Zm9.4 0V7.2C9.4 3.2 11.6.6 15.4 0L16 1.6c-2.2.8-3.2 2.2-3.2 3.8h2.6V12H9.4Z" />
-      </svg>
-      <blockquote class="mt-8 max-w-4xl text-[30px] leading-snug">
-        {t('“They did not just build a campaign, they gave us an attitude.”', '„Sie haben nicht nur eine Kampagne gebaut, sondern uns eine Haltung gegeben.“')}
-      </blockquote>
-      <p class="mt-8 text-[14px] leading-tight">{t('Client voice · Marketing Director', 'Kundenstimme · Marketing Director')}</p>
     </div>
   </section>
 
@@ -231,39 +247,6 @@ const words = [
     }
   </style>
 
-  <script>
-    // Zahlen im Results-Modul zählen gleichzeitig hoch, sobald die Maus die dunkle Fläche berührt
-    const facts = document.querySelector<HTMLElement>('[data-facts]');
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (facts && !reduceMotion) {
-      const counters = Array.from(facts.querySelectorAll<HTMLElement>('[data-count]'))
-        .map((el) => {
-          const finalText = el.textContent ?? '';
-          return { el, finalText, target: parseInt(finalText, 10), suffix: finalText.replace(/^\d+/, '') };
-        })
-        .filter((counter) => !Number.isNaN(counter.target));
-
-      let frame = 0;
-      const run = () => {
-        cancelAnimationFrame(frame);
-        const start = performance.now();
-        const duration = 1100;
-        const tick = (now: number) => {
-          const progress = Math.min((now - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          counters.forEach((counter) => {
-            counter.el.textContent = progress < 1 ? Math.round(counter.target * eased) + counter.suffix : counter.finalText;
-          });
-          if (progress < 1) frame = requestAnimationFrame(tick);
-        };
-        frame = requestAnimationFrame(tick);
-      };
-
-      facts.addEventListener('mouseenter', run);
-      facts.addEventListener('touchstart', run, { passive: true });
-    }
-  </script>
   <script>
     // What we offer: 01 bis 04 werden wie auf einer Schreibmaschine getippt, sobald die Liste ins Bild kommt
     const typeList = document.querySelector<HTMLElement>('[data-typewriter]');

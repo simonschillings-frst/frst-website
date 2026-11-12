@@ -3,6 +3,8 @@ import Base from '../../../layouts/Base.astro';
 import Media from '../../../components/Media.astro';
 import Newsletter from '../../../components/Newsletter.astro';
 import { responsiveImage } from '../../../lib/images';
+import { readingLabel } from '../../../lib/readingTime';
+import { MIDDLE_DE_MINUTES } from '../../../data/researchArticles';
 
 const heroImage = { src: '/images/web/artikel-02-01-header.jpg', alt: 'Zwei Figuren sitzen sich in einer weiten Steppe in der Dämmerung an einem Tisch gegenüber: eine als dunkle Silhouette, die andere weiß leuchtend' };
 
@@ -68,7 +70,7 @@ const practice = `Die wichtigste strategische Entscheidung, die Agenturen jetzt 
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/70 via-transparent to-night/40"></div>
     <div class="container-frst relative pt-40 pb-12">
       <div class="md:ml-[9%]">
-        <p class="eyebrow text-[14px]">Artikel · 5 Min. Lesezeit</p>
+        <p class="eyebrow text-[14px]">{readingLabel('de', MIDDLE_DE_MINUTES)}</p>
         <h1 class="mt-8 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">Die Mitte verschwindet.</h1>
       </div>
     </div>
@@ -161,7 +163,6 @@ const practice = `Die wichtigste strategische Entscheidung, die Agenturen jetzt 
         <p class="mt-6 max-w-[78ch] text-[16px] leading-relaxed">{practice}</p>
 
         <p class="eyebrow mt-10 text-[14px]">Die Mitte verschwindet</p>
-        <a href="/de/perspectives" class="btn-outline mt-6 border-night text-[16px] hover:bg-night hover:text-cream">Zurück zu Perspektiven</a>
       </div>
     </div>
   </section>
@@ -173,7 +174,7 @@ const practice = `Die wichtigste strategische Entscheidung, die Agenturen jetzt 
     </div>
     <div class="flex flex-col items-center justify-center bg-night px-5 py-20 text-center text-cream md:px-16">
       <p class="max-w-[28ch] text-[30px] leading-snug" lang="de">Das Mittelfeld ist kein Geschäftsmodell. Es ist ein Aufschub.</p>
-      <a href="#" class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">Artikel herunterladen</a>
+      <a href="/de/research#articles" class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">Zurück zu Research</a>
     </div>
   </section>
 

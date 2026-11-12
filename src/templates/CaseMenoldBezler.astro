@@ -16,12 +16,34 @@ const t = useLang(lang);
 const facts = [
   { label: t('Project', 'Projekt'), value: t('Brand · Redesign', 'Marke · Redesign') },
   { label: t('Client', 'Kunde'), value: 'Menold Bezler' },
-  { label: t('Location', 'Ort'), value: '—' },
-  { label: t('Year', 'Jahr'), value: '—' },
+  { label: t('Year', 'Jahr'), value: '2025' },
 ];
 
-const paragraph =
-  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+// Case-Text (bisher nur Englisch; deutsche Fassung folgt)
+const lead = 'Law firms all look the same. Menold Bezler decided not to.';
+
+const paragraphs = [
+  'Serif fonts. Deep blue. Marble columns. A handshake. Law firms all look the same, and Menold Bezler, the law, tax and audit firm from Baden-Württemberg, wanted to become the benchmark for modern advisory.',
+  'Decades of trust were already there. What was missing was a self-image to match. So the brief was never a new logo. It was a new way for the firm to see itself.',
+  'We chose evolution over revolution. A brand that has earned trust for decades doesn’t throw it away. It builds on it. We kept the green, reinterpreted it and built one design system for every touchpoint, from business card to career campaign to conference stage. Add a tone of voice with attitude: „Wenn du lieber Klagen als Ausreden hörst.“',
+  'We didn’t hand over a 200-page brand book. We built a living playbook together with the in-house team: co-creation, coaching, real campaigns, real learnings. The goal is a team that doesn’t need us anymore.',
+  'In three years, this should not look like a new identity. It should feel like a firm that knows exactly who it is.',
+  'Bold where others play it safe. Clear where others hide behind complexity.',
+];
+
+// Zweiter Textblock zum Design (zwei versetzte Spalten weiter unten)
+const designLead = 'Keep the green. Rewrite the signal.';
+
+const designLeft = [
+  'Trust was never the problem. Visibility was. Menold Bezler’s green already lived in the collective memory of Baden-Württemberg, so we didn’t replace it. We reinterpreted it: a deep, confident forest green as the foundation, a bright, electric signal green that cuts through. Two voices, one message. We stay true. And we move forward.',
+  'The wordmark sits inside two minimal brackets. A frame, a focus, a viewfinder: here is what matters. It holds up on a billboard, a business card and a 32-pixel app icon. One typeface, Inter, carries every channel, from slide deck to poster to platform. No translation loss. No print version of the truth.',
+];
+
+const designRight = [
+  'Then the pill. One green highlight that turns a sentence into a statement: „Wenn dein Leben nicht die längste Rückstellung ever werden soll.“ Suddenly a law firm has attitude, and recruiting, social and the stage all work with the same element.',
+  'One system, built to be used, not filed.',
+  'Stay true. Move first.',
+];
 ---
 
 <Base title="MENOLD BEZLER Green is the new black. – frst" headerLight lang={lang}>
@@ -59,8 +81,8 @@ const paragraph =
         ))}
       </dl>
       <div class="space-y-6 text-[20px] leading-relaxed">
-        <p>{paragraph}</p>
-        <p>{paragraph}</p>
+        <h2 class="text-3xl leading-tight font-light md:text-4xl">{lead}</h2>
+        {paragraphs.map((text) => <p>{text}</p>)}
       </div>
     </div>
   </section>
@@ -104,8 +126,13 @@ const paragraph =
 
   <!-- Zwei versetzte Textblöcke: rechter Block beginnt tiefer. Auf dem Handy untereinander. -->
   <section class="mb-20 grid gap-6 px-5 text-[20px] leading-relaxed md:mb-32 md:flex md:items-start md:gap-0 md:px-0">
-    <p class="md:ml-[10%] md:w-[35.5%]">{paragraph}</p>
-    <p class="md:mt-[11%] md:ml-[6.95%] md:w-[35.5%]">{paragraph}</p>
+    <div class="space-y-6 md:ml-[10%] md:w-[35.5%]">
+      <h2 class="text-3xl leading-tight font-light md:text-4xl">{designLead}</h2>
+      {designLeft.map((text) => <p>{text}</p>)}
+    </div>
+    <div class="space-y-6 md:mt-[11%] md:ml-[6.95%] md:w-[35.5%]">
+      {designRight.map((text) => <p>{text}</p>)}
+    </div>
   </section>
 
   <!-- Bilderstreifen über die ganze Breite: Ab 768 px bleibt er beim Scrollen stehen und fährt seitlich durch.

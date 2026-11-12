@@ -90,11 +90,19 @@ const isCurrent = (href: string) => {
                       <li>
                         <a href={child.href} class="group/card block">
                           <div class="aspect-[2.13/1] origin-center bg-night transition-transform duration-500 ease-out group-hover/card:scale-[1.02] group-focus-visible/card:scale-[1.02] motion-reduce:transition-none">
-                            <Media
-                              src={child.image}
-                              tone={child.tone ?? tones[i % tones.length]}
-                              class="h-full w-full"
-                            />
+                            {child.images ? (
+                              <div class="grid h-full" style={`grid-template-columns: repeat(${child.images.length}, minmax(0, 1fr))`}>
+                                {child.images.map((img) => (
+                                  <Media src={img.src} alt={img.alt} sizes="15vw" class="h-full w-full" />
+                                ))}
+                              </div>
+                            ) : (
+                              <Media
+                                src={child.image}
+                                tone={child.tone ?? tones[i % tones.length]}
+                                class="h-full w-full"
+                              />
+                            )}
                           </div>
                           <p class="mt-[clamp(24px,3.6vw,52px)] mb-2.5 text-[clamp(18px,1.9vw,27px)] leading-[1.2] font-light">{child.title}</p>
                           {child.subtitle && <p class="text-[16px]">{child.subtitle}</p>}
