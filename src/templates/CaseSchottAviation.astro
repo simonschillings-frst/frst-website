@@ -15,12 +15,18 @@ const t = useLang(lang);
 const facts = [
   { label: t('Project', 'Projekt'), value: 'Visuals' },
   { label: t('Client', 'Kunde'), value: 'SCHOTT Aviation' },
-  { label: t('Location', 'Ort'), value: '—' },
-  { label: t('Year', 'Jahr'), value: '—' },
+  { label: t('Year', 'Jahr'), value: '2024' },
 ];
 
-const paragraph =
-  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+// Case-Text (bisher nur Englisch; deutsche Fassung folgt)
+const lead = 'Light isn’t just seen. It’s felt.';
+
+const paragraphs = [
+  'SCHOTT is constantly pushing the boundaries of aircraft lighting. But when it came time to sell its latest premium ambient and reading lights for first-class cabins, the products existed only in R&D. But luxury air travel isn’t sold on specification. It’s sold on atmosphere, the feeling a cabin gives you long before take off. In luxury, feeling comes before facts. So the question was never how to show a light. It was how to show a feeling.',
+  'We started where ideas are cheapest and fastest to test: AI-generated visuals. They let us explore the right ambiance quickly, flexibly and at low cost. We tested moods until one felt exactly right. Then we moved from exploration to craft. We built a high-end first-class cabin in 3D and refined every detail to capture the essence of light and space.',
+  'Rendered in ultra-high resolution, the images did what a technical sheet never could. They turned light into experience. The product wasn’t finished. The impression was. Expanded for trade shows, the images didn’t only present a product. They immersed viewers in the luxury it creates.',
+  'AI helped us explore. Human craft decided what mattered. Together they gave an unfinished innovation a place in people’s imagination before it had a place on an aircraft.',
+];
 ---
 
 <Base title="SCHOTT Enjoy the flight – frst" headerLight lang={lang}>
@@ -58,8 +64,8 @@ const paragraph =
         ))}
       </dl>
       <div class="space-y-6 text-[20px] leading-relaxed">
-        <p>{paragraph}</p>
-        <p>{paragraph}</p>
+        <h2 class="text-3xl leading-tight font-light md:text-4xl">{lead}</h2>
+        {paragraphs.map((text) => <p>{text}</p>)}
       </div>
     </div>
   </section>
