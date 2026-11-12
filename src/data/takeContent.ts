@@ -147,4 +147,74 @@ export const takeContent: Record<string, TakeContent> = {
       'Krowinska, A. & Dineva, D. (2025): The role and forms of social media branded content driving active customer engagement behaviours. Journal of Marketing Management, 41(9–10), 1030–1060. https://doi.org/10.1080/0267257X.2025.2544808',
     ],
   },
+  // Take 3
+  'lorem-ipsum-03': {
+    teaser: 'AI can make the work. Humans must make the decisions.',
+    sections: [
+      {
+        heading: 'The comforting story',
+        paragraphs: [
+          'Whenever someone asks what AI means for creativity, the industry has a reassuring answer: The human will remain important. Because humans have intuition. Emotion. Empathy. Originality. Things machines cannot do.',
+          'Sounds good. But it is not a strategy. It is wishful thinking.',
+          'If AI can produce a hundred campaign ideas before a creative team has finished its first coffee, being slightly more creative is not enough. And being slower certainly isn’t a competitive advantage.',
+          'The human will not remain relevant simply because we say so. Nor because human creativity is somehow sacred.',
+          'The human remains valuable when human judgment changes the outcome. And when agencies can show clients exactly why that change matters.',
+        ],
+        inShort: 'Human creativity is not a birthright. It is a job that needs to be done.',
+      },
+      {
+        heading: 'The value of disagreement',
+        paragraphs: [
+          'AI is very good at producing plausible answers. That is both its strength and its weakness. A plausible idea looks finished. It sounds convincing. It fits the brief. And suddenly, nobody asks whether it is actually any good.',
+          'This is where human judgment becomes valuable: In challenging the version everyone already likes.',
+          'A 2025 study at the CHI Conference tested 52 pairs of people working on creative tasks, with and without ChatGPT. AI support did not improve overall performance. In fact, participants developed their ideas less. The tool had made it easier to produce answers, not necessarily to think them through.',
+        ],
+      },
+      {
+        heading: 'So what should agencies do?',
+        paragraphs: [
+          'Make disagreement part of the process. Every AI-assisted concept should come with a counterargument: What is generic about it? Where does it misunderstand the brand? What cultural assumption does it get wrong?',
+          'And protect the person making that argument. A good objection should count as good creative work, even when the team eventually chooses the AI suggestion.',
+          'For important decisions, test both routes against the same criteria: brand fit, distinctiveness and audience response. Show clients what the AI suggested, why the team challenged it and what the alternative achieves.',
+        ],
+        pull: 'Do not sell human creativity as an abstract promise. Sell the quality of the decision.',
+      },
+      {
+        heading: 'The value of responsibility',
+        paragraphs: [
+          'There is another problem. AI makes producing more options incredibly cheap. Which means options are no longer the scarce resource. Decisions are.',
+          'If an agency presents 50 variations, it has not necessarily done more creative work. It may simply have outsourced the difficult part to the client.',
+          'The real work starts before the prompt. It starts with understanding the world the brand operates in. Talking to customers. Visiting places. Listening to people who are not in the meeting. Finding out what the brief leaves out.',
+          'Then comes the uncomfortable part: taking a position.',
+          'Before designing anything, write down one sentence: We want to say X, not Y. AI can explore the possibilities, but it should not decide what the brand stands for.',
+          'Research supports this more balanced view. A 2025 meta-analysis by Holzner, Maier and Feuerriegel, covering 28 studies and more than 8,200 participants, found that people working with generative AI performed better on creative tasks on average. But their ideas also became significantly less diverse.',
+          'The lesson is not to use less AI. It is to use it without surrendering the choices that make the work distinctive.',
+          'And the job does not end at delivery. Agencies should define what success looks like, check what the work actually does and take responsibility when it misses the mark.',
+        ],
+      },
+      {
+        heading: 'What needs to change',
+        paragraphs: [
+          'This requires more than a new prompt workshop.',
+          'Agencies need to budget for research, critical review and creative judgment. They need to present fewer, better-reasoned options instead of selling volume. They need to make the human contribution visible in proposals and charge for it.',
+          'Clients need to stop buying creative output by the kilo. A pitch should not only reward the best-looking execution, but also the strongest reasoning behind it.',
+          'And the industry needs to talk about the alternatives that were rejected, the assumptions that were challenged and the mistakes that were made. Not just the shiny success stories.',
+        ],
+      },
+      {
+        heading: 'The bottom line',
+        paragraphs: [
+          'If agencies only deliver images, headlines and variations, they are competing with AI on its strongest ground. And they will lose.',
+          'The human advantage is not that we can generate something machines cannot. It is that we can question what should be generated in the first place, connect it to reality and take responsibility for what happens next.',
+          'But that advantage only exists if we build a process around it. And if clients are willing to pay for it.',
+        ],
+        inShort: 'AI can make the work. Humans must make the decisions. But only if we give them the right to disagree – and the responsibility to be right.',
+      },
+    ],
+    sources: [
+      'CHI Conference (2025): CreAItive Collaboration? Users’ Misjudgment of AI-Creativity Affects Their Collaborative Performance. Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems. https://doi.org/10.1145/3706598.3713886',
+      'Holzner, N., Maier, S. & Feuerriegel, S. (2025): Generative AI and Creativity: A Systematic Literature Review and Meta-Analysis. Preprint, 28 studies, 8,214 participants.',
+      'Tang, M. et al. (2025): Who Is the Best Creative Thinking Partner? An Experimental Investigation of Human–Human, Human–Internet, and Human–AI Co-Creation. Journal of Creative Behavior, 59(3).',
+    ],
+  },
 };
