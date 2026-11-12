@@ -6,6 +6,7 @@ import Newsletter from '../components/Newsletter.astro';
 import type { ArticleStory } from '../data/researchArticles';
 import { localePath, useLang, type Lang } from '../i18n';
 import { responsiveImage } from '../lib/images';
+import { readingLabel, readingMinutes } from '../lib/readingTime';
 
 interface Props {
   lang: Lang;
@@ -16,6 +17,7 @@ interface Props {
 const { lang, title, lead, story } = Astro.props;
 const t = useLang(lang);
 const l = (href: string) => localePath(lang, href);
+const minutes = readingMinutes(lang, title, lead, story);
 
 // Blindtext: Inhalte später durch den echten Artikel ersetzen
 const short = `Lorem ipsum dolor sit amet, consetetur sadipscing elitr.`;
@@ -47,7 +49,7 @@ const quotes = Array.from({ length: 4 }, () => ({ text: medium, source: 'Lorem i
     )}
     <div class="container-frst relative pt-40 pb-12">
       <div class="md:ml-[9%]">
-        <p class="eyebrow text-[14px]">{t('Article · 5 min read', 'Artikel · 5 Min. Lesezeit')}</p>
+        <p class="eyebrow text-[14px]">{readingLabel(lang, minutes)}</p>
         <h1 class="mt-8 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{title}</h1>
       </div>
     </div>

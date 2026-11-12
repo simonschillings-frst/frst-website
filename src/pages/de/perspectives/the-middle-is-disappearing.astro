@@ -3,6 +3,8 @@ import Base from '../../../layouts/Base.astro';
 import Media from '../../../components/Media.astro';
 import Newsletter from '../../../components/Newsletter.astro';
 import { responsiveImage } from '../../../lib/images';
+import { readingLabel } from '../../../lib/readingTime';
+import { MIDDLE_DE_MINUTES } from '../../../data/researchArticles';
 
 const heroImage = { src: '/images/web/artikel-02-01-header.jpg', alt: 'Zwei Figuren sitzen sich in einer weiten Steppe in der Dämmerung an einem Tisch gegenüber: eine als dunkle Silhouette, die andere weiß leuchtend' };
 
@@ -68,7 +70,7 @@ const practice = `Die wichtigste strategische Entscheidung, die Agenturen jetzt 
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/70 via-transparent to-night/40"></div>
     <div class="container-frst relative pt-40 pb-12">
       <div class="md:ml-[9%]">
-        <p class="eyebrow text-[14px]">Artikel · 5 Min. Lesezeit</p>
+        <p class="eyebrow text-[14px]">{readingLabel('de', MIDDLE_DE_MINUTES)}</p>
         <h1 class="mt-8 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">Die Mitte verschwindet.</h1>
       </div>
     </div>

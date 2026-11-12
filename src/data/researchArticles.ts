@@ -1,5 +1,9 @@
 import { localePath, useLang, type Lang } from '../i18n';
-import { anatomyEn, blindSpotEn, confessionEn, manualEn, nightmareEn, obituaryEn, therapySessionEn } from './researchArticles.en';
+import { anatomyEn, blindSpotEn, confessionEn, manualEn, middleEn, nightmareEn, obituaryEn, therapySessionEn } from './researchArticles.en';
+import { readingMinutes } from '../lib/readingTime';
+
+/** Lesezeit der deutschen Seite „Die Mitte verschwindet“ (eigene Seite ohne Story-Daten, rund 1.050 Wörter). Bei Textänderungen neu zählen. */
+export const MIDDLE_DE_MINUTES = 6;
 
 type Tone = 'night' | 'dusk' | 'sky' | 'desert';
 
@@ -9,6 +13,8 @@ export interface ResearchArticle {
   href: string;
   text: string;
   tone: Tone;
+  /** Lesezeit in Minuten, aus dem Artikeltext berechnet */
+  minutes: number;
   /** Bild im Teaser, in der Regel der Header des Artikels. Ohne Angabe steht dort der Platzhalter. */
   image?: string;
   /** Adresse der Blindtext-Unterseite unter /research/<slug>. Artikel mit eigener Seite haben keinen slug. */
@@ -661,6 +667,7 @@ export const researchArticles = (lang: Lang): ResearchArticle[] => {
     lead,
     story,
     text,
+    minutes: readingMinutes(lang, title, lead, story),
     href: localePath(lang, `/research/${slug}`),
   });
   const placeholderTones: Tone[] = ['night', 'dusk', 'sky', 'desert'];
@@ -680,6 +687,7 @@ export const researchArticles = (lang: Lang): ResearchArticle[] => {
       href: localePath(lang, '/perspectives/the-middle-is-disappearing'),
       text: t('AI isn’t destroying the agency. It’s destroying the middle.', 'KI zerstört nicht die Agentur. Sie zerstört das Mittelfeld.'),
       tone: 'dusk',
+      minutes: lang === 'de' ? MIDDLE_DE_MINUTES : readingMinutes('en', 'The middle is disappearing.', 'AI isn’t destroying the agency. It’s destroying the middle.', middleEn),
       image: '/images/web/artikel-02-01-header.jpg',
     },
     withPage(
