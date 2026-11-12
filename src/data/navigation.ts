@@ -76,14 +76,7 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       layout: 'cards',
       children: [
         { title: t('Cases', 'Cases'), subtitle: t('Our philosophy brought to life', 'Unsere Philosophie, zum Leben erweckt'), href: l('/work#cases'), image: '/images/marccain-teaser-navi.jpg' },
-        { title: 'Mention', subtitle: t('What our clients love', 'Was unsere Kunden lieben'), href: l('/work#mention'),
-          // Die drei Kundinnen und Kunden aus den Zitaten auf der Work-Seite. Eigene Fassungen: Schwarzweiß, einheitlich belichtet, oben mit mehr Luft über dem Kopf
-          images: [
-            { src: '/images/mention-nav-bjoern.jpg', alt: t('Portrait of Björn Weller', 'Porträt von Björn Weller') },
-            { src: '/images/mention-nav-christina.jpg', alt: t('Portrait of Christina Rettig', 'Porträt von Christina Rettig') },
-            { src: '/images/mention-nav-fetsum.jpg', alt: t('Portrait of Fetsum Sebhat', 'Porträt von Fetsum Sebhat') },
-          ],
-        },
+        { title: 'Mention', subtitle: t('What our clients love', 'Was unsere Kunden lieben'), href: l('/work#mention'), image: '/images/mention-navi.jpg' },
       ],
     },
     {
