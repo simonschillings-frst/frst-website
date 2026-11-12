@@ -3,12 +3,19 @@ import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { localePath, useLang, type Lang } from '../i18n';
+import type { TakeContent } from '../data/takeContent';
 
 interface Props {
   lang: Lang;
   title: string;
+  /** Hero-Bild statt Verlauf */
+  image?: string;
+  /** Echter Inhalt; ohne Angabe Blindtext */
+  content?: TakeContent;
+  /** Lesezeit in Minuten */
+  minutes?: number;
 }
-const { lang, title } = Astro.props;
+const { lang, title, image, content, minutes = 5 } = Astro.props;
 const t = useLang(lang);
 const l = (href: string) => localePath(lang, href);
 
@@ -21,17 +28,26 @@ const paragraph = `${long} ${long}`;
 ---
 
 <Base title={`${title} – frst`} headerOverlay lang={lang}>
-  <!-- Hero mit buntem Verlauf (wie auf der Artikel-Seite) -->
+  <!-- Hero: Foto, falls der Take eins hat, sonst bunter Verlauf (wie auf der Artikel-Seite) -->
   <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-screen md:max-h-[900px]">
-    <div
-      class="pointer-events-none absolute top-1/2 left-[70%] h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#ffd9a0_0%,#f59a3c_28%,#6026fe55_55%,transparent_72%)] opacity-80"
-    ></div>
-    <div
-      class="pointer-events-none absolute bottom-[-25%] left-[8%] h-[640px] w-[640px] rounded-full bg-[radial-gradient(circle,#93c0f5_0%,#4d6fd0_30%,#6026fe55_55%,transparent_72%)] opacity-60"
-    ></div>
+    {image ? (
+      <>
+        <Media src={image} alt="" eager class="absolute inset-0 h-full w-full" position="40% 45%" />
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/56 via-night/14 to-night/28"></div>
+      </>
+    ) : (
+      <>
+        <div
+          class="pointer-events-none absolute top-1/2 left-[70%] h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#ffd9a0_0%,#f59a3c_28%,#6026fe55_55%,transparent_72%)] opacity-80"
+        ></div>
+        <div
+          class="pointer-events-none absolute bottom-[-25%] left-[8%] h-[640px] w-[640px] rounded-full bg-[radial-gradient(circle,#93c0f5_0%,#4d6fd0_30%,#6026fe55_55%,transparent_72%)] opacity-60"
+        ></div>
+      </>
+    )}
     <div class="container-frst relative pt-40 pb-12">
       <div class="md:ml-[9%]">
-        <p class="eyebrow text-[14px]">{t('Take · 5 min read', 'Take · 5 Min. Lesezeit')}</p>
+        <p class="eyebrow text-[14px]">{t(`Take · ${minutes} min read`, `Take · ${minutes} Min. Lesezeit`)}</p>
         <h1 class="mt-8 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{title}</h1>
       </div>
     </div>
@@ -49,31 +65,68 @@ const paragraph = `${long} ${long}`;
         ]}
         class="mb-12 md:mb-20"
       />
-      <p class="max-w-[34ch] text-[24px] leading-snug font-light">{short}</p>
+      {content ? (
+        <div class="md:ml-[20%]">
+          {/* Echter Take: Abschnitte mit Zwischenüberschrift, hervorgehobenem Satz und Kurzfazit */}
+          {content.sections.map((section, i) => (
+            <section class={i > 0 ? 'mt-16 md:mt-20' : ''}>
+              <h2 class="max-w-[34ch] text-[24px] leading-snug">{section.heading}</h2>
+              {section.paragraphs.map((text, j) => (
+                <p class={`${j === 0 ? 'mt-4' : 'mt-6'} max-w-[78ch] text-[16px] leading-relaxed`}>{text}</p>
+              ))}
+              {section.pull && <blockquote class="my-16 max-w-[34ch] text-[30px] leading-snug md:my-20">{section.pull}</blockquote>}
+              {section.list && (
+                <ul class="mt-6 max-w-[78ch] space-y-4 text-[16px] leading-relaxed">
+                  {section.list.map((item) => (
+                    <li class="border-l border-night/30 pl-5"><strong class="font-medium">{item.title}</strong> {item.text}</li>
+                  ))}
+                </ul>
+              )}
+              {section.paragraphsAfter?.map((text) => <p class="mt-6 max-w-[78ch] text-[16px] leading-relaxed">{text}</p>)}
+              {section.inShort && (
+                <aside class="mt-10 max-w-[78ch] border-l-2 border-night pl-6">
+                  <p class="eyebrow text-[14px]">{t('In short', 'Kurz gesagt')}</p>
+                  <p class="mt-3 text-[20px] leading-snug">{section.inShort}</p>
+                </aside>
+              )}
+            </section>
+          ))}
 
-      <div class="mt-12 md:ml-[20%]">
-        <p class="max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
-        <p class="mt-8 max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
+          {content.sources && (
+            <footer class="mt-20 max-w-[78ch] border-t border-night/20 pt-8 md:mt-24">
+              <h2 class="eyebrow text-[14px]">{t('Sources', 'Quellen')}</h2>
+              <ul class="mt-4 space-y-3 text-[14px] leading-relaxed opacity-80">
+                {content.sources.map((source) => <li>{source}</li>)}
+              </ul>
+            </footer>
+          )}
+        </div>
+      ) : (
+        <>
+          <p class="max-w-[34ch] text-[24px] leading-snug font-light">{short}</p>
 
-        <blockquote class="mx-auto mt-20 max-w-[34ch] text-center text-[30px] leading-snug">{medium}</blockquote>
-      </div>
+          <div class="mt-12 md:ml-[20%]">
+            <p class="max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
+            <p class="mt-8 max-w-[78ch] text-[16px] leading-relaxed">{long}</p>
+
+            <blockquote class="mx-auto mt-20 max-w-[34ch] text-center text-[30px] leading-snug">{medium}</blockquote>
+          </div>
+        </>
+      )}
     </div>
   </section>
 
-  <!-- Bildband über die ganze Breite -->
-  <section aria-hidden="true">
-    <Media tone="night" label={t('Take image', 'Take-Bild')} class="h-[260px] w-full md:h-[420px]" />
-  </section>
-
-  <!-- Fließtext -->
-  <section class="px-5 py-16 md:px-10 md:py-24">
-    <div class="mx-auto max-w-[1110px]">
-      <div class="md:ml-[20%]">
-        <h2 class="max-w-[34ch] text-[24px] leading-snug">{short}</h2>
-        <p class="mt-4 max-w-[78ch] text-[16px] leading-relaxed">{paragraph}</p>
-        <p class="mt-8 max-w-[78ch] text-[16px] leading-relaxed">{paragraph}</p>
+  <!-- Fließtext (nur Blindtext-Takes) -->
+  {!content && (
+    <section class="px-5 py-16 md:px-10 md:py-24">
+      <div class="mx-auto max-w-[1110px]">
+        <div class="md:ml-[20%]">
+          <h2 class="max-w-[34ch] text-[24px] leading-snug">{short}</h2>
+          <p class="mt-4 max-w-[78ch] text-[16px] leading-relaxed">{paragraph}</p>
+          <p class="mt-8 max-w-[78ch] text-[16px] leading-relaxed">{paragraph}</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
 </Base>

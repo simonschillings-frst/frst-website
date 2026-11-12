@@ -5,6 +5,7 @@ import Video from '../components/Video.astro';
 import Arrow from '../components/Arrow.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { localePath, useLang, type Lang } from '../i18n';
+import { takes } from '../data/takes';
 
 interface Props {
   lang: Lang;
@@ -13,6 +14,9 @@ const { lang } = Astro.props;
 const t = useLang(lang);
 const l = (href: string) => localePath(lang, href);
 const articleHref = l('/perspectives/the-middle-is-disappearing');
+// Erster (neuester) Take für die Teaser auf der Startseite
+const firstTake = takes(lang)[0];
+const firstTakeMeta = t(`Take · ${firstTake.minutes} min read`, `Take · ${firstTake.minutes} Min. Lesezeit`);
 
 const intro = t(
   'There is a comfortable story the industry is telling itself right now: AI is a tool. We use it. We become more efficient. And in the end we are stronger than before. The story isn’t wrong. But it is incomplete.',
@@ -94,11 +98,11 @@ const disciplines = [
       </div>
       <div class="md:col-span-3 md:col-start-10">
         <p class="eyebrow text-[14px]">{t('Perspectives', 'Perspektiven')}</p>
-        <a href={l('/perspectives/lorem-ipsum')} class="mt-8 block">
-          <Media tone="night" class="aspect-[4/3] w-full" />
+        <a href={firstTake.href} class="mt-8 block">
+          <div class="aspect-square overflow-hidden border border-night/20"><Media src={firstTake.cardImage ?? firstTake.image} tone="night" alt="" sizes="(min-width: 768px) 25vw, 100vw" class="h-full w-full" /></div>
           <p class="eyebrow text-[14px] mt-6">{t('Our Takes', 'Unsere Takes')}</p>
-          <h3 class="mt-3 text-[24px]">Lorem Ipsum</h3>
-          <p class="mt-2 text-[14px]">{t('Take · 6 min read', 'Take · 6 Min. Lesezeit')}</p>
+          <h3 class="mt-3 text-[24px]">{firstTake.title}</h3>
+          <p class="mt-2 text-[14px]">{firstTakeMeta}</p>
           <Arrow class="mt-6" />
         </a>
       </div>
@@ -206,11 +210,11 @@ const disciplines = [
         <a href={l('/perspectives')} class="mt-8 inline-block" aria-label={t('All perspectives', 'Alle Perspektiven')}><Arrow /></a>
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
-        <a href={l('/perspectives/lorem-ipsum')}>
-          <Media tone="night" class="aspect-[4/3] w-full" />
+        <a href={firstTake.href}>
+          <div class="aspect-square overflow-hidden border border-night/20"><Media src={firstTake.cardImage ?? firstTake.image} tone="night" alt="" sizes="(min-width: 640px) 30vw, 100vw" class="h-full w-full" /></div>
           <p class="eyebrow text-[14px] mt-6">{t('Our Takes', 'Unsere Takes')}</p>
-          <h3 class="mt-3 text-[24px]">Lorem ipsum</h3>
-          <p class="mt-2 text-[14px]">{t('Take · 5 min read', 'Take · 5 Min. Lesezeit')}</p>
+          <h3 class="mt-3 text-[24px]">{firstTake.title}</h3>
+          <p class="mt-2 text-[14px]">{firstTakeMeta}</p>
           <Arrow class="mt-6" />
         </a>
         <a href={l('/perspectives#videos')}>
