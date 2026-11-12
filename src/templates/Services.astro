@@ -35,18 +35,46 @@ const steps = [
 ];
 
 // Pricing: Aufbau wie die CMO-Community-Kacheln auf der Startseite.
-// Platzhalter: Modelle, Texte und Preise folgen.
-const lorem = t(
-  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.',
-  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.',
-);
-const pricing = [1, 2, 3].map((n) => ({
-  no: t(`Model ${n}`, `Modell ${n}`),
-  title: 'Lorem ipsum',
-  subtitle: 'Dolor sit amet',
-  text: lorem,
-  why: 'Stet clita kasd gubergren, no sea takimata sanctus est lorem ipsum dolor sit amet.',
-}));
+// Text bisher nur Englisch; erscheint auch auf der deutschen Seite.
+const pricingIntro = 'Every great collaboration starts somewhere. Whether you need a strategic partner, want to explore a new idea or prefer to make things happen yourself – we give you the people, tools and creative freedom to move forward. Find the way that works for you.*';
+const pricingNote = '*Looking for something different? We also create tailored solutions to fit your needs.';
+const pricing = [
+  {
+    no: 'frst Partner',
+    title: 'frst Partner',
+    subtitle: 'Your creative partner for what’s next.',
+    text: 'We bring strategy, creative thinking and hands-on support together with full access to our digital tool and artist network. As your ongoing partner, we help you challenge the familiar, explore new possibilities and turn ideas into action.',
+    details: [
+      { label: 'What we bring', text: 'Strategy, creative direction, project management, tool access and our full artist network.' },
+      { label: 'What you get', text: 'A team that knows your business, thinks ahead and helps you make better things happen.' },
+    ],
+    meta: 'Monthly retainer · Ongoing collaboration',
+    // Unser Fokus-Modell: wird farblich hervorgehoben
+    highlight: 'Best to turn ideas into lasting impact',
+  },
+  {
+    no: 'frst Sprint',
+    title: 'frst Sprint',
+    subtitle: 'A focused start. A fresh perspective.',
+    text: 'We take your brief, shape the right approach and connect you with the artists who can bring it to life. Our briefing generator helps structure your needs. With your first project, you’ll also get a personal demo of our digital tool.',
+    details: [
+      { label: 'What we bring', text: 'A clear process, our briefing generator and access to handpicked artists – curated and coordinated by frst.' },
+      { label: 'What you get', text: 'The right creative minds for your project, without the commitment of a long-term partnership.' },
+    ],
+    meta: 'Fixed project fee · Clearly defined scope',
+  },
+  {
+    no: 'frst Access',
+    title: 'frst Access',
+    subtitle: 'Your network. Your tools. Your move.',
+    text: 'Get independent access to our digital platform and discover, select and book artists yourself. Everything you need to bring the right creative people together, all in one place. Artist bookings are charged separately through a transparent service or brokerage fee.',
+    details: [
+      { label: 'What we bring', text: 'Access to our digital tool and curated artist network, with a simple booking process.' },
+      { label: 'What you get', text: 'More freedom, direct access to creative talent and the power to make things happen on your own terms.' },
+    ],
+    meta: 'Monthly or annual license · Artist bookings charged separately',
+  },
+].map((item, i) => ({ ...item, no: t(`Model ${i + 1}`, `Modell ${i + 1}`) }));
 ---
 
 <Base title={t('Services – frst', 'Leistungen – frst')} headerOverlay lang={lang}>
@@ -115,10 +143,11 @@ const pricing = [1, 2, 3].map((n) => ({
     <div class="grid gap-12 lg:grid-cols-[1fr_2.4fr]">
       <div>
         <p class="eyebrow text-[14px]">Pricing</p>
-        <h2 class="mt-8 max-w-md text-[30px] leading-snug">Lorem ipsum dolor sit amet</h2>
-        <p class="mt-6 max-w-md text-[16px] leading-relaxed">{lorem}</p>
+        <h2 class="mt-8 max-w-md text-[30px] leading-snug">Ready for what’s next?</h2>
+        <p class="mt-6 max-w-md text-[16px] leading-relaxed">{pricingIntro}</p>
+        <p class="mt-4 max-w-md text-[14px] leading-relaxed opacity-70">{pricingNote}</p>
       </div>
-      <PillarCards lang={lang} items={pricing} idPrefix="pricing" whyLabel={t('What’s included', 'Was enthalten ist')} />
+      <PillarCards lang={lang} items={pricing} idPrefix="pricing" />
     </div>
   </section>
 
