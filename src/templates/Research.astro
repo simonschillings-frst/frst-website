@@ -15,9 +15,11 @@ const t = useLang(lang);
 const privacyHref = privacyPath(lang);
 
 const quotesIntro = t(
-  'Honest, surprising, uncomfortable. This is what clients told us about the agencies of tomorrow. Real quotes from real conversations.',
+  'Honest, surprising, uncomfortable. This is what clients told us about the agencies of tomorrow. Real quotes from real conversations.*',
   'Ehrlich, überraschend, unbequem. Das haben uns Kunden über die Agenturen von morgen erzählt. Echte Zitate aus echten Gesprächen.',
 );
+// „By the numbers“ ist vorerst ausgeblendet (auch in der Navi); zum Einblenden auf true setzen
+const showNumbers = false;
 const numbersIntro = t(
   'We’ve been keeping count. So much passion has gone into this study.',
   'Wir haben mitgezählt. So viel Leidenschaft steckt in dieser Studie.',
@@ -60,21 +62,30 @@ const facts = [
   { value: '100%', text: loremShort },
 ];
 
-const quotesLang = 'de'; // Zitate stammen aus deutschsprachigen Interviews
+// Zitate stammen aus deutschsprachigen Interviews; auf der englischen Seite übersetzt
 const quotes = [
-  { text: 'Ich glaube, diese eine Agentur für alles gibt es nicht mehr.', source: t('IP 2 · Subject expertise', 'IP 2 · Fachexpertise'), role: t('Corporate communications', 'Unternehmenskommunikation') },
+  { text: t("I don't think that one agency for everything exists anymore.", 'Ich glaube, diese eine Agentur für alles gibt es nicht mehr.'), source: t('IP 2 · Subject expertise', 'IP 2 · Fachexpertise'), role: t('Corporate communications', 'Unternehmenskommunikation') },
   {
-    text: 'Ich glaube, wir werden viele, viele kleine spezialisierte Agenturen sehen und halt große, große Netzwerke, die vieles abbilden können.',
+    text: t(
+      "I think we'll see lots and lots of small, specialised agencies and then really big networks that can cover a lot.",
+      'Ich glaube, wir werden viele, viele kleine spezialisierte Agenturen sehen und halt große, große Netzwerke, die vieles abbilden können.',
+    ),
     source: t('IP 2 · Subject expertise', 'IP 2 · Fachexpertise'),
     role: t('Corporate communications', 'Unternehmenskommunikation'),
   },
   {
-    text: 'Ich will auch keine Agentur haben, die alles anbietet. Ich bestelle auch nicht bei einem Italiener, der nebenher noch Indisch kocht.',
+    text: t(
+      "I don't want an agency that offers everything, either. I wouldn't order from an Italian restaurant that also does Indian on the side.",
+      'Ich will auch keine Agentur haben, die alles anbietet. Ich bestelle auch nicht bei einem Italiener, der nebenher noch Indisch kocht.',
+    ),
     source: t('IP 2 · Subject expertise', 'IP 2 · Fachexpertise'),
     role: t('Corporate communications', 'Unternehmenskommunikation'),
   },
   {
-    text: 'Dienstleister weisen abseits ihrer originären Kernkompetenzen oftmals Schwächen in der Ausführung auf.',
+    text: t(
+      'Outside their original core competencies, service providers often show weaknesses in execution.',
+      'Dienstleister weisen abseits ihrer originären Kernkompetenzen oftmals Schwächen in der Ausführung auf.',
+    ),
     source: t('IP 2 · Subject expertise', 'IP 2 · Fachexpertise'),
     role: t('Corporate communications', 'Unternehmenskommunikation'),
   },
@@ -213,6 +224,7 @@ const quotes = [
         <p class="eyebrow text-[14px]">Quotes</p>
         <h2 class="mt-8 text-[30px] leading-snug">{t('In their own words.', 'In ihren eigenen Worten.')}</h2>
         <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{quotesIntro}</p>
+        {lang === 'en' && <p class="mt-4 max-w-sm text-[14px] leading-relaxed opacity-70">*Translated from German</p>}
       </div>
       <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {quotes.map((quote) => (
@@ -222,7 +234,7 @@ const quotes = [
                 <svg viewBox="0 0 16 12" class="h-3 w-4" fill="currentColor" aria-hidden="true">
                   <path d="M0 12V7.2C0 3.2 2.2.6 6 0l.6 1.6C4.4 2.4 3.4 3.8 3.4 5.4H6V12H0Zm9.4 0V7.2C9.4 3.2 11.6.6 15.4 0L16 1.6c-2.2.8-3.2 2.2-3.2 3.8h2.6V12H9.4Z" />
                 </svg>
-                <blockquote class="mt-4 text-[16px] leading-snug" lang="de">„{quote.text}“</blockquote>
+                <blockquote class="mt-4 text-[16px] leading-snug">{t(`“${quote.text}”`, `„${quote.text}“`)}</blockquote>
               </div>
               <figcaption class="mt-8 text-[14px] leading-tight">
                 {quote.source}<br />{quote.role}
@@ -234,7 +246,8 @@ const quotes = [
     </div>
   </section>
 
-  <!-- Facts -->
+  <!-- Facts (vorerst ausgeblendet, siehe showNumbers) -->
+  {showNumbers && (
   <section id="by-the-numbers" class="scroll-mt-20 bg-night text-cream" data-facts>
     <div class="container-frst grid gap-12 py-16 md:py-20 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
       <div>
@@ -252,6 +265,7 @@ const quotes = [
       </ul>
     </div>
   </section>
+  )}
 
   <!-- Studienteilnahme: Anmeldeformular -->
   <section id="study" class="scroll-mt-20 bg-lilac">

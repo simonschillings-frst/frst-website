@@ -65,7 +65,8 @@ export const getNavItems = (lang: Lang): NavItem[] => {
         { title: t('Articles', 'Artikel'), subtitle: t('Thoughts on the future of the agency', 'Gedanken zur Zukunft der Agentur'), href: l('/research#articles') },
         { title: t('Study', 'Studie'), subtitle: t('Get the study', 'Studie anfordern'), href: l('/research#get-the-study') },
         { title: 'Quotes', subtitle: t('Different perspectives. Same direction.', 'Verschiedene Perspektiven. Gleiche Richtung.'), href: l('/research#quotes') },
-        { title: 'By the numbers', subtitle: t('Facts that make a difference.', 'Fakten, die den Unterschied machen.'), href: l('/research#by-the-numbers') },
+        // „By the numbers“ vorerst ausgeblendet, wie das Modul auf der Research-Seite
+        // { title: 'By the numbers', subtitle: t('Facts that make a difference.', 'Fakten, die den Unterschied machen.'), href: l('/research#by-the-numbers') },
         { title: t('Research study', 'Research-Studie'), subtitle: t('Take part in our study.', 'Nimm teil an unserer Studie.'), href: l('/research#study') },
       ],
     },
