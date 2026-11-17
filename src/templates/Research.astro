@@ -105,10 +105,12 @@ const quotes = [
     <h1 class="sr-only">Research</h1>
     <!-- Hintergrundvideo (Flip-through der Studie, stumm, Loop): startet sofort, bis dahin ist das Standbild zu sehen. Handys laden die 720p-Fassung. -->
     <Video src="/videos/research-hero.mp4" srcMobile="/videos/research-hero-720.mp4" poster="/videos/research-hero-poster.webp" loop eager class="absolute inset-0" lang={lang} />
-    <!-- Störer: sich drehender Textkreis am rechten Rand, führt wie das Menü zu „Get the Study“ -->
+    <!-- Störer: sich drehender Textkreis, rechts bündig mit dem Inhaltsraster (wie Texte und Buttons), führt wie das Menü zu „Get the Study“ -->
+    <div class="pointer-events-none absolute inset-0 z-10">
+    <div class="container-frst relative h-full">
     <a
       href="#get-the-study"
-      class="group absolute right-4 bottom-20 z-10 block h-28 w-28 rounded-full text-night focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream md:top-1/2 md:right-10 md:bottom-auto md:h-36 md:w-36 md:-translate-y-1/2"
+      class="group pointer-events-auto absolute right-5 bottom-20 block h-28 w-28 rounded-full text-night focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream md:top-1/2 md:right-[13.5rem] md:bottom-auto md:h-36 md:w-36 md:-translate-y-1/2"
       aria-label={t('Get the study', 'Studie anfordern')}
     >
       <svg class="h-full w-full animate-[spin_18s_linear_infinite] motion-reduce:animate-none" viewBox="0 0 100 100" aria-hidden="true">
@@ -120,6 +122,8 @@ const quotes = [
       </svg>
       <Arrow class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-90" />
     </a>
+    </div>
+    </div>
   </section>
 
   <!-- Manifest: zweispaltig wie „Why frst“ auf der Startseite, drei Absätze im Spaltenfluss -->
