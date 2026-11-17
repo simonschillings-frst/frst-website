@@ -1,0 +1,75 @@
+---
+/**
+ * Bilderstreifen über die ganze Breite (Karussell): Ab 768 px bleibt er beim Scrollen stehen und fährt seitlich durch.
+ * Auf dem Handy und bei „reduzierte Bewegung“ normal seitlich scrollbar (Wischen, Trackpad, Tastatur).
+ * Die Bilder kommen als Kinder, jeweils mit `class="h-full aspect-[…] shrink-0"`.
+ */
+import { useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  label: string;
+}
+const { lang, label } = Astro.props;
+const t = useLang(lang);
+---
+
+<section aria-label={label} data-strip>
+  <div data-strip-runway>
+    <div data-strip-pin>
+      <div class="h-[50vh] snap-x overflow-x-auto xl:h-screen" tabindex="0" role="region" aria-label={t('Image gallery, scrolls sideways', 'Bildergalerie, seitlich scrollbar')} data-strip-track>
+        <div class="flex h-full min-w-max gap-2 will-change-transform [&>*]:snap-start" data-strip-row>
+          <slot />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Der Streifen bleibt oben stehen, während die Seite weiterscrollt, und fährt dabei seitlich durch.
+  // Die Seite wird dafür um die seitliche Strecke länger.
+  document.querySelectorAll<HTMLElement>('[data-strip]').forEach((strip) => {
+    const runway = strip.querySelector<HTMLElement>('[data-strip-runway]');
+    const pin = strip.querySelector<HTMLElement>('[data-strip-pin]');
+    const track = strip.querySelector<HTMLElement>('[data-strip-track]');
+    const row = strip.querySelector<HTMLElement>('[data-strip-row]');
+    if (!runway || !pin || !track || !row) return;
+
+    const active = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)');
+    let distance = 0;
+
+    const move = () => {
+      if (!active.matches || distance <= 0) return;
+      const offset = parseFloat(pin.style.top) || 0;
+      const progress = Math.min(1, Math.max(0, (offset - runway.getBoundingClientRect().top) / distance));
+      row.style.transform = `translateX(${-progress * distance}px)`;
+    };
+
+    const setup = () => {
+      if (!active.matches) {
+        runway.style.height = '';
+        pin.classList.remove('sticky');
+        pin.style.top = '';
+        track.style.overflowX = '';
+        row.style.transform = '';
+        return;
+      }
+      track.scrollLeft = 0;
+      track.style.overflowX = 'hidden';
+      pin.classList.add('sticky');
+      // Senkrecht mittig im Bildschirm stehen bleiben (bei voller Höhe oben)
+      pin.style.top = `${Math.max(0, (window.innerHeight - pin.offsetHeight) / 2)}px`;
+      distance = Math.max(0, row.scrollWidth - track.clientWidth);
+      runway.style.height = `${pin.offsetHeight + distance}px`;
+      move();
+    };
+
+    window.addEventListener('scroll', move, { passive: true });
+    window.addEventListener('resize', setup);
+    active.addEventListener('change', setup);
+    // Bilder laden erst beim Scrollen: danach die Strecke neu messen
+    row.querySelectorAll('img').forEach((img) => img.addEventListener('load', setup, { once: true }));
+    setup();
+  });
+</script>

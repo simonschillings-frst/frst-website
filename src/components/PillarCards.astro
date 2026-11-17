@@ -4,8 +4,8 @@
 import { useLang, type Lang } from '../i18n';
 
 export interface PillarCard {
-  /** Kleine Zeile oben, z. B. „Pillar 1“ */
-  no: string;
+  /** Kleine Zeile oben, z. B. „Pillar 1“ (optional) */
+  no?: string;
   title: string;
   subtitle?: string;
   text: string;
@@ -55,7 +55,8 @@ const t = useLang(lang);
           </text>
         </svg>
       )}
-      <p class="eyebrow text-[14px] opacity-70">{item.no}</p>
+      {/* Ohne Zeile oben bleibt ihr Platz frei, damit der Kreis der hervorgehobenen Kachel nicht über dem Titel liegt */}
+      <p class="eyebrow text-[14px] opacity-70" aria-hidden={item.no ? undefined : 'true'}>{item.no ?? '\u00a0'}</p>
       <h3 class="mt-8 text-[24px]">{item.title}</h3>
       {item.subtitle && <p class="mt-1 text-[14px] opacity-80">{item.subtitle}</p>}
       <div

@@ -1,8 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
+import ImageStrip from '../components/ImageStrip.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Newsletter from '../components/Newsletter.astro';
+import '@fontsource-variable/playfair-display';
+import '@fontsource-variable/syne';
 import { localePath, useLang, type Lang } from '../i18n';
 
 interface Props {
@@ -22,14 +25,12 @@ const facts = [
   { label: t('Year', 'Jahr'), value: '—' },
 ];
 
-const tiles = [
+const tiles: { src: string; alt: string; position?: string }[] = [
   { src: '/images/web/261102_frst_tobel_vcard_Mockup.jpg', alt: 'Stapel Visitenkarten aus Kraftpapier mit Logo auf einem Holztisch' },
   { src: '/images/tobel-detail.avif', alt: 'Sitzecke mit zwei grünen Sesseln unter Holzbalken' },
   { src: '/images/web/tobel-menu.jpg', alt: 'Menükarte' },
-  { src: '/images/tobel-weinkuehlschrank.webp', alt: 'Hand nimmt eine Flasche aus dem Weinkühlschrank' },
   // Querformat: Ausschnitt nach links, damit der Flyer mittig in der Kachel sitzt
   { src: '/images/web/tobel-flyer-mockup-2.jpg', alt: 'Flyer mit Sessel und Blumenvase auf einem Holztisch neben einer Tasse Cappuccino', position: 'object-[38%_50%]' },
-  { src: '/images/tobel-bistro.webp', alt: 'Bistro mit Holztisch und kleinem Tisch vor einer Wandnische' },
 ];
 
 // Case-Text (bisher nur Englisch; deutsche Fassung folgt)
@@ -44,7 +45,32 @@ const paragraphs = [
   'Not an escape. An arrival.',
 ];
 
-// Zweiter Textblock zum Design (zwischen Website-Bild und Bildreihen)
+// Schriftmuster: Playfair Display (Wortmarke) und Syne (Jahreszahl, Auszeichnung)
+const specimenText = t(
+  'The best from the simple: honest food, sustainable craft and deep respect for nature.',
+  'Vom Einfachen das Beste: ehrliche Küche, nachhaltiges Handwerk und tiefer Respekt vor der Natur.',
+);
+// Größen aus dem Gestaltungsraster (Print in pt), am Bildschirm im selben Verhältnis vergrößert
+const fonts = [
+  {
+    name: 'Playfair Display Bold',
+    family: "'Playfair Display Variable', serif",
+    weight: 700,
+    samples: [{ role: 'Headline', size: '18 pt', text: 'text-[27px] leading-[1.2] md:text-[28px]' }],
+  },
+  {
+    name: 'Syne Regular',
+    family: "'Syne Variable', sans-serif",
+    weight: 400,
+    samples: [
+      { role: 'Subheadline', size: '14 pt', text: 'text-[21px] leading-[1.25] md:text-[22px]' },
+      { role: t('Body text', 'Fließtext'), size: '10 pt', text: 'text-[15px] leading-[1.4] md:text-[16px]' },
+      { role: t('Header/footer', 'Kopf-/Fußzeile'), size: '8 pt', text: 'text-[12px] leading-[1.4] md:text-[13px]' },
+    ],
+  },
+];
+
+// Zweiter Textblock zum Design (zwischen Schriftmuster und Bildreihen)
 const designLead = 'Classic in form. Modern in function.';
 
 const designParagraphs = [
@@ -68,7 +94,7 @@ const designParagraphs = [
 
   <!-- Hauptmotiv über die ganze Breite -->
   <section>
-    <Media eager src="/images/tobel-header.jpg" alt={`${brand} – Logo vor einem Wald im Morgenlicht`} class="aspect-[16/10] w-full md:aspect-[12/5]" />
+    <Media eager sizes="100vw" src="/images/web/tobel-flyer-mockup-quer.jpg" alt={`${brand} – Flyer mit Sessel und Blumenvase auf einem Holztisch neben einer Tasse Kaffee`} class="aspect-[16/10] w-full md:aspect-[12/5]" />
   </section>
 
   <!-- Projektdaten und Text -->
@@ -98,16 +124,35 @@ const designParagraphs = [
     </div>
   </section>
 
-  <!-- Bildergalerie (großes Bild, zwei Dreierreihen) -->
-  <!-- Film / großes Bewegtbild über die ganze Breite (wie das Hauptmotiv oben) -->
-  <section class="relative">
-    <Media src="/images/web/tobel-website.jpg" alt={`${brand} – Website`} class="aspect-video w-full" />
-    <!-- Kreis „Vom Einfachen das Beste“ dreht sich langsam -->
-    <img src="/images/tobel-kreis-weiss.svg" alt="Vom Einfachen das Beste" class="absolute top-[12.3%] left-[6.92%] w-[11.2%] animate-[spin_30s_linear_infinite] motion-reduce:animate-none" />
+  <!-- Schriftmuster: so breit wie die Textspalte darunter (gleiches Raster), je Schrift großes „Aa“, Name und Größen.
+       Unter 1280 px steht das „Aa“ über den Mustern, sonst wird die Spalte zu schmal. -->
+  <section class="container-frst py-8 md:py-10" aria-label={t('Typefaces', 'Schriften')}>
+    <div class="grid md:grid-cols-[1fr_1.35fr]">
+      <div class="hidden md:block"></div>
+      <div>
+        {fonts.map((font) => (
+          <div class="grid gap-8 py-12 md:py-14 xl:grid-cols-3" style={`font-family: ${font.family}; font-weight: ${font.weight}`}>
+            <div>
+              <p class="text-[96px] leading-[0.9] md:text-[clamp(96px,9vw,140px)]" aria-hidden="true">Aa</p>
+              <p class="mt-3 text-[24px] leading-tight md:text-[26px]">{font.name}</p>
+            </div>
+            <div class="space-y-8 md:space-y-10 xl:col-span-2 xl:pt-3">
+              {font.samples.map((sample) => (
+                <div class="grid grid-cols-[6.5rem_1fr] items-baseline gap-4 md:grid-cols-[7rem_1fr]">
+                  <span class="text-[12px] leading-snug md:text-[13px]">{sample.role}<br />{sample.size}</span>
+                  <p class={sample.text}>{specimenText}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   </section>
 
+  <!-- Bildergalerie (zwei Dreierreihen) folgt nach dem zweiten Textblock -->
   <!-- Zweiter Textblock (Design), in der Textspalte wie oben -->
-  <section class="container-frst py-14 md:py-20">
+  <section class="container-frst pt-14 pb-[120px] md:pt-20 md:pb-[118px]">
     <div class="grid gap-10 md:grid-cols-[1fr_1.35fr] md:gap-0">
       <div class="hidden md:block"></div>
       <div class="space-y-6 text-[20px] leading-relaxed">
@@ -118,16 +163,22 @@ const designParagraphs = [
     </div>
   </section>
 
+  <!-- Briefpapier über die ganze Breite, heller Kreis „Vom Einfachen das Beste“ dreht sich oben links über dem Bild -->
   <section class="container-frst">
-    <!-- Zwei Reihen mit je drei Bildern -->
-    <div class="grid gap-2 md:grid-cols-3">
-      {tiles.map((tile) => (
-        <div class="group overflow-hidden">
-          <Media src={tile.src} alt={`${brand} – ${tile.alt}`} class={`aspect-[3/4] w-full transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${tile.position ?? ''}`} />
-        </div>
-      ))}
+    <div class="group relative overflow-hidden">
+      <Media src="/images/web/tobel-briefpapier.jpg" alt={`${brand} – Briefbogen mit Logo und Kreis „Vom Einfachen das Beste“ auf einem Holztisch im Licht- und Schattenspiel`} sizes="(min-width: 1440px) 1360px, 100vw" class="aspect-[4/3] w-full transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 md:aspect-[3/2]" />
+      <img src="/images/tobel-kreis-weiss.svg" alt="" aria-hidden="true" class="pointer-events-none absolute top-10 left-10 w-24 animate-[spin_30s_linear_infinite] motion-reduce:animate-none md:top-20 md:left-20 md:w-40" />
     </div>
   </section>
+
+  <!-- Bilderstreifen über die ganze Breite (Karussell wie bei Marc Cain, siehe ImageStrip) -->
+  <div class="mt-2">
+    <ImageStrip lang={lang} label={t('More visuals', 'Weitere Motive')}>
+      {tiles.map((tile) => (
+        <Media sizes="(min-width: 1280px) 75vh, 38vh" src={tile.src} alt={`${brand} – ${tile.alt}`} class={`h-full aspect-[3/4] shrink-0 ${tile.position ?? ''}`} />
+      ))}
+    </ImageStrip>
+  </div>
 
   <Newsletter lang={lang} dark />
 

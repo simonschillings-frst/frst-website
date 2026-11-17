@@ -18,8 +18,8 @@ const quotesIntro = t(
   'Honest, surprising, uncomfortable. This is what clients told us about the agencies of tomorrow. Real quotes from real conversations.*',
   'Ehrlich, überraschend, unbequem. Das haben uns Kunden über die Agenturen von morgen erzählt. Echte Zitate aus echten Gesprächen.',
 );
-// „By the numbers“ ist vorerst ausgeblendet (auch in der Navi); zum Einblenden auf true setzen
-const showNumbers = false;
+// „By the numbers“ ein- oder ausblenden (bei false auch den Eintrag in der Navi auskommentieren)
+const showNumbers = true;
 const numbersIntro = t(
   'We’ve been keeping count. So much passion has gone into this study.',
   'Wir haben mitgezählt. So viel Leidenschaft steckt in dieser Studie.',
@@ -54,20 +54,32 @@ const studyFields = [
   { name: 'jobTitle', label: t('Job title', 'Position'), type: 'text', autocomplete: 'organization-title' },
 ];
 
-const loremShort = 'Lorem Ipsum dolor sit amet Ectur centran et amos.';
+// Zahlen zur Studie: die erste Zahl im Wert zählt hoch, Einheiten, Spannen und das Sternchen (geschätzt) bleiben stehen
 const facts = [
-  { value: '120+', text: loremShort },
-  { value: '50+', text: loremShort },
-  { value: '10+', text: loremShort },
-  { value: '100%', text: loremShort },
+  { value: '11', text: t('conversations with decision-makers in marketing, communications and brand', 'Gespräche mit Entscheidern aus Marketing, Kommunikation und Marke') },
+  { value: t('25–48 min', '25–48 Min.'), text: t('length of each conversation', 'Dauer der einzelnen Gespräche') },
+  { value: t('6.5 h', '6,5 h'), text: t('of interview material in total', 'Gesprächsmaterial insgesamt') },
+  { value: t('50,000*', '50.000*'), text: t('spoken words, a good 100 pages of transcript', 'gesprochene Wörter, also gut 100 Transkriptseiten') },
+  { value: t('11 times', '11 Mal'), text: t('“Do you have another appointment after this?”', '„Haben Sie danach noch einen Anschlusstermin?“') },
+  { value: t('25 h*', '25 Std.*'), text: t('checking transcripts line by line against the audio recordings', 'Transkripte Zeile für Zeile gegen die Audioaufnahmen abgeglichen') },
+  { value: '50', text: t('sources and theoretical approaches in the bibliography', 'Quellen und theoretische Ansätze im Literaturverzeichnis') },
+  { value: t('1,500*', '1.500*'), text: t('“ums” that aTrain mercifully left out', '„Ähms“, die aTrain gnädig weggelassen hat') },
+  { value: '18*', text: t('“Can you hear me?” in the conversations', '„Hören Sie mich?“ in den Gesprächen') },
 ];
 
 // Zitate stammen aus deutschsprachigen Interviews; auf der englischen Seite übersetzt
 const quotes = [
-  { text: t("I don't think that one agency for everything exists anymore.", 'Ich glaube, diese eine Agentur für alles gibt es nicht mehr.'), source: t('IP 2 · Subject expertise', 'IP 2 · Fachexpertise'), role: t('Corporate communications', 'Unternehmenskommunikation') },
   {
     text: t(
-      "I think we'll see lots and lots of small, specialised agencies and then really big networks that can cover a lot.",
+      "I don't think the one agency for everything exists anymore.",
+      'Ich glaube, diese eine Agentur für alles gibt es nicht mehr.',
+    ),
+    source: t('IP 8 · Top management', 'IP 8 · Top-Management'),
+    role: t('Brand strategy', 'Markenstrategie'),
+  },
+  {
+    text: t(
+      "I think we'll see lots and lots of small, specialised agencies, and then huge networks that can cover a lot.",
       'Ich glaube, wir werden viele, viele kleine spezialisierte Agenturen sehen und halt große, große Netzwerke, die vieles abbilden können.',
     ),
     source: t('IP 2 · Subject expertise', 'IP 2 · Fachexpertise'),
@@ -75,19 +87,19 @@ const quotes = [
   },
   {
     text: t(
-      "I don't want an agency that offers everything, either. I wouldn't order from an Italian restaurant that also does Indian on the side.",
+      "I don't want an agency that offers everything, either. I don't order from an Italian place that does Indian food on the side.",
       'Ich will auch keine Agentur haben, die alles anbietet. Ich bestelle auch nicht bei einem Italiener, der nebenher noch Indisch kocht.',
     ),
-    source: t('IP 2 · Subject expertise', 'IP 2 · Fachexpertise'),
-    role: t('Corporate communications', 'Unternehmenskommunikation'),
+    source: t('IP 11 · Specialist coordination', 'IP 11 · Fachkoordination'),
+    role: t('Communications', 'Kommunikation'),
   },
   {
     text: t(
-      'Outside their original core competencies, service providers often show weaknesses in execution.',
+      'Outside their actual core competencies, service providers often fall short in execution.',
       'Dienstleister weisen abseits ihrer originären Kernkompetenzen oftmals Schwächen in der Ausführung auf.',
     ),
-    source: t('IP 2 · Subject expertise', 'IP 2 · Fachexpertise'),
-    role: t('Corporate communications', 'Unternehmenskommunikation'),
+    source: t('IP 1 · Leadership', 'IP 1 · Führungsebene'),
+    role: t('Marketing & communications', 'Marketing & Kommunikation'),
   },
 ];
 ---
@@ -98,6 +110,25 @@ const quotes = [
     <h1 class="sr-only">Research</h1>
     <!-- Hintergrundvideo (Flip-through der Studie, stumm, Loop): startet sofort, bis dahin ist das Standbild zu sehen. Handys laden die 720p-Fassung. -->
     <Video src="/videos/research-hero.mp4" srcMobile="/videos/research-hero-720.mp4" poster="/videos/research-hero-poster.webp" loop eager class="absolute inset-0" lang={lang} />
+    <!-- Störer: sich drehender Textkreis, rechts bündig mit dem Inhaltsraster (wie Texte und Buttons), führt wie das Menü zu „Get the Study“ -->
+    <div class="pointer-events-none absolute inset-0 z-10">
+    <div class="container-frst relative h-full">
+    <a
+      href="#get-the-study"
+      class="group pointer-events-auto absolute right-5 bottom-20 block h-28 w-28 rounded-full text-night focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream md:top-1/2 md:right-[13.5rem] md:bottom-auto md:h-36 md:w-36 md:-translate-y-1/2"
+      aria-label={t('Get the study', 'Studie anfordern')}
+    >
+      <svg class="h-full w-full animate-[spin_18s_linear_infinite] motion-reduce:animate-none" viewBox="0 0 100 100" aria-hidden="true">
+        <defs><path id="study-ring" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0" /></defs>
+        <circle cx="50" cy="50" r="49" class="fill-lilac transition-colors duration-300 group-hover:fill-cream" />
+        <text class="fill-current text-[9px] tracking-[0.08em] uppercase">
+          <textPath href="#study-ring" textLength="230" lengthAdjust="spacing">{t('Get the study · Get the study ·', 'Studie anfordern · Studie anfordern ·')}</textPath>
+        </text>
+      </svg>
+      <Arrow class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-90" />
+    </a>
+    </div>
+    </div>
   </section>
 
   <!-- Manifest: zweispaltig wie „Why frst“ auf der Startseite, drei Absätze im Spaltenfluss -->
@@ -246,7 +277,7 @@ const quotes = [
     </div>
   </section>
 
-  <!-- Facts (vorerst ausgeblendet, siehe showNumbers) -->
+  <!-- Facts (ein-/ausblendbar, siehe showNumbers) -->
   {showNumbers && (
   <section id="by-the-numbers" class="scroll-mt-20 bg-night text-cream" data-facts>
     <div class="container-frst grid gap-12 py-16 md:py-20 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
@@ -254,11 +285,12 @@ const quotes = [
         <p class="eyebrow text-[14px]">By the numbers</p>
         <h2 class="mt-8 text-[30px] leading-snug">{t('Figures behind the answers', 'Die Zahlen hinter den Antworten')}</h2>
         <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{numbersIntro}</p>
+        <p class="mt-4 max-w-sm text-[14px] leading-relaxed opacity-70">{t('*These are realistic estimates, not exact counts.', '*Bei diesen Angaben handelt es sich um realistisch geschätzte Zahlen.')}</p>
       </div>
-      <ul class="grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+      <ul class="grid gap-x-8 gap-y-12 sm:grid-cols-2 2xl:grid-cols-3">
         {facts.map((fact) => (
-          <li class="lg:pt-4">
-            <p class="text-6xl leading-none font-normal tabular-nums md:text-7xl" data-count>{fact.value}</p>
+          <li class="@container lg:pt-4">
+            <p class="text-[min(3rem,14cqw)] leading-none font-normal whitespace-nowrap tabular-nums" data-count>{fact.value}</p>
             <p class="mt-6 max-w-[26ch] text-[16px] leading-relaxed">{fact.text}</p>
           </li>
         ))}
@@ -430,12 +462,22 @@ const quotes = [
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (facts && !reduceMotion) {
+      // Erste Zahl im Text finden (auch „50.000“, „50,000“ oder „6,5“), davor und danach bleibt stehen
       const counters = Array.from(facts.querySelectorAll<HTMLElement>('[data-count]'))
         .map((el) => {
           const finalText = el.textContent ?? '';
-          return { el, finalText, target: parseInt(finalText, 10), suffix: finalText.replace(/^\d+/, '') };
+          const match = finalText.match(/\d+(?:[.,]\d{3})*(?:[.,]\d+)?/);
+          if (!match || match.index === undefined) return null;
+          const raw = match[0];
+          // Tausenderpunkt (de) bzw. -komma (en) entfernen, Dezimalkomma als Punkt lesen
+          const grouped = /^\d{1,3}([.,]\d{3})+$/.test(raw);
+          const decimals = grouped ? 0 : (raw.split(/[.,]/)[1]?.length ?? 0);
+          const target = grouped ? Number(raw.replace(/[.,]/g, '')) : Number(raw.replace(',', '.'));
+          const locale = raw.includes(',') && !grouped ? 'de-DE' : document.documentElement.lang === 'en' ? 'en-US' : 'de-DE';
+          const format = (n: number) => n.toLocaleString(locale, { minimumFractionDigits: decimals, maximumFractionDigits: decimals, useGrouping: grouped });
+          return { el, finalText, target, format, before: finalText.slice(0, match.index), after: finalText.slice(match.index + raw.length) };
         })
-        .filter((counter) => !Number.isNaN(counter.target));
+        .filter((counter): counter is NonNullable<typeof counter> => counter !== null && !Number.isNaN(counter.target));
 
       let frame = 0;
       const run = () => {
@@ -446,7 +488,8 @@ const quotes = [
           const progress = Math.min((now - start) / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
           counters.forEach((counter) => {
-            counter.el.textContent = progress < 1 ? Math.round(counter.target * eased) + counter.suffix : counter.finalText;
+            const value = counter.target * eased;
+            counter.el.textContent = progress < 1 ? counter.before + counter.format(value) + counter.after : counter.finalText;
           });
           if (progress < 1) frame = requestAnimationFrame(tick);
         };

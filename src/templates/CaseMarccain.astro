@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
+import ImageStrip from '../components/ImageStrip.astro';
 import Video from '../components/Video.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Newsletter from '../components/Newsletter.astro';
@@ -14,7 +15,7 @@ const t = useLang(lang);
 
 // Texte und Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
 const facts = [
-  { label: t('Project', 'Projekt'), value: t('Campaign', 'Kampagne') },
+  { label: t('Project', 'Projekt'), value: t('OOH · Guerilla Marketing · Event · Content', 'OOH · Guerilla-Marketing · Event · Content') },
   { label: t('Client', 'Kunde'), value: 'MARCCAIN' },
   { label: t('Year', 'Jahr'), value: '2024' },
 ];
@@ -74,22 +75,13 @@ const paragraphs = [
     </div>
   </section>
 
-  <!-- Bilderstreifen über die ganze Breite: Ab 768 px bleibt er beim Scrollen stehen und fährt seitlich durch.
-       Auf dem Handy und bei „reduzierte Bewegung“ normal seitlich scrollbar (Wischen, Trackpad, Tastatur). -->
-  <section aria-label={t('More visuals', 'Weitere Motive')} data-strip>
-    <div data-strip-runway>
-      <div data-strip-pin>
-        <div class="h-[50vh] snap-x overflow-x-auto xl:h-screen" tabindex="0" role="region" aria-label={t('Image gallery, scrolls sideways', 'Bildergalerie, seitlich scrollbar')} data-strip-track>
-          <div class="flex h-full min-w-max gap-2 will-change-transform [&>*]:snap-start" data-strip-row>
+  <!-- Bilderstreifen über die ganze Breite (Karussell, siehe ImageStrip) -->
+  <ImageStrip lang={lang} label={t('More visuals', 'Weitere Motive')}>
             <Media sizes="(min-width: 1280px) 125vh, 60vh" src="/images/web/marccain-slider-01.jpg" alt="MARCCAIN New York City Activation – Motiv 1" class="h-full aspect-[4/5] shrink-0" />
             <Media sizes="(min-width: 1280px) 125vh, 60vh" src="/images/web/marccain-slider-02.jpg" alt="MARCCAIN New York City Activation – Motiv 2" class="h-full aspect-[3/4] shrink-0" />
             <Media sizes="(min-width: 1280px) 125vh, 60vh" src="/images/web/marccain-slider-03.jpg" alt="MARCCAIN New York City Activation – Motiv 3" class="h-full aspect-[5/4] shrink-0" />
             <Media sizes="(min-width: 1280px) 125vh, 60vh" src="/images/web/marccain-slider-04.jpg?v=2" alt="MARCCAIN New York City Activation – Motiv 4" class="h-full aspect-[4/5] shrink-0" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </ImageStrip>
 
   <!-- Video über die ganze Breite (Vimeo, stumm und ohne Player): beginnt von vorn, sobald es ins Bild scrollt -->
   <section class="mt-2">
@@ -114,49 +106,5 @@ const paragraphs = [
     align();
     window.addEventListener('resize', align);
     window.addEventListener('load', align);
-
-    // Bilderstreifen als Karussell: Der Streifen bleibt oben stehen, während die Seite weiterscrollt,
-    // und fährt dabei seitlich durch. Die Seite wird dafür um die seitliche Strecke länger.
-    document.querySelectorAll<HTMLElement>('[data-strip]').forEach((strip) => {
-      const runway = strip.querySelector<HTMLElement>('[data-strip-runway]');
-      const pin = strip.querySelector<HTMLElement>('[data-strip-pin]');
-      const track = strip.querySelector<HTMLElement>('[data-strip-track]');
-      const row = strip.querySelector<HTMLElement>('[data-strip-row]');
-      if (!runway || !pin || !track || !row) return;
-
-      const active = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)');
-      let distance = 0;
-
-      const move = () => {
-        if (!active.matches || distance <= 0) return;
-        const offset = parseFloat(pin.style.top) || 0;
-        const progress = Math.min(1, Math.max(0, (offset - runway.getBoundingClientRect().top) / distance));
-        row.style.transform = `translateX(${-progress * distance}px)`;
-      };
-
-      const setup = () => {
-        if (!active.matches) {
-          runway.style.height = '';
-          pin.classList.remove('sticky');
-          pin.style.top = '';
-          track.style.overflowX = '';
-          row.style.transform = '';
-          return;
-        }
-        track.scrollLeft = 0;
-        track.style.overflowX = 'hidden';
-        pin.classList.add('sticky');
-        // Senkrecht mittig im Bildschirm stehen bleiben (bei voller Höhe oben)
-        pin.style.top = `${Math.max(0, (window.innerHeight - pin.offsetHeight) / 2)}px`;
-        distance = Math.max(0, row.scrollWidth - track.clientWidth);
-        runway.style.height = `${pin.offsetHeight + distance}px`;
-        move();
-      };
-
-      window.addEventListener('scroll', move, { passive: true });
-      window.addEventListener('resize', setup);
-      active.addEventListener('change', setup);
-      setup();
-    });
   </script>
 </Base>
