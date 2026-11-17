@@ -18,8 +18,8 @@ const quotesIntro = t(
   'Honest, surprising, uncomfortable. This is what clients told us about the agencies of tomorrow. Real quotes from real conversations.*',
   'Ehrlich, überraschend, unbequem. Das haben uns Kunden über die Agenturen von morgen erzählt. Echte Zitate aus echten Gesprächen.',
 );
-// „By the numbers“ ist vorerst ausgeblendet (auch in der Navi); zum Einblenden auf true setzen
-const showNumbers = false;
+// „By the numbers“ ein- oder ausblenden (bei false auch den Eintrag in der Navi auskommentieren)
+const showNumbers = true;
 const numbersIntro = t(
   'We’ve been keeping count. So much passion has gone into this study.',
   'Wir haben mitgezählt. So viel Leidenschaft steckt in dieser Studie.',
@@ -54,12 +54,18 @@ const studyFields = [
   { name: 'jobTitle', label: t('Job title', 'Position'), type: 'text', autocomplete: 'organization-title' },
 ];
 
-const loremShort = 'Lorem Ipsum dolor sit amet Ectur centran et amos.';
+// Zahlen zur Studie: die erste Zahl im Wert zählt hoch, „ca.“, Einheiten und Spannen bleiben stehen
 const facts = [
-  { value: '120+', text: loremShort },
-  { value: '50+', text: loremShort },
-  { value: '10+', text: loremShort },
-  { value: '100%', text: loremShort },
+  { value: '11', text: t('conversations with decision-makers in marketing, communications and brand', 'Gespräche mit Entscheidern aus Marketing, Kommunikation und Marke') },
+  { value: '7', text: t('industries: automotive and suppliers, mobility, health, pharma and cosmetics, mechanical engineering, sports and consumer goods, non-profit', 'Branchen: Automotive und Zulieferer, Mobilität, Gesundheit, Pharma und Kosmetik, Maschinenbau, Sport und Konsumgüter, Non-Profit') },
+  { value: t('25–48 min', '25–48 Min.'), text: t('length of each conversation', 'Dauer der einzelnen Gespräche') },
+  { value: t('6.5 h', '6,5 h'), text: t('of interview material in total', 'Gesprächsmaterial insgesamt') },
+  { value: t('approx. 50,000', 'ca. 50.000'), text: t('spoken words, a good 100 pages of transcript', 'gesprochene Wörter, also gut 100 Transkriptseiten') },
+  { value: t('11 times', '11 Mal'), text: t('“Do you have another appointment after this?”', '„Haben Sie danach noch einen Anschlusstermin?“') },
+  { value: t('approx. 25 h', 'ca. 25 Std.'), text: t('checking transcripts line by line against the audio recordings', 'Transkripte Zeile für Zeile gegen die Audioaufnahmen abgeglichen') },
+  { value: '50', text: t('sources and theoretical approaches in the bibliography', 'Quellen und theoretische Ansätze im Literaturverzeichnis') },
+  { value: t('approx. 1,500', 'ca. 1.500'), text: t('“ums” that aTrain mercifully left out', '„Ähms“, die aTrain gnädig weggelassen hat') },
+  { value: t('approx. 18', 'ca. 18'), text: t('“Can you hear me?” in the conversations', '„Hören Sie mich?“ in den Gesprächen') },
 ];
 
 // Zitate stammen aus deutschsprachigen Interviews; auf der englischen Seite übersetzt
@@ -272,7 +278,7 @@ const quotes = [
     </div>
   </section>
 
-  <!-- Facts (vorerst ausgeblendet, siehe showNumbers) -->
+  <!-- Facts (ein-/ausblendbar, siehe showNumbers) -->
   {showNumbers && (
   <section id="by-the-numbers" class="scroll-mt-20 bg-night text-cream" data-facts>
     <div class="container-frst grid gap-12 py-16 md:py-20 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
@@ -281,10 +287,10 @@ const quotes = [
         <h2 class="mt-8 text-[30px] leading-snug">{t('Figures behind the answers', 'Die Zahlen hinter den Antworten')}</h2>
         <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{numbersIntro}</p>
       </div>
-      <ul class="grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+      <ul class="grid gap-x-8 gap-y-12 sm:grid-cols-2 2xl:grid-cols-3">
         {facts.map((fact) => (
-          <li class="lg:pt-4">
-            <p class="text-6xl leading-none font-normal tabular-nums md:text-7xl" data-count>{fact.value}</p>
+          <li class="@container lg:pt-4">
+            <p class="text-[min(3rem,14cqw)] leading-none font-normal whitespace-nowrap tabular-nums" data-count>{fact.value}</p>
             <p class="mt-6 max-w-[26ch] text-[16px] leading-relaxed">{fact.text}</p>
           </li>
         ))}
@@ -456,12 +462,22 @@ const quotes = [
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (facts && !reduceMotion) {
+      // Erste Zahl im Text finden (auch „50.000“, „50,000“ oder „6,5“), davor und danach bleibt stehen
       const counters = Array.from(facts.querySelectorAll<HTMLElement>('[data-count]'))
         .map((el) => {
           const finalText = el.textContent ?? '';
-          return { el, finalText, target: parseInt(finalText, 10), suffix: finalText.replace(/^\d+/, '') };
+          const match = finalText.match(/\d+(?:[.,]\d{3})*(?:[.,]\d+)?/);
+          if (!match || match.index === undefined) return null;
+          const raw = match[0];
+          // Tausenderpunkt (de) bzw. -komma (en) entfernen, Dezimalkomma als Punkt lesen
+          const grouped = /^\d{1,3}([.,]\d{3})+$/.test(raw);
+          const decimals = grouped ? 0 : (raw.split(/[.,]/)[1]?.length ?? 0);
+          const target = grouped ? Number(raw.replace(/[.,]/g, '')) : Number(raw.replace(',', '.'));
+          const locale = raw.includes(',') && !grouped ? 'de-DE' : document.documentElement.lang === 'en' ? 'en-US' : 'de-DE';
+          const format = (n: number) => n.toLocaleString(locale, { minimumFractionDigits: decimals, maximumFractionDigits: decimals, useGrouping: grouped });
+          return { el, finalText, target, format, before: finalText.slice(0, match.index), after: finalText.slice(match.index + raw.length) };
         })
-        .filter((counter) => !Number.isNaN(counter.target));
+        .filter((counter): counter is NonNullable<typeof counter> => counter !== null && !Number.isNaN(counter.target));
 
       let frame = 0;
       const run = () => {
@@ -472,7 +488,8 @@ const quotes = [
           const progress = Math.min((now - start) / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
           counters.forEach((counter) => {
-            counter.el.textContent = progress < 1 ? Math.round(counter.target * eased) + counter.suffix : counter.finalText;
+            const value = counter.target * eased;
+            counter.el.textContent = progress < 1 ? counter.before + counter.format(value) + counter.after : counter.finalText;
           });
           if (progress < 1) frame = requestAnimationFrame(tick);
         };
