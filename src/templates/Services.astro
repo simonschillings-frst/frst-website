@@ -40,9 +40,8 @@ const pricingIntro = 'Every great collaboration starts somewhere. Whether you ne
 const pricingNote = '*Looking for something different? We also create tailored solutions to fit your needs.';
 const pricing = [
   {
-    no: 'frst Partner',
     title: 'frst Partner',
-    subtitle: 'Your creative partner for what’s next.',
+    subtitle: 'The customized agency built around your ambitions.',
     text: 'We bring strategy, creative thinking and hands-on support together with full access to our digital tool and artist network. As your ongoing partner, we help you challenge the familiar, explore new possibilities and turn ideas into action.',
     details: [
       { label: 'What we bring', text: 'Strategy, creative direction, project management, tool access and our full artist network.' },
@@ -53,9 +52,8 @@ const pricing = [
     highlight: 'Best to turn ideas into lasting impact',
   },
   {
-    no: 'frst Sprint',
     title: 'frst Sprint',
-    subtitle: 'A focused start. A fresh perspective.',
+    subtitle: 'One project. One clear goal. Tangible results.',
     text: 'We take your brief, shape the right approach and connect you with the artists who can bring it to life. Our briefing generator helps structure your needs. With your first project, you’ll also get a personal demo of our digital tool.',
     details: [
       { label: 'What we bring', text: 'A clear process, our briefing generator and access to handpicked artists – curated and coordinated by frst.' },
@@ -64,9 +62,8 @@ const pricing = [
     meta: 'Fixed project fee · Clearly defined scope',
   },
   {
-    no: 'frst Access',
     title: 'frst Access',
-    subtitle: 'Your network. Your tools. Your move.',
+    subtitle: 'More creative power for your team.',
     text: 'Get independent access to our digital platform and discover, select and book artists yourself. Everything you need to bring the right creative people together, all in one place. Artist bookings are charged separately through a transparent service or brokerage fee.',
     details: [
       { label: 'What we bring', text: 'Access to our digital tool and curated artist network, with a simple booking process.' },
@@ -74,7 +71,7 @@ const pricing = [
     ],
     meta: 'Monthly or annual license · Artist bookings charged separately',
   },
-].map((item, i) => ({ ...item, no: t(`Model ${i + 1}`, `Modell ${i + 1}`) }));
+];
 ---
 
 <Base title={t('Services – frst', 'Leistungen – frst')} headerOverlay lang={lang}>

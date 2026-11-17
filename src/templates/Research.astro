@@ -54,18 +54,17 @@ const studyFields = [
   { name: 'jobTitle', label: t('Job title', 'Position'), type: 'text', autocomplete: 'organization-title' },
 ];
 
-// Zahlen zur Studie: die erste Zahl im Wert zählt hoch, „ca.“, Einheiten und Spannen bleiben stehen
+// Zahlen zur Studie: die erste Zahl im Wert zählt hoch, Einheiten, Spannen und das Sternchen (geschätzt) bleiben stehen
 const facts = [
   { value: '11', text: t('conversations with decision-makers in marketing, communications and brand', 'Gespräche mit Entscheidern aus Marketing, Kommunikation und Marke') },
-  { value: '7', text: t('industries: automotive and suppliers, mobility, health, pharma and cosmetics, mechanical engineering, sports and consumer goods, non-profit', 'Branchen: Automotive und Zulieferer, Mobilität, Gesundheit, Pharma und Kosmetik, Maschinenbau, Sport und Konsumgüter, Non-Profit') },
   { value: t('25–48 min', '25–48 Min.'), text: t('length of each conversation', 'Dauer der einzelnen Gespräche') },
   { value: t('6.5 h', '6,5 h'), text: t('of interview material in total', 'Gesprächsmaterial insgesamt') },
-  { value: t('approx. 50,000', 'ca. 50.000'), text: t('spoken words, a good 100 pages of transcript', 'gesprochene Wörter, also gut 100 Transkriptseiten') },
+  { value: t('50,000*', '50.000*'), text: t('spoken words, a good 100 pages of transcript', 'gesprochene Wörter, also gut 100 Transkriptseiten') },
   { value: t('11 times', '11 Mal'), text: t('“Do you have another appointment after this?”', '„Haben Sie danach noch einen Anschlusstermin?“') },
-  { value: t('approx. 25 h', 'ca. 25 Std.'), text: t('checking transcripts line by line against the audio recordings', 'Transkripte Zeile für Zeile gegen die Audioaufnahmen abgeglichen') },
+  { value: t('25 h*', '25 Std.*'), text: t('checking transcripts line by line against the audio recordings', 'Transkripte Zeile für Zeile gegen die Audioaufnahmen abgeglichen') },
   { value: '50', text: t('sources and theoretical approaches in the bibliography', 'Quellen und theoretische Ansätze im Literaturverzeichnis') },
-  { value: t('approx. 1,500', 'ca. 1.500'), text: t('“ums” that aTrain mercifully left out', '„Ähms“, die aTrain gnädig weggelassen hat') },
-  { value: t('approx. 18', 'ca. 18'), text: t('“Can you hear me?” in the conversations', '„Hören Sie mich?“ in den Gesprächen') },
+  { value: t('1,500*', '1.500*'), text: t('“ums” that aTrain mercifully left out', '„Ähms“, die aTrain gnädig weggelassen hat') },
+  { value: '18*', text: t('“Can you hear me?” in the conversations', '„Hören Sie mich?“ in den Gesprächen') },
 ];
 
 // Zitate stammen aus deutschsprachigen Interviews; auf der englischen Seite übersetzt
@@ -286,6 +285,7 @@ const quotes = [
         <p class="eyebrow text-[14px]">By the numbers</p>
         <h2 class="mt-8 text-[30px] leading-snug">{t('Figures behind the answers', 'Die Zahlen hinter den Antworten')}</h2>
         <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{numbersIntro}</p>
+        <p class="mt-4 max-w-sm text-[14px] leading-relaxed opacity-70">{t('*These are realistic estimates, not exact counts.', '*Bei diesen Angaben handelt es sich um realistisch geschätzte Zahlen.')}</p>
       </div>
       <ul class="grid gap-x-8 gap-y-12 sm:grid-cols-2 2xl:grid-cols-3">
         {facts.map((fact) => (
