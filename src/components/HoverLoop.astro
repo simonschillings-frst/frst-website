@@ -15,13 +15,17 @@ interface Props {
   interval?: number;
   /** Nur einmal zum nächsten Bild umschalten statt durchzulaufen (beim Verlassen zurück zum ersten) */
   swap?: boolean;
+  /** HTML `sizes` der Bilder (Standard: halbe Breite ab 768 px) */
+  sizes?: string;
+  /** Für Bilder ganz oben auf der Seite: sofort laden statt erst beim Scrollen */
+  eager?: boolean;
 }
-const { images, alt, class: className, interval, swap = false } = Astro.props;
+const { images, alt, class: className, interval, swap = false, sizes = '(min-width: 768px) 50vw, 100vw', eager = false } = Astro.props;
 ---
 
 <div class:list={['relative overflow-hidden', className]} data-hover-loop data-interval={interval} data-swap={swap ? '' : undefined}>
   {images.map((src, i) => (
-    <img {...responsiveImage(src)} sizes="(min-width: 768px) 50vw, 100vw" alt={i === 0 ? alt : ''} aria-hidden={i === 0 ? undefined : 'true'} loading="lazy" class:list={['absolute inset-0 h-full w-full object-cover', { 'opacity-0': i > 0 }]} />
+    <img {...responsiveImage(src)} sizes={sizes} alt={i === 0 ? alt : ''} aria-hidden={i === 0 ? undefined : 'true'} loading={eager && i === 0 ? 'eager' : 'lazy'} fetchpriority={eager && i === 0 ? 'high' : undefined} class:list={['absolute inset-0 h-full w-full object-cover', { 'opacity-0': i > 0 }]} />
   ))}
 </div>
 
