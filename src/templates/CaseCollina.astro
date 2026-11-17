@@ -43,11 +43,11 @@ const designParagraphs = [
 ];
 ---
 
-<Base title="COLLINA Corporate Identity – frst" headerLight lang={lang}>
+<Base title="COLLINA Corporate Space – frst" headerLight lang={lang}>
   <!-- Titel -->
   <section class="container-frst pt-24 pb-14 md:pt-36 md:pb-16">
     <div class="md:ml-[16%]" data-align-nav>
-      <h1 class="text-5xl leading-[1.05] font-light md:text-7xl">Corporate Identity</h1>
+      <h1 class="text-5xl leading-[1.05] font-light md:text-7xl">Corporate Space</h1>
       <p class="mt-8 text-lg font-light md:text-2xl">COLLINA</p>
     </div>
   </section>
@@ -64,7 +64,7 @@ const designParagraphs = [
       items={[
         { label: t('Home', 'Startseite'), href: localePath(lang, '/') },
         { label: t('Work', 'Projekte'), href: localePath(lang, '/work') },
-        { label: 'Corporate Identity' },
+        { label: 'Corporate Space' },
       ]}
       class="mb-12 md:mb-16"
     />
@@ -101,6 +101,16 @@ const designParagraphs = [
         <h2 class="text-3xl leading-tight font-light md:text-4xl">{designLead}</h2>
         {designParagraphs.map((text) => <p>{text}</p>)}
       </div>
+    </div>
+  </section>
+
+  <section class="container-frst">
+    <!-- Vier Bilder nebeneinander: Making-of (am Handy zwei pro Reihe) -->
+    <div class="grid grid-cols-2 gap-2 md:grid-cols-4">
+      <Media src="/images/web/collina-making-of-vorhang.jpg" alt={t('COLLINA – Making-of: sheer curtain on a brass rail in the workshop', 'COLLINA – Making-of: Vorhang an einer Messingstange in der Werkstatt')} class="aspect-[3/4] w-full" />
+      <Media src="/images/web/collina-making-of-theke.jpg" alt={t('COLLINA – Making-of: marble counter under the concrete ceiling during construction', 'COLLINA – Making-of: Marmortheke unter der Betondecke im Ausbau')} class="aspect-[3/4] w-full" />
+      <Media src="/images/web/collina-making-of-stuehle.jpg" alt={t('COLLINA – Making-of: red bentwood chairs next to an oak tabletop', 'COLLINA – Making-of: rote Bugholzstühle neben einer Eichen-Tischplatte')} class="aspect-[3/4] w-full" />
+      <Media src="/images/web/collina-making-of-materialien.jpg" alt={t('COLLINA – Making-of: material samples in shades of red with oak edges on stone', 'COLLINA – Making-of: Materialmuster in Rottönen mit Eichenkanten auf Stein')} class="aspect-[3/4] w-full" />
     </div>
   </section>
 
