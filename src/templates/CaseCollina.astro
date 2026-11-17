@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
+import ImageStrip from '../components/ImageStrip.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { localePath, useLang, type Lang } from '../i18n';
@@ -104,14 +105,6 @@ const designParagraphs = [
     </div>
   </section>
 
-  <section class="container-frst">
-    <!-- Drei Bilder nebeneinander: Making-of -->
-    <div class="grid gap-2 md:grid-cols-3">
-      <Media src="/images/web/collina-making-of-vorhang.jpg" alt={t('COLLINA – Making-of: sheer curtain on a brass rail in the workshop', 'COLLINA – Making-of: Vorhang an einer Messingstange in der Werkstatt')} class="aspect-[3/4] w-full" />
-      <Media src="/images/web/collina-making-of-theke.jpg" alt={t('COLLINA – Making-of: marble counter under the concrete ceiling during construction', 'COLLINA – Making-of: Marmortheke unter der Betondecke im Ausbau')} class="aspect-[3/4] w-full" />
-      <Media src="/images/web/collina-making-of-stuehle.jpg" alt={t('COLLINA – Making-of: red bentwood chairs next to an oak tabletop', 'COLLINA – Making-of: rote Bugholzstühle neben einer Eichen-Tischplatte')} class="aspect-[3/4] w-full" />    </div>
-  </section>
-
   <!-- Film / großes Bewegtbild über die ganze Breite (wie das Hauptmotiv oben) -->
   <section class="mt-2">
     <Media src="/images/web/collina-interior-01.jpg" alt="COLLINA – Interior" class="aspect-video w-full" />
@@ -125,6 +118,16 @@ const designParagraphs = [
       <Media src="/images/web/collina-teller.jpg" alt="COLLINA – Teller" class="aspect-[3/4] w-full" />
     </div>
   </section>
+
+  <!-- Materialien und Making-of als Bilderstreifen (Karussell wie bei MARCCAIN) -->
+  <div class="mt-2">
+  <ImageStrip lang={lang} label={t('Materials and making-of', 'Materialien und Making-of')}>
+    <Media sizes="(min-width: 1280px) 150vh, 75vh" src="/images/web/collina-materialien.jpg" alt={t('COLLINA – Material samples in shades of red with oak edges and stone on black', 'COLLINA – Materialmuster in Rottönen mit Eichenkanten und Stein auf Schwarz')} class="h-full aspect-[3/2] shrink-0" />
+    <Media sizes="(min-width: 1280px) 150vh, 75vh" src="/images/web/collina-making-of-vorhang.jpg" alt={t('COLLINA – Making-of: sheer curtain on a brass rail in the workshop', 'COLLINA – Making-of: Vorhang an einer Messingstange in der Werkstatt')} class="h-full aspect-[3/4] shrink-0" />
+    <Media sizes="(min-width: 1280px) 150vh, 75vh" src="/images/web/collina-making-of-theke.jpg" alt={t('COLLINA – Making-of: marble counter under the concrete ceiling during construction', 'COLLINA – Making-of: Marmortheke unter der Betondecke im Ausbau')} class="h-full aspect-[3/4] shrink-0" />
+    <Media sizes="(min-width: 1280px) 150vh, 75vh" src="/images/web/collina-making-of-stuehle.jpg" alt={t('COLLINA – Making-of: red bentwood chairs next to an oak tabletop', 'COLLINA – Making-of: rote Bugholzstühle neben einer Eichen-Tischplatte')} class="h-full aspect-[3/4] shrink-0" />
+  </ImageStrip>
+  </div>
 
   <!-- Zweites großes Bild über die ganze Breite -->
   <section class="mt-2">
