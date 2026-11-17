@@ -138,7 +138,7 @@ const words = [
         <ol class="border-t border-night/20" data-typewriter>
           {words.map((word, i) => (
             <li class="grid grid-cols-[2.5rem_1fr] items-center gap-4 border-b border-night/20 py-4 md:grid-cols-[3rem_1fr] md:py-5">
-              <span class="relative text-[24px] leading-none" data-type>{String(i + 1).padStart(2, '0')}</span>
+              <span class="relative text-[24px] leading-none" data-type>{String.fromCharCode(65 + i)}</span>
               <span class="relative text-[24px] leading-none font-light" data-type>{word}</span>
             </li>
           ))}
@@ -248,7 +248,7 @@ const words = [
   </style>
 
   <script>
-    // What we offer: 01 bis 04 werden wie auf einer Schreibmaschine getippt, sobald die Liste ins Bild kommt
+    // What we offer: A bis D werden wie auf einer Schreibmaschine getippt, sobald die Liste ins Bild kommt
     const typeList = document.querySelector<HTMLElement>('[data-typewriter]');
 
     if (typeList && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
