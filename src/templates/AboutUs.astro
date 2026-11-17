@@ -16,7 +16,7 @@ const t = useLang(lang);
 // Standorte: Adressdaten wie angegeben, Bilder liegen in /images/web.
 const locations = [
   { city: 'Stuttgart', lines: ['Feuersee', 'Creative Hub'], email: 'stuttgart@frst.agency', tone: 'desert', imageLeft: true, image: '/images/web/location-stuttgart-office.jpg', alt: t('Bright open-plan office with wooden desks, chrome office chairs, monitors and white pendant lamps', 'Helles Großraumbüro mit Holztischen, verchromten Bürostühlen, Bildschirmen und weißen Pendelleuchten') },
-  { city: 'New York', lines: ['Brooklyn', 'Creative Hub'], email: 'nyc@frst.agency', tone: 'sky', imageLeft: false, image: '/images/web/location-new-york-67-west-st.jpg', hoverImages: ['/images/web/location-new-york-67-west-st.jpg', '/images/web/location-new-york-entrance.jpg', '/images/web/location-new-york-studio.jpg'], alt: t('Red brick warehouse building at 67 West St in Brooklyn with a large black-framed glass entrance, snow on the sidewalk', 'Rotes Backstein-Lagerhaus in der 67 West St in Brooklyn mit großem, schwarz gerahmtem Glaseingang, Schnee auf dem Gehweg') },
+  { city: 'New York', lines: ['Brooklyn', 'Creative Hub'], email: 'nyc@frst.agency', tone: 'sky', imageLeft: false, image: '/images/web/location-new-york-67-west-st.jpg', hoverImages: ['/images/web/location-new-york-67-west-st.jpg', '/images/web/location-new-york-entrance.jpg'], alt: t('Red brick warehouse building at 67 West St in Brooklyn with a large black-framed glass entrance, snow on the sidewalk', 'Rotes Backstein-Lagerhaus in der 67 West St in Brooklyn mit großem, schwarz gerahmtem Glaseingang, Schnee auf dem Gehweg') },
   { city: 'Berlin', lines: ['Prenzlauer Berg', 'Creative Hub'], email: 'berlin@frst.agency', tone: 'dusk', imageLeft: true, image: '/images/web/location-berlin-studio.jpg', alt: t('Meeting room seen from the gallery above: white oval table, yellow door and tall windows in a concrete loft', 'Besprechungsraum von der Galerie aus gesehen: weißer ovaler Tisch, gelbe Tür und hohe Fenster in einem Beton-Loft') },
 ] as const;
 
@@ -96,7 +96,7 @@ const jobs = [
     {locations.map((loc) => (
       <div class="grid gap-y-8 py-8 md:grid-cols-2 md:gap-x-16 md:py-12">
         {'hoverImages' in loc && loc.hoverImages ? (
-          <HoverLoop images={loc.hoverImages} alt={loc.alt} interval={1600} class={`aspect-[3/2] w-full ${loc.imageLeft ? '' : 'md:order-2'}`} />
+          <HoverLoop images={loc.hoverImages} alt={loc.alt} swap class={`aspect-[3/2] w-full ${loc.imageLeft ? '' : 'md:order-2'}`} />
         ) : (
         <Media
           src={'image' in loc ? loc.image : undefined}

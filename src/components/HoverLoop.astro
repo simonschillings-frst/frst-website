@@ -13,11 +13,13 @@ interface Props {
   class?: string;
   /** Wie lange jedes Bild stehen bleibt, in Millisekunden (Standard 700) */
   interval?: number;
+  /** Nur einmal zum nächsten Bild umschalten statt durchzulaufen (beim Verlassen zurück zum ersten) */
+  swap?: boolean;
 }
-const { images, alt, class: className, interval } = Astro.props;
+const { images, alt, class: className, interval, swap = false } = Astro.props;
 ---
 
-<div class:list={['relative overflow-hidden', className]} data-hover-loop data-interval={interval}>
+<div class:list={['relative overflow-hidden', className]} data-hover-loop data-interval={interval} data-swap={swap ? '' : undefined}>
   {images.map((src, i) => (
     <img {...responsiveImage(src)} sizes="(min-width: 768px) 50vw, 100vw" alt={i === 0 ? alt : ''} aria-hidden={i === 0 ? undefined : 'true'} loading="lazy" class:list={['absolute inset-0 h-full w-full object-cover', { 'opacity-0': i > 0 }]} />
   ))}
@@ -39,8 +41,13 @@ const { images, alt, class: className, interval } = Astro.props;
         images[next].classList.remove('opacity-0');
         current = next;
       };
+      const swapOnce = wrapper.hasAttribute('data-swap');
       const start = () => {
         window.clearInterval(timer);
+        if (swapOnce) {
+          show(1 % images.length);
+          return;
+        }
         timer = window.setInterval(() => show((current + 1) % images.length), interval);
         show((current + 1) % images.length);
       };
