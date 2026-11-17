@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
+import HoverLoop from '../components/HoverLoop.astro';
 import Arrow from '../components/Arrow.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { useLang, type Lang } from '../i18n';
@@ -15,8 +16,8 @@ const t = useLang(lang);
 // Standorte: Adressdaten wie angegeben, Bilder liegen in /images/web.
 const locations = [
   { city: 'Stuttgart', lines: ['Feuersee', 'Creative Hub'], email: 'stuttgart@frst.agency', tone: 'desert', imageLeft: true, image: '/images/web/location-stuttgart.jpg', alt: t('Smiling man with dreadlocks, sunglasses and a dark coat in a courtyard in front of a white brick building', 'Lächelnder Mann mit Dreadlocks, Sonnenbrille und dunklem Mantel in einem Innenhof vor einem weißen Backsteingebäude') },
-  { city: 'New York', lines: ['Brooklyn', 'Creative Hub'], email: 'nyc@frst.agency', tone: 'sky', imageLeft: false, image: '/images/web/location-new-york.jpg', alt: t('Person with curly hair seen from behind on a subway platform at Rector Street as a train passes', 'Person mit lockigen Haaren von hinten auf einem U-Bahnsteig an der Rector Street, während ein Zug vorbeifährt') },
-  { city: 'Berlin', lines: ['Prenzlauer Berg', 'Creative Hub'], email: 'berlin@frst.agency', tone: 'dusk', imageLeft: true, image: '/images/web/location-berlin.jpg', alt: t('Five people in dark clothes walking towards the camera on an airfield under a grey sky', 'Fünf Personen in dunkler Kleidung laufen unter grauem Himmel auf einem Flugfeld auf die Kamera zu') },
+  { city: 'New York', lines: ['Brooklyn', 'Creative Hub'], email: 'nyc@frst.agency', tone: 'sky', imageLeft: false, image: '/images/web/location-new-york-67-west-st.jpg', hoverImages: ['/images/web/location-new-york-67-west-st.jpg', '/images/web/location-new-york-entrance.jpg', '/images/web/location-new-york-studio.jpg'], alt: t('Red brick warehouse building at 67 West St in Brooklyn with a large black-framed glass entrance, snow on the sidewalk', 'Rotes Backstein-Lagerhaus in der 67 West St in Brooklyn mit großem, schwarz gerahmtem Glaseingang, Schnee auf dem Gehweg') },
+  { city: 'Berlin', lines: ['Prenzlauer Berg', 'Creative Hub'], email: 'berlin@frst.agency', tone: 'dusk', imageLeft: true, image: '/images/web/location-berlin-studio.jpg', alt: t('Meeting room seen from the gallery above: white oval table, yellow door and tall windows in a concrete loft', 'Besprechungsraum von der Galerie aus gesehen: weißer ovaler Tisch, gelbe Tür und hohe Fenster in einem Beton-Loft') },
 ] as const;
 
 const jobsMail = 'jobs@frst.agency';
@@ -94,6 +95,9 @@ const jobs = [
     <p class="eyebrow text-[14px]">{t('Locations', 'Standorte')}</p>
     {locations.map((loc) => (
       <div class="grid gap-y-8 py-8 md:grid-cols-2 md:gap-x-16 md:py-12">
+        {'hoverImages' in loc && loc.hoverImages ? (
+          <HoverLoop images={loc.hoverImages} alt={loc.alt} interval={1600} class={`aspect-[3/2] w-full ${loc.imageLeft ? '' : 'md:order-2'}`} />
+        ) : (
         <Media
           src={'image' in loc ? loc.image : undefined}
           alt={'alt' in loc ? loc.alt : undefined}
@@ -101,6 +105,7 @@ const jobs = [
           label={loc.city}
           class={`aspect-[3/2] w-full ${loc.imageLeft ? '' : 'md:order-2'}`}
         />
+        )}
         <div class={`flex items-center ${loc.imageLeft ? '' : 'md:order-1'}`}>
           <div>
             <h3 class="text-[30px] leading-snug">{loc.city}</h3>

@@ -11,11 +11,13 @@ interface Props {
   images: string[];
   alt: string;
   class?: string;
+  /** Wie lange jedes Bild stehen bleibt, in Millisekunden (Standard 700) */
+  interval?: number;
 }
-const { images, alt, class: className } = Astro.props;
+const { images, alt, class: className, interval } = Astro.props;
 ---
 
-<div class:list={['relative overflow-hidden', className]} data-hover-loop>
+<div class:list={['relative overflow-hidden', className]} data-hover-loop data-interval={interval}>
   {images.map((src, i) => (
     <img {...responsiveImage(src)} sizes="(min-width: 768px) 50vw, 100vw" alt={i === 0 ? alt : ''} aria-hidden={i === 0 ? undefined : 'true'} loading="lazy" class:list={['absolute inset-0 h-full w-full object-cover', { 'opacity-0': i > 0 }]} />
   ))}
@@ -29,6 +31,7 @@ const { images, alt, class: className } = Astro.props;
   if (!reduceMotion) {
     document.querySelectorAll<HTMLElement>('[data-hover-loop]').forEach((wrapper) => {
       const images = Array.from(wrapper.querySelectorAll('img'));
+      const interval = Number(wrapper.dataset.interval) || INTERVAL;
       let current = 0;
       let timer = 0;
       const show = (next: number) => {
@@ -38,7 +41,7 @@ const { images, alt, class: className } = Astro.props;
       };
       const start = () => {
         window.clearInterval(timer);
-        timer = window.setInterval(() => show((current + 1) % images.length), INTERVAL);
+        timer = window.setInterval(() => show((current + 1) % images.length), interval);
         show((current + 1) % images.length);
       };
       const stop = () => {
