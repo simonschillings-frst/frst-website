@@ -17,7 +17,7 @@ const t = useLang(lang);
 
 const brand = 'tobel 1853';
 const title = 'Vom Einfachen das Beste';
-const project = t('Brand · Corporate Identity', 'Marke · Corporate Identity');
+const project = 'Brand · Corporate Identity';
 
 // Texte und Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
 const facts = [
@@ -34,10 +34,17 @@ const tiles: { src: string; alt: string; position?: string }[] = [
   { src: '/images/web/tobel-flyer-mockup-2.jpg', alt: 'Flyer mit Sessel und Blumenvase auf einem Holztisch neben einer Tasse Cappuccino', position: 'object-[38%_50%]' },
 ];
 
-// Case-Text (bisher nur Englisch; deutsche Fassung folgt)
+// Case-Text (Englisch, Deutsch)
 const lead = 'Hospitality adds meaning. We started where it already is.';
 
-const paragraphs = [
+const paragraphs = lang === 'de' ? [
+  'Urlaubsmarken laden ihr Angebot gern von außen mit Bedeutung auf. Bio. Vegan. Wellness. Und dann bauen sie in genau die Natur hinein, die sie zu schützen behaupten. Bedeutung wird zur Behauptung. Zur Kulisse.',
+  'tobel1853 ist ein restaurierter Hof im Allgäu, seit 1853 in derselben Familie: Ferienwohnungen, Bistro, Events, Retreats. Ein Ort wie dieser braucht keine zusätzliche Bedeutung. Er braucht eine Marke, die dort ansetzt, wo die Bedeutung schon ist, am Ursprung, und die es möglich macht, den Weg dorthin zurückzufinden.',
+  'Daraus wurde die Idee. Wer hier zu Gast ist, will nicht vergessen. Sondern sich erinnern, woher er kommt.',
+  'Die Verbindung, die man hier findet, ist nicht kompliziert. Sie ist überraschend einfach, einfacher, als wir es aus dem Alltag gewohnt sind. Also war die Linie klar: Vom Einfachen das Beste. Ehrliche Küche, nachhaltiges Handwerk, tiefer Respekt vor der Natur. Wahrer Reichtum liegt nicht im Überfluss, sondern in der bewussten Wahl.',
+  'Auf dieser Linie haben wir die Markenstrategie und das gesamte Corporate Design aufgebaut. Alles, was einem Gast begegnet, folgt demselben Prinzip: Reduktion auf das Wesentliche.',
+  'Keine Flucht. Ein Ankommen.',
+] : [
   'Holiday brands love to charge their offer with meaning from the outside. Organic. Vegan. Wellness. Then they build into the very nature they claim to protect. Meaning becomes a claim. Scenery.',
   'tobel1853 is a restored farmstead in the Allgäu, in the same family since 1853: apartments, bistro, events, retreats. A place like that doesn’t need meaning added. It needs a brand that starts where the meaning already is, at the origin, and makes it possible to find your way back to it.',
   'That became the idea. People who stay here are not looking to forget. They are looking to remember where they come from.',
@@ -74,7 +81,14 @@ const fonts = [
 // Zweiter Textblock zum Design (zwischen Schriftmuster und Bildreihen)
 const designLead = 'Classic in form. Modern in function.';
 
-const designParagraphs = [
+const designParagraphs = lang === 'de' ? [
+  'Das Design folgt einem Prinzip: Reduktion. Nicht als Stil, sondern als Entscheidung. Jede Wahl beantwortet eine einzige Frage: Dient sie dem Wesentlichen?',
+  'Also haben wir behalten, was bleibt, und gestrichen, was sich nur inszeniert. Die Form ist klassisch: ruhig, selbstbewusst, verwurzelt an einem Ort, der seit 1853 besteht. Die Funktion ist modern: klar, flexibel, gemacht für Bildschirm und Papier gleichermaßen. Zeitlose Eleganz trifft Präzision. Ästhetik und Zweck werden eins.',
+  'Der Name steht in Kleinbuchstaben, die Jahreszahl daneben. Kein Logo, das sich in Szene setzt, sondern ein Zeichen, das einfach dasteht, wie der Hof selbst.',
+  'Dieselbe Ruhe zieht sich durch alles, was ein Gast in die Hand nimmt, von der Website bis zur gedruckten Seite. Einladend. Klar. Großzügig. Nichts ist Dekoration. Nichts ist Lärm.',
+  'Deshalb hat die Marke nie ein Label gebraucht. Andere erzählen, was ein Ort bedeutet. tobel1853 zeigt es, in Proportionen, in Materialien, in dem, was weggelassen wird.',
+  'Vom Einfachen das Beste.',
+] : [
   'The design follows one principle: reduction. Not as a style, but as a decision. Every choice answers a single question: does it serve what matters?',
   'So we kept what lasts and cut what performs. The form is classic: calm, confident, rooted in a place that has stood since 1853. The function is modern: clear, flexible, built for screens and for paper alike. Timeless elegance meets precision. Aesthetics and purpose become one.',
   'The name stands in lowercase, with the year beside it. No logo that performs, a mark that simply stands, like the farmstead itself.',

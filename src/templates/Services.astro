@@ -20,56 +20,68 @@ const intro = t(
 // `id` bleibt in beiden Sprachen gleich, damit die Anker aus der Navigation funktionieren.
 const services = [
   { id: undefined, no: '', title: '', text: t('Seeing beyond belonging is a way of looking. It only counts if it changes what we see. So we turned it into four disciplines and one open process: research at the start, the right people for every task, and you inside the work from day one.', 'Über Zugehörigkeit hinauszusehen ist eine Art zu schauen. Sie zählt nur, wenn sie verändert, was wir sehen. Deshalb haben wir daraus vier Disziplinen und einen offenen Prozess gemacht: Research am Anfang, die richtigen Menschen für jede Aufgabe und du von Tag eins an mittendrin.'), tags: '' },
-  { id: 'brand-strategy', no: 'A', title: t('Brand Strategy', 'Markenstrategie'), text: t('Brands need a clear point of view, and a point of view needs evidence. We combine research, data and experience to understand your business, your audiences and the forces reshaping your market. From there we define positioning, purpose and identity: a brand that guides your teams and stands apart in the market.', 'Marken brauchen eine klare Haltung, und eine Haltung braucht Belege. Wir verbinden Research, Daten und Erfahrung, um dein Geschäft, deine Zielgruppen und die Kräfte zu verstehen, die deinen Markt verändern. Daraus entwickeln wir Positionierung, Purpose und Identität: eine Marke, die deine Teams leitet und sich im Markt abhebt.'), tags: t('Market Research · Audience Insights · Brand Positioning · Brand Purpose · Brand Identity · Tone of Voice', 'Marktforschung · Zielgruppen-Insights · Markenpositionierung · Markenpurpose · Markenidentität · Tone of Voice') },
-  { id: 'creative-concept', no: 'B', title: t('Creative Concept', 'Kreativkonzept'), text: t('A concept is the idea everything else depends on. We build every creative team from our network of artists, writers, designers, filmmakers and technologists, chosen for what your project demands. Led by people with a point of view, they develop ideas that are original, clear and made for your brand, shaped with you.', 'Ein Konzept ist die Idee, von der alles andere abhängt. Jedes Kreativteam stellen wir aus unserem Netzwerk von Künstlerinnen, Autoren, Designerinnen, Filmemachern und Technologinnen zusammen, ausgewählt nach dem, was dein Projekt verlangt. Geführt von Menschen mit Haltung entwickeln sie Ideen, die originell, klar und für deine Marke gemacht sind, gemeinsam mit dir geformt.'), tags: t('Creative Direction · Concept Development · Storytelling · Naming & Claims · Visual Worlds · Creative Workshops', 'Creative Direction · Konzeptentwicklung · Storytelling · Naming & Claims · Bildwelten · Kreativ-Workshops') },
-  { id: 'campaign-and-craft', no: 'C', title: t('Campaign and Craft', 'Kampagne und Handwerk'), text: t('Ideas only matter when they reach people. We turn concepts into campaigns, content and film for every channel, and care about every detail along the way, from the first frame to the final launch. One line of thinking, many formats, produced to a standard we are proud to put our name on. Measured by results.', 'Ideen zählen nur, wenn sie Menschen erreichen. Wir machen aus Konzepten Kampagnen, Content und Film für jeden Kanal und kümmern uns um jedes Detail, vom ersten Bild bis zum finalen Launch. Eine Denkrichtung, viele Formate, produziert auf einem Niveau, für das wir gerne mit unserem Namen stehen. Gemessen an Ergebnissen.'), tags: t('Integrated Campaigns · Film & Documentary · Photo & Motion · Social Content · Websites & Digital Experiences · Audio & Podcast', 'Integrierte Kampagnen · Film & Dokumentation · Foto & Motion · Social Content · Websites & digitale Erlebnisse · Audio & Podcast') },
-  { id: 'ai-driven-technology', no: 'D', title: t('AI driven Technology', 'KI-gestützte Technologie'), text: t('Technology should make teams better, not make everything look the same. We use AI where it changes outcomes: sharper insights, faster briefings, more precise teams. Superpod, our own platform, makes every project transparent. We also build custom AI solutions for your creative and marketing workflows.', 'Technologie soll Teams besser machen, nicht alles gleich aussehen lassen. Wir setzen KI dort ein, wo sie Ergebnisse verändert: schärfere Insights, schnellere Briefings, präzisere Teams. Superpod, unsere eigene Plattform, macht jedes Projekt transparent. Außerdem entwickeln wir individuelle KI-Lösungen für deine Kreativ- und Marketing-Workflows.'), tags: t('AI Workflows · Marketing Automation · Data & Reporting · Superpod Platform · Custom Software · Team Enablement', 'KI-Workflows · Marketing-Automatisierung · Daten & Reporting · Superpod-Plattform · Individualsoftware · Team Enablement') },
+  { id: 'brand-strategy', no: 'A', title: 'Brand Strategy', text: t('Brands need a clear point of view, and a point of view needs evidence. We combine research, data and experience to understand your business, your audiences and the forces reshaping your market. From there we define positioning, purpose and identity: a brand that guides your teams and stands apart in the market.', 'Marken brauchen eine klare Haltung, und eine Haltung braucht Belege. Wir verbinden Research, Daten und Erfahrung, um dein Geschäft, deine Zielgruppen und die Kräfte zu verstehen, die deinen Markt verändern. Daraus entwickeln wir Positionierung, Purpose und Identität: eine Marke, die deine Teams leitet und sich im Markt abhebt.'), tags: 'Market Research · Audience Insights · Brand Positioning · Brand Purpose · Brand Identity · Tone of Voice' },
+  { id: 'creative-concept', no: 'B', title: 'Creative Concept', text: t('A concept is the idea everything else depends on. We build every creative team from our network of artists, writers, designers, filmmakers and technologists, chosen for what your project demands. Led by people with a point of view, they develop ideas that are original, clear and made for your brand, shaped with you.', 'Ein Konzept ist die Idee, von der alles andere abhängt. Jedes Kreativteam stellen wir aus unserem Netzwerk von Künstlerinnen, Autoren, Designerinnen, Filmemachern und Technologinnen zusammen, ausgewählt nach dem, was dein Projekt verlangt. Geführt von Menschen mit Haltung entwickeln sie Ideen, die originell, klar und für deine Marke gemacht sind, gemeinsam mit dir geformt.'), tags: 'Creative Direction · Concept Development · Storytelling · Naming & Claims · Visual Worlds · Creative Workshops' },
+  { id: 'campaign-and-craft', no: 'C', title: 'Campaign and Craft', text: t('Ideas only matter when they reach people. We turn concepts into campaigns, content and film for every channel, and care about every detail along the way, from the first frame to the final launch. One line of thinking, many formats, produced to a standard we are proud to put our name on. Measured by results.', 'Ideen zählen nur, wenn sie Menschen erreichen. Wir machen aus Konzepten Kampagnen, Content und Film für jeden Kanal und kümmern uns um jedes Detail, vom ersten Bild bis zum finalen Launch. Eine Denkrichtung, viele Formate, produziert auf einem Niveau, für das wir gerne mit unserem Namen stehen. Gemessen an Ergebnissen.'), tags: 'Integrated Campaigns · Film & Documentary · Photo & Motion · Social Content · Websites & Digital Experiences · Audio & Podcast' },
+  { id: 'ai-driven-technology', no: 'D', title: 'AI driven Technology', text: t('Technology should make teams better, not make everything look the same. We use AI where it changes outcomes: sharper insights, faster briefings, more precise teams. Superpod, our own platform, makes every project transparent. We also build custom AI solutions for your creative and marketing workflows.', 'Technologie soll Teams besser machen, nicht alles gleich aussehen lassen. Wir setzen KI dort ein, wo sie Ergebnisse verändert: schärfere Insights, schnellere Briefings, präzisere Teams. Superpod, unsere eigene Plattform, macht jedes Projekt transparent. Außerdem entwickeln wir individuelle KI-Lösungen für deine Kreativ- und Marketing-Workflows.'), tags: 'AI Workflows · Marketing Automation · Data & Reporting · Superpod Platform · Custom Software · Team Enablement' },
 ];
 
 const steps = [
-  { title: t('Research', 'Research'), text: t('Look beyond: Research, not guesses. We ask those who know. You join from day one.', 'Weiter schauen: Research statt Vermutungen. Wir fragen die, die es wissen. Du bist von Tag eins dabei.') },
-  { title: t('Briefing', 'Briefing'), text: t('Frame the task: Superpod AI sharpens the brief. You review and approve. Then we start.', 'Die Aufgabe fassen: Superpod AI schärft das Briefing. Du prüfst und gibst frei. Dann legen wir los.') },
-  { title: t('Talent matching', 'Talent-Matching'), text: t('Assemble the team: Superpod matches the right artists, not whoever is free.', 'Das Team zusammenstellen: Superpod findet die passenden Künstlerinnen und Künstler, nicht die, die gerade frei sind.') },
-  { title: t('Co-creation', 'Co-Creation'), text: t('Work happens in the open: You shape ideas early with us. No surprises.', 'Die Arbeit passiert offen: Du formst Ideen früh mit uns. Keine Überraschungen.') },
-  { title: t('Launch and learn', 'Launch und Learnings'), text: t('Move forward: Launch together, measure what matters. Results shape what’s next.', 'Weitergehen: Gemeinsam launchen, messen, was zählt. Ergebnisse bestimmen, was als Nächstes kommt.') },
+  { title: 'Research', text: t('Look beyond: Research, not guesses. We ask those who know. You join from day one.', 'Weiter schauen: Research statt Vermutungen. Wir fragen die, die es wissen. Du bist von Tag eins dabei.') },
+  { title: 'Briefing', text: t('Frame the task: Superpod AI sharpens the brief. You review and approve. Then we start.', 'Die Aufgabe fassen: Superpod AI schärft das Briefing. Du prüfst und gibst frei. Dann legen wir los.') },
+  { title: 'Talent matching', text: t('Assemble the team: Superpod matches the right artists, not whoever is free.', 'Das Team zusammenstellen: Superpod findet die passenden Künstlerinnen und Künstler, nicht die, die gerade frei sind.') },
+  { title: 'Co-creation', text: t('Work happens in the open: You shape ideas early with us. No surprises.', 'Die Arbeit passiert offen: Du formst Ideen früh mit uns. Keine Überraschungen.') },
+  { title: 'Launch and learn', text: t('Move forward: Launch together, measure what matters. Results shape what’s next.', 'Weitergehen: Gemeinsam launchen, messen, was zählt. Ergebnisse bestimmen, was als Nächstes kommt.') },
 ];
 
 // Pricing: Aufbau wie die CMO-Community-Kacheln auf der Startseite.
-// Text bisher nur Englisch; erscheint auch auf der deutschen Seite.
-const pricingIntro = 'Every great collaboration starts somewhere. Whether you need a strategic partner, want to explore a new idea or prefer to make things happen yourself – we give you the people, tools and creative freedom to move forward. Find the way that works for you.*';
-const pricingNote = '*Looking for something different? We also create tailored solutions to fit your needs.';
+// Texte auf Englisch und Deutsch.
+const pricingIntro = t(
+  'Every great collaboration starts somewhere. Whether you need a strategic partner, want to explore a new idea or prefer to make things happen yourself – we give you the people, tools and creative freedom to move forward. Find the way that works for you.*',
+  'Jede gute Zusammenarbeit fängt irgendwo an. Ob du einen strategischen Partner brauchst, eine neue Idee erkunden willst oder die Dinge lieber selbst in die Hand nimmst – wir geben dir die Menschen, die Tools und die kreative Freiheit, um voranzukommen. Finde den Weg, der zu dir passt.*',
+);
+const pricingNote = t('*Looking for something different? We also create tailored solutions to fit your needs.', '*Du suchst etwas anderes? Wir entwickeln auch maßgeschneiderte Lösungen für deinen Bedarf.');
 const pricing = [
   {
     title: 'frst Partner',
-    subtitle: 'The customized agency built around your ambitions.',
-    text: 'We bring strategy, creative thinking and hands-on support together with full access to our digital tool and artist network. As your ongoing partner, we help you challenge the familiar, explore new possibilities and turn ideas into action.',
+    subtitle: t('The customized agency built around your ambitions.', 'Die maßgeschneiderte Agentur rund um deine Ambitionen.'),
+    text: t(
+      'We bring strategy, creative thinking and hands-on support together with full access to our digital tool and artist network. As your ongoing partner, we help you challenge the familiar, explore new possibilities and turn ideas into action.',
+      'Wir verbinden Strategie, kreatives Denken und tatkräftige Unterstützung mit vollem Zugang zu unserem digitalen Tool und Künstlernetzwerk. Als dauerhafter Partner helfen wir dir, das Gewohnte zu hinterfragen, neue Möglichkeiten zu erkunden und Ideen in die Tat umzusetzen.',
+    ),
     details: [
-      { label: 'What we bring', text: 'Strategy, creative direction, project management, tool access and our full artist network.' },
-      { label: 'What you get', text: 'A team that knows your business, thinks ahead and helps you make better things happen.' },
+      { label: t('What we bring', 'Was wir mitbringen'), text: t('Strategy, creative direction, project management, tool access and our full artist network.', 'Strategie, Creative Direction, Projektmanagement, Tool-Zugang und unser gesamtes Künstlernetzwerk.') },
+      { label: t('What you get', 'Was du bekommst'), text: t('A team that knows your business, thinks ahead and helps you make better things happen.', 'Ein Team, das dein Geschäft kennt, vorausdenkt und dir hilft, Besseres möglich zu machen.') },
     ],
-    meta: 'Monthly retainer · Ongoing collaboration',
+    meta: t('Monthly retainer · Ongoing collaboration', 'Monatlicher Retainer · Laufende Zusammenarbeit'),
     // Unser Fokus-Modell: wird farblich hervorgehoben
     highlight: 'Best to turn ideas into lasting impact',
   },
   {
     title: 'frst Sprint',
-    subtitle: 'One project. One clear goal. Tangible results.',
-    text: 'We take your brief, shape the right approach and connect you with the artists who can bring it to life. Our briefing generator helps structure your needs. With your first project, you’ll also get a personal demo of our digital tool.',
+    subtitle: t('One project. One clear goal. Tangible results.', 'Ein Projekt. Ein klares Ziel. Greifbare Ergebnisse.'),
+    text: t(
+      'We take your brief, shape the right approach and connect you with the artists who can bring it to life. Our briefing generator helps structure your needs. With your first project, you’ll also get a personal demo of our digital tool.',
+      'Wir nehmen dein Briefing auf, entwickeln den passenden Ansatz und bringen dich mit den Künstlerinnen und Künstlern zusammen, die es zum Leben erwecken. Unser Briefing-Generator hilft, deine Anforderungen zu strukturieren. Mit deinem ersten Projekt bekommst du außerdem eine persönliche Demo unseres digitalen Tools.',
+    ),
     details: [
-      { label: 'What we bring', text: 'A clear process, our briefing generator and access to handpicked artists – curated and coordinated by frst.' },
-      { label: 'What you get', text: 'The right creative minds for your project, without the commitment of a long-term partnership.' },
+      { label: t('What we bring', 'Was wir mitbringen'), text: t('A clear process, our briefing generator and access to handpicked artists – curated and coordinated by frst.', 'Einen klaren Prozess, unseren Briefing-Generator und Zugang zu handverlesenen Künstlerinnen und Künstlern – kuratiert und koordiniert von frst.') },
+      { label: t('What you get', 'Was du bekommst'), text: t('The right creative minds for your project, without the commitment of a long-term partnership.', 'Die richtigen kreativen Köpfe für dein Projekt, ohne die Bindung einer langfristigen Partnerschaft.') },
     ],
-    meta: 'Fixed project fee · Clearly defined scope',
+    meta: t('Fixed project fee · Clearly defined scope', 'Feste Projektgebühr · Klar definierter Umfang'),
   },
   {
     title: 'frst Access',
-    subtitle: 'More creative power for your team.',
-    text: 'Get independent access to our digital platform and discover, select and book artists yourself. Everything you need to bring the right creative people together, all in one place. Artist bookings are charged separately through a transparent service or brokerage fee.',
+    subtitle: t('More creative power for your team.', 'Mehr kreative Power für dein Team.'),
+    text: t(
+      'Get independent access to our digital platform and discover, select and book artists yourself. Everything you need to bring the right creative people together, all in one place. Artist bookings are charged separately through a transparent service or brokerage fee.',
+      'Erhalte eigenständigen Zugang zu unserer digitalen Plattform und finde, wähle und buche Künstlerinnen und Künstler selbst. Alles, was du brauchst, um die richtigen kreativen Menschen zusammenzubringen, an einem Ort. Buchungen werden separat über eine transparente Service- oder Vermittlungsgebühr abgerechnet.',
+    ),
     details: [
-      { label: 'What we bring', text: 'Access to our digital tool and curated artist network, with a simple booking process.' },
-      { label: 'What you get', text: 'More freedom, direct access to creative talent and the power to make things happen on your own terms.' },
+      { label: t('What we bring', 'Was wir mitbringen'), text: t('Access to our digital tool and curated artist network, with a simple booking process.', 'Zugang zu unserem digitalen Tool und kuratierten Künstlernetzwerk, mit einem einfachen Buchungsprozess.') },
+      { label: t('What you get', 'Was du bekommst'), text: t('More freedom, direct access to creative talent and the power to make things happen on your own terms.', 'Mehr Freiheit, direkten Zugang zu kreativen Talenten und die Möglichkeit, Dinge zu deinen eigenen Bedingungen umzusetzen.') },
     ],
-    meta: 'Monthly or annual license · Artist bookings charged separately',
+    meta: t('Monthly or annual license · Artist bookings charged separately', 'Monatliche oder jährliche Lizenz · Buchungen werden separat abgerechnet'),
   },
 ];
 ---
@@ -84,8 +96,8 @@ const pricing = [
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/60 via-transparent to-night/30"></div>
     <div class="container-frst relative grid gap-10 pt-40 pb-16 md:grid-cols-2">
       <div>
-        <p class="eyebrow text-[14px]">{t('Services', 'Leistungen')}</p>
-        <h1 class="mt-6 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{t('End to end', 'Von A bis Z')}<br />{t('for your brand.', 'für deine Marke.')}</h1>
+        <p class="eyebrow text-[14px]">Services</p>
+        <h1 class="mt-6 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">End to end<br />for your brand.</h1>
         <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{t('Four disciplines. One team, built around your project.', 'Vier Disziplinen. Ein Team, zusammengestellt für dein Projekt.')}</p>
       </div>
     </div>
@@ -93,7 +105,7 @@ const pricing = [
 
   <!-- Our services -->
   <section id="services" class="container-frst scroll-mt-20 py-20 md:py-24">
-    <p class="eyebrow text-[14px]">{t('What we offer', 'Was wir bieten')}</p>
+    <p class="eyebrow text-[14px]">What we offer</p>
     <div class="mt-10 grid gap-x-16 gap-y-14 md:gap-y-24 md:grid-cols-2 lg:grid-cols-3">
       {services.map((s) => (
         <article id={s.id} class="scroll-mt-24">
@@ -109,9 +121,9 @@ const pricing = [
   <!-- Our approaches -->
   <section id="process" class="container-frst scroll-mt-20 py-20 md:py-24">
     <div>
-      <p class="eyebrow text-[14px]">{t('Our process', 'Unser Prozess')}</p>
+      <p class="eyebrow text-[14px]">Our process</p>
       <div class="mt-8 lg:grid lg:grid-cols-5 lg:gap-x-16">
-        <h2 class="text-[8vw] leading-[1.05] font-light md:text-5xl lg:col-span-3 lg:text-7xl">{t('The Process built around your Ambition.', 'Der Prozess, gebaut um deinen Anspruch.')}</h2>
+        <h2 class="text-[8vw] leading-[1.05] font-light md:text-5xl lg:col-span-3 lg:text-7xl">The Process built around your Ambition.</h2>
       </div>
       <div class="mt-10 lg:grid lg:grid-cols-5 lg:gap-x-16">
         <p class="text-[16px] leading-relaxed lg:col-span-3">{t(
@@ -154,7 +166,7 @@ const pricing = [
       <Media src="/images/marccain-teaser-navi.jpg" alt="MARCCAIN New York City Activation" class="absolute inset-0 h-full w-full transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
     </a>
     <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-24">
-      <p class="eyebrow text-[14px]">{t('Selected work', 'Ausgewählte Projekte')}</p>
+      <p class="eyebrow text-[14px]">Selected work</p>
       <h2 class="mt-6 text-[30px] leading-snug font-light">New York City Activation</h2>
       <p class="mt-6 max-w-md text-[16px] leading-relaxed opacity-90">{intro}</p>
       <a href={localePath(lang, '/work/marccain')} class="mt-8 self-start" aria-label={t('Go to the case study MARCCAIN New York City Activation', 'Zur Case-Seite MARCCAIN New York City Activation')}><Arrow /></a>

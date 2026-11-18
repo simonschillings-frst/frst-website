@@ -21,8 +21,8 @@ const l = (href: string) => localePath(lang, href);
 const navItems = getNavItems(lang).filter((i) => i.key !== 'cmo');
 const otherLang: Lang = lang === 'de' ? 'en' : 'de';
 
-// Sprachumschalter vorerst aus: zum Start geht nur die englische Version online. Für DE wieder auf true setzen.
-const showLanguageSwitch = false;
+// Sprachumschalter (EN/DE). Mit false lässt er sich wieder ausblenden.
+const showLanguageSwitch = true;
 
 // Platzhalterbilder der Karten, wenn kein eigener Ton gesetzt ist
 const tones = ['night', 'desert', 'mist'] as const;

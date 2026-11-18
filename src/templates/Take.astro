@@ -47,7 +47,7 @@ const paragraph = `${long} ${long}`;
     )}
     <div class="container-frst relative pt-40 pb-12">
       <div class="md:ml-[9%]">
-        <p class="eyebrow text-[14px]">{t(`Take · ${minutes} min read`, `Take · ${minutes} Min. Lesezeit`)}</p>
+        <p class="eyebrow text-[14px]">Take · {minutes} min read</p>
         <h1 class="mt-8 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{title}</h1>
       </div>
     </div>
@@ -85,7 +85,7 @@ const paragraph = `${long} ${long}`;
               {section.paragraphsAfter?.map((text) => <p class="mt-6 max-w-[78ch] text-[16px] leading-relaxed">{text}</p>)}
               {section.inShort && (
                 <aside class="mt-10 max-w-[78ch] border-l-2 border-night pl-6">
-                  <p class="eyebrow text-[14px]">{t('In short', 'Kurz gesagt')}</p>
+                  <p class="eyebrow text-[14px]">In short</p>
                   <p class="mt-3 text-[20px] leading-snug">{section.inShort}</p>
                 </aside>
               )}
@@ -94,7 +94,7 @@ const paragraph = `${long} ${long}`;
 
           {content.sources && (
             <footer class="mt-20 max-w-[78ch] border-t border-night/20 pt-8 md:mt-24">
-              <h2 class="eyebrow text-[14px]">{t('Sources', 'Quellen')}</h2>
+              <h2 class="eyebrow text-[14px]">Sources</h2>
               <ul class="mt-4 space-y-3 text-[14px] leading-relaxed opacity-80">
                 {content.sources.map((source) => <li>{source}</li>)}
               </ul>

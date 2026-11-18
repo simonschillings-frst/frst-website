@@ -15,15 +15,23 @@ const t = useLang(lang);
 
 // Texte und Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
 const facts = [
-  { label: t('Project', 'Projekt'), value: t('OOH · Guerilla Marketing · Event · Content', 'OOH · Guerilla-Marketing · Event · Content') },
+  { label: t('Project', 'Projekt'), value: 'OOH · Guerilla Marketing · Event · Content' },
   { label: t('Client', 'Kunde'), value: 'MARCCAIN' },
   { label: t('Year', 'Jahr'), value: '2024' },
 ];
 
-// Case-Text (bisher nur Englisch; deutsche Fassung folgt)
+// Case-Text (Englisch, Deutsch)
 const lead = 'We didn’t book a stage in New York. We took the city.';
 
-const paragraphs = [
+const paragraphs = lang === 'de' ? [
+  'Der Einstieg in den US-Markt ist hart, gerade in der Mode. Die New York Fashion Week ist der perfekte Moment, aber ein offizieller Auftritt ist teuer, und man ist einer von vielen. Klassische Außenwerbung hat ihr eigenes Problem: hohe Kosten und hohe Streuverluste.',
+  'Also haben wir eine andere Frage gestellt: Was, wenn die Stadt selbst zum Laufsteg wird?',
+  'Mitten in New York übertrug ein riesiger LED-Screen die Berliner Show von Marc Cain live. Drumherum: echte Models, ein lebendiges Pop-up-Event, ein DJ und VIP-Gäste. Pure Fashion-Energie, direkt auf der Straße.',
+  'Alles wurde in Echtzeit festgehalten und in die Welt geschickt. Die Aktivierung dominierte die Medien und erzielte die Wirkung einer großen Out-of-Home-Kampagne: zielgenau, perfekt getimt, auffällig und einzigartig. Möglich gemacht haben das internationale Künstlerinnen und Künstler, die lokale Märkte ebenso verstehen wie globale Trends.',
+  'Die Erkenntnis war einfach. Ein Laufsteg ist kein Ort, sondern ein Moment der Aufmerksamkeit. Man kann eine Location mieten oder den Moment selbst schaffen. Wir haben uns für das Zweite entschieden, und zwar genau dort, wo die ganze Modewelt ohnehin hinschaute.',
+  'Eine Idee statt eines Budgets. Eine Stadt statt einer Location. Aufmerksamkeit verdient, nicht gemietet.',
+  'Keine Bühne? Kein Problem. Wir haben unsere eigene gebaut.',
+] : [
   'Breaking into the US market is tough, especially in fashion. New York Fashion Week is the perfect moment, but an official presence is expensive, and you are one of many. Traditional out-of-home media has its own problem: high cost and high wastage.',
   'So we asked a different question: what if the city itself became the runway?',
   'In the heart of New York, a massive LED screen streamed Marc Cain’s Berlin show live. Around it: real models, a buzzing pop-up event, a DJ and VIP guests. Pure fashion energy, right in the street.',

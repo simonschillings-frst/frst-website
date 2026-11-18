@@ -14,15 +14,21 @@ const t = useLang(lang);
 
 // Texte und Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
 const facts = [
-  { label: t('Project', 'Projekt'), value: t('Strategy · Creative Platform · Campaign · OOH · Social Media · Co-Creation', 'Strategie · Kreativplattform · Kampagne · OOH · Social Media · Co-Creation') },
+  { label: t('Project', 'Projekt'), value: 'Strategy · Creative Platform · Campaign · OOH · Social Media · Co-Creation' },
   { label: t('Client', 'Kunde'), value: 'Volksbank Göppingen' },
   { label: t('Year', 'Jahr'), value: '2025' },
 ];
 
-// Case-Text (bisher nur Englisch; deutsche Fassung folgt)
+// Case-Text (Englisch, Deutsch)
 const lead = 'When branches close, closeness shouldn’t.';
 
-const paragraphs = [
+const paragraphs = lang === 'de' ? [
+  'Die Digitalisierung verändert das Bankgeschäft. Filialen verschwinden und mit ihnen das, worauf die Volksbank Göppingen gebaut ist: Nähe. Die Frage war, wie eine Bank nah bleiben kann, wenn sie nicht mehr um die Ecke ist.',
+  'Wir haben darin eine Chance gesehen, keinen Verlust. Menschen ziehen um, arbeiten remote und leben anders, und viele denken neu darüber nach, was wirklich zählt: Gemeinschaft, Vertrauen, Verbundenheit. Werte, die altmodisch klingen, sind nicht überholt. Sie werden unterschätzt. Und Nähe war nie nur eine Frage der Entfernung. Es geht darum zu wissen, was dir wichtig ist.',
+  'Daraus wurde die Idee: Näher am Leben. Echter Kulturwandel kommt nicht von außen, also haben wir innen angefangen. In Co-Creation-Workshops haben Menschen aus der ganzen Bank Werte in Handeln übersetzt. Nähe war kein Ort mehr, sondern etwas, das man spürt. <em>Näher am Leben</em> wurde zu einer Haltung, einer Kreativplattform und einem gemeinsamen Spirit.',
+  'Dann sind wir an die Öffentlichkeit gegangen, mit echten Kundinnen und Kunden. Ihre Fragen, Sorgen und Träume haben das Versprechen der Bank greifbar gemacht. Vernetzt über digitale und analoge Kanäle, innerhalb und außerhalb der Bank, bringt die Kampagne Marke und Menschen zusammen.',
+  'Mehr als eine Kampagne: eine neue Art, Bank zu sein. Verwurzelt in Werten. Gebaut für morgen.',
+] : [
   'Digitalization is changing banking. Branches are disappearing, and with them goes the one thing Volksbank Göppingen was built on: closeness. The question was how a bank can stay close when it is no longer around the corner.',
   'We saw an opportunity, not a loss. People move, work remotely and live differently, and many are rethinking what really matters: community, trust, connection. Values that sound old-fashioned are not outdated. They are underrated. And closeness was never only about distance. It is about knowing what matters to you.',
   'That became the idea: Näher am Leben – <em>Closer to Life</em>. Real cultural change doesn’t come from the outside, so we started inside. In co-creation workshops, people across the bank turned values into action. Closeness stopped being a place and became something you feel. <em>Closer to Life</em> grew into a mindset, a creative platform and a shared spirit.',

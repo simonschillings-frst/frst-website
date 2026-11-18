@@ -24,9 +24,9 @@ const jobsMail = 'jobs@frst.agency';
 const mailto = (subject: string) => `mailto:${jobsMail}?subject=${encodeURIComponent(subject)}`;
 
 const jobs = [
-  { title: t('Senior Strategist (m/w/d)', 'Senior Strategist (m/w/d)'), place: t('Full-time', 'Vollzeit') },
-  { title: t('Creative Technologist (m/w/d)', 'Creative Technologist (m/w/d)'), place: t('Full-time', 'Vollzeit') },
-  { title: t('Working Student Communication (m/w/d)', 'Werkstudent Kommunikation (m/w/d)'), place: t('Part-time', 'Teilzeit') },
+  { title: 'Senior Strategist (m/w/d)', place: t('Full-time', 'Vollzeit') },
+  { title: 'Creative Technologist (m/w/d)', place: t('Full-time', 'Vollzeit') },
+  { title: 'Working Student Communication (m/w/d)', place: t('Part-time', 'Teilzeit') },
 ];
 ---
 
@@ -39,8 +39,8 @@ const jobs = [
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/70 via-transparent to-night/40"></div>
     <div class="container-frst relative grid gap-10 pt-40 pb-10 md:grid-cols-2 md:items-end">
       <div class="md:self-center">
-        <p class="eyebrow text-[14px]">{t('About us', 'Über uns')}</p>
-        <h1 class="mt-14 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{t('Made for the', 'Gemacht für den')}<br />{t('unguarded moment.', 'unverstellten Moment.')}</h1>
+        <p class="eyebrow text-[14px]">About us</p>
+        <h1 class="mt-14 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">Made for the<br />unguarded moment.</h1>
         <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{t(
           'frst is a family-owned company, led by brothers, with an eye for people. We see our work as an interaction between humans. In every conversation we look for the moment the mask drops and something real is said. That is where the best ideas begin.',
           'frst ist ein inhabergeführtes Familienunternehmen, geleitet von Brüdern, mit einem Blick für Menschen. Wir verstehen unsere Arbeit als Zusammenspiel von Menschen. In jedem Gespräch suchen wir den Moment, in dem die Maske fällt und etwas Echtes gesagt wird. Dort beginnen die besten Ideen.',
@@ -84,7 +84,7 @@ const jobs = [
     <div class="pointer-events-none absolute inset-0 bg-night/70 md:bg-transparent md:bg-gradient-to-r md:from-night/75 md:via-night/40 md:to-night/10"></div>
     <div class="container-frst relative py-20 md:py-28">
       <p class="eyebrow text-[14px]">Superpod</p>
-      <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">{t('Every project, out in the open.', 'Jedes Projekt, offen einsehbar.')}</h2>
+      <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">Every project, out in the open.</h2>
       <p class="mt-8 max-w-md text-[16px] leading-relaxed">{t('Superpod is frst’s own platform. It makes every project transparent, from the first briefing to the final launch.', 'Superpod ist die eigene Plattform von frst. Sie macht jedes Projekt transparent, vom ersten Briefing bis zum finalen Launch.')}</p>
       <a href="https://tool.frst.agency/login" target="_blank" rel="noopener noreferrer" class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">{t('Sign in', 'Anmelden')}</a>
     </div>
@@ -92,7 +92,7 @@ const jobs = [
 
   <!-- Standorte -->
   <section id="locations" class="container-frst scroll-mt-20 py-16 md:py-24" aria-label={t('Locations', 'Standorte')}>
-    <p class="eyebrow text-[14px]">{t('Locations', 'Standorte')}</p>
+    <p class="eyebrow text-[14px]">Locations</p>
     {locations.map((loc) => (
       <div class="grid gap-y-8 py-8 md:grid-cols-2 md:gap-x-16 md:py-12">
         {'hoverImages' in loc && loc.hoverImages ? (
@@ -125,8 +125,8 @@ const jobs = [
   <section id="careers" class="scroll-mt-20 bg-night text-cream">
     <div class="container-frst grid gap-12 py-20 md:py-28 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
       <div>
-        <p class="eyebrow text-[14px]">{t('Careers', 'Karriere')}</p>
-        <h2 class="mt-8 text-[30px] leading-snug">{t('Grow beyond the job description.', 'Wachse über die Stellenbeschreibung hinaus.')}</h2>
+        <p class="eyebrow text-[14px]">Careers</p>
+        <h2 class="mt-8 text-[30px] leading-snug">Grow beyond the job description.</h2>
         <p class="mt-10 max-w-sm text-[16px] leading-relaxed opacity-90">{t(
           'Every industry has its habits. We look behind them and build something else: a place where curious people grow, think freely and shape what comes next. See where you fit.',
           'Jede Branche hat ihre Gewohnheiten. Wir schauen dahinter und bauen etwas anderes: einen Ort, an dem neugierige Menschen wachsen, frei denken und gestalten, was als Nächstes kommt. Finde heraus, wo du hinpasst.',
