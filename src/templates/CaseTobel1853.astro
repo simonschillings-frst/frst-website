@@ -139,8 +139,8 @@ const designParagraphs = lang === 'de' ? [
     </div>
   </section>
 
-  <!-- Casefilm: startet stumm im Loop, mit „Ton an“-Knopf -->
-  <section class="container-frst pb-6 md:pb-10">
+  <!-- Casefilm über die ganze Breite: startet stumm im Loop, mit „Ton an“-Knopf -->
+  <section class="pb-6 md:pb-10">
     <Video src="/videos/tobel-case.mp4" srcMobile="/videos/tobel-case-mobile.mp4" poster="/videos/tobel-case-poster.webp" loop sound title={`${brand} – Casefilm`} class="aspect-video w-full" lang={lang} />
   </section>
 
@@ -184,9 +184,9 @@ const designParagraphs = lang === 'de' ? [
   </section>
 
   <!-- Briefpapier über die ganze Breite, heller Kreis „Vom Einfachen das Beste“ dreht sich oben links über dem Bild -->
-  <section class="container-frst">
+  <section>
     <div class="group relative overflow-hidden">
-      <Media src="/images/web/tobel-briefpapier.jpg" alt={`${brand} – Briefbogen mit Logo und Kreis „Vom Einfachen das Beste“ auf einem Holztisch im Licht- und Schattenspiel`} sizes="(min-width: 1440px) 1360px, 100vw" class="aspect-[4/3] w-full transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 md:aspect-[3/2]" />
+      <Media src="/images/web/tobel-briefpapier.jpg" alt={`${brand} – Briefbogen mit Logo und Kreis „Vom Einfachen das Beste“ auf einem Holztisch im Licht- und Schattenspiel`} sizes="100vw" class="aspect-[4/3] w-full transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 md:aspect-[3/2]" />
       <img src="/images/tobel-kreis-weiss.svg" alt="" aria-hidden="true" class="pointer-events-none absolute top-10 left-10 w-24 animate-[spin_30s_linear_infinite] motion-reduce:animate-none md:top-20 md:left-20 md:w-40" />
     </div>
   </section>
