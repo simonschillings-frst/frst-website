@@ -6,3 +6,6 @@ node_modules/
 .DS_Store
 public/_img/
 src/data/images.generated.json
+
+# Video-Originale: zu groß für GitHub (>100 MB)
+originale/*.mp4

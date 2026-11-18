@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
+import Video from '../components/Video.astro';
 import ImageStrip from '../components/ImageStrip.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Newsletter from '../components/Newsletter.astro';
@@ -122,6 +123,11 @@ const designParagraphs = [
         {paragraphs.map((text) => <p>{text}</p>)}
       </div>
     </div>
+  </section>
+
+  <!-- Casefilm: startet stumm im Loop, mit „Ton an“-Knopf -->
+  <section class="container-frst pb-6 md:pb-10">
+    <Video src="/videos/tobel-case.mp4" srcMobile="/videos/tobel-case-mobile.mp4" poster="/videos/tobel-case-poster.webp" loop sound title={`${brand} – Casefilm`} class="aspect-video w-full" lang={lang} />
   </section>
 
   <!-- Schriftmuster: so breit wie die Textspalte darunter (gleiches Raster), je Schrift großes „Aa“, Name und Größen.
