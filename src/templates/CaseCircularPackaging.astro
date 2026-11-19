@@ -18,10 +18,16 @@ const facts = [
   { label: t('Year', 'Jahr'), value: '2023' },
 ];
 
-// Case-Text (bisher nur Englisch; deutsche Fassung folgt)
+// Case-Text (Englisch, Deutsch)
 const lead = 'Trays have always been virgin. Then three companies asked why.';
 
-const paragraphs = [
+const paragraphs = lang === 'de' ? [
+  'Medizinische Verpackungen müssen höchste Sicherheitsstandards erfüllen. Jahrelang hieß das vor allem eins: neu produzierter Kunststoff. Sicherheit und Recyclingmaterial schienen sich gegenseitig auszuschließen.',
+  'SCHOTT Pharma, Corplex und Takeda fragten, ob das wirklich stimmt. Gemeinsam stellten sie die Konvention infrage, und zum ersten Mal wird nun recyceltes Material für die Trays verwendet, ohne Abstriche bei der medizinischen Sicherheit.',
+  'Unsere Aufgabe war es, diese Geschichte so zu erzählen, dass man sie spürt. Ein technischer Durchbruch allein bewegt noch niemanden. Also haben wir einen Film gemacht, der ruhig ist statt laut. Stille Bilder aus den Arbeitswelten der Protagonistinnen und Protagonisten schufen einen kontemplativen Raum für ihre Stimmen. Ihre Worte, aus ausführlichen Interviews, wurden zu inneren Monologen, die berühren und zugleich informieren. Nichts wird dem Publikum erklärt. Alles wird gespürt.',
+  'Der Film zeigt, was das Projekt beweist: Innovation beginnt mit Verantwortung. SCHOTT Pharma hat es initiiert und als Pionier auf den Markt gebracht, ein Schritt, der verändern kann, wie die Pharmaindustrie über Ressourcen denkt.',
+  'Manchmal ist die radikalste Veränderung die leiseste.',
+] : [
   'Medical packaging has to meet the highest safety standards. For years, that meant one thing: newly produced plastic. Safety and recycled material seemed to rule each other out.',
   'SCHOTT Pharma, Corplex and Takeda asked whether that was really true. Together, they questioned the convention, and for the first time, recycled material is now used for the trays, without compromising medical safety.',
   'Our challenge was to tell this story in a way people could feel. A technical breakthrough doesn’t move anyone on its own. So we made a film that is calm instead of loud. Quiet images from the protagonists’ own working environments created a contemplative space for their voices. Their words, taken from in-depth interviews, became inner monologues that touch and inform at once. Nothing is explained at the viewer. Everything is felt.',

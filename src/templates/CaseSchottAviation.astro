@@ -14,15 +14,20 @@ const t = useLang(lang);
 
 // Texte sind Platzhalter.
 const facts = [
-  { label: t('Project', 'Projekt'), value: t('AI Campaign · Trade Fair · CGI', 'KI-Kampagne · Messe · CGI') },
+  { label: t('Project', 'Projekt'), value: 'AI Campaign · Trade Fair · CGI' },
   { label: t('Client', 'Kunde'), value: 'SCHOTT Aviation' },
   { label: t('Year', 'Jahr'), value: '2024' },
 ];
 
-// Case-Text (bisher nur Englisch; deutsche Fassung folgt)
+// Case-Text (Englisch, Deutsch)
 const lead = 'Light isn’t just seen. It’s felt.';
 
-const paragraphs = [
+const paragraphs = lang === 'de' ? [
+  'SCHOTT verschiebt ständig die Grenzen der Flugzeugbeleuchtung. Doch als es darum ging, die neuesten Premium-Ambiente- und Leseleuchten für First-Class-Kabinen zu verkaufen, gab es die Produkte nur in der Entwicklung. Luxusreisen in der Luft verkauft man aber nicht über Spezifikationen. Sondern über Atmosphäre, das Gefühl, das eine Kabine vermittelt, lange bevor das Flugzeug abhebt. Im Luxus kommt das Gefühl vor den Fakten. Die Frage war also nie, wie man ein Licht zeigt. Sondern wie man ein Gefühl zeigt.',
+  'Wir haben dort angefangen, wo sich Ideen am günstigsten und schnellsten testen lassen: mit KI-generierten Visuals. So konnten wir das richtige Ambiente schnell, flexibel und kostengünstig erkunden. Wir haben Stimmungen getestet, bis eine genau stimmte. Dann sind wir von der Exploration zum Handwerk übergegangen. Wir haben eine hochwertige First-Class-Kabine in 3D gebaut und jedes Detail verfeinert, um das Wesen von Licht und Raum einzufangen.',
+  'In ultrahoher Auflösung gerendert, leisteten die Bilder, was ein technisches Datenblatt nie könnte. Sie machten Licht zum Erlebnis. Das Produkt war noch nicht fertig. Der Eindruck schon. Für Messen erweitert, präsentierten die Bilder nicht nur ein Produkt. Sie ließen die Betrachter in den Luxus eintauchen, den es schafft.',
+  'KI hat uns beim Erkunden geholfen. Menschliches Handwerk hat entschieden, was zählt. Gemeinsam haben sie einer unfertigen Innovation einen Platz in der Vorstellung der Menschen gegeben, bevor sie einen Platz im Flugzeug hatte.',
+] : [
   'SCHOTT is constantly pushing the boundaries of aircraft lighting. But when it came time to sell its latest premium ambient and reading lights for first-class cabins, the products existed only in R&D. But luxury air travel isn’t sold on specification. It’s sold on atmosphere, the feeling a cabin gives you long before take off. In luxury, feeling comes before facts. So the question was never how to show a light. It was how to show a feeling.',
   'We started where ideas are cheapest and fastest to test: AI-generated visuals. They let us explore the right ambiance quickly, flexibly and at low cost. We tested moods until one felt exactly right. Then we moved from exploration to craft. We built a high-end first-class cabin in 3D and refined every detail to capture the essence of light and space.',
   'Rendered in ultra-high resolution, the images did what a technical sheet never could. They turned light into experience. The product wasn’t finished. The impression was. Expanded for trade shows, the images didn’t only present a product. They immersed viewers in the luxury it creates.',

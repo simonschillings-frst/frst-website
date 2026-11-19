@@ -2,9 +2,6 @@ import { localePath, useLang, type Lang } from '../i18n';
 import { anatomyEn, blindSpotEn, confessionEn, manualEn, middleEn, nightmareEn, obituaryEn, therapySessionEn } from './researchArticles.en';
 import { readingMinutes } from '../lib/readingTime';
 
-/** Lesezeit der deutschen Seite „Die Mitte verschwindet“ (eigene Seite ohne Story-Daten, rund 1.050 Wörter). Bei Textänderungen neu zählen. */
-export const MIDDLE_DE_MINUTES = 6;
-
 type Tone = 'night' | 'dusk' | 'sky' | 'desert';
 
 export interface ResearchArticle {
@@ -75,7 +72,7 @@ export interface ArticleStory {
 const obituary: ArticleStory = {
   heroImage: { src: '/images/web/artikel-01-01-header.jpg', alt: 'Eine Digitalanzeige mit der Uhrzeit 5:55 spiegelt sich nachts in einer Pfütze', position: '25% 50%' },
   bodyImage: { src: '/images/artikel-01-02-web.webp', alt: 'Schwarz-Weiß-Porträt einer Person in heller Bluse, das Gesicht ist aus dem Papier herausgerissen und von gerissenen Papierringen umgeben', label: 'artikel-01-02' },
-  eyebrow: 'Nachruf',
+  eyebrow: 'Obituary',
   title: ['Hier ruht die abrechenbare Stunde.', 'Ihre Zeit ist gekommen.'],
   paragraphs: [
     'Sie starb still, ohne große Abschiedsworte. Neben ihr lag noch das Angebot, das niemand mehr freigeben wollte, als ihre Zeiger für immer stehen blieben. Sie wurde 87 Jahre alt. Die genauen Umstände ihres Todes sind noch Gegenstand von Diskussionen. Die meisten sind sich aber einig: Ihr Ende war absehbar.',
@@ -130,6 +127,85 @@ const obituary: ArticleStory = {
     text: 'Agenturen müssen aufhören, Zeit zu verkaufen, und anfangen, Wert zu kommunizieren. Das bedeutet konkret: Leistungspakete mit klar definierten Deliverables statt offener Stundenkontingente. Preisargumentationen, die vom Ergebnis ausgehen, nicht vom Aufwand. KI-Effizienzgewinne offen kommunizieren und das eingesparte Budget in strategische Tiefe reinvestieren — nicht still einstecken. Und die wichtigste Frage, die jede Agentur intern beantworten muss, bevor sie nach außen kommuniziert: Was wäre ohne uns anders gewesen?',
   },
   summary: 'Wenn Zeit nicht mehr der Maßstab ist, muss die Branche neu beantworten, was ihre Arbeit wert ist.',
+};
+
+/** Deutsche Fassung von „Die Mitte verschwindet“ (Texte unverändert von der früheren eigenen Seite übernommen) */
+export const middle: ArticleStory = {
+  heroImage: { src: '/images/web/artikel-02-01-header.jpg', alt: 'Zwei Figuren sitzen sich in einer weiten Steppe in der Dämmerung an einem Tisch gegenüber: eine als dunkle Silhouette, die andere weiß leuchtend' },
+  bandImage: { src: '/images/artikel-02-02-web.jpg', alt: 'Zwei Figuren stehen sich in einer weiten Landschaft auf beiden Seiten einer tiefen Felsspalte gegenüber: eine als dunkle Silhouette, die andere weiß leuchtend', position: '50% 53%' },
+  paragraphs: [
+    'Es gibt eine bequeme Geschichte, die die Branche sich gerade erzählt: KI ist ein Werkzeug. Wir nutzen es. Wir werden effizienter. Und am Ende sind wir stärker als zuvor. Die Geschichte ist nicht falsch. Aber sie ist unvollständig.',
+    'Denn KI verändert nicht nur, wie Agenturen arbeiten. Sie verändert, welche Agenturen überhaupt noch gebraucht werden. Was repetitiv ist, verschwindet. Was keine klare Kompetenz hat, verliert seine Daseinsberechtigung. Was bleibt, sind die Enden des Spektrums — die Spezialisten und die Netzwerke. Das Mittelfeld dazwischen schrumpft. Nicht dramatisch. Nicht über Nacht. Aber strukturell und unaufhaltsam. Was folgt, sind keine Analysen. Es sind Befunde. Pointiert, weil die Lage es verlangt. Zugespitzt, weil das Mittelfeld keinen Raum mehr lässt für Unentschlossenheit. Ein Ratgeber in sechs Zitat-Kacheln.',
+  ],
+  quote: 'Das Mittelfeld dazwischen schrumpft. Nicht dramatisch. Nicht über Nacht. Aber strukturell und unaufhaltsam.',
+  continuation: {
+    sections: [
+      {
+        title: 'Wer für alle da ist, ist für niemanden unverzichtbar.',
+        paragraphs: [
+          'Die Agenturlandschaft hat sich jahrzehntelang in der Mitte eingerichtet. Full Service war kein Versprechen – es war eine Vermeidungsstrategie. Wer alles anbietet, muss sich nie entscheiden. Wer sich nie entscheidet, muss sich nie erklären. Das funktionierte, solange Kunden bereit waren, für Bequemlichkeit zu zahlen. Diese Zeit ist vorbei. Der GWA-Frühjahrsmonitor 2026 dokumentiert eine wachsende Spaltung zwischen Agenturen, die den Wandel produktiv wenden, und solchen, denen das nicht gelingt.',
+        ],
+      },
+      {
+        title: 'Effizienz ist kein Differenzierungsmerkmal, sondern die Eintrittskarte.',
+        paragraphs: [
+          'Generative KI hat die Produktionskosten für Standardleistungen auf ein Niveau gesenkt, das noch vor fünf Jahren undenkbar gewesen wäre. Textvarianten, Formatadaptionen, einfache Bildwelten, all das erledigen Tools schneller und günstiger als jedes Team. Die Transaktionskostentheorie nach Williamson beschreibt diesen Mechanismus präzise: Sinken die Kosten interner Koordination durch Technologisierung, verschiebt sich die Make-or-Buy-Grenze zuungunsten der externen Agentur. Was repetitiv und standardisierbar ist, wandert zurück in die Hierarchie. Oder fällt an Plattformen. Agenturen, die ihren Wert über diese Leistungen definiert haben, verlieren ihre Preisgrundlage. Nicht weil sie schlechter geworden wären. Sondern weil der Marktpreis für das, was sie tun, gegen null tendiert.',
+        ],
+      },
+      {
+        title: 'Spezialisierung ist keine Einschränkung. Sie ist der einzige Schutz.',
+        paragraphs: [
+          'Was nicht standardisierbar ist, kann nicht automatisiert werden. Tiefes Branchenwissen, das über Jahre aufgebaut wurde. Eine Handschrift, die unverwechselbar ist. Die Fähigkeit, in einem bestimmten Kontext Dinge zu sehen, die andere übersehen. Der ressourcenbasierte Ansatz nach Barney (1991) beschreibt genau diese Qualitäten als nachhaltige Wettbewerbsvorteile: wertvoll, selten, schwer imitierbar, nicht substituierbar. Die Boutique, die besser ist als alle anderen in genau einer Sache. Und schläft ruhiger als die Agentur, die gut ist in vielen Dingen.',
+        ],
+      },
+      {
+        title: 'Größe schützt nur die, die wirklich groß sind.',
+        paragraphs: [
+          'Auf der anderen Seite des Spektrums stehen die Netzwerke. Globale Koordination, internationale Kampagnen, proprietäre Technologien. Das sind Leistungen, die kleine Agenturen strukturell nicht erbringen können. Laut World Federation of Advertisers verfügen inzwischen zwei Drittel der multinationalen Unternehmen über eigene interne Agentureinheiten. Ein Anstieg von 16 Prozentpunkten seit 2020. Diese Entwicklung trifft das Mittelfeld härter als die Extreme: Wer weder die Skalierbarkeit eines Netzwerks hat noch die Tiefe einer Spezialagentur, verliert auf beiden Seiten gleichzeitig.',
+        ],
+      },
+      {
+        title: 'Das Mittelfeld ist kein Geschäftsmodell. Es ist ein Aufschub.',
+        paragraphs: [
+          'Was gerade passiert, ist keine Krise. Es ist eine Korrektur. Der Markt sortiert sich entlang einer Logik, die schon immer stimmte, aber lange durch Wachstum und Bequemlichkeit überdeckt wurde. Die empirischen Befunde der Masterthesis bestätigen diesen Befund aus Kundenperspektive: Kein einziger der befragten Entscheider glaubt noch an die Agentur für alles. Wer seinen Wert nicht klar benennen kann, verliert ihn. Nicht an die KI. Nicht an den Wettbewerb. Sondern an die eigene Unentschlossenheit.',
+        ],
+      },
+      {
+        title: 'Die Frage ist nicht, ob du dich positionierst. Die Frage ist, ob du es rechtzeitig tust.',
+        paragraphs: [
+          'Es gibt Agenturen, die diese Entscheidung bereits getroffen haben. Die wissen, was sie können, was sie nicht können und was sie nie versuchen werden. Sie haben aufgehört, jeden Pitch mitzumachen, und angefangen, die richtigen abzulehnen. Diese Agenturen wachsen. Nicht weil der Markt einfacher geworden ist, sondern weil Klarheit im Moment der Verwirrung der stärkste Wettbewerbsvorteil ist, den man haben kann.',
+        ],
+      },
+    ],
+  },
+  research: {
+    title: 'Forschungslage',
+    text: 'Die Transaktionskostentheorie nach Coase (1937) und Williamson (1985) liefert die ökonomische Erklärung für die laufende Marktbereinigung: Unternehmen lagern Leistungen aus, wenn externe Koordinationskosten niedriger sind als interne. Sinken diese Kosten durch Digitalisierung und KI-gestützte Automatisierung, verschiebt sich die Make-or-Buy-Grenze — zuungunsten der externen Agentur. Dieser Mechanismus erklärt strukturell, warum In-Housing operativer Standardleistungen kein vorübergehender Trend ist, sondern eine ökonomische Konsequenz. Der ressourcenbasierte Ansatz nach Barney (1991) beschreibt, welche Agenturen dennoch überleben: jene, die Ressourcen bieten, die intern nicht replizierbar sind — wertvoll, selten, schwer imitierbar und nicht substituierbar. Das trifft auf hochspezialisierte Boutiquen und auf integrierte Netzwerke zu, nicht jedoch auf das Mittelfeld ohne klares Alleinstellungsmerkmal. Die empirischen Befunde der Masterarbeit (Walter, 2026) bestätigen diese Polarisierung aus Kundenperspektive: Kein einziger der elf befragten Entscheider glaubt noch an die Universalagentur. Die WFA & Observatory International (2023) dokumentieren, dass zwei Drittel der multinationalen Unternehmen bereits eigene interne Agentureinheiten betreiben — ein Anstieg von 16 Prozentpunkten seit 2020.',
+  },
+  facts: {
+    title: 'Zahlen',
+    items: [
+      { value: '66 %', text: 'der multinationalen Unternehmen haben bereits eigene interne Agentureinheiten (WFA & Observatory International, 2023)' },
+      { value: '21 %', text: 'erwägen zusätzlich den Aufbau einer eigenen Einheit (WFA, 2023)' },
+      { value: '49 %', text: 'der Agenturen sehen KI-Substitution als Wachstumshemmnis (GWA Frühjahrsmonitor, 2026)' },
+      { value: '11 %', text: 'der Unternehmen halten ihr bestehendes Agenturmodell für zukunftsfähig (WFA)' },
+      { value: '43,7 %', text: 'der Agenturen melden Umsatzplus — aber 50,7 % melden Rückgänge: Der Markt spaltet sich (GWA, 2026)' },
+    ],
+  },
+  quotes: {
+    title: 'Direkte Zitate',
+    items: [
+      { text: 'Ich glaube, diese eine Agentur für alles gibt es nicht mehr.', source: 'IP 8 · Top-Management Markenstrategie' },
+      { text: 'Ich glaube, wir werden viele, viele kleine spezialisierte Agenturen sehen und halt große, große Netzwerke, die vieles abbilden können.', source: 'IP 2 · Fachexpertise Unternehmenskommunikation' },
+      { text: 'Ich will auch keine Agentur haben, die alles anbietet. Ich bestelle auch nicht bei einem Italiener, der nebenher noch Indisch kocht.', source: 'IP 11 · Fachkoordination Kommunikation' },
+      { text: 'Dienstleister weisen abseits ihrer originären Kernkompetenzen oftmals Schwächen in der Ausführung auf.', source: 'IP 1 · Führungsebene Marketing & Kommunikation' },
+    ],
+  },
+  practice: {
+    title: 'Ableitung in die Praxis',
+    text: 'Die wichtigste strategische Entscheidung, die Agenturen jetzt treffen müssen, ist keine Technologieentscheidung. Es ist eine Positionierungsentscheidung: Boutique oder Netzwerk? Spezialist oder Integrator? Wer sich nicht entscheidet, entscheidet sich für das Mittelfeld — und das Mittelfeld schrumpft. Konkret bedeutet das: Kernkompetenz radikal benennen und konsequent kommunizieren. Leistungen außerhalb dieser Kompetenz transparent an spezialisierte Partner abgeben. Und In-Housing nicht als Bedrohung lesen, sondern als Chance, den eigenen Wertbeitrag auf das zu konzentrieren, was kein internes Team je replizieren kann.',
+  },
+  summary: 'Das Mittelfeld ist kein Geschäftsmodell. Es ist ein Aufschub.',
 };
 
 const therapySession: ArticleStory = {
@@ -687,7 +763,9 @@ export const researchArticles = (lang: Lang): ResearchArticle[] => {
       href: localePath(lang, '/perspectives/the-middle-is-disappearing'),
       text: t('AI isn’t destroying the agency. It’s destroying the middle.', 'KI zerstört nicht die Agentur. Sie zerstört das Mittelfeld.'),
       tone: 'dusk',
-      minutes: lang === 'de' ? MIDDLE_DE_MINUTES : readingMinutes('en', 'The middle is disappearing.', 'AI isn’t destroying the agency. It’s destroying the middle.', middleEn),
+      minutes: lang === 'de'
+        ? readingMinutes('de', 'Die Mitte verschwindet.', 'KI zerstört nicht die Agentur. Sie zerstört das Mittelfeld.', middle)
+        : readingMinutes('en', 'The middle is disappearing.', 'AI isn’t destroying the agency. It’s destroying the middle.', middleEn),
       image: '/images/web/artikel-02-01-header.jpg',
     },
     withPage(

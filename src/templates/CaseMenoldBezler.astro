@@ -14,15 +14,22 @@ const t = useLang(lang);
 
 // Texte und Bilder sind Platzhalter. Mit `src="/images/..."` durch die Originalfotos ersetzen.
 const facts = [
-  { label: t('Project', 'Projekt'), value: t('Brand Repositioning · Design System · Campaign Architecture · Tone of Voice', 'Marken-Repositionierung · Designsystem · Kampagnenarchitektur · Tone of Voice') },
+  { label: t('Project', 'Projekt'), value: 'Brand Repositioning · Design System · Campaign Architecture · Tone of Voice' },
   { label: t('Client', 'Kunde'), value: 'Menold Bezler' },
   { label: t('Year', 'Jahr'), value: '2025' },
 ];
 
-// Case-Text (bisher nur Englisch; deutsche Fassung folgt)
+// Case-Text (Englisch, Deutsch)
 const lead = 'Law firms all look the same. Menold Bezler decided not to.';
 
-const paragraphs = [
+const paragraphs = lang === 'de' ? [
+  'Serifenschriften. Tiefes Blau. Marmorsäulen. Ein Händedruck. Kanzleien sehen alle gleich aus, und Menold Bezler, die Kanzlei für Recht, Steuern und Wirtschaftsprüfung aus Baden-Württemberg, wollte zum Maßstab für moderne Beratung werden.',
+  'Jahrzehntelanges Vertrauen war längst da. Was fehlte, war ein Selbstbild, das dazu passt. Das Briefing war also nie ein neues Logo. Sondern eine neue Art, wie sich die Kanzlei selbst sieht.',
+  'Wir haben uns für Evolution statt Revolution entschieden. Eine Marke, die sich über Jahrzehnte Vertrauen erarbeitet hat, wirft es nicht weg. Sie baut darauf auf. Wir haben das Grün behalten, neu interpretiert und ein Designsystem für jeden Touchpoint gebaut, von der Visitenkarte über die Karrierekampagne bis zur Konferenzbühne. Dazu ein Tone of Voice mit Haltung: „Wenn du lieber Klagen als Ausreden hörst.“',
+  'Wir haben kein 200-seitiges Brandbook übergeben. Wir haben gemeinsam mit dem Inhouse-Team ein lebendiges Playbook gebaut: Co-Creation, Coaching, echte Kampagnen, echte Learnings. Das Ziel ist ein Team, das uns nicht mehr braucht.',
+  'In drei Jahren soll das nicht wie eine neue Identität aussehen. Es soll sich anfühlen wie eine Kanzlei, die genau weiß, wer sie ist.',
+  'Mutig, wo andere auf Nummer sicher gehen. Klar, wo andere sich hinter Komplexität verstecken.',
+] : [
   'Serif fonts. Deep blue. Marble columns. A handshake. Law firms all look the same, and Menold Bezler, the law, tax and audit firm from Baden-Württemberg, wanted to become the benchmark for modern advisory.',
   'Decades of trust were already there. What was missing was a self-image to match. So the brief was never a new logo. It was a new way for the firm to see itself.',
   'We chose evolution over revolution. A brand that has earned trust for decades doesn’t throw it away. It builds on it. We kept the green, reinterpreted it and built one design system for every touchpoint, from business card to career campaign to conference stage. Add a tone of voice with attitude: „Wenn du lieber Klagen als Ausreden hörst.“',
@@ -34,12 +41,19 @@ const paragraphs = [
 // Zweiter Textblock zum Design (zwei versetzte Spalten weiter unten)
 const designLead = 'Keep the green. Rewrite the signal.';
 
-const designLeft = [
+const designLeft = lang === 'de' ? [
+  'Vertrauen war nie das Problem. Sichtbarkeit schon. Das Grün von Menold Bezler war längst im kollektiven Gedächtnis Baden-Württembergs verankert, also haben wir es nicht ersetzt. Wir haben es neu interpretiert: ein tiefes, selbstbewusstes Waldgrün als Fundament, ein helles, elektrisches Signalgrün, das durchdringt. Zwei Stimmen, eine Botschaft. Wir bleiben uns treu. Und wir gehen voran.',
+  'Die Wortmarke sitzt zwischen zwei minimalen Klammern. Ein Rahmen, ein Fokus, ein Sucher: Hier ist, was zählt. Sie funktioniert auf dem Plakat, auf der Visitenkarte und als App-Icon mit 32 Pixeln. Eine Schrift, Inter, trägt jeden Kanal, vom Foliensatz über das Plakat bis zur Plattform. Kein Übersetzungsverlust. Keine Printversion der Wahrheit.',
+] : [
   'Trust was never the problem. Visibility was. Menold Bezler’s green already lived in the collective memory of Baden-Württemberg, so we didn’t replace it. We reinterpreted it: a deep, confident forest green as the foundation, a bright, electric signal green that cuts through. Two voices, one message. We stay true. And we move forward.',
   'The wordmark sits inside two minimal brackets. A frame, a focus, a viewfinder: here is what matters. It holds up on a billboard, a business card and a 32-pixel app icon. One typeface, Inter, carries every channel, from slide deck to poster to platform. No translation loss. No print version of the truth.',
 ];
 
-const designRight = [
+const designRight = lang === 'de' ? [
+  'Dann die Pille. Ein grünes Highlight, das aus einem Satz ein Statement macht: „Wenn dein Leben nicht die längste Rückstellung ever werden soll.“ Plötzlich hat eine Kanzlei Haltung, und Recruiting, Social und Bühne arbeiten alle mit demselben Element.',
+  'Ein System, gebaut, um genutzt zu werden, nicht um abgeheftet zu werden.',
+  'Treu bleiben. Vorangehen.',
+] : [
   'Then the pill. One green highlight that turns a sentence into a statement: „Wenn dein Leben nicht die längste Rückstellung ever werden soll.“ Suddenly a law firm has attitude, and recruiting, social and the stage all work with the same element.',
   'One system, built to be used, not filed.',
   'Stay true. Move first.',

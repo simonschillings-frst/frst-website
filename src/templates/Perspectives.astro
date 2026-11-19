@@ -37,23 +37,23 @@ const topics = sliderTakes.map((take, i) => ({
 }));
 
 const videos = [
-  { title: t('Talk with Prof. Dr. Amelie Duckwitz', 'Talk mit Prof. Dr. Amelie Duckwitz'), tags: t('Agency of the Future · Research', 'Agentur der Zukunft · Forschung'), tone: 'night', youtube: 'cqHlVXHbxd4', poster: '/images/talk-duckwitz.jpg' },
-  { title: t('Talk with Dr. Ilke Heller', 'Talk mit Dr. Ilke Heller'), tags: t('Design Thinking', 'Design Thinking'), tone: 'night', youtube: 'XTrlKfSNs-8', poster: '/images/talk-heller.jpg' },
-  { title: t('Talk with Constantin Schiller', 'Talk mit Constantin Schiller'), tags: t('Social Media · Content · Digital', 'Social Media · Content · Digital'), tone: 'dusk', youtube: '4vnXQX7XxYA', poster: '/images/talk-schiller.jpg' },
-  { title: t('Talk with Sebastian Corbé', 'Talk mit Sebastian Corbé'), tags: t('Strategy · Content · Archetypes', 'Strategie · Content · Archetypen'), tone: 'mist', youtube: 'gHJJ_ywRHzc', poster: '/images/talk-corbe.jpg' },
+  { title: 'Talk with Prof. Dr. Amelie Duckwitz', tags: t('Agency of the Future · Research', 'Agentur der Zukunft · Forschung'), tone: 'night', youtube: 'cqHlVXHbxd4', poster: '/images/talk-duckwitz.jpg' },
+  { title: 'Talk with Dr. Ilke Heller', tags: t('Design Thinking', 'Design Thinking'), tone: 'night', youtube: 'XTrlKfSNs-8', poster: '/images/talk-heller.jpg' },
+  { title: 'Talk with Constantin Schiller', tags: t('Social Media · Content · Digital', 'Social Media · Content · Digital'), tone: 'dusk', youtube: '4vnXQX7XxYA', poster: '/images/talk-schiller.jpg' },
+  { title: 'Talk with Sebastian Corbé', tags: t('Strategy · Content · Archetypes', 'Strategie · Content · Archetypen'), tone: 'mist', youtube: 'gHJJ_ywRHzc', poster: '/images/talk-corbe.jpg' },
 ] as const;
 ---
 
 <Base title={t('Perspectives – frst', 'Perspektiven – frst')} headerOverlay lang={lang}>
   <!-- Hero -->
   <section class="relative flex min-h-[640px] items-end overflow-hidden bg-night text-cream md:h-screen md:max-h-[900px]">
-    <Media eager src="/images/perspectives-header.jpg" alt={t('Two people talking on chairs at a low table in a studio', 'Zwei Personen im Gespräch auf Sesseln an einem niedrigen Tisch in einem Studio')} position="35% 50%" class="absolute inset-0 h-full w-full" />
+    <Video src="/videos/perspectives-hero.mp4" srcMobile="/videos/perspectives-hero-720.mp4" poster="/videos/perspectives-hero-poster.webp" loop eager tone="night" class="absolute inset-0" lang={lang} />
     <!-- Abdunklung, damit Navigation und Text über den hellen Fenstern lesbar bleiben -->
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-night/75 via-night/40 to-night/20" aria-hidden="true"></div>
     <div class="container-frst relative grid gap-10 pt-40 pb-10 md:grid-cols-2 md:items-end">
       <div class="md:self-center">
-        <p class="eyebrow text-[14px]">{t('Perspectives', 'Perspektiven')}</p>
-        <h1 class="mt-14 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{t('Ideas worth', 'Ideen, über die')}<br />{t('thinking about.', 'es sich nachzudenken lohnt.')}</h1>
+        <p class="eyebrow text-[14px]">Perspectives</p>
+        <h1 class="mt-14 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">Ideas worth<br />thinking about.</h1>
         <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{t(
           'Bold takes and honest talks from our universe. Ideas that look beyond the familiar, and conversations with people who work on the future. Read, watch, argue back.',
           'Mutige Takes und ehrliche Gespräche aus unserem Universum. Ideen, die über das Vertraute hinausblicken, und Gespräche mit Menschen, die an der Zukunft arbeiten. Lesen, ansehen, widersprechen.',
@@ -69,7 +69,7 @@ const videos = [
         <Media src={newestTake.teaserImage ?? newestTake.image} tone={newestTake.tone} alt="" sizes="(min-width: 768px) 60vw, 100vw" class="aspect-[16/9] w-full transition-transform duration-700 ease-out group-hover:scale-105" />
       </a>
       <div>
-        <p class="eyebrow text-[14px]">{t('Newest take', 'Neuester Take')}</p>
+        <p class="eyebrow text-[14px]">Newest take</p>
         <h2 class="mt-6 max-w-[20ch] text-[30px] leading-snug">{newestTake.title}</h2>
         <p class="mt-6 max-w-[48ch] text-[16px] leading-relaxed">{newestTake.content?.sections[0].paragraphs[0] ?? longText}</p>
         <p class="mt-4 text-[14px]">{t(`Take · ${newestTake.minutes} min read`, `Take · ${newestTake.minutes} Min. Lesezeit`)}</p>
@@ -81,7 +81,7 @@ const videos = [
   <!-- Videos als Slider -->
   <section id="videos" class="container-frst scroll-mt-20 py-16 md:py-24" data-slider>
     <div class="flex items-center justify-between">
-      <p class="eyebrow text-[14px]">Beyond Talks</p>
+      <p class="eyebrow text-[14px]">Talks</p>
       <div class="flex gap-2">
         <button
           type="button"
@@ -107,7 +107,7 @@ const videos = [
           {'youtube' in video ? (
             <div>
               <Video youtube={video.youtube} poster={video.poster} title={video.title} tone={video.tone} lang={lang} />
-              <p class="mt-8 text-[14px]">Beyond Talk</p>
+              <p class="mt-8 text-[14px]">Talk</p>
               <h3 class="mt-3 text-[24px] leading-snug">{video.title}</h3>
               <p class="mt-5 text-[14px] opacity-70">{video.tags}</p>
             </div>
@@ -116,7 +116,7 @@ const videos = [
               <div class="overflow-hidden">
                 <Media tone={video.tone} label="frst talk" class="aspect-video w-full transition-transform duration-700 ease-out group-hover:scale-105" />
               </div>
-              <p class="mt-8 text-[14px]">Beyond Talk</p>
+              <p class="mt-8 text-[14px]">Talk</p>
               <h3 class="mt-3 text-[24px] leading-snug">{video.title}</h3>
               <p class="mt-5 text-[14px] opacity-70">{video.tags}</p>
               <span class="mt-5 inline-block transition-transform duration-300 group-hover:translate-x-2"><Arrow /></span>
@@ -131,7 +131,7 @@ const videos = [
   <section id="channel" class="grid scroll-mt-20 md:grid-cols-[1fr_1.3fr]">
     <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-10">
       <p class="eyebrow text-[14px]">Channel</p>
-      <h2 class="mt-8 max-w-[16ch] text-[30px] leading-snug">{t('You think about it, we talk about it.', 'Du denkst darüber nach, wir sprechen darüber.')}</h2>
+      <h2 class="mt-8 max-w-[16ch] text-[30px] leading-snug">You think about it, we talk about it.</h2>
       <p class="mt-8 max-w-xs text-[16px] leading-relaxed opacity-90">{t('Many perspectives in one place. Subscribe to our channel and join the discussion.', 'Viele Perspektiven an einem Ort. Abonniere unseren Kanal und diskutiere mit.')}</p>
       <a href="https://www.youtube.com/@frst.agency" target="_blank" rel="noopener noreferrer" class="btn-outline mt-10 self-start border-cream/80 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">{t('Watch on YouTube', 'Auf YouTube ansehen')}</a>
     </div>
@@ -145,7 +145,7 @@ const videos = [
     <div class="grid gap-12 lg:grid-cols-[1fr_2.6fr] lg:gap-24" data-slider>
       <div>
         <p class="eyebrow text-[14px]">Our Takes</p>
-        <h2 class="mt-8 text-[30px] leading-snug">{t('Think out loud', 'Laut gedacht')}</h2>
+        <h2 class="mt-8 text-[30px] leading-snug">Think out loud</h2>
         <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{t(
           'Short, clear and opinionated essays on brands, technology, culture and the way we work together. We don’t chase hot topics. We pick the questions that matter to us, say what we think and invite you to push back. Read one, and tell us where we are wrong. Or where we should go further.',
           'Kurze, klare Essays mit Haltung über Marken, Technologie, Kultur und die Art, wie wir zusammenarbeiten. Wir jagen keinen Trendthemen hinterher. Wir greifen die Fragen auf, die uns wichtig sind, sagen, was wir denken, und laden dich ein, zu widersprechen. Lies einen und sag uns, wo wir falschliegen. Oder wo wir weitergehen sollten.',

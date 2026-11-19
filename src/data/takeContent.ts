@@ -1,5 +1,5 @@
 // Inhalte der Take-Seiten. Takes ohne Eintrag zeigen noch den Blindtext aus Take.astro.
-// Der Text liegt bisher nur auf Englisch vor und wird auch auf den deutschen Seiten angezeigt.
+// Englische Fassung; die deutsche steht in takeContent.de.ts (gleiche Schlüssel).
 
 export interface TakeSection {
   heading: string;

@@ -18,9 +18,9 @@ const lorem = t(
 );
 
 const events = [
-  { no: '01', date: t('12 Nov 2026', '12. Nov. 2026'), title: t('CMO Roundtable: Trust', 'CMO-Roundtable: Vertrauen'), place: 'Stuttgart', href: '#' },
-  { no: '02', date: t('04 Feb 2027', '04. Feb. 2027'), title: t('CMO Roundtable: Creativity', 'CMO-Roundtable: Kreativität'), place: t('Munich', 'München'), href: '#' },
-  { no: '03', date: t('17 Jun 2027', '17. Juni 2027'), title: t('CMO Roundtable: The Future of Agencies', 'CMO-Roundtable: Die Zukunft der Agentur'), place: 'Berlin', href: '#' },
+  { no: '01', date: t('12 Nov 2026', '12. Nov. 2026'), title: 'CMO Roundtable: Trust', place: 'Stuttgart', href: '#' },
+  { no: '02', date: t('04 Feb 2027', '04. Feb. 2027'), title: 'CMO Roundtable: Creativity', place: t('Munich', 'München'), href: '#' },
+  { no: '03', date: t('17 Jun 2027', '17. Juni 2027'), title: 'CMO Roundtable: The Future of Agencies', place: 'Berlin', href: '#' },
 ];
 
 const factText = t('Lorem Ipsum dolor sit amet Ectur centran et amos.', 'Lorem Ipsum dolor sit amet Ectur centran et amos.');
@@ -41,7 +41,7 @@ const facts = [
     <div class="container-frst relative grid gap-10 pt-40 pb-10 md:grid-cols-2 md:items-end">
       <div class="md:self-center">
         <p class="eyebrow text-[14px]">CMO Community</p>
-        <h1 class="mt-14 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{t('The Future of', 'Die Zukunft der')}<br />{t('Agency Relationships.', 'Agenturbeziehung.')}</h1>
+        <h1 class="mt-14 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">The Future of<br />Agency Relationships.</h1>
         <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{t(
           'The agency-client relationship is under pressure. AI. More transparency. New expectations. But the pressure isn’t on agencies themselves—it’s on the model companies and agencies use to work together. frst is exploring what needs to change.',
           'Die Beziehung zwischen Agentur und Kunde steht unter Druck. KI. Mehr Transparenz. Neue Erwartungen. Doch der Druck liegt nicht auf den Agenturen selbst, sondern auf dem Modell, mit dem Unternehmen und Agenturen zusammenarbeiten. frst untersucht, was sich ändern muss.',
@@ -83,7 +83,7 @@ const facts = [
   <section id="roundtables" class="grid scroll-mt-20 md:grid-cols-[1fr_1.3fr]">
     <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-10">
       <p class="eyebrow text-[14px]">Roundtables</p>
-      <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">{t('Peer conversations, backed by research', 'Austausch auf Augenhöhe, gestützt auf Research')}</h2>
+      <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">Peer conversations, backed by research</h2>
       <p class="mt-8 max-w-md text-[16px] leading-relaxed opacity-90">{t(
         'Three times a year, 10–15 marketing and C-suite leaders come together. No panels. No pitches. Three themes: trust, creativity, and the future of agencies. What’s shared in the room stays in the room. The insights feed into the next study.',
         'Dreimal im Jahr kommen 10 bis 15 Marketing- und C-Level-Verantwortliche zusammen. Keine Panels. Keine Pitches. Drei Themen: Vertrauen, Kreativität und die Zukunft der Agentur. Was im Raum besprochen wird, bleibt im Raum. Die Erkenntnisse fließen in die nächste Studie ein.',
@@ -96,8 +96,8 @@ const facts = [
   <section id="network" class="container-frst scroll-mt-20 py-20 md:py-28">
     <div class="grid gap-12 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
       <div>
-        <p class="eyebrow text-[14px]">{t('CMO Network', 'CMO-Netzwerk')}</p>
-        <h2 class="mt-8 text-[30px] leading-snug">{t('Different perspectives.', 'Verschiedene Perspektiven.')}<br />{t('Same direction.', 'Gleiche Richtung.')}</h2>
+        <p class="eyebrow text-[14px]">CMO Network</p>
+        <h2 class="mt-8 text-[30px] leading-snug">Different perspectives.<br />Same direction.</h2>
         <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{lorem}</p>
       </div>
       <ul class="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -114,8 +114,8 @@ const facts = [
   <!-- Mitmachen -->
   <section class="relative overflow-hidden bg-stone text-cream">
     <div class="container-frst relative py-24 md:py-32">
-      <p class="eyebrow text-[14px]">{t('Join the community', 'Der Community beitreten')}</p>
-      <h2 class="mt-8 max-w-4xl text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">{t('Bring your questions to the table.', 'Bring deine Fragen mit an den Tisch.')}</h2>
+      <p class="eyebrow text-[14px]">Join the community</p>
+      <h2 class="mt-8 max-w-4xl text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">Bring your questions to the table.</h2>
       <a href={localePath(lang, '/#contact')} class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">{t('Request an invitation', 'Einladung anfragen')}</a>
     </div>
   </section>

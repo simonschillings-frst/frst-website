@@ -116,13 +116,13 @@ const quotes = [
     <a
       href="#get-the-study"
       class="group pointer-events-auto absolute right-5 bottom-20 block h-28 w-28 rounded-full text-night focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream md:top-1/2 md:right-[13.5rem] md:bottom-auto md:h-36 md:w-36 md:-translate-y-1/2"
-      aria-label={t('Get the study', 'Studie anfordern')}
+      aria-label="Get the study"
     >
       <svg class="h-full w-full animate-[spin_18s_linear_infinite] motion-reduce:animate-none" viewBox="0 0 100 100" aria-hidden="true">
         <defs><path id="study-ring" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0" /></defs>
         <circle cx="50" cy="50" r="49" class="fill-lilac transition-colors duration-300 group-hover:fill-cream" />
         <text class="fill-current text-[9px] tracking-[0.08em] uppercase">
-          <textPath href="#study-ring" textLength="230" lengthAdjust="spacing">{t('Get the study · Get the study ·', 'Studie anfordern · Studie anfordern ·')}</textPath>
+          <textPath href="#study-ring" textLength="230" lengthAdjust="spacing">Get the study · Get the study ·</textPath>
         </text>
       </svg>
       <Arrow class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-90" />
@@ -133,7 +133,7 @@ const quotes = [
 
   <!-- Manifest: zweispaltig wie „Why frst“ auf der Startseite, drei Absätze im Spaltenfluss -->
   <section id="manifest" class="container-frst scroll-mt-20 pt-14 pb-20 md:pt-20 md:pb-28">
-    <p class="eyebrow text-[14px]">{t('The Future of the Agency', 'Die Zukunft der Agentur')}</p>
+    <p class="eyebrow text-[14px]">The Future of the Agency</p>
     <div class="mt-10 text-2xl leading-snug md:columns-2 md:gap-16">
       {manifest.map((paragraph, i) => (
         <p class:list={[i > 0 && 'mt-6']}>{paragraph}</p>
@@ -143,7 +143,7 @@ const quotes = [
 
   <!-- Artikel -->
   <section id="articles" class="container-frst scroll-mt-20 py-16 md:py-24">
-    <p class="eyebrow text-[14px]">{t('Articles', 'Artikel')}</p>
+    <p class="eyebrow text-[14px]">Articles</p>
     <div class="mt-10 grid items-start gap-10 md:grid-cols-[1.4fr_1fr] md:gap-16">
       <ul data-article-list>
         {articles.map((article, i) => (
@@ -204,8 +204,8 @@ const quotes = [
     <div class="absolute inset-0 bg-night/50" aria-hidden="true"></div>
     <div class="container-frst relative grid gap-10 py-16 md:grid-cols-[1fr_3fr]">
       <div>
-        <p class="eyebrow text-[14px]">{t('Study', 'Studie')}</p>
-        <h2 class="mt-4 text-[30px] leading-snug">{t('Get the Study', 'Studie anfordern')}</h2>
+        <p class="eyebrow text-[14px]">Study</p>
+        <h2 class="mt-4 text-[30px] leading-snug">Get the Study</h2>
       </div>
       <form class="grid gap-x-8 gap-y-8 md:grid-cols-3 md:pt-6" action="/api/study" method="post" data-study-mail="request" data-lang={lang}
         data-msg-sending={t('Sending …', 'Wird gesendet …')}
@@ -253,7 +253,7 @@ const quotes = [
     <div class="grid gap-12 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
       <div>
         <p class="eyebrow text-[14px]">Quotes</p>
-        <h2 class="mt-8 text-[30px] leading-snug">{t('In their own words.', 'In ihren eigenen Worten.')}</h2>
+        <h2 class="mt-8 text-[30px] leading-snug">In their own words.</h2>
         <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{quotesIntro}</p>
         {lang === 'en' && <p class="mt-4 max-w-sm text-[14px] leading-relaxed opacity-70">*Translated from German</p>}
       </div>
@@ -283,7 +283,7 @@ const quotes = [
     <div class="container-frst grid gap-12 py-16 md:py-20 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
       <div>
         <p class="eyebrow text-[14px]">By the numbers</p>
-        <h2 class="mt-8 text-[30px] leading-snug">{t('Figures behind the answers', 'Die Zahlen hinter den Antworten')}</h2>
+        <h2 class="mt-8 text-[30px] leading-snug">Figures behind the answers</h2>
         <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{numbersIntro}</p>
         <p class="mt-4 max-w-sm text-[14px] leading-relaxed opacity-70">{t('*These are realistic estimates, not exact counts.', '*Bei diesen Angaben handelt es sich um realistisch geschätzte Zahlen.')}</p>
       </div>
@@ -303,8 +303,8 @@ const quotes = [
   <section id="study" class="scroll-mt-20 bg-lilac">
     <div class="container-frst grid gap-12 py-16 md:py-24 lg:grid-cols-[1fr_2.6fr] lg:gap-16">
       <div>
-        <p class="eyebrow text-[14px]">{t('Research study', 'Research-Studie')}</p>
-        <h2 class="mt-8 text-[30px] leading-snug">{t('Take part', 'Nimm teil')}<br />{t('in our study.', 'an unserer Studie.')}</h2>
+        <p class="eyebrow text-[14px]">Research study</p>
+        <h2 class="mt-8 text-[30px] leading-snug">Take part<br />in our study.</h2>
         <p class="mt-10 max-w-sm text-[16px] leading-relaxed">{t('Share a few details and we will get in touch with the next steps. Your data is used only for organising the study.', 'Teile uns ein paar Angaben mit, und wir melden uns mit den nächsten Schritten. Deine Daten werden nur zur Organisation der Studie verwendet.')}</p>
       </div>
 

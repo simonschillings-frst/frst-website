@@ -11,6 +11,8 @@ export interface MenuLink {
   tone?: Tone;
   /** Bild im Mega-Menü; ersetzt den Platzhalter */
   image?: string;
+  /** Bildausschnitt für `image` als CSS `object-position`, z. B. `50% 20%` */
+  imagePosition?: string;
   /** Mehrere Bilder nebeneinander in der Karte (z. B. Porträts); hat Vorrang vor `image` */
   images?: { src: string; alt: string }[];
 }
@@ -47,12 +49,12 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       label: t('Services', 'Leistungen'),
       href: l('/what-we-do'),
       layout: 'feature',
-      feature: { title: lang === 'de' ? ['Von A bis Z', 'für deine', 'Marke.'] : ['End-to-end', 'for your', 'brand.'] },
+      feature: { title: ['End-to-end', 'for your', 'brand.'] },
       children: [
-        { title: t('What we offer', 'Was wir bieten'), subtitle: t('Four disciplines. One team, built around your project.', 'Vier Disziplinen. Ein Team, zusammengestellt für dein Projekt.'), href: l('/what-we-do#services') },
-        { title: t('Our process', 'Unser Prozess'), subtitle: t('The Process built around your Ambition.', 'Der Prozess, gebaut um deinen Anspruch.'), href: l('/what-we-do#process') },
+        { title: 'What we offer', subtitle: t('Four disciplines. One team, built around your project.', 'Vier Disziplinen. Ein Team, zusammengestellt für dein Projekt.'), href: l('/what-we-do#services') },
+        { title: 'Our process', subtitle: t('The Process built around your Ambition.', 'Der Prozess, gebaut um deinen Anspruch.'), href: l('/what-we-do#process') },
         { title: 'Pricing', subtitle: t('Models that fit your project.', 'Modelle, die zu deinem Projekt passen.'), href: l('/what-we-do#pricing') },
-        { title: t('Selected work', 'Ausgewählte Projekte'), subtitle: 'New York City Activation', href: l('/what-we-do#selected-work') },
+        { title: 'Selected work', subtitle: 'New York City Activation', href: l('/what-we-do#selected-work') },
       ],
     },
     {
@@ -60,13 +62,13 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       label: t('Research', 'Research'),
       href: l('/research'),
       layout: 'feature',
-      feature: { title: lang === 'de' ? ['Die', 'Zukunft', 'der Agentur'] : ['The', 'Future', 'of the Agency'] },
+      feature: { title: ['The', 'Future', 'of the Agency'] },
       children: [
-        { title: t('Articles', 'Artikel'), subtitle: t('Thoughts on the future of the agency', 'Gedanken zur Zukunft der Agentur'), href: l('/research#articles') },
-        { title: t('Study', 'Studie'), subtitle: t('Get the study', 'Studie anfordern'), href: l('/research#get-the-study') },
+        { title: 'Articles', subtitle: t('Thoughts on the future of the agency', 'Gedanken zur Zukunft der Agentur'), href: l('/research#articles') },
+        { title: 'Study', subtitle: t('Get the study', 'Studie anfordern'), href: l('/research#get-the-study') },
         { title: 'Quotes', subtitle: t('Different perspectives. Same direction.', 'Verschiedene Perspektiven. Gleiche Richtung.'), href: l('/research#quotes') },
         { title: 'By the numbers', subtitle: t('Facts that make a difference.', 'Fakten, die den Unterschied machen.'), href: l('/research#by-the-numbers') },
-        { title: t('Research study', 'Research-Studie'), subtitle: t('Take part in our study.', 'Nimm teil an unserer Studie.'), href: l('/research#study') },
+        { title: 'Research study', subtitle: t('Take part in our study.', 'Nimm teil an unserer Studie.'), href: l('/research#study') },
       ],
     },
     {
@@ -75,7 +77,7 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       href: l('/work'),
       layout: 'cards',
       children: [
-        { title: t('Cases', 'Cases'), subtitle: t('Our philosophy brought to life', 'Unsere Philosophie, zum Leben erweckt'), href: l('/work#cases'), image: '/images/marccain-teaser-navi.jpg' },
+        { title: 'Cases', subtitle: t('Our philosophy brought to life', 'Unsere Philosophie, zum Leben erweckt'), href: l('/work#cases'), image: '/images/marccain-teaser-navi.jpg' },
         { title: 'Mention', subtitle: t('What our clients love', 'Was unsere Kunden lieben'), href: l('/work#mention'), image: '/images/mention-navi.jpg' },
       ],
     },
@@ -86,7 +88,7 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       layout: 'cards',
       children: [
         { title: 'Our Takes', subtitle: t('Think like the wise, and speak like the crowd', 'Denke wie die Weisen und sprich wie die Menge'), href: l('/perspectives#our-takes'), image: '/images/take-aura-01-nav.jpg' },
-        { title: 'Beyond Talks', subtitle: t('Thinking takes shape while speaking', 'Denken nimmt beim Sprechen Gestalt an'), href: l('/perspectives#videos'), image: '/images/beyond-talks-teaser.jpg' },
+        { title: 'Talks', subtitle: t('Thinking takes shape while speaking', 'Denken nimmt beim Sprechen Gestalt an'), href: l('/perspectives#videos'), image: '/images/beyond-talks-nav.jpg', imagePosition: '50% 15%' },
       ],
     },
     {
@@ -95,9 +97,9 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       href: l('/cmo-community'),
       layout: 'cards',
       children: [
-        { title: t('Events', 'Events'), subtitle: 'CMO Community', href: l('/cmo-community#events') },
-        { title: t('Roundtables', 'Roundtables'), subtitle: 'CMO Community', href: l('/cmo-community#roundtables') },
-        { title: t('CMO Network', 'CMO-Netzwerk'), subtitle: 'CMO Community', href: l('/cmo-community#network') },
+        { title: 'Events', subtitle: 'CMO Community', href: l('/cmo-community#events') },
+        { title: 'Roundtables', subtitle: 'CMO Community', href: l('/cmo-community#roundtables') },
+        { title: 'CMO Network', subtitle: 'CMO Community', href: l('/cmo-community#network') },
       ],
     },
     {
@@ -105,11 +107,11 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       label: t('About us', 'Über uns'),
       href: l('/about-us'),
       layout: 'feature',
-      feature: { title: lang === 'de' ? ['Gemacht für den', 'unverstellten', 'Moment.'] : ['Made for the', 'unguarded', 'moment.'] },
+      feature: { title: ['Made for the', 'unguarded', 'moment.'] },
       children: [
         { title: 'Manifest', subtitle: t('What we believe in.', 'Woran wir glauben.'), href: l('/about-us#manifest') },
-        { title: t('Locations', 'Standorte'), subtitle: 'Stuttgart · New York · Berlin', href: l('/about-us#locations') },
-        { title: t('Careers', 'Karriere'), subtitle: t('Join us.', 'Werde Teil von frst.'), href: l('/about-us#careers') },
+        { title: 'Locations', subtitle: 'Stuttgart · New York · Berlin', href: l('/about-us#locations') },
+        { title: 'Careers', subtitle: t('Join us.', 'Werde Teil von frst.'), href: l('/about-us#careers') },
       ],
     },
   ];

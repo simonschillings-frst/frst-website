@@ -3,12 +3,14 @@ import Article from '../../../templates/Article.astro';
 import { researchArticles } from '../../../data/researchArticles';
 
 export function getStaticPaths() {
+  // Englische Titel für die Eyebrow am Artikelende
+  const enTitles = new Map(researchArticles('en').map((article) => [article.slug, article.title]));
   return researchArticles('de')
     .filter((article) => article.slug)
-    .map((article) => ({ params: { slug: article.slug }, props: { title: article.title, lead: article.lead, story: article.story } }));
+    .map((article) => ({ params: { slug: article.slug }, props: { title: article.title, lead: article.lead, story: article.story, eyebrowTitle: enTitles.get(article.slug) } }));
 }
 
-const { title, lead, story } = Astro.props;
+const { title, lead, story, eyebrowTitle } = Astro.props;
 ---
 
-<Article lang="de" title={title} lead={lead} story={story} />
+<Article lang="de" title={title} lead={lead} story={story} eyebrowTitle={eyebrowTitle} />

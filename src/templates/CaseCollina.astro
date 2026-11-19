@@ -14,32 +14,44 @@ const t = useLang(lang);
 
 // Texte und Bilder sind Platzhalter. Mit `src="/bilder/..."` durch die Originalfotos ersetzen.
 const facts = [
-  { label: t('Project', 'Projekt'), value: t('Corporate Space Concept · Interior Design · Brand Identity', 'Corporate-Space-Konzept · Interior Design · Markenidentität') },
+  { label: t('Project', 'Projekt'), value: 'Corporate Space Concept · Interior Design · Brand Identity' },
   { label: t('Client', 'Kunde'), value: 'COLLINA' },
   { label: t('Year', 'Jahr'), value: '2025' },
 ];
 
-// Case-Text (bisher nur Englisch; deutsche Fassung folgt)
+// Case-Text (Englisch, Deutsch)
 const lead = 'Stuttgart doesn’t need another Italian restaurant. It needs a place to be.';
 
-const paragraphs = [
+const paragraphs = lang === 'de' ? [
+  'Das Theaterhaus Stuttgart ist ein Haus für Kultur. Seine Gründer wollten einen Tisch, der diesen Geist über die Bühne hinausträgt: offen für Künstlerinnen und Künstler, Nachbarn und Passanten, mit oder ohne Ticket.',
+  'Wir haben dafür nicht nur ein Logo gestaltet. Wir haben den ganzen Ort gebaut, von null bis zum Eröffnungsabend: Strategie, Name, Marke, Raum, Umbau, Launch. Ein Team, eine Linie, von der ersten Skizze bis zum ersten Espresso.',
+  'Die Idee war einfach. Theater und Essen sind dasselbe: live, geteilt, unwiederholbar. Also haben wir eine Brücke gebaut zwischen Bühne und Tisch, zwischen Kunst und Küche, zwischen Stuttgart und Italien.',
+  'Der Name trägt sie. Collina heißt auf Italienisch Hügel. Ein Hügel ist ein Treffpunkt, ein Ort mit Aussicht, an dem eine Stadt zusammenkommt. Collina wurde zu einem dritten Ort: nicht Zuhause, nicht Arbeit, sondern der Ort, an dem Künstler ihr Publikum treffen, Freunde sich vor der Vorstellung verabreden und Fremde danach zur Gemeinschaft werden. Echte Begegnungen, im echten Leben.',
+  'Collina zeigt, was wir tun, wenn der Auftrag keine Kampagne ist. Wir spüren die Stimmung einer Stadt, und dann bauen wir sie. Kreativ, nicht reaktiv.',
+  'Manche Marken erzählen Geschichten über Kultur. Collina ist ein Teil davon.',
+] : [
   'Theaterhaus Stuttgart is a house for culture. Its founders wanted a table that carries that spirit beyond the stage: open to artists, neighbors and passers-by, with or without a ticket.',
-  'We didn’t design a logo for it. We built the brand from zero: name, strategy, identity, interior, every touchpoint.',
+  'We didn’t just design a logo for it. We built the entire place, from zero to opening night: strategy, name, brand, space, construction, launch. One team, one line, from the first sketch to the first espresso.',
   'The idea was simple. Theater and food are the same thing: live, shared, unrepeatable. So we built a bridge between stage and table, between art and cuisine, between Stuttgart and Italy.',
   'The name carries it. Collina means hill in Italian. A hill is a meeting point, a place with a view, where a city comes together. Collina became a third place: not home, not work, but where artists meet their audience, friends meet before the show and strangers become a community after it. Real encounters, in real life.',
-  'It belongs to the theater and stands on its own. From the first espresso to the last glass, one line runs through everything.',
-  'Collina shows what we do when the job is not a campaign. We sense the mood of a city and become part of its cultural life. Creative, not reactive.',
+  'Collina shows what we do when the job is not a campaign. We sense the mood of a city, and then we build it. Creative, not reactive.',
   'Some brands tell stories about culture. Collina is part of it.',
 ];
 
 // Zweiter Textblock zum Design (zwischen den Bildern)
 const designLead = 'Not your nonna’s trattoria.';
 
-const designParagraphs = [
+const designParagraphs = lang === 'de' ? [
+  'Das Design von Collina begann mit einer Absage. Keine karierten Tischdecken. Keine falsche Nonna. Kein Kitsch. Eine neue Generation liebt italienisches Essen, nur nicht die alte Geschichte. Sie will einen Ort, der sich nach Kultur anfühlt, nicht nach Themenpark.',
+  'Also spricht die Identität mit zwei Stimmen. Die Signature ist eine handgeschriebene Schrift in Signalrot, wie ein Autogramm auf einem Theaterprogramm. Sie steht auf der Espressotasse, dem Teller, der Karte, der Wand. Sie ist kein Logo. Sie ist eine Person. Das Statement ist eine kräftige Schrift in Kleinbuchstaben in frischem italienischem Grün, und es sagt alles in vier Wörtern: not your nonna’s trattoria. Klares Porzellanweiß hält beide lesbar.',
+  'Dann haben wir das System in den Raum übertragen. Wir haben den Umbau geplant, die Materialien ausgewählt und die Umsetzung vor Ort geleitet. Rote Bugholzstühle als Ikone. Warme Holztische. Zarte Vorhänge wie ein Theaterschleier. Auf jedem Tisch eine kleine Lampe: ein Spotlight, damit jeder Gast seine Bühne bekommt.',
+  'Die Speisekarte liest sich wie ein Theaterzettel. Das Team trägt ein Spaghetti-Icon auf dem Shirt. Alles spricht eine Sprache, von der Marke bis zum Gebäude: flexibel, skalierbar, unverwechselbar.',
+  'Die Tradition respektieren. Die Umsetzung neu denken.',
+] : [
   'Collina’s design started with a refusal. No checkered tablecloths. No fake Nonna. No kitsch. A new generation loves Italian food, just not the old story. It wants a place that feels like culture, not like a theme park.',
   'So the identity speaks in two voices. The Signature is a handwritten script in signal red, like an autograph on a theater program. It appears on the espresso cup, the plate, the menu, the wall. It is not a logo. It is a person. The Statement is bold, lowercase type in fresh Italian green, and it says everything in four words: not your nonna’s trattoria. Crisp porcelain white keeps both clear.',
-  'We carried the system into space. Red bentwood chairs as an icon. Warm wood tables. Sheer curtains like a theater veil. On every table, a small lamp: a spotlight, so every guest gets a stage.',
-  'The menu reads like a playbill. The staff wear a spaghetti icon on their tees. Everything speaks one language: flexible, scalable, unmistakable.',
+  'Then we carried the system into space. We planned the conversion, chose the materials and directed the build on site. Red bentwood chairs as an icon. Warm wood tables. Sheer curtains like a theater veil. On every table, a small lamp: a spotlight, so every guest gets a stage.',
+  'The menu reads like a playbill. The staff wear a spaghetti icon on their tees. Everything speaks one language, from the brand to the building: flexible, scalable, unmistakable.',
   'Respect the tradition. Disrupt the execution.',
 ];
 ---
