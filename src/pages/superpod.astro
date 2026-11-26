@@ -1,0 +1,410 @@
+---
+// Superpod-Unterseite (vorerst nur Englisch; die deutsche Navigation verlinkt ebenfalls hierher).
+// Aufbau: Hero → Challenge → How it works (Einleitung) → die vier Schritte chronologisch, wie das Tool arbeitet
+// (Briefing Generator → Talent Matching → Co-Creation → Launch & Learn) → Zusammenfassung, Für wen, FAQ, Abschluss.
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Video from '../components/Video.astro';
+import Arrow from '../components/Arrow.astro';
+
+const lang = 'en';
+
+// Einleitung: die vier Schritte, jeweils mit Sprung zum passenden Abschnitt
+const steps = [
+  { id: 'briefing', title: 'Briefing Generator', text: 'An AI built to write briefings – and to question them. No yes-man, but a critical sparring partner until the brief is perfect.' },
+  { id: 'talent', title: 'Talent Matching', text: 'Based on the finished briefing, Superpod matches the right artists from our worldwide network.' },
+  { id: 'co-creation', title: 'Co-Creation', text: 'Clients, artists and frst work in one shared space. Feedback, drafts and approvals happen in the open.' },
+  { id: 'launch', title: 'Launch & Learn', text: 'Every project feeds your brand intelligence. The next idea builds on everything your brand already is.' },
+];
+
+// Briefing Generator: Beispiel-Dialog (die KI hakt nach, statt nur zuzustimmen)
+const chat = [
+  { from: 'you', text: 'We want a campaign that reaches everyone between 18 and 65.' },
+  { from: 'ai', text: 'That’s a very broad audience. Who matters most for this launch – and what should they do after seeing the campaign?' },
+  { from: 'you', text: 'Mainly first-time buyers, 25 to 35, living in cities.' },
+  { from: 'ai', text: 'Much clearer. One gap left: how is the budget split between production and media? It decides which formats make sense.' },
+];
+
+// Talent Matching: Platzhalterbilder, bis Fotos der Artists da sind
+const artists = [
+  { src: '/images/what-we-do-hands.jpg', discipline: 'Illustration' },
+  { src: '/images/web/location-berlin-studio.jpg', discipline: 'Film & Motion' },
+  { src: '/images/take-aura-01.jpg', discipline: 'Photography' },
+  { src: '/images/web/collina-making-of-materialien.jpg', discipline: 'Spatial Design' },
+  { src: '/images/research-gespraech.jpg', discipline: 'Strategy' },
+  { src: '/images/take-aura-02.jpg', discipline: 'Art Direction' },
+  { src: '/images/web/location-new-york-studio.jpg', discipline: 'Sound Design' },
+  { src: '/images/web/collina-making-of-vorhang.jpg', discipline: 'Set Design' },
+];
+
+const rows = [
+  { label: 'Concept', start: 2, width: 30, cls: 'bg-violet' },
+  { label: 'Key visual', start: 24, width: 28, cls: 'bg-lilac' },
+  { label: 'Film', start: 40, width: 40, cls: 'bg-violet/60' },
+  { label: 'Social', start: 62, width: 26, cls: 'bg-cream/40' },
+  { label: 'Launch', start: 86, width: 12, cls: 'bg-cream/25' },
+];
+
+// Launch & Learn: was die Brand Intelligence sich merkt
+const brandMemory = ['Tone of voice', 'Visual language', 'Corporate identity', 'Learnings from past cases'];
+
+// Zusammenfassung: die vier Schritte laufen in Superpod zusammen
+const nodes = [
+  { label: 'Briefing', pos: 'left-0 top-0' },
+  { label: 'Talent', pos: 'right-0 top-0' },
+  { label: 'Co-Creation', pos: 'left-0 bottom-0' },
+  { label: 'Brand intelligence', pos: 'right-0 bottom-0' },
+];
+
+const audiences = [
+  {
+    label: 'For clients',
+    title: 'Stay inside the work.',
+    points: ['A sharper briefing from day one', 'See every step, from first briefing to final launch', 'Give feedback early, approve in one place', 'Your brand stays consistent, project after project'],
+  },
+  {
+    label: 'For artists',
+    title: 'Stay focused on the craft.',
+    points: ['Clear briefings instead of scattered emails', 'Matched to projects that fit your skills', 'All files, feedback and deadlines in one place', 'Work with frst teams from anywhere in the world'],
+  },
+];
+
+const faq = [
+  { q: 'What is Superpod?', a: 'Superpod is frst’s own digital platform. It guides every project from the first briefing to the final launch: briefing, talent matching, co-creation and brand intelligence in one workspace.' },
+  { q: 'Why doesn’t the Briefing Generator just write the brief for me?', a: 'Because a brief is only as good as the thinking behind it. The Briefing Generator is built to ask critical questions and point out gaps, not to agree with everything. That way the project starts on a solid foundation.' },
+  { q: 'How does talent matching work?', a: 'Superpod compares the finished briefing with the skills, experience and style of the artists in our network. Our team then puts together the final crew – technology supports the choice, people make it.' },
+  { q: 'What is brand intelligence?', a: 'Superpod learns from your previous projects: tone of voice, visual language and corporate identity. This knowledge is retrieved for every new project, so new work stays recognisably yours instead of starting from zero.' },
+  { q: 'Where is my data stored?', a: 'On European servers, in compliance with the GDPR. Your brand data is only used for your own projects.' },
+];
+---
+
+<Base headerOverlay lang={lang} translations={['en']} title="Superpod – frst" description="Superpod is frst’s own platform for creative work: briefing generator, talent matching, co-creation and brand intelligence in one workspace.">
+  <!-- Fester „Get in touch“-Reiter am rechten Rand: bleibt beim Scrollen sichtbar und öffnet eine E-Mail an frst -->
+  <a
+    href="mailto:hello@frst.agency?subject=Superpod"
+    class="group fixed top-1/2 right-0 z-40 flex -translate-y-1/2 items-center gap-3 rounded-l-2xl bg-violet px-3 py-5 text-[14px] tracking-[0.08em] text-cream uppercase shadow-[0_12px_30px_-12px_rgba(13,6,38,0.5)] transition-[padding,background-color] duration-300 [writing-mode:vertical-rl] hover:bg-night hover:pr-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet motion-reduce:transition-none md:px-3.5 md:py-6"
+  >
+    <span class="rotate-180">Get in touch</span>
+  </a>
+
+  <!-- Hero -->
+  <section class="relative flex min-h-[640px] items-end overflow-hidden text-cream md:h-screen md:max-h-[900px]">
+    <!-- Superpod-Teaservideo als Hintergrund-Loop (startet sofort, bis dahin Standbild) -->
+    <Video src="/videos/superpod-case.mp4" srcMobile="/videos/superpod-case-mobile.mp4" poster="/videos/superpod-case-poster.webp" loop eager tone="night" class="absolute inset-0" lang={lang} />
+    <div class="pointer-events-none absolute inset-0 opacity-30 mix-blend-multiply"><Media tone="dusk" class="h-full w-full" /></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/70 via-night/20 to-night/40"></div>
+    <div class="container-frst relative pt-40 pb-16 md:pb-24">
+      <p class="eyebrow text-[14px]">Superpod</p>
+      <h1 class="mt-6 max-w-[16ch] text-[10vw] leading-[1.05] md:text-6xl lg:text-7xl">A tool to lead into the future of creative work.</h1>
+      <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">With over 20 years of industry experience, we developed an independent platform to organize cross-functional teams worldwide.</p>
+      <a href="https://tool.frst.agency/login" target="_blank" rel="noopener noreferrer" class="btn-outline mt-12 border-cream/80 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">Sign in</a>
+    </div>
+  </section>
+
+  <!-- One connected workspace: Schaubild direkt nach dem Header -->
+  <section class="container-frst py-20 md:py-28">
+    <div class="grid gap-16 md:grid-cols-2 md:items-center">
+      <div>
+        <p class="eyebrow text-[14px]">One connected workspace</p>
+        <h2 class="mt-8 max-w-[20ch] text-[30px] leading-snug">Everything that used to be scattered now comes together.</h2>
+        <p class="mt-6 max-w-md text-[16px] leading-relaxed">Briefing, talent, co-creation and brand intelligence meet in one place – and everyone works from the same version.</p>
+      </div>
+      <div class="relative h-[300px] md:h-[340px]">
+        <svg class="absolute inset-0 h-full w-full text-night/25" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="0.3">
+          <path d="M22 12 C40 12, 40 50, 50 50" vector-effect="non-scaling-stroke" />
+          <path d="M78 12 C60 12, 60 50, 50 50" vector-effect="non-scaling-stroke" />
+          <path d="M22 88 C40 88, 40 50, 50 50" vector-effect="non-scaling-stroke" />
+          <path d="M78 88 C60 88, 60 50, 50 50" vector-effect="non-scaling-stroke" />
+        </svg>
+        {nodes.map((n) => (
+          <div class:list={['group absolute flex w-[44%] cursor-default items-center gap-3 rounded-2xl border border-night/20 bg-cream px-5 py-4 text-[16px] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:scale-[1.04] hover:border-night hover:bg-night hover:text-cream hover:shadow-[0_12px_30px_-12px_rgba(13,6,38,0.35)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100 md:w-[38%]', n.pos]}>
+            <span class="h-2 w-2 shrink-0 rounded-full bg-violet transition-colors duration-300 group-hover:bg-lilac"></span>{n.label}
+          </div>
+        ))}
+        <div class="absolute top-1/2 left-1/2 flex h-28 w-28 -translate-1/2 cursor-default items-center justify-center rounded-full bg-night text-center text-[13px] tracking-[0.08em] text-cream uppercase transition-transform duration-300 ease-out hover:scale-110 motion-reduce:transition-none motion-reduce:hover:scale-100">
+          <span class="absolute inset-[-10px] rounded-full border border-night/40"></span>Super&shy;pod
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Manifest-Block: zweispaltiger Fließtext wie auf About us – BLINDTEXT, wird noch ersetzt -->
+  <section class="container-frst pb-20 md:pb-28">
+    <p class="eyebrow text-[14px]">Our approach</p>
+    <div class="mt-10 text-2xl leading-snug md:columns-2 md:gap-16 [&>p]:mb-8 [&>p]:break-inside-avoid">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus, nulla gravida orci a odio, nullam varius turpis et commodo pharetra.</p>
+      <p>Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula, donec lobortis risus a elit. Etiam tempor ut ullamcorper ligula eu tempor congue.</p>
+      <p>Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum, aenean imperdiet etiam ultricies nisi vel augue, sed fringilla mauris sit amet nibh.</p>
+    </div>
+  </section>
+
+  <!-- How it works: Einleitung, jeder Schritt springt zu seinem Abschnitt -->
+  <section class="container-frst pb-20 md:pb-28">
+    <!-- Einleitung oben, Schritte darunter über die ganze Breite -->
+    <div class="grid gap-12 md:gap-16">
+      <div>
+        <p class="eyebrow text-[14px]">How it works</p>
+        <h2 class="mt-8 max-w-md text-[30px] leading-snug">From the perfect briefing to a brand that keeps learning.</h2>
+        <p class="mt-6 max-w-md text-[16px] leading-relaxed">Four steps, one platform. Superpod follows the creative process from start to finish – and remembers what works.</p>
+      </div>
+      <ol class="border-t border-night/20">
+        {steps.map((s, i) => (
+          <li class="border-b border-night/20">
+            <a href={`#${s.id}`} class="group grid gap-3 py-8 md:grid-cols-[4rem_1fr_1.4fr_auto] md:gap-8 md:py-10">
+              <span class="text-[24px] leading-snug">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="text-[24px] leading-snug">{s.title}</h3>
+              <p class="max-w-[44ch] text-[16px] leading-relaxed md:pt-1">{s.text}</p>
+              <span class="hidden pt-3 transition-transform duration-300 group-hover:translate-x-2 md:block"><Arrow class="rotate-90" /></span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 01 Briefing Generator -->
+  <section id="briefing" class="scroll-mt-20 bg-lilac">
+    <div class="container-frst grid gap-16 py-20 md:grid-cols-2 md:items-center md:py-28">
+      <div>
+        <p class="eyebrow text-[14px]">01 · Briefing Generator</p>
+        <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">Every great project starts with the perfect briefing.</h2>
+        <p class="mt-6 max-w-md text-[16px] leading-relaxed">A perfect result needs a perfect foundation. Our Briefing Generator is an AI built for exactly one job: creating briefings. But it’s no yes-man that simply nods along. It asks questions, challenges assumptions and points out what’s missing – until the brief is sharp enough to build on.</p>
+        <p class="mt-6 text-[16px]">Critical, not compliant.</p>
+      </div>
+      <!-- Beispiel-Dialog -->
+      <div class="rounded-2xl bg-cream p-5 shadow-[0_24px_60px_-30px_rgba(13,6,38,0.45)] md:p-6">
+        <div class="flex items-center justify-between border-b border-night/15 pb-4 text-[14px]">
+          <span class="flex items-center gap-2"><span class="inline-flex h-6 w-6 items-center justify-center rounded-md bg-violet text-[12px] text-cream">✳</span>Briefing Generator</span>
+          <span class="opacity-60">Draft v2</span>
+        </div>
+        <div class="mt-5 space-y-3">
+          {chat.map((m) => (
+            <div class:list={['max-w-[85%] rounded-2xl px-4 py-3 text-[14px] leading-relaxed', m.from === 'ai' ? 'bg-night text-cream' : 'ml-auto border border-night/15']}>
+              {m.from === 'ai' && <p class="mb-1 text-[11px] tracking-[0.08em] uppercase opacity-60">Superpod AI</p>}
+              {m.text}
+            </div>
+          ))}
+        </div>
+        <div class="mt-6 border-t border-night/15 pt-4 text-[13px]">
+          <div class="flex justify-between"><span>Briefing check</span><span class="opacity-60">3 of 4 complete</span></div>
+          <div class="mt-2 h-1.5 rounded-full bg-night/10"><div class="h-full w-3/4 rounded-full bg-violet"></div></div>
+          <p class="mt-3 opacity-70">Target group ✓ · Objective ✓ · Message ✓ · Budget open</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 Talent Matching: Karussell läuft automatisch durch, hält beim Hovern an -->
+  <section id="talent" class="scroll-mt-20 overflow-hidden bg-night py-20 text-cream md:py-28">
+    <div class="container-frst grid gap-8 md:grid-cols-2 md:items-end">
+      <div>
+        <p class="eyebrow text-[14px]">02 · Talent Matching</p>
+        <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">The right people for the brief. Not whoever is free.</h2>
+      </div>
+      <p class="max-w-md text-[16px] leading-relaxed opacity-90">As soon as the briefing is ready, Superpod matches it with our worldwide artist network – by skills, experience and style. Our team then puts together the final crew.</p>
+    </div>
+    <div class="marquee mt-14 md:mt-20" aria-label="Artists from the frst network">
+      <div class="marquee-track flex w-max gap-4">
+        {[...artists, ...artists].map((a, i) => (
+          <figure class="relative w-56 shrink-0 overflow-hidden rounded-2xl md:w-72" aria-hidden={i >= artists.length ? 'true' : undefined}>
+            <Media src={a.src} alt="" sizes="288px" class="aspect-[3/4] w-full" />
+            <figcaption class="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-night/80 to-transparent p-4 pt-16 text-[14px]">
+              <span>{a.discipline}</span>
+              <span class="rounded-full bg-cream/15 px-2 py-0.5 text-[12px] backdrop-blur">Matched</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Co-Creation (ehemals „The solution“) -->
+  <section id="co-creation" class="scroll-mt-20 overflow-hidden">
+    <div class="container-frst grid grid-cols-1 gap-16 py-20 md:grid-cols-[1fr_1.5fr] md:items-center md:py-28">
+      <div>
+        <p class="eyebrow text-[14px]">03 · Co-Creation</p>
+        <h2 class="mt-8 text-[30px] leading-snug">One space. Every step.<br />Everyone in sync.</h2>
+        <p class="mt-6 max-w-md text-[16px] leading-relaxed">Once the team is set, the work begins – together. Clients, artists and frst share one workspace. Drafts, feedback and approvals happen right where the work is, so everyone talks to each other instead of past each other.</p>
+        <p class="mt-10 text-[14px] opacity-80">Timelines · Feedback · Approvals · Files</p>
+      </div>
+      <!-- Tool-Ansicht (gestaltet, kein Screenshot) mit Kommentar im Vordergrund -->
+      <div class="relative min-w-0 md:-mr-24">
+        <div class="rounded-2xl border border-night/15 bg-[#160d38] p-2 text-cream shadow-2xl">
+          <div class="grid grid-cols-1 overflow-hidden rounded-xl bg-[#100830] sm:grid-cols-[150px_1fr]">
+            <aside class="hidden border-r border-cream/10 p-5 text-[13px] sm:block">
+              <p class="flex items-center gap-2 text-[16px]"><span class="inline-flex h-6 w-6 items-center justify-center rounded-md bg-violet text-[12px]">✳</span>Superpod</p>
+              <ul class="mt-8 space-y-4 opacity-80">
+                <li>Briefing</li>
+                <li>Team</li>
+                <li class="-mx-2 rounded-md bg-cream/10 px-2 py-1.5">Project</li>
+                <li>Messages</li>
+                <li>Brand</li>
+              </ul>
+            </aside>
+            <div class="min-w-0 p-4 sm:p-6">
+              <div class="flex items-center gap-3">
+                <p class="text-[18px]">Brand Campaign 2027</p>
+                <span class="rounded-full bg-lilac px-2 py-0.5 text-[11px] text-night">In progress</span>
+              </div>
+              <div class="mt-5 flex gap-4 overflow-hidden border-b border-cream/10 pb-3 text-[13px] whitespace-nowrap opacity-80 sm:gap-6">
+                <span>Overview</span><span class="-mb-3 border-b border-cream pb-3 opacity-100">Timeline</span><span>Feedback</span><span>Files</span>
+              </div>
+              <div class="mt-4 grid grid-cols-[84px_1fr] text-[11px] opacity-50 sm:grid-cols-[110px_1fr]">
+                <span></span>
+                <div class="grid grid-cols-4"><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span></div>
+              </div>
+              <div class="mt-2">
+                {rows.map((r) => (
+                  <div class="grid grid-cols-[84px_1fr] items-center border-t border-cream/10 py-3 text-[13px] sm:grid-cols-[110px_1fr]">
+                    <span class="opacity-85">{r.label}</span>
+                    <div class="relative h-2.5"><span class:list={['absolute top-0 h-full rounded-full', r.cls]} style={`left:${r.start}%;width:${r.width}%`}></span></div>
+                  </div>
+                ))}
+              </div>
+              <div class="mt-5 flex items-center justify-between border-t border-cream/10 pt-4 text-[12px] opacity-70">
+                <span>Client, frst and 6 artists in this project</span>
+                <span class="flex -space-x-2">
+                  {['bg-lilac', 'bg-violet', 'bg-cream/70', 'bg-[#c78a7a]'].map((c) => <span class:list={['h-6 w-6 rounded-full border-2 border-[#100830]', c]}></span>)}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Kommentar-Karte: zeigt den Austausch im Prozess -->
+        <div class="relative z-10 mx-4 -mt-10 max-w-xs rounded-2xl border border-night/15 bg-cream p-4 text-[14px] shadow-[0_20px_50px_-20px_rgba(13,6,38,0.5)] sm:absolute sm:-bottom-20 sm:-left-10 sm:mx-0 sm:mt-0">
+          <p class="flex items-center gap-2 text-[12px] opacity-70"><span class="h-5 w-5 rounded-full bg-[#c78a7a]"></span>Client · Key visual</p>
+          <p class="mt-2 leading-relaxed">Love the direction. Can we try a warmer palette before we approve?</p>
+          <p class="mt-3 flex gap-4 text-[12px]"><span class="underline underline-offset-4">Reply</span><span class="opacity-60">Approve</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 Launch & Learn: Brand Intelligence -->
+  <section id="launch" class="scroll-mt-20 bg-night text-cream">
+    <div class="container-frst py-20 md:py-28">
+      <div class="grid gap-8 md:grid-cols-2">
+        <div>
+          <p class="eyebrow text-[14px]">04 · Launch & Learn</p>
+          <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">Every project makes the next one smarter.</h2>
+        </div>
+        <div class="max-w-md text-[16px] leading-relaxed opacity-90">
+          <p>Most AI tools start from zero every time. The result: every output looks a little different, and your brand loses its continuity.</p>
+          <p class="mt-4">Superpod learns from your previous cases. Tone of voice, visual language and corporate identity are stored securely and retrieved for your brand. The result is a brand intelligence that keeps every new idea unmistakably yours.</p>
+        </div>
+      </div>
+      <!-- Ablauf: frühere Cases → Brand Intelligence → neue Arbeit, die zur Marke passt -->
+      <div class="mt-14 grid items-stretch gap-4 md:mt-20 md:grid-cols-[1fr_auto_1.2fr_auto_1fr]">
+        <div class="rounded-2xl border border-cream/20 p-6">
+          <p class="eyebrow text-[14px] opacity-70">Your cases</p>
+          <div class="mt-6 grid grid-cols-3 gap-2">
+            {['/images/web/collina-header.jpg', '/images/web/tobel-menu.jpg', '/images/web/marccain-teaser.jpg'].map((src) => (
+              <Media src={src} alt="" sizes="120px" class="aspect-square w-full rounded-lg" />
+            ))}
+          </div>
+          <p class="mt-6 text-[16px] leading-relaxed">Campaigns, content and learnings from every project you did with frst.</p>
+        </div>
+        <span class="flex items-center justify-center py-1 md:py-0"><Arrow class="rotate-90 md:rotate-0" /></span>
+        <div class="rounded-2xl bg-lilac p-6 text-night">
+          <p class="eyebrow text-[14px] opacity-70">Brand intelligence</p>
+          <ul class="mt-6 border-t border-night/20">
+            {brandMemory.map((b) => <li class="border-b border-night/20 py-3 text-[16px]">{b}</li>)}
+          </ul>
+          <p class="mt-6 text-[14px]">Stored on European servers · GDPR compliant</p>
+        </div>
+        <span class="flex items-center justify-center py-1 md:py-0"><Arrow class="rotate-90 md:rotate-0" /></span>
+        <div class="rounded-2xl border border-cream/20 p-6">
+          <p class="eyebrow text-[14px] opacity-70">Your next project</p>
+          <p class="mt-6 text-[24px] leading-snug">New ideas. Same brand.</p>
+          <p class="mt-4 text-[16px] leading-relaxed">Every briefing, every draft and every AI output starts from what your brand already is – for continuity you can see.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Für wen: Kunden und Artists -->
+  <section class="grid md:grid-cols-2">
+    {audiences.map((a, i) => (
+      <div class:list={['flex justify-center px-5 py-20 md:px-10 md:py-28', i === 0 ? 'bg-night text-cream' : 'bg-lilac text-night']}>
+        <!-- Textblock linksbündig, als Ganzes in der Hälfte zentriert -->
+        <div class="w-full max-w-md">
+          <p class="eyebrow text-[14px]">{a.label}</p>
+          <h2 class="mt-8 text-[30px] leading-snug">{a.title}</h2>
+          <ul class="mt-10 border-t border-current/20">
+            {a.points.map((p) => (
+              <li class="flex items-start gap-4 border-b border-current/20 py-4 text-[16px] leading-relaxed">
+                <Arrow class="mt-1.5 shrink-0" />{p}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <!-- Thinking: nur Text, links im Raster -->
+  <section class="container-frst py-20 md:py-28">
+    <p class="eyebrow text-[14px]">The thinking behind it</p>
+    <h2 class="mt-8 max-w-[22ch] text-[30px] leading-snug">20 years of creative experience. One tool built around it.</h2>
+    <p class="mt-6 max-w-md text-[16px] leading-relaxed">Merging creative excellence with cutting-edge digital technology for the creative process of tomorrow. Superpod is the result of two decades of building teams, guiding creative processes and making ambitious ideas happen.</p>
+    <p class="mt-6 text-[16px]">Artists stay focused. Clients stay inside the work.</p>
+  </section>
+
+  <!-- FAQ: aufklappbar, Plus dreht sich zum Kreuz wie bei den Kacheln -->
+  <section class="container-frst pb-20 md:pb-28">
+    <!-- Überschrift oben, Fragen darunter über die ganze Breite -->
+    <div class="grid gap-12 md:gap-16">
+      <div>
+        <p class="eyebrow text-[14px]">FAQ</p>
+        <h2 class="mt-8 max-w-md text-[30px] leading-snug">Good questions.</h2>
+      </div>
+      <div class="border-t border-night/20">
+        {faq.map((f, i) => (
+          <details class="group border-b border-night/20" open={i === 0}>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-[20px] md:text-[24px] [&::-webkit-details-marker]:hidden">
+              {f.q}
+              <svg class="h-3 w-4 shrink-0 transition-transform duration-300 group-open:rotate-45" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M2 6h12M8 0v12" /></svg>
+            </summary>
+            <p class="max-w-[60ch] pb-8 text-[16px] leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Abschluss -->
+  <section class="bg-night text-cream">
+    <div class="container-frst grid gap-10 py-24 md:grid-cols-[2fr_1fr] md:items-end md:py-32">
+      <div>
+        <p class="eyebrow text-[14px]">See your project in Superpod</p>
+        <h2 class="mt-8 text-[8vw] leading-[1.05] md:text-5xl lg:text-6xl">Superpod isn’t just a tool.<br />It’s radical creative excellence.</h2>
+      </div>
+      <div class="md:text-right">
+        <p class="text-[16px] opacity-80">Ready for a better way of working?</p>
+        <div class="mt-6 flex gap-3 md:justify-end">
+          <a href="/#contact" data-book-demo class="btn-outline border-cream bg-cream text-[16px] text-night hover:bg-transparent hover:text-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">Book a demo</a>
+          <a href="https://tool.frst.agency/login" target="_blank" rel="noopener noreferrer" class="btn-outline border-cream/80 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">Sign in</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+  /* Talent-Karussell: zwei gleiche Reihen hintereinander, die Spur läuft um eine Reihe weiter und beginnt nahtlos von vorn */
+  @keyframes superpod-marquee {
+    to { transform: translateX(calc(-50% - 0.5rem)); }
+  }
+  .marquee-track {
+    animation: superpod-marquee 45s linear infinite;
+  }
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee { overflow-x: auto; }
+    .marquee-track { animation: none; }
+  }
+</style>
