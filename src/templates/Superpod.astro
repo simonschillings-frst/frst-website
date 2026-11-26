@@ -1,0 +1,510 @@
+---
+// Superpod-/Tool-Unterseite (Englisch unter /superpod, Deutsch unter /de/superpod).
+// Header-Headline, Eyebrows und Headlines bleiben bewusst auch auf Deutsch englisch; übersetzt wird der Fließtext.
+// Aufbau: Hero → Mindmap → Produktbeschreibung → How it works → die vier Schritte chronologisch
+// (Briefing Generator → Talent Matching → Co-Creation → Launch & Learn) → FAQ → Abschluss.
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Video from '../components/Video.astro';
+import Arrow from '../components/Arrow.astro';
+import { localePath, useLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useLang(lang);
+const demoHref = localePath(lang, '/#contact');
+
+// Einleitung: die vier Schritte, jeweils mit Sprung zum passenden Abschnitt
+const steps = [
+  { id: 'briefing', title: 'Briefing Generator', text: t('An AI built for briefings: it spots contradictions and gaps and turns your input into one clear, consistent brief.', 'Eine KI, gebaut für Briefings: Sie erkennt Widersprüche und Lücken und macht aus euren Angaben ein klares, widerspruchsfreies Briefing.') },
+  { id: 'talent', title: 'Talent Matching', text: t('Based on the finished briefing, Superpod matches the right artists from our worldwide network.', 'Auf Basis des fertigen Briefings findet Superpod die passenden Artists aus unserem weltweiten Netzwerk.') },
+  { id: 'co-creation', title: 'Co-Creation', text: t('Clients, artists and frst work in one shared space. Feedback, drafts and approvals happen in the open.', 'Kundinnen und Kunden, Artists und frst arbeiten in einem gemeinsamen Raum. Feedback, Entwürfe und Freigaben passieren für alle sichtbar.') },
+  { id: 'launch', title: 'Launch & Learn', text: t('Every project feeds your brand intelligence. The next idea builds on everything your brand already is.', 'Jedes Projekt fließt in eure Brand Intelligence. Die nächste Idee baut auf allem auf, was eure Marke schon ist.') },
+];
+
+// Briefing Generator: Beispiel-Dialog (die KI erkennt Widersprüche und Lücken)
+const chat = [
+  { from: 'you', text: t('Premium launch for our new running shoe. Main channels: discount platforms and TikTok. Go-live in spring.', 'Premium-Launch für unseren neuen Laufschuh. Hauptkanäle: Discount-Plattformen und TikTok. Go-live im Frühjahr.') },
+  { from: 'ai', text: t('Contradiction found: a premium positioning and discount platforms send different signals. Which one should lead?', 'Widerspruch erkannt: Premium-Positionierung und Discount-Plattformen senden unterschiedliche Signale. Was soll führen?') },
+  { from: 'you', text: t('Premium. We drop the discount platforms.', 'Premium. Die Discount-Plattformen streichen wir.') },
+  { from: 'ai', text: t('Updated. One gap left: there is no budget yet. Once it is in, your briefing is complete and consistent.', 'Aktualisiert. Eine Lücke ist noch offen: Es fehlt das Budget. Danach ist euer Briefing vollständig und widerspruchsfrei.') },
+];
+
+// Talent Matching: Platzhalterbilder, bis Fotos der Artists da sind
+const artists = [
+  { src: '/images/web/talent-photo-film-01.jpg', discipline: t('Photography & Film', 'Fotografie & Film') },
+  { src: '/images/web/talent-ui-ux.jpg', discipline: 'UI/UX Design' },
+  { src: '/images/web/talent-sound-video.jpg', discipline: t('Video Editing', 'Schnitt') },
+  { src: '/images/web/talent-graphic-design.jpg', discipline: t('Graphic Design', 'Grafikdesign') },
+  { src: '/images/web/talent-photo-film-02.jpg', discipline: t('Photography & Film', 'Fotografie & Film') },
+  { src: '/images/web/talent-strategy.jpg', discipline: t('Brand Strategy', 'Markenstrategie') },
+  { src: '/images/web/talent-art-direction.jpg', discipline: 'Art Direction' },
+  { src: '/images/web/talent-sound-video.jpg', discipline: 'Sound Design' },
+  { src: '/images/web/talent-ui-ux.jpg', discipline: t('Production', 'Produktion') },
+  { src: '/images/web/talent-photo-film-03.jpg', discipline: t('Photography & Film', 'Fotografie & Film') },
+  { src: '/images/web/talent-strategy-02.jpg', discipline: t('Brand Strategy', 'Markenstrategie') },
+  { src: '/images/web/talent-styling.jpg', discipline: 'Styling' },
+];
+
+// Co-Creation-Mockup: nachgebaut nach der echten Superpod-Oberfläche (Orders-Ansicht).
+// Die Bedienelemente bleiben englisch wie im Tool, die Inhalte (Bewertungen, Notizen, Kommentar) sind übersetzt.
+const toolNav = [
+  { label: 'Craft', icon: 'M4 7h16l-1.5 11h-13zM9 7V5h6v2' },
+  { label: 'Portfolios', icon: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM15.5 8.5l-2 5-5 2 2-5z' },
+  { label: 'Saved', icon: 'M7 4h10v16l-5-3.5L7 20z' },
+  { label: 'Messages', icon: 'M5 5h14v10H9l-4 4z' },
+  { label: 'Orders', icon: 'M6 4h12v16H6zM9 9h6M9 13h6', active: true, badge: 1 },
+  { label: 'Settings', icon: 'M12 9a3 3 0 1 0 0 6a3 3 0 1 0 0-6zM12 3v3M12 18v3M3 12h3M18 12h3' },
+];
+const bookedProjects = [
+  { label: 'Key visual – Spring Campaign', dot: 'bg-violet' },
+  { label: '3D renders – Spring Campaign', dot: 'bg-[#3fae68]' },
+];
+const statusStyle = {
+  Completed: 'bg-[#dcf1e2] text-[#2c7444]',
+  Delivered: 'bg-lilac text-violet',
+  Requested: 'bg-[#fbefc9] text-[#8a6400]',
+};
+const bookings = [
+  {
+    title: 'Key visual photography', status: 'Completed', price: '2', meta: 'Photographer: Jonas Weber · 2 story points', date: 'Requested 14 Oct 2026',
+    review: t('Great feel for light and product. Jonas picked up our note on the warmer palette right away – the final selection went straight into the campaign.', 'Tolles Gespür für Licht und Produkt. Jonas hat unseren Hinweis zur wärmeren Farbpalette sofort umgesetzt – die finale Auswahl ging direkt in die Kampagne.'),
+    actions: ['View project', 'Invoice INV-2026-014'], messages: 'Messages',
+  },
+  {
+    title: '3D product renders', status: 'Delivered', price: '3', meta: '3D artist: Mara Lind · 3 story points', date: 'Requested 21 Oct 2026', unread: true,
+    note: t('Final renders are uploaded: six angles in 4K plus a turntable for social. Packaging colours are matched to the brand guide.', 'Die finalen Renderings sind hochgeladen: sechs Perspektiven in 4K plus ein Turntable für Social. Die Verpackungsfarben sind auf den Brand Guide abgestimmt.'),
+    primary: 'Approve & complete', actions: ['Send back to work', 'View project'], messages: 'Messages (2)',
+  },
+  {
+    title: 'Sound design & mix', status: 'Requested', price: 'Price on request', meta: 'Sound designer: Tim Kraus · Price on request', date: 'Requested 28 Oct 2026',
+    note: t('30-second product film. We need a warm, calm sound bed and a final mix for TV and social.', '30-Sekunden-Produktfilm. Wir brauchen einen warmen, ruhigen Soundteppich und einen finalen Mix für TV und Social.'),
+    actions: ['Cancel order'], messages: 'Messages (1)',
+  },
+];
+
+// Launch & Learn: was die Brand Intelligence sich merkt
+const brandMemory = [t('Tone of voice', 'Tonalität'), t('Visual language', 'Bildsprache'), t('Corporate identity', 'Corporate Identity'), t('Learnings from past cases', 'Learnings aus früheren Cases')];
+
+// Mindmap: die vier Schritte laufen in Superpod zusammen
+const nodes = [
+  { label: 'Briefing', href: '#briefing', text: t('Turns a rough idea into a solid briefing in minutes.', 'Macht aus einer groben Idee in Minuten ein solides Briefing.'), pos: 'left-0 top-0' },
+  { label: 'Talent', href: '#talent', text: t('Finds the right people from a vetted network.', 'Findet die richtigen Leute aus einem geprüften Netzwerk.'), pos: 'right-0 top-0' },
+  { label: 'Co-Creation', href: '#co-creation', text: t('One place for feedback, files and versions.', 'Ein Ort für Feedback, Dateien und Versionen.'), pos: 'left-0 bottom-0' },
+  { label: t('Brand intelligence', 'Brand Intelligence'), href: '#launch', text: t('Learns your brand with every project.', 'Lernt eure Marke mit jedem Projekt besser kennen.'), pos: 'right-0 bottom-0' },
+];
+
+// FAQ als Vertrauensanker (Sicherheit, keine Installation, Integration, Onboarding, Preis).
+// Antworten 3–5 sind vorläufig und müssen von frst bestätigt werden.
+const faq = [
+  {
+    q: t('Where is our data stored?', 'Wo werden unsere Daten gespeichert?'),
+    a: t('On European servers, fully compliant with the GDPR. Your brand data is only used for your own projects and is never shared with other clients.', 'Auf europäischen Servern, vollständig DSGVO-konform. Eure Markendaten werden nur für eure eigenen Projekte genutzt und nie mit anderen Kunden geteilt.'),
+  },
+  {
+    q: t('Do we need to install anything?', 'Müssen wir etwas installieren?'),
+    a: t('No. Superpod runs entirely in the browser – no downloads, no installation, no IT project. Your team just signs in and starts working.', 'Nein. Superpod läuft komplett im Browser – kein Download, keine Installation, kein IT-Projekt. Euer Team meldet sich an und legt los.'),
+  },
+  {
+    q: t('How does Superpod fit into our existing tools?', 'Wie passt Superpod zu unseren bestehenden Tools?'),
+    a: t('Superpod is designed to work alongside the tools your team already uses. In a short call we look at your set-up together and show you how it fits in.', 'Superpod ist darauf ausgelegt, neben den Tools zu laufen, die euer Team schon nutzt. In einem kurzen Call schauen wir uns euer Set-up gemeinsam an und zeigen, wie es sich einfügt.'),
+  },
+  {
+    q: t('How long does onboarding take?', 'Wie lange dauert das Onboarding?'),
+    a: t('Not long. We set up your workspace with you, bring in your existing brand material and walk your team through the first project – so you are productive from day one.', 'Nicht lange. Wir richten euren Workspace gemeinsam mit euch ein, übernehmen euer bestehendes Markenmaterial und begleiten euer Team durch das erste Projekt – so seid ihr vom ersten Tag an produktiv.'),
+  },
+  {
+    q: t('How is Superpod priced?', 'Was kostet Superpod?'),
+    a: t('Pricing depends on the size of your team and the scope of your projects. Book a demo and we will put together an offer that fits.', 'Der Preis hängt von der Größe eures Teams und dem Umfang eurer Projekte ab. Bucht eine Demo, und wir stellen euch ein passendes Angebot zusammen.'),
+  },
+];
+---
+
+<Base
+  headerOverlay
+  lang={lang}
+  title={t('Superpod – frst', 'Superpod – frst')}
+  description={t('Superpod is frst’s own platform for creative work: briefing generator, talent matching, co-creation and brand intelligence in one workspace.', 'Superpod ist die eigene Plattform von frst für kreative Arbeit: Briefing Generator, Talent Matching, Co-Creation und Brand Intelligence in einem Workspace.')}
+>
+  <!-- Fester „Start now“-Störer am rechten Rand: bleibt beim Scrollen sichtbar und öffnet das Demo-Formular -->
+  <a
+    href={demoHref}
+    data-book-demo
+    class="group fixed top-1/2 right-0 z-40 flex -translate-y-1/2 items-center gap-3 rounded-l-2xl bg-violet px-3 py-5 text-[14px] tracking-[0.08em] text-cream uppercase shadow-[0_12px_30px_-12px_rgba(13,6,38,0.5)] transition-[padding,background-color] duration-300 [writing-mode:vertical-rl] hover:bg-night hover:pr-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet motion-reduce:transition-none md:px-3.5 md:py-6"
+  >
+    <span class="rotate-180">{t('Start now', 'Jetzt starten')}</span>
+  </a>
+
+  <!-- Hero -->
+  <section class="relative flex min-h-[640px] items-end overflow-hidden text-cream md:h-screen md:max-h-[900px]">
+    <!-- Superpod-Teaservideo als Hintergrund-Loop (startet sofort, bis dahin Standbild) -->
+    <Video src="/videos/tool-header.mp4" srcMobile="/videos/tool-header-mobile.mp4" poster="/videos/tool-header-poster.jpg" loop eager tone="night" class="absolute inset-0" lang={lang} />
+    <div class="pointer-events-none absolute inset-0 opacity-30 mix-blend-multiply"><Media tone="dusk" class="h-full w-full" /></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/70 via-night/20 to-night/40"></div>
+    <div class="container-frst relative pt-40 pb-16 md:pb-24">
+      <p class="eyebrow text-[14px]">Superpod</p>
+      <h1 class="mt-6 text-[8vw] leading-[1.05] font-light w-[9.5em] max-w-none text-pretty md:text-5xl lg:text-7xl">What if technology brings humans closer together?</h1>
+      <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{t('Superpod takes care of briefings, team set-up and documentation – so your people can focus on what only people can do.', 'Superpod kümmert sich um Briefings, Teamaufstellung und Dokumentation – damit sich eure Leute auf das konzentrieren können, was nur Menschen können.')}</p>
+      <!-- Book a demo als Hauptbutton; Sign in nur in der Hauptnavigation -->
+      <div class="mt-12 flex flex-wrap items-center gap-x-8 gap-y-5">
+        <a href={demoHref} data-book-demo class="btn-outline border-cream/80 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">{t('Book a demo', 'Demo buchen')}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- One connected workspace: Schaubild direkt nach dem Header -->
+  <section class="container-frst py-20 md:py-28">
+    <div class="grid gap-14 md:gap-16">
+      <div>
+        <p class="eyebrow text-[14px]">One connected workspace</p>
+        <p class="mt-8 max-w-md text-[16px] leading-relaxed">{t('Briefing, talent, co-creation and brand intelligence meet in one place – and everyone works from the same version.', 'Briefing, Talent, Co-Creation und Brand Intelligence kommen an einem Ort zusammen – und alle arbeiten mit derselben Version.')}</p>
+      </div>
+      <div class="relative mx-auto h-[420px] w-full max-w-3xl md:h-[400px]">
+        <svg class="absolute inset-0 h-full w-full text-night/25" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="0.3">
+          <path d="M22 12 C40 12, 40 50, 50 50" vector-effect="non-scaling-stroke" />
+          <path d="M78 12 C60 12, 60 50, 50 50" vector-effect="non-scaling-stroke" />
+          <path d="M22 88 C40 88, 40 50, 50 50" vector-effect="non-scaling-stroke" />
+          <path d="M78 88 C60 88, 60 50, 50 50" vector-effect="non-scaling-stroke" />
+        </svg>
+        {nodes.map((n) => (
+          <a href={n.href} class:list={['group absolute block w-[47%] rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet border border-night/20 bg-cream px-3.5 py-3.5 text-[14px] sm:px-5 sm:py-4 sm:text-[16px] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:scale-[1.04] hover:border-night hover:bg-night hover:text-cream hover:shadow-[0_12px_30px_-12px_rgba(13,6,38,0.35)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100 md:w-[38%]', n.pos]}>
+            <p class="flex items-center gap-2 sm:gap-3"><span class="h-2 w-2 shrink-0 rounded-full bg-violet transition-colors duration-300 group-hover:bg-lilac"></span>{n.label}</p>
+            <p class="mt-2 text-[13px] leading-snug opacity-70 md:text-[14px]">{n.text}</p>
+          </a>
+        ))}
+        <!-- Mittelkreis: beim Hovern laufen zwei graue Wellen bis an die Kästchen (Reichweite per Skript berechnet) -->
+        <div class="pulse-core absolute top-1/2 left-1/2 flex h-28 w-28 -translate-1/2 cursor-default items-center justify-center rounded-full bg-night text-center text-[13px] tracking-[0.08em] text-cream uppercase">
+          <span class="absolute inset-[-10px] rounded-full border border-night/40"></span>
+          <span class="pulse-wave absolute inset-0 rounded-full border border-night/30" aria-hidden="true"></span>
+          <span class="pulse-wave pulse-wave-2 absolute inset-0 rounded-full border border-night/30" aria-hidden="true"></span>
+          <span class="relative">Super&shy;pod</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Produktbeschreibung: zweispaltiger Fließtext wie das Manifest auf About us -->
+  <section class="container-frst pb-20 md:pb-28">
+    <p class="eyebrow text-[14px]">Superpod</p>
+    <div class="mt-10 text-2xl leading-snug md:columns-2 md:gap-16 [&>p]:mb-8 [&>p]:break-inside-avoid">
+      <p>{t('Superpod is a browser-based platform that runs every creative project from first idea to final delivery. It writes and checks briefings, suggests the right talent, keeps feedback and files in one place, and stores what worked for the next project.', 'Superpod ist eine browserbasierte Plattform, die jedes Kreativprojekt von der ersten Idee bis zur finalen Abgabe steuert. Sie schreibt und prüft Briefings, schlägt die passenden Talente vor, hält Feedback und Dateien an einem Ort und speichert, was funktioniert hat, für das nächste Projekt.')}</p>
+      <p>{t('The result: less time lost on emails, status meetings and documentation – and more time for the work itself. Your team decides, Superpod handles the rest.', 'Das Ergebnis: weniger Zeit für E-Mails, Statusmeetings und Dokumentation – und mehr Zeit für die eigentliche Arbeit. Euer Team entscheidet, Superpod erledigt den Rest.')}</p>
+    </div>
+  </section>
+
+  <!-- How it works: Einleitung, jeder Schritt springt zu seinem Abschnitt -->
+  <section class="container-frst pb-20 md:pb-28">
+    <!-- Einleitung oben, Schritte darunter über die ganze Breite -->
+    <div class="grid gap-12 md:gap-16">
+      <div>
+        <p class="eyebrow text-[14px]">How it works</p>
+        <h2 class="mt-8 max-w-md text-[30px] leading-snug">From the perfect briefing to a brand that keeps learning.</h2>
+        <p class="mt-6 max-w-md text-[16px] leading-relaxed">{t('Four steps, one platform. Superpod follows the creative process from start to finish – and remembers what works.', 'Vier Schritte, eine Plattform. Superpod begleitet den kreativen Prozess von Anfang bis Ende – und merkt sich, was funktioniert.')}</p>
+      </div>
+      <ol class="border-t border-night/20">
+        {steps.map((s, i) => (
+          <li class="border-b border-night/20">
+            <a href={`#${s.id}`} class="group grid gap-3 py-8 md:grid-cols-[4rem_1fr_1.4fr_auto] md:gap-8 md:py-10">
+              <span class="text-[24px] leading-snug">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="text-[24px] leading-snug">{s.title}</h3>
+              <p class="max-w-[44ch] text-[16px] leading-relaxed md:pt-1">{s.text}</p>
+              <span class="hidden pt-3 transition-transform duration-300 group-hover:translate-x-2 md:block"><Arrow class="rotate-90" /></span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 01 Briefing Generator -->
+  <section id="briefing" class="scroll-mt-20 bg-lilac">
+    <div class="container-frst grid gap-16 py-20 md:grid-cols-2 md:items-center md:py-28">
+      <div>
+        <p class="eyebrow text-[14px]">01 · Briefing Generator</p>
+        <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">Every great project starts with the perfect briefing.</h2>
+        <p class="mt-6 max-w-md text-[16px] leading-relaxed">{t('A perfect result needs a perfect foundation. Our Briefing Generator is an AI built for exactly one job: creating briefings. It brings all your input together, spots contradictions and gaps – and turns it into one clear, consistent briefing your team can build on.', 'Ein perfektes Ergebnis braucht ein perfektes Fundament. Unser Briefing Generator ist eine KI, die für genau eine Aufgabe gebaut ist: Briefings erstellen. Sie führt alle eure Angaben zusammen, erkennt Widersprüche und Lücken – und macht daraus ein klares, widerspruchsfreies Briefing, auf dem euer Team aufbauen kann.')}</p>
+        <p class="mt-6 text-[16px]">{t('Clear. Complete. Consistent.', 'Klar. Vollständig. Widerspruchsfrei.')}</p>
+      </div>
+      <!-- Beispiel-Dialog -->
+      <div class="rounded-2xl bg-cream p-5 shadow-[0_24px_60px_-30px_rgba(13,6,38,0.45)] md:p-6">
+        <div class="flex items-center justify-between border-b border-night/15 pb-4 text-[14px]">
+          <span class="flex items-center gap-2"><span class="inline-flex h-6 w-6 items-center justify-center rounded-md bg-violet text-[12px] text-cream">✳</span>Briefing Generator</span>
+          <span class="opacity-60">{t('Draft v2', 'Entwurf v2')}</span>
+        </div>
+        <div class="mt-5 space-y-3">
+          {chat.map((m) => (
+            <div class:list={['max-w-[85%] rounded-2xl px-4 py-3 text-[14px] leading-relaxed', m.from === 'ai' ? 'bg-night text-cream' : 'ml-auto border border-night/15']}>
+              {m.from === 'ai' && <p class="mb-1 text-[11px] tracking-[0.08em] uppercase opacity-60">Superpod AI</p>}
+              {m.text}
+            </div>
+          ))}
+        </div>
+        <div class="mt-6 border-t border-night/15 pt-4 text-[13px]">
+          <div class="flex justify-between"><span>{t('Briefing check', 'Briefing-Check')}</span><span class="opacity-60">{t('3 of 4 complete', '3 von 4 vollständig')}</span></div>
+          <div class="mt-2 h-1.5 rounded-full bg-night/10"><div class="h-full w-3/4 rounded-full bg-violet"></div></div>
+          <p class="mt-3 opacity-70">{t('Target group ✓ · Objective ✓ · Message ✓ · Budget open', 'Zielgruppe ✓ · Ziel ✓ · Botschaft ✓ · Budget offen')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 Talent Matching: Karussell läuft automatisch durch, hält beim Hovern an -->
+  <section id="talent" class="scroll-mt-20 overflow-hidden bg-night py-20 text-cream md:py-28">
+    <div class="container-frst grid gap-8 md:grid-cols-2 md:items-end">
+      <div>
+        <p class="eyebrow text-[14px]">02 · Talent Matching</p>
+        <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">The right people for the brief. Not whoever is free.</h2>
+      </div>
+      <p class="max-w-md text-[16px] leading-relaxed opacity-90">{t('As soon as the briefing is ready, Superpod matches it with our worldwide artist network – by skills, experience and style. Our team then puts together the final crew.', 'Sobald das Briefing steht, gleicht Superpod es mit unserem weltweiten Artist-Netzwerk ab – nach Fähigkeiten, Erfahrung und Stil. Unser Team stellt dann die finale Crew zusammen.')}</p>
+    </div>
+    <div class="marquee mt-14 md:mt-20" aria-label={t('Artists from the frst network', 'Artists aus dem frst-Netzwerk')}>
+      <div class="marquee-track flex w-max gap-4">
+        {[...artists, ...artists].map((a, i) => (
+          <figure class="relative w-56 shrink-0 overflow-hidden rounded-2xl md:w-72" aria-hidden={i >= artists.length ? 'true' : undefined}>
+            <Media src={a.src} alt="" sizes="288px" class="aspect-[3/4] w-full" />
+            <figcaption class="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-night/80 to-transparent p-4 pt-16 text-[14px]">
+              <span>{a.discipline}</span>
+              <span class="rounded-full bg-cream/15 px-2 py-0.5 text-[12px] backdrop-blur">Matched</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Co-Creation -->
+  <section id="co-creation" class="scroll-mt-20 overflow-hidden">
+    <div class="container-frst grid grid-cols-1 gap-16 pt-20 pb-28 md:grid-cols-[1fr_1.5fr] md:items-center md:pt-28 md:pb-36">
+      <div>
+        <p class="eyebrow text-[14px]">03 · Co-Creation</p>
+        <h2 class="mt-8 text-[30px] leading-snug">One space. Every step.<br />Everyone in sync.</h2>
+        <p class="mt-6 max-w-md text-[16px] leading-relaxed">{t('Once the team is set, the work begins – together. Clients, artists and frst share one workspace. Drafts, feedback and approvals happen right where the work is, so everyone talks to each other instead of past each other.', 'Sobald das Team steht, beginnt die Arbeit – gemeinsam. Kundinnen und Kunden, Artists und frst teilen sich einen Workspace. Entwürfe, Feedback und Freigaben passieren direkt dort, wo die Arbeit liegt. So reden alle miteinander statt aneinander vorbei.')}</p>
+        <p class="mt-10 text-[14px] opacity-80">{t('Bookings · Feedback · Approvals · Invoices', 'Buchungen · Feedback · Freigaben · Rechnungen')}</p>
+      </div>
+      <!-- Tool-Ansicht: nachgebaut nach der echten Superpod-Oberfläche (Orders), mit Kommentar im Vordergrund -->
+      <div class="relative min-w-0">
+        <div class="overflow-hidden rounded-2xl border border-night/15 bg-[#fbf7ef] text-night shadow-2xl">
+          <div class="grid grid-cols-1 sm:grid-cols-[176px_1fr]">
+            <!-- Seitenleiste wie im Tool -->
+            <aside class="hidden flex-col bg-night p-3 text-[12px] text-cream sm:flex">
+              <p class="flex items-center gap-2 px-1 text-[14px] font-medium tracking-[0.04em] uppercase"><span class="inline-flex h-6 w-6 items-center justify-center rounded-md bg-violet text-[12px]">✳</span>Superpod</p>
+              <div class="mt-4 rounded-lg bg-cream/8 px-2.5 py-2">
+                <p class="text-[9px] tracking-[0.08em] uppercase opacity-60">Workspace</p>
+                <p class="mt-0.5 text-[12px]">Spring Campaign 2027</p>
+              </div>
+              <div class="mt-3 grid grid-cols-2 rounded-lg bg-cream/8 p-1 text-center text-[11px]">
+                <span class="py-1 opacity-70">Studio</span>
+                <span class="rounded-md bg-cream py-1 text-night">Marketplace</span>
+              </div>
+              <ul class="mt-4 space-y-0.5">
+                {toolNav.map((n) => (
+                  <li class:list={['flex items-center gap-2.5 rounded-lg px-2 py-1.5', n.active ? 'bg-violet' : 'opacity-80']}>
+                    <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={n.icon} /></svg>
+                    <span class="flex-1">{n.label}</span>
+                    {n.badge && <span class="inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-cream px-1 text-[9px] text-violet">{n.badge}</span>}
+                  </li>
+                ))}
+              </ul>
+              <p class="mt-6 px-2 text-[9px] tracking-[0.08em] uppercase opacity-50">Booked projects</p>
+              <ul class="mt-2 space-y-2 px-2 text-[11px] opacity-80">
+                {bookedProjects.map((b) => <li class="flex items-center gap-2"><span class:list={['h-1.5 w-1.5 shrink-0 rounded-full', b.dot]}></span>{b.label}</li>)}
+              </ul>
+              <div class="mt-auto flex items-center gap-2 border-t border-cream/10 px-1 pt-3">
+                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-cream text-[10px] text-night">LH</span>
+                <span class="leading-tight"><span class="block text-[11px]">Lena Hoffmann</span><span class="block text-[9px] opacity-60">Marketing Lead</span></span>
+              </div>
+            </aside>
+            <!-- Hauptbereich: Orders -->
+            <div class="min-w-0 p-4 sm:p-6">
+              <p class="text-[20px] font-medium">Orders</p>
+              <p class="mt-0.5 text-[12px] opacity-60">Bookings you made and requests you received.</p>
+              <div class="mt-4 flex flex-wrap gap-1.5 text-[11px]">
+                {[['All', 3], ['Requested', 1], ['Delivered', 1], ['Cancelled', 0]].map(([l, c], i) => (
+                  <span class:list={['rounded-full px-2.5 py-1', i === 0 ? 'bg-night text-cream' : 'border border-night/10 bg-white']}>{l} <span class="opacity-60">{c}</span></span>
+                ))}
+              </div>
+              <p class="mt-5 text-[13px] font-medium">My bookings</p>
+              <div class="mt-2.5 space-y-2.5">
+                {bookings.map((b, i) => (
+                  <div class:list={['rounded-xl bg-white p-3.5 shadow-[0_1px_2px_rgba(13,6,38,0.06)]', i === 2 && 'hidden sm:block']}>
+                    <div class="flex items-start justify-between gap-3">
+                      <p class="flex flex-wrap items-center gap-2 text-[13px] font-medium">
+                        {b.unread && <span class="h-1.5 w-1.5 rounded-full bg-violet"></span>}{b.title}
+                        <span class:list={['rounded-md px-1.5 py-0.5 text-[10px] font-normal', statusStyle[b.status as keyof typeof statusStyle]]}>{b.status}</span>
+                      </p>
+                      <p class="shrink-0 text-[12px] font-medium">{b.price}{/^\d+$/.test(b.price) && <span class="ml-0.5 text-[9px] font-normal opacity-60">SP</span>}</p>
+                    </div>
+                    <p class="mt-1 text-[11px] opacity-60">{b.meta}</p>
+                    <p class="text-[10px] opacity-50">{b.date}</p>
+                    {b.review && (
+                      <div class="mt-2.5 rounded-lg bg-[#f6f2ea] p-2.5 text-[11px] leading-relaxed">
+                        <p class="flex items-center gap-1.5 font-medium">Your review <span class="tracking-[0.1em] text-violet" aria-label={t('5 of 5 stars', '5 von 5 Sternen')}>★★★★★</span></p>
+                        <p class="mt-1 opacity-75">{b.review}</p>
+                      </div>
+                    )}
+                    {b.note && <p class="mt-2.5 rounded-lg bg-[#f6f2ea] p-2.5 text-[11px] leading-relaxed opacity-85">{b.note}</p>}
+                    <div class="mt-2.5 flex flex-wrap items-center gap-1.5 text-[11px]">
+                      {b.primary && <span class="rounded-md bg-violet px-2.5 py-1.5 text-cream">{b.primary}</span>}
+                      {b.actions.map((a) => <span class="rounded-md border border-night/12 px-2.5 py-1.5">{a}</span>)}
+                      <span class="px-1.5 py-1.5 opacity-70">{b.messages}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Kommentar-Karte: Feedback der Kundin direkt am Auftrag -->
+        <div class="relative z-10 mx-4 -mt-10 max-w-xs rounded-2xl border border-night/15 bg-cream p-4 text-[14px] shadow-[0_20px_50px_-20px_rgba(13,6,38,0.5)] sm:absolute sm:-bottom-24 sm:-left-10 sm:mx-0 sm:mt-0">
+          <p class="flex items-center gap-2 text-[12px] opacity-70"><span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-night text-[8px] text-cream">LH</span>Lena Hoffmann · 3D product renders</p>
+          <p class="mt-2 leading-relaxed">{t('The renders look great. Could we open the lid in the hero angle before we approve?', 'Die Renderings sehen super aus. Können wir in der Hauptperspektive den Deckel öffnen, bevor wir freigeben?')}</p>
+          <p class="mt-3 flex gap-4 text-[12px]"><span class="underline underline-offset-4">Reply</span><span class="opacity-60">Approve</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 Launch & Learn: Brand Intelligence -->
+  <section id="launch" class="scroll-mt-20 bg-night text-cream">
+    <div class="container-frst py-20 md:py-28">
+      <div class="grid gap-8 md:grid-cols-2">
+        <div>
+          <p class="eyebrow text-[14px]">04 · Launch & Learn</p>
+          <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">Every project you did makes the next one smarter.</h2>
+        </div>
+        <div class="max-w-md text-[16px] leading-relaxed opacity-90">
+          <p>{t('Most AI tools start from zero every time. The result: every output looks a little different, and your brand loses its continuity.', 'Die meisten KI-Tools fangen jedes Mal bei null an. Das Ergebnis: Jeder Output sieht ein bisschen anders aus, und eure Marke verliert ihre Kontinuität.')}</p>
+          <p class="mt-4">{t('Superpod learns from your previous cases. Tone of voice, visual language and corporate identity are stored securely and retrieved for your brand. The result is a brand intelligence that keeps every new idea unmistakably yours.', 'Superpod lernt aus euren bisherigen Cases. Tonalität, Bildsprache und Corporate Identity werden sicher gespeichert und für eure Marke abgerufen. So entsteht eine Brand Intelligence, die jede neue Idee unverwechselbar zu eurer macht.')}</p>
+        </div>
+      </div>
+      <!-- Ablauf: frühere Cases → Brand Intelligence → neue Arbeit, die zur Marke passt -->
+      <div class="mt-14 grid items-stretch gap-4 md:mt-20 md:grid-cols-[1fr_auto_1.2fr_auto_1fr]">
+        <div class="rounded-2xl bg-cream p-6 text-night">
+          <p class="eyebrow text-[14px] opacity-70">Your cases</p>
+          <div class="mt-6 grid grid-cols-3 gap-2">
+            {['/images/web/collina-header.jpg', '/images/web/tobel-menu.jpg', '/images/web/marccain-teaser.jpg'].map((src) => (
+              <Media src={src} alt="" sizes="120px" class="aspect-square w-full rounded-lg" />
+            ))}
+          </div>
+          <p class="mt-6 text-[16px] leading-relaxed">{t('Campaigns, content and learnings from every project you did with frst.', 'Kampagnen, Content und Learnings aus jedem Projekt, das ihr mit frst umgesetzt habt.')}</p>
+        </div>
+        <span class="flex items-center justify-center py-1 md:py-0"><Arrow class="rotate-90 md:rotate-0" /></span>
+        <div class="rounded-2xl bg-lilac p-6 text-night">
+          <p class="eyebrow text-[14px] opacity-70">Brand intelligence</p>
+          <ul class="mt-6 border-t border-night/20">
+            {brandMemory.map((b) => <li class="border-b border-night/20 py-3 text-[16px]">{b}</li>)}
+          </ul>
+          <p class="mt-6 text-[14px]">{t('Stored on European servers · GDPR compliant', 'Gespeichert auf europäischen Servern · DSGVO-konform')}</p>
+        </div>
+        <span class="flex items-center justify-center py-1 md:py-0"><Arrow class="rotate-90 md:rotate-0" /></span>
+        <div class="rounded-2xl bg-cream p-6 text-night">
+          <p class="eyebrow text-[14px] opacity-70">Your next project</p>
+          <p class="mt-6 text-[24px] leading-snug">New ideas. Same brand.</p>
+          <p class="mt-4 text-[16px] leading-relaxed">{t('Every briefing, every draft and every AI output starts from what your brand already is – for continuity you can see.', 'Jedes Briefing, jeder Entwurf und jeder KI-Output startet bei dem, was eure Marke schon ist – für Kontinuität, die man sieht.')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ: aufklappbar, Plus dreht sich zum Kreuz wie bei den Kacheln -->
+  <section class="container-frst py-20 md:py-28">
+    <!-- Überschrift oben, Fragen darunter über die ganze Breite -->
+    <div class="grid gap-12 md:gap-16">
+      <div>
+        <p class="eyebrow text-[14px]">FAQ</p>
+        <h2 class="mt-8 max-w-md text-[30px] leading-snug">Good questions.</h2>
+      </div>
+      <div class="border-t border-night/20">
+        {faq.map((f, i) => (
+          <details class="group border-b border-night/20" open={i === 0}>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-[20px] md:text-[24px] [&::-webkit-details-marker]:hidden">
+              {f.q}
+              <svg class="h-3 w-4 shrink-0 transition-transform duration-300 group-open:rotate-45" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M2 6h12M8 0v12" /></svg>
+            </summary>
+            <p class="max-w-[60ch] pb-8 text-[16px] leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Abschluss -->
+  <section class="bg-night text-cream">
+    <div class="container-frst grid gap-10 py-24 md:grid-cols-[2fr_1fr] md:items-end md:py-32">
+      <div>
+        <p class="eyebrow text-[14px]">See your project in Superpod</p>
+        <h2 class="mt-8 text-[8vw] leading-[1.05] md:text-5xl lg:text-6xl">Superpod isn’t just a tool.<br />It’s radical creative excellence.</h2>
+      </div>
+      <div class="md:text-right">
+        <p class="text-[16px] opacity-80">{t('Ready for a better way of working?', 'Bereit für eine bessere Art zu arbeiten?')}</p>
+        <div class="mt-6 flex gap-3 md:justify-end">
+          <a href={demoHref} data-book-demo class="btn-outline border-cream/80 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">{t('Book a demo', 'Demo buchen')}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Wellen der Mindmap-Mitte sollen genau bis an die Kästchen reichen:
+  // Abstand vom Kreisrand zur nächsten Kästchen-Kante, als CSS-Variable --wave-reach
+  const core = document.querySelector<HTMLElement>('.pulse-core');
+  if (core) {
+    const map = core.parentElement!;
+    const nodes = [...map.querySelectorAll<HTMLElement>('a')];
+    const update = () => {
+      // alle Kästchen gleich hoch, damit die Welle alle vier gleichzeitig berührt
+      nodes.forEach((a) => (a.style.minHeight = ''));
+      const h = Math.max(...nodes.map((a) => a.offsetHeight));
+      nodes.forEach((a) => (a.style.minHeight = `${h}px`));
+      const m = map.getBoundingClientRect();
+      const cx = m.left + m.width / 2;
+      const cy = m.top + m.height / 2;
+      const r = core.offsetWidth / 2;
+      let min = Infinity;
+      nodes.forEach((a) => {
+        const b = a.getBoundingClientRect();
+        const dx = Math.max(b.left - cx, 0, cx - b.right);
+        const dy = Math.max(b.top - cy, 0, cy - b.bottom);
+        min = Math.min(min, Math.hypot(dx, dy));
+      });
+      if (Number.isFinite(min)) core.style.setProperty('--wave-reach', `${Math.max(min - r, 0)}px`);
+    };
+    update();
+    new ResizeObserver(update).observe(map);
+  }
+</script>
+
+<style is:global>
+  /* Talent-Karussell: zwei gleiche Reihen hintereinander, die Spur läuft um eine Reihe weiter und beginnt nahtlos von vorn */
+  @keyframes superpod-marquee {
+    to { transform: translateX(calc(-50% - 0.5rem)); }
+  }
+  .marquee-track {
+    animation: superpod-marquee 45s linear infinite;
+  }
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee { overflow-x: auto; }
+    .marquee-track { animation: none; }
+  }
+
+  /* Mindmap-Mitte: beim Hovern laufen zwei feine graue Wellen versetzt vom Kreis bis an die Kästchen */
+  /* --wave-reach: Abstand Kreisrand → nächstes Kästchen, wird im Skript oben aus dem Layout berechnet.
+     Die Welle wächst über inset statt scale, damit die Linie so fein bleibt wie die Mindmap-Stränge. */
+  @keyframes superpod-wave {
+    0% { opacity: 1; inset: 0; }
+    92% { opacity: 1; }
+    100% { opacity: 0; inset: calc(-1 * var(--wave-reach, 70px)); }
+  }
+  .pulse-wave { opacity: 0; pointer-events: none; }
+  .pulse-core:hover .pulse-wave { animation: superpod-wave 1.6s linear infinite; }
+  .pulse-core:hover .pulse-wave-2 { animation-delay: 0.8s; }
+  @media (prefers-reduced-motion: reduce) {
+    .pulse-core:hover .pulse-wave { animation: none; }
+  }
+</style>

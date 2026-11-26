@@ -114,5 +114,13 @@ export const getNavItems = (lang: Lang): NavItem[] => {
         { title: 'Careers', subtitle: t('Join us.', 'Werde Teil von frst.'), href: l('/about-us#careers') },
       ],
     },
+    {
+      // Eigene Seite ohne Untermenü (Superpod), englisch unter /superpod, deutsch unter /de/superpod
+      key: 'superpod',
+      label: 'Tool',
+      href: l('/superpod'),
+      layout: 'cards',
+      children: [],
+    },
   ];
 };

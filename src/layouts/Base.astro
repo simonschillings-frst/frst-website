@@ -22,12 +22,13 @@ const {
   translations = ['en', 'de'],
 } = Astro.props;
 const t = useLang(lang);
-const title = Astro.props.title ?? t('frst – The agency for tomorrow', 'frst – Die Agentur für morgen');
+// Standard-Titel und -Beschreibung (gelten für die Startseite, die keine eigenen angibt)
+const title = Astro.props.title ?? 'frst – A New Kind of Creative Agency';
 const description =
   Astro.props.description ??
   t(
-    'We build memorable brands that spark excitement and ignite engagement.',
-    'Wir bauen einprägsame Marken, die begeistern und Menschen erreichen.',
+    'Less overhead. More hands-on. frst brings together creative minds, strategic thinking and innovative technology to rethink brands and turn ideas into reality – together.',
+    'Weniger Overhead. Mehr Hands-on. frst verbindet kreative Köpfe, strategisches Denken und innovative Technologien, um Marken neu zu denken und Ideen gemeinsam in die Realität zu bringen.',
   );
 
 // Adressen der Sprachvarianten dieser Seite (für Umschalter, canonical und hreflang)

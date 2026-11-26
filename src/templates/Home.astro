@@ -68,8 +68,9 @@ const disciplines = [
     <div class="container-frst relative grid gap-10 pt-40 pb-6 md:grid-cols-2">
       <div>
         <p class="eyebrow text-[14px]">Your customized agency</p>
-        <h1 class="mt-6 text-[8vw] leading-[1.05] font-light whitespace-nowrap md:text-5xl lg:text-7xl">Beyond the Expected</h1>
-        <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{t('A creative ecosystem shaping ideas and driving innovation, powered by research and technology.', 'Ein kreatives Ökosystem, das Ideen formt und Innovation vorantreibt, angetrieben von Research und Technologie.')}</p>
+        <!-- Header-Headlines auf allen Seiten gleich breit (9.5em = längste Zeile der Startseiten-Headline), dürfen über die halbe Spalte hinauslaufen -->
+        <h1 class="mt-6 text-[8vw] leading-[1.05] font-light w-[9.5em] max-w-none text-pretty md:text-5xl lg:text-7xl">Are we ready for a new kind of agency?</h1>
+        <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{t('Less overhead. More hands-on. frst is a creative ecosystem bringing together people, ideas, research and technology to drive innovation, rethink brands and turn visions into reality.', 'Weniger Overhead. Mehr Hands-on. frst ist ein kreatives Ökosystem, das Menschen, Ideen, Research und Technologie zusammenbringt, um Innovation voranzutreiben, Marken neu zu denken und Visionen Wirklichkeit werden zu lassen.')}</p>
         <a href={l('/about-us')} class="mt-16 inline-flex h-7 w-7 items-center justify-center rounded-full border border-cream/80" aria-label={t('Go to the About us page', 'Zur Über-uns-Seite')}>
           <Arrow class="rotate-90" />
         </a>
@@ -126,17 +127,18 @@ const disciplines = [
     </div>
   </section>
 
-  <!-- Future of the Agency -->
-  <section class="grid md:grid-cols-2">
+  <!-- Research -->
+  <section id="research" class="grid md:grid-cols-2">
     <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-10">
       <p class="eyebrow text-[14px]">Research</p>
-      <h2 class="mt-8 text-[30px]">The middle is disappearing</h2>
-      <p class="mt-6 max-w-md text-[16px] leading-relaxed opacity-90">{intro}</p>
-      <a href={articleHref} class="mt-8" aria-label={t('Go to the article The middle is disappearing', 'Zum Artikel Die Mitte verschwindet')}><Arrow /></a>
+      <h2 class="mt-8 text-[30px] leading-snug">We asked the people who know.</h2>
+      <p class="mt-6 max-w-md text-[16px] leading-relaxed opacity-90">
+        {t('Together with TH Köln, we did what hasn’t been done like this before: we asked a representative group of clients what they really expect from agencies. The answers aren’t always comfortable, but they are very useful. We share what we found, so the whole industry can move forward.', 'Gemeinsam mit der TH Köln haben wir gemacht, was es so noch nicht gab: Wir haben eine repräsentative Gruppe von Auftraggebern gefragt, was sie von Agenturen wirklich erwarten. Die Antworten sind nicht immer bequem, aber sehr nützlich. Wir teilen, was wir gefunden haben, damit die ganze Branche vorankommt.')}
+      </p>
+      <a href={l('/research')} class="mt-8" aria-label={t('Go to the Research page', 'Zur Research-Seite')}><Arrow /></a>
     </div>
-    <a href={articleHref} class="group relative block overflow-hidden md:min-h-[480px]" aria-label={t('Go to the article The middle is disappearing', 'Zum Artikel Die Mitte verschwindet')}>
-      <!-- Absolut positioniert, damit das Bild die Zeilenhöhe nicht vergrößert -->
-      <Media src="/images/web/artikel-02-01-header.jpg" class="h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:absolute md:inset-0 md:h-full" />
+    <a href={l('/research')} class="group block overflow-hidden" aria-label={t('Go to the Research page', 'Zur Research-Seite')}>
+      <Media src="/images/research-interview.jpg" alt={t('Two people talking in a film studio', 'Zwei Personen im Gespräch in einem Filmstudio')} position="70% 50%" sizes="(min-width: 768px) 50vw, 100vw" class="aspect-[1672/790] w-full md:aspect-auto transition-transform duration-700 ease-out group-hover:scale-105 md:h-full md:min-h-[480px]" />
     </a>
   </section>
 
@@ -234,18 +236,17 @@ const disciplines = [
 
   <Newsletter lang={lang} />
 
-  <!-- Research -->
-  <section id="research" class="grid md:grid-cols-2">
+  <!-- Future of the Agency -->
+  <section class="grid md:grid-cols-2">
     <div class="flex flex-col justify-center bg-night px-5 py-20 text-cream md:px-10">
       <p class="eyebrow text-[14px]">Research</p>
-      <h2 class="mt-8 text-[30px] leading-snug">We asked the people who know.</h2>
-      <p class="mt-6 max-w-md text-[16px] leading-relaxed opacity-90">
-        {t('Together with TH Köln, we did what hasn’t been done like this before: we asked a representative group of clients what they really expect from agencies. The answers aren’t always comfortable, but they are very useful. We share what we found, so the whole industry can move forward.', 'Gemeinsam mit der TH Köln haben wir gemacht, was es so noch nicht gab: Wir haben eine repräsentative Gruppe von Auftraggebern gefragt, was sie von Agenturen wirklich erwarten. Die Antworten sind nicht immer bequem, aber sehr nützlich. Wir teilen, was wir gefunden haben, damit die ganze Branche vorankommt.')}
-      </p>
-      <a href={l('/research')} class="mt-8" aria-label={t('Go to the Research page', 'Zur Research-Seite')}><Arrow /></a>
+      <h2 class="mt-8 text-[30px]">The middle is disappearing</h2>
+      <p class="mt-6 max-w-md text-[16px] leading-relaxed opacity-90">{intro}</p>
+      <a href={articleHref} class="mt-8" aria-label={t('Go to the article The middle is disappearing', 'Zum Artikel Die Mitte verschwindet')}><Arrow /></a>
     </div>
-    <a href={l('/research')} class="group block overflow-hidden" aria-label={t('Go to the Research page', 'Zur Research-Seite')}>
-      <Media src="/images/research-interview.jpg" alt={t('Two people talking in a film studio', 'Zwei Personen im Gespräch in einem Filmstudio')} position="70% 50%" sizes="(min-width: 768px) 50vw, 100vw" class="aspect-[1672/790] w-full md:aspect-auto transition-transform duration-700 ease-out group-hover:scale-105 md:h-full md:min-h-[480px]" />
+    <a href={articleHref} class="group relative block overflow-hidden md:min-h-[480px]" aria-label={t('Go to the article The middle is disappearing', 'Zum Artikel Die Mitte verschwindet')}>
+      <!-- Absolut positioniert, damit das Bild die Zeilenhöhe nicht vergrößert -->
+      <Media src="/images/web/artikel-02-01-header.jpg" class="h-[320px] w-full transition-transform duration-700 ease-out group-hover:scale-105 md:absolute md:inset-0 md:h-full" />
     </a>
   </section>
 
@@ -266,14 +267,18 @@ const disciplines = [
 
   <!-- Kontakt -->
   <section id="contact" class="relative overflow-hidden bg-night text-cream">
-    <!-- Hintergrundvideo (dasselbe wie im Superpod-Bereich auf About us): lädt erst kurz bevor der Bereich ins Bild kommt -->
-    <Video src="/videos/about-us-superpod.mp4" srcMobile="/videos/about-us-superpod-720.mp4" poster="/videos/about-us-superpod-poster.webp" loop tone="night" class="absolute inset-0" lang={lang} />
+    <!-- Hintergrundvideo (dasselbe wie im Header der Superpod-Seite und auf About us): lädt erst kurz bevor der Bereich ins Bild kommt -->
+    <Video src="/videos/tool-header.mp4" srcMobile="/videos/tool-header-mobile.mp4" poster="/videos/tool-header-poster.jpg" loop tone="night" class="absolute inset-0" lang={lang} />
     <!-- Abdunklung: am Handy über die ganze Fläche, ab Tablet nur links hinter dem Text -->
     <div class="pointer-events-none absolute inset-0 bg-night/70 md:bg-transparent md:bg-gradient-to-r md:from-night/85 md:via-night/60 md:to-night/10"></div>
     <div class="container-frst relative py-24 md:py-32">
       <p class="eyebrow text-[14px]">See your project in Superpod</p>
       <h2 class="mt-8 max-w-5xl text-[8vw] leading-[1.05] md:text-5xl lg:text-7xl">Watch an idea become a roadmap.</h2>
-      <a href="#" data-book-demo class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night">{t('Book a demo', 'Demo buchen')}</a>
+      <!-- Hauptlink zur Superpod-Unterseite, Demo-Buchung bleibt daneben -->
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href={l('/superpod')} class="btn-outline border-cream/80 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">{t('Discover Superpod', 'Superpod entdecken')}</a>
+        <a href="#" data-book-demo class="btn-outline border-cream/80 text-[16px] hover:bg-cream hover:text-night">{t('Book a demo', 'Demo buchen')}</a>
+      </div>
     </div>
   </section>
 

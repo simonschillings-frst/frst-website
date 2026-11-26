@@ -4,7 +4,7 @@ import Media from '../components/Media.astro';
 import HoverLoop from '../components/HoverLoop.astro';
 import Arrow from '../components/Arrow.astro';
 import Newsletter from '../components/Newsletter.astro';
-import { useLang, type Lang } from '../i18n';
+import { localePath, useLang, type Lang } from '../i18n';
 import Video from '../components/Video.astro';
 
 interface Props {
@@ -40,7 +40,7 @@ const jobs = [
     <div class="container-frst relative grid gap-10 pt-40 pb-10 md:grid-cols-2 md:items-end">
       <div class="md:self-center">
         <p class="eyebrow text-[14px]">About us</p>
-        <h1 class="mt-14 text-[8vw] leading-[1.05] font-light md:text-5xl lg:text-7xl">Made for the<br />unguarded moment.</h1>
+        <h1 class="mt-14 text-[8vw] leading-[1.05] font-light w-[9.5em] max-w-none text-pretty md:text-5xl lg:text-7xl">When was the last time you felt truly understood?</h1>
         <p class="mt-10 max-w-md text-[16px] leading-relaxed opacity-90">{t(
           'frst is a family-owned company, led by brothers, with an eye for people. We see our work as an interaction between humans. In every conversation we look for the moment the mask drops and something real is said. That is where the best ideas begin.',
           'frst ist ein inhabergeführtes Familienunternehmen, geleitet von Brüdern, mit einem Blick für Menschen. Wir verstehen unsere Arbeit als Zusammenspiel von Menschen. In jedem Gespräch suchen wir den Moment, in dem die Maske fällt und etwas Echtes gesagt wird. Dort beginnen die besten Ideen.',
@@ -79,14 +79,15 @@ const jobs = [
   <!-- Superpod -->
   <section id="superpod" class="relative flex min-h-[520px] scroll-mt-20 items-center overflow-hidden text-cream md:min-h-[640px]">
     <!-- Hintergrundvideo (selbst gehostet, stumm, Loop): lädt erst kurz bevor der Bereich ins Bild kommt, bis dahin Standbild -->
-    <Video src="/videos/superpod-case.mp4" srcMobile="/videos/superpod-case-mobile.mp4" poster="/videos/superpod-case-poster.webp" loop tone="night" class="absolute inset-0" lang={lang} />
+    <Video src="/videos/tool-header.mp4" srcMobile="/videos/tool-header-mobile.mp4" poster="/videos/tool-header-poster.jpg" loop tone="night" class="absolute inset-0" lang={lang} />
     <!-- Abdunklung: am Handy über die ganze Fläche, ab Tablet von links nach rechts auslaufend -->
     <div class="pointer-events-none absolute inset-0 bg-night/70 md:bg-transparent md:bg-gradient-to-r md:from-night/75 md:via-night/40 md:to-night/10"></div>
     <div class="container-frst relative py-20 md:py-28">
       <p class="eyebrow text-[14px]">Superpod</p>
       <h2 class="mt-8 max-w-[18ch] text-[30px] leading-snug">Every project, out in the open.</h2>
       <p class="mt-8 max-w-md text-[16px] leading-relaxed">{t('Superpod is frst’s own platform. It makes every project transparent, from the first briefing to the final launch.', 'Superpod ist die eigene Plattform von frst. Sie macht jedes Projekt transparent, vom ersten Briefing bis zum finalen Launch.')}</p>
-      <a href="https://tool.frst.agency/login" target="_blank" rel="noopener noreferrer" class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">{t('Sign in', 'Anmelden')}</a>
+      <!-- führt zur Superpod-Unterseite (nicht mehr direkt zum Tool-Login) -->
+      <a href={localePath(lang, '/superpod')} class="btn-outline mt-10 border-cream/80 text-[16px] hover:bg-cream hover:text-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">{t('Discover Superpod', 'Superpod entdecken')}</a>
     </div>
   </section>
 
