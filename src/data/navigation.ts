@@ -115,10 +115,10 @@ export const getNavItems = (lang: Lang): NavItem[] => {
       ],
     },
     {
-      // Eigene Seite ohne Untermenü; vorerst nur auf Englisch, daher ohne /de-Präfix
+      // Eigene Seite ohne Untermenü (Superpod), englisch unter /superpod, deutsch unter /de/superpod
       key: 'superpod',
       label: 'Tool',
-      href: '/superpod',
+      href: l('/superpod'),
       layout: 'cards',
       children: [],
     },
